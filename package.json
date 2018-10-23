@@ -5,6 +5,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "bcrypt": "^3.0.2",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "chess.js": "^0.10.2",
     "chessboardjs": "0.0.1",
@@ -12,6 +13,7 @@
     "express": "^4.16.4",
     "express-session": "^1.15.6",
     "massive": "^5.5.1",
+    "node-sass": "^4.9.4",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-redux": "^5.0.7",
@@ -33,5 +35,7 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "main": "server/server.js",
+  "proxy": "http://localhost:3438"
 }
