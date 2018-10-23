@@ -39,9 +39,11 @@ const {
 //     app.set('db', db)
 // })
 
-// app.get('/api/logout', (req, res) => {
-//     req.session.destroy()
-// })
+
+
+app.get('/api/logout', (req, res) => {
+    req.session.destroy()
+})
 
 
 app.listen(SERVER_PORT, () => {
