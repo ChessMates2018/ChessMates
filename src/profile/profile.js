@@ -4,7 +4,7 @@ class Profile extends Component {
   render () {
     return (
       <div>
-        <h1>Profile.JS</h1>
+        <h1>I'm here</h1>
       </div>
     )
   }
