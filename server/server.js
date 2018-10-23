@@ -41,6 +41,7 @@ massive(CONNECTION_STRING).then(db => {
 })
 
 
+
 // User Endpoints
 app.get(`/api/user`, ctrl.getUser)
 app.get(`/api/loggedin`, ctrl.getOnlineUsers)

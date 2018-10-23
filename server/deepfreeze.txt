@@ -1,0 +1,7 @@
+app.get('/api/leaderboard', async (req, res) => {
+    const db = req.app.get('db')
+
+    let leaders = db.leaderboard()
+
+    res.status(200).send(leaders)
+})
