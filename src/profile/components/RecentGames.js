@@ -1,6 +1,6 @@
 import React, {Component} from 'react' 
 
-class Profile extends Component {
+class RecentGames extends Component {
   constructor(props) {
     super(props)
 
@@ -12,10 +12,10 @@ class Profile extends Component {
   render () {
     return (
       <div>
-        <h1>Profile.JS</h1>
+        <h1>RecentGames.JS</h1>
       </div>
     )
   }
 }
 
-export default Profile 
+export default RecentGames 
