@@ -4,6 +4,7 @@ const session = require('express-session')
 const axios = require('axios')
 const massive = require('massive')
 const bodyParser = require('body-parser')
+const ctrl = require('./controllers')
 
 
 const app = express()
@@ -17,11 +18,11 @@ const {
     // PROTOCOL
 } = process.env
 
-// app.use(session({
-//     secret: SESSION_SECRET,
-//     saveUninitialized: false,
-//     resave: false
-// }))
+app.use(session({
+    secret: SESSION_SECRET,
+    saveUninitialized: false,
+    resave: false
+}))
 
 // app.use((req,res,next) => {
 //     if (ENVIRONMENT === 'dev') {
@@ -35,12 +36,17 @@ const {
 //     }
 // })
 
-// massive(CONNECTION_STRING).then(db => {
-//     app.set('db', db)
-// })
+massive(CONNECTION_STRING).then(db => {
+    app.set('db', db)
+})
 
 
 
+// User Endpoints
+app.get(`/api/user`, ctrl.getUser)
+app.get(`/api/loggedin`, ctrl.getOnlineUsers)
+app.post('/api/register', ctrl.registerUser)
+app.post('/api/login', ctrl.loginUser)
 app.get('/api/logout', (req, res) => {
     req.session.destroy()
 })

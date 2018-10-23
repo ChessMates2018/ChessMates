@@ -1,11 +1,11 @@
 import React, {Component} from 'react'
 import axios from 'axios'
 
-class LeaderBoard extends component{
+class Leaderboard extends Component{
     constructor(){
         super()
             this.state={
-                Leaders: ["BradyDaBest", "JordanofTroy", "Michelle", "Scrub4", "Scrub5"]
+                Leaders: []
             }
     }
 
@@ -30,3 +30,5 @@ render(){
     )
 }
 }
+
+export default Leaderboard
