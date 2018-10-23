@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import axios from 'axios';
 
-class registerModal extends Component{
+class RegisterModal extends Component{
     constructor(){
         super()
             this.state={
@@ -12,10 +12,12 @@ class registerModal extends Component{
                 Password: '',
                 PasswordConfirm: ''
             }
+            this.handleInput = this.handleInput.bind(this)
+            this.createAccount = this.createAccount.bind(this)
     }
 
 handleInput(e){
-this.state({
+this.setState({
 [e.target.name]: e.target.value
 })
 }
@@ -23,13 +25,17 @@ this.state({
 createAccount(){
 let {FirstName, LastName, Email, Username, Password, PasswordConfirm} = this.state
 if (Password !== PasswordConfirm){
-    return alert('Your password and password confirmation do not match.')
+    return alert('Your password confirmation does not match.')
 } else {
-    axios.post('/api/register', {Username, Password, FirstName, LastName, Email})
-}
-}
+    axios.post('/api/register', {Username: Username.toLocaleLowerCase(), Password:Password, FirstName:FirstName, LastName: LastName, Email: Email}).then((res) => {
+        if (res.data === 'Username taken. Please try again.') {
+            alert(res.data)
+        } 
+})}}
+
 
 render(){
+    console.log(this.state)
     return(
         <div>
             <h2>Register Modal</h2>
@@ -45,11 +51,11 @@ render(){
 
             <h3>PasswordConfirm:</h3><input name='PasswordConfirm' placeholder="Please confirm your password." value={this.state.PasswordConfirm} onChange={this.handleInput} ></input>
 
-            <button onClick={}>Create Account</button>
+            <button onClick={this.createAccount}>Create Account</button>
             <button>Cancel</button>
         </div>
     )
 }
 }
 
-export default registerModal
+export default RegisterModal
