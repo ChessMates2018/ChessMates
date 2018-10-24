@@ -3,9 +3,13 @@ var session_id_count = 1
 
 module.exports = {
     registerUser: (req, res) => {
-        console.log(req.body)
-        const { Firstname, Lastname, Email, Username, Password } = req.body
+        const { FirstName, LastName, Email, Username, Password } = req.body
         const defaultRank = 1000
+        const defaultImg = null
+        const defaultFriend = false
+        const defaultOnline = false
+        const defaultWins = 0
+        const defaultLosses = 0
         const db = req.app.get('db')
         db.checkUsername({Username}).then(user => {
             if (user.length !== 0) {
@@ -13,14 +17,13 @@ module.exports = {
             } else {
                 const salt = bcrypt.genSaltSync(10)
                 const hash = bcrypt.hashSync(Password, salt)
-                
 
-                db.registerUser(Username, hash, defaultRank, Firstname, Lastname, Email).then((user) => {
+                db.registerUser(Username, hash, defaultRank, defaultImg, Email, FirstName, LastName, defaultFriend, defaultOnline, defaultWins, defaultLosses).then((user) => {
+                    req.session.user
+                    req.session.user = user[0].username
                     req.session.user.session_id = session_id_count
                     session_id_count++
-                    req.session.user.user_id = user[0].user_id
-                    req.session.user.username = user[0].username
-                    // console.log('registered: ', req.session)
+                    db.toggle_online()
                     res.status(200).send(user[0])
                 })
             }
@@ -29,15 +32,15 @@ module.exports = {
     loginUser: (req, res) => {
         const { Username, Password } = req.body
         const db = req.app.get('db')
-        db.checkUsername({Username}).then(user => {
-            if (user.length !== 0) {
-                const validPassword = bcrypt.compareSync(Password, user[0].Password)
+        db.checkUsername(Username).then(user => {
+            if (user.length) { 
+                const validPassword = bcrypt.compareSync(Password, user[0].password)
                 if (validPassword) {
+                    req.session.user = user[0].username
                     req.session.user.session_id = session_id_count
                     session_id_count++
-                    req.session.user = user[0]
-                    req.session.user.username = user[0].username
-                    res.status(200).send()
+                    db.toggle_online([Username])
+                    res.sendStatus(200)
                 } else {
                     res.status(200).send('Invalid Password')
                 }
@@ -51,24 +54,30 @@ module.exports = {
         const db = req.app.get('db')
         db.get_user({username}).then(user => {
         res.status(200).send(user)
-        .catch(err => {
-        console.log(err)
-        res.status(500).send(err)
-        })
-        })
+        }).catch(err => {
+            console.log(err)
+            res.status(500).send(err)
+            })
     },
     getOnlineUsers: (req, res) => {
         const db = req.app.get('db')
         db.get_online_users().then(users => {
         res.status(200).send(users)
-        .catch(err => {
-        console.log(err)
-        res.status(500).send(err)
-        })
-        })
+        }).catch(err => {
+            console.log(err)
+            res.status(500).send(err)
+            })
         },
-    Logout: (req,res,next) => {
-
+    getLeaders: async (req, res) => {
+        const db = req.app.get('db')
+        let leaders = await db.leaderboard()
+        res.status(200).send(leaders)
+    },
+    logout: async (req, res) => {
+        const {user} = req.session
+        const db = req.app.get('db')
+        let toggle = await db.toggle_online([user])
+        let order66 = await req.session.destroy()
+        res.sendStatus(200)
     }
-
 }

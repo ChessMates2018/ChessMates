@@ -10,21 +10,33 @@ class Leaderboard extends Component{
     }
 
 componentDidMount(){
-    //get from users and return usernames in order of 10 highest rated in desc order.
-    //setState Leaders with res.data
+axios.get('/api/leaderboard').then((res) => {
+    console.log(res.data)
+    this.setState({
+        Leaders: res.data
+    })
+})
 }
 
 render(){
+const leaderBoard =  this.state.Leaders.map((element, index) => {
+    let username = element.username
+    let rating = element.rating
+    let placing = index + 1
+    return(
+        <div key={index}>
+            <p>{`${placing}. ${username} | ${rating}`} </p>
+        </div>
+    )
+})
+
     return(
         <div>
             <h1>LeaderBoard</h1>
             <h2>Highest Rated Players</h2>
             <div className="Leaderboard">
-                <p>1. {this.state.Leaders[0]}</p>
-                <p>2. {this.state.Leaders[1]}</p>
-                <p>3. {this.state.Leaders[2]}</p>
-                <p>4. {this.state.Leaders[3]}</p>
-                <p>5. {this.state.Leaders[4]}</p>
+              {leaderBoard}
+
             </div>
         </div>
     )
