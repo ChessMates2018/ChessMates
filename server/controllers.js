@@ -50,10 +50,13 @@ module.exports = {
         })
     },
     getUser: (req, res) => {
-        let {username} = req.body
+        console.log('IVE BEEN HIT!')
+        let {user} = req.session
+        console.log('session user', req.session)
         const db = req.app.get('db')
-        db.get_user({username}).then(user => {
-        res.status(200).send(user)
+        db.get_user({user}).then(currentUser => {
+        console.log('currentUser', currentUser)
+        res.status(200).send(currentUser)
         }).catch(err => {
             console.log(err)
             res.status(500).send(err)

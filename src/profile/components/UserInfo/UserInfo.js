@@ -17,7 +17,7 @@ class UserInfo extends Component {
           <img src={defaultImage} alt="default profile image"/>
         </section>
         <section>
-          <h1 className="userName"></h1>
+          <h1 className="userName">Username</h1>
           <div className="stats_box">
             <h3 className="stats">Rating</h3>
             <h3 className="stats">Win:Loss ratio</h3>

@@ -16,9 +16,9 @@ export default function Opponent () {
           <h4>Rating</h4>
         </div>
       </section>
-      <section>
+      {/* <section>
         <button>CHALLENGE</button>
-      </section>
+      </section> */}
     </div>
   )
 }

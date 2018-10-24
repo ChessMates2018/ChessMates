@@ -18,14 +18,13 @@ class Profile extends Component {
     this.getAllOnline = this.getAllOnline.bind(this)
   }
 
-  componentDidMount() {
-    this.getUser()
-    this.getAllOnline()
-    // setTimeout(() => console.log('state',this.state), 3000)
+  async componentDidMount() {
+    let user = await this.getUser()
+    let onlineUsers = await this.getAllOnline()
   }
 
   getUser () {
-    axios.get(`/api/user`, {username:'Rook'}).then(res => {
+    axios.get(`/api/user`).then(res => {
       console.log('user', res.data)
       this.setState({
         currentUser: res.data

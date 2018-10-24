@@ -11,11 +11,11 @@ class Arena extends Component {
     }
   }
 
-  componentDidMount() {
-    setTimeout(() => {
-      console.log('arean props', this.props)
-    }, 3000);
-  }
+  // componentDidMount() {
+  //   setTimeout(() => {
+  //     console.log('arean props', this.props)
+  //   }, 3000);
+  // }
 
 
   render () {
