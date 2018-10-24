@@ -13,11 +13,11 @@ export default function PotentialOpponents (props) {
       </section>
       <section>
         <div>
-          <h3>Username</h3>
+          <h3>{username}</h3>
         </div>
         <div>
-          <h4>Win:Lose ratio</h4>
-          <h4>Rating</h4>
+          <h4>{`${wins} : ${losses}`}</h4>
+          <h4>{rating}</h4>
         </div>
       </section>
       </div>
