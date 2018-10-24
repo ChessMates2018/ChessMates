@@ -11,17 +11,15 @@ class Arena extends Component {
     }
   }
 
-  // componentDidMount() {
-  //   setTimeout(() => {
-  //     console.log('arean props', this.props)
-  //   }, 3000);
-  // }
-
+ 
 
   render () {
+    let {opponentsList} = this.props
     return (
       <div>
-        <PotentialOpponents/>
+        <PotentialOpponents
+        opponentsList = {opponentsList}
+        />
         <button className="button">Join the Arena</button>
       </div>
     )
