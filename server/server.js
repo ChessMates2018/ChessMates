@@ -7,14 +7,17 @@ const bodyParser = require('body-parser')
 const ctrl = require('./controllers')
 
 
+
 const app = express()
 app.use(bodyParser.json())
+
 
 const {
     SERVER_PORT,
     CONNECTION_STRING,
     SESSION_SECRET,
     DEV_KEY,
+    ENVIRONMENT
     // PROTOCOL
 } = process.env
 
@@ -36,22 +39,20 @@ app.use(session({
 //     }
 // })
 
-massive(CONNECTION_STRING).then(db => {
-    app.set('db', db)
-})
+
 
 
 
 // User Endpoints
 app.get(`/api/user`, ctrl.getUser)
+app.get('/api/leaderboard', ctrl.getLeaders)
 app.get(`/api/loggedin`, ctrl.getOnlineUsers)
 app.post('/api/register', ctrl.registerUser)
 app.post('/api/login', ctrl.loginUser)
-app.get('/api/logout', (req, res) => {
-    req.session.destroy()
-})
-
+app.post('/api/logout', ctrl.logout)
 
 app.listen(SERVER_PORT, () => {
     console.log(`spellbound on port ${SERVER_PORT}`)
 })
+
+massive(CONNECTION_STRING).then(db => app.set('db', db))
