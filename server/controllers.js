@@ -76,6 +76,13 @@ module.exports = {
         let leaders = await db.leaderboard()
         res.status(200).send(leaders)
     },
+    getMyGames: async (req, res) => {
+        const db = req.app.get('db')
+        let {user} = req.session
+
+        let myGames = await db.my_games(user)
+        res.status(200).send(myGames)
+    },
     logout: async (req, res) => {
         const {user} = req.session
         const db = req.app.get('db')

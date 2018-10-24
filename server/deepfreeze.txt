@@ -19,3 +19,19 @@ let showTurn = arr => {
 	}
 	return moves
 }
+select * from game_history
+where loser = $1 or winner = $1;
+-- order by date desc;
+
+select * from moves
+where gameid = $1
+
+app.get('/api/myGames', ctrl.getMyGames)
+
+getMyGames: async (req, res) => {
+        const db = req.app.get('db')
+        let {user} = req.session
+
+        let myGames = await db.my_games(user)
+        res.status(200).send(myGames)
+    },s
