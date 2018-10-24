@@ -6,6 +6,19 @@ app.get('/api/leaderboard', async (req, res) => {
     res.status(200).send(leaders)
 })
 
+
+let showTurn = arr => {
+	let moves = []
+	for (i=0; i <arr.length; i++) {
+		for (key in arr[i]) {
+			if (key == 'san') {
+				let something = Object.values(arr[i].san).join('')
+				moves.push(something)
+			}
+		} 
+	}
+	return moves
+}
 select * from game_history
 where loser = $1 or winner = $1;
 -- order by date desc;

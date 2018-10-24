@@ -46,7 +46,7 @@ class Profile extends Component {
       <div>
         <h1>Profile.JS</h1>
         <Arena
-        Opponents = {this.state.onlineUsers}
+        opponentsList = {this.state.onlineUsers}
         />
         <UserInfo/>
         <RecentGames/>

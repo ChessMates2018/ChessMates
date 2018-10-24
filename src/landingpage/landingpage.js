@@ -63,7 +63,7 @@ render(){
         <h2>Login</h2>
         <input placeholder="Username" name="Username" value={this.state.Username} onChange={this.handleInput} ></input>
 
-        <input placeholder="Password" name="Password" value={this.state.Password}onChange={this.handleInput}></input>
+        <input placeholder="Password" name="Password" type = "password" value={this.state.Password}onChange={this.handleInput}></input>
 
         <button onClick={this.login}>Login</button>
 
