@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+import knight from '../images/knight.jpg'
 
 class Nav extends Component {
     logout() {
@@ -10,12 +11,12 @@ class Nav extends Component {
     }
     render() {
         if (this.props.location.pathname !== '/') {
-            if (this.props.location.pathname !== '/gameboard/id') {
+            if (this.props.location.pathname !== '/gameboard/${id}') {
                 if (this.props.location.pathname === '/profile') {
                     return (
                         <div>
                             <div>
-                                <img src='' />
+                                <img src={knight} />
                                 <h2>Checked</h2>
                             </div>
                             <h1>Profile</h1>
@@ -29,7 +30,7 @@ class Nav extends Component {
                     return (
                         <div>
                             <div>
-                                <img src='' />
+                                <img src={knight} />
                                 <h2>Checked</h2>
                             </div>
                             <h1>Profile</h1>
