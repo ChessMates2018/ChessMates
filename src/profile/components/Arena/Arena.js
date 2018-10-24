@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import axios from 'axios'
 import PotentialOpponents from './SubComponents/PotentialOpponents';
 
 
@@ -8,17 +7,15 @@ class Arena extends Component {
     super(props)
 
     this.state = {
-      onlineUsers: []
+      
     }
   }
 
-  componentDidMount() {
-    axios.get(`/api/loggedin`).then(res => {
-      this.setState({
-        onlineUsers: res.data
-      })
-    })
-  }
+  // componentDidMount() {
+  //   setTimeout(() => {
+  //     console.log('arean props', this.props)
+  //   }, 3000);
+  // }
 
 
   render () {
