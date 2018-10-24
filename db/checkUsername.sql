@@ -1,2 +1,2 @@
 SELECT * FROM users
-where username = ${Username}
+where username = $1
