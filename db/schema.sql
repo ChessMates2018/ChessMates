@@ -40,6 +40,6 @@ create table moves(
   gameid serial references game_history(id), 
   color varchar(10), 
   piece varchar(10), 
-  move varchar(10),
+  move text,
   moveOrder int
   )

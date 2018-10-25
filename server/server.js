@@ -53,6 +53,7 @@ app.post('/api/login', ctrl.loginUser)
 app.post('/api/logout', ctrl.logout)
 app.get('/api/myGames', ctrl.getMyGames)
 app.get(`/api/checkuser`, ctrl.checkUser)
+app.post('/api/gameMoves', ctrl.gameMoves)
 
 app.listen(SERVER_PORT, () => {
     console.log(`spellbound on port ${SERVER_PORT}`)
