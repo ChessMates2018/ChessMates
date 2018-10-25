@@ -82,6 +82,7 @@ module.exports = {
     },
     getMyGames: async (req, res) => {
         const db = req.app.get('db')
+    
         let {user} = req.session
         console.log('look here stupit!',user)
         let myGames = await db.my_games(user)
