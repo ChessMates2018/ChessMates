@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import MoveList from './components/moveList'
 import Chess from "chess.js"; // import Chess from  "chess.js"(default) if recieving an error about new Chess() not being a constructor
+
 
 import Chessboard from "chessboardjsx";
 
-let allTheMoves = []
 
 class HumanVsHuman extends Component {
   static propTypes = { children: PropTypes.func };
@@ -38,31 +39,31 @@ class HumanVsHuman extends Component {
   };
 
   // show possible moves
-  highlightSquare = (sourceSquare, squaresToHighlight) => {
-    const highlightStyles = [sourceSquare, ...squaresToHighlight].reduce(
-      (a, c) => {
-        return {
-          ...a,
-          ...{
-            [c]: {
-              background:
-                "radial-gradient(circle, #fffc00 36%, transparent 40%)",
-              borderRadius: "50%"
-            }
-          },
-          ...squareStyling({
-            history: this.state.history,
-            pieceSquare: this.state.pieceSquare
-          })
-        };
-      },
-      {}
-    );
+  // highlightSquare = (sourceSquare, squaresToHighlight) => {
+  //   const highlightStyles = [sourceSquare, ...squaresToHighlight].reduce(
+  //     (a, c) => {
+  //       return {
+  //         ...a,
+  //         ...{
+  //           [c]: {
+  //             background:
+  //               "radial-gradient(circle, #fffc00 36%, transparent 40%)",
+  //             borderRadius: "50%"
+  //           }
+  //         },
+  //         ...squareStyling({
+  //           history: this.state.history,
+  //           pieceSquare: this.state.pieceSquare
+  //         })
+  //       };
+  //     },
+  //     {}
+  //   );
 
-    this.setState(({ squareStyles }) => ({
-      squareStyles: { ...squareStyles, ...highlightStyles }
-    }));
-  };
+  //   this.setState(({ squareStyles }) => ({
+  //     squareStyles: { ...squareStyles, ...highlightStyles }
+  //   }));
+  // };
 
   onDrop = ({ sourceSquare, targetSquare }) => {
     // see if the move is legal
@@ -76,28 +77,42 @@ class HumanVsHuman extends Component {
     if (move === null) return;
     this.setState(({ history, pieceSquare }) => ({
       fen: this.game.fen(),
-      history: this.game.history({ verbose: true }),
-      squareStyles: squareStyling({ pieceSquare, history })
+      history: this.game.history({ verbose: false }),
+      squareStyles: squareStyling({ pieceSquare, history }),
     }));
+    return this.game.history
   };
 
-  onMouseOverSquare = square => {
-    // get list of possible moves for this square
-    let moves = this.game.moves({
-      square: square,
-      verbose: true
-    });
+  showHistory = () => {
+  let {history} = this.state
+  console.log("HISTORY",history)
+  let moveList = history.map((element,index) => {
+    return(
+      <div key={index}>
+      {element}
+      </div>
+    )
+  })
+  return moveList
+  }
 
-    // exit if there are no moves available for this square
-    if (moves.length === 0) return;
+  // onMouseOverSquare = square => {
+  //   // get list of possible moves for this square
+  //   let moves = this.game.moves({
+  //     square: square,
+  //     verbose: true
+  //   });
 
-    let squaresToHighlight = [];
-    for (var i = 0; i < moves.length; i++) {
-      squaresToHighlight.push(moves[i].to);
-    }
+  //   // exit if there are no moves available for this square
+  //   if (moves.length === 0) return;
 
-    this.highlightSquare(square, squaresToHighlight);
-  };
+  //   let squaresToHighlight = [];
+  //   for (var i = 0; i < moves.length; i++) {
+  //     squaresToHighlight.push(moves[i].to);
+  //   }
+
+  //   this.highlightSquare(square, squaresToHighlight);
+  // };
 
   onMouseOutSquare = square => this.removeHighlightSquare(square);
 
@@ -151,7 +166,6 @@ class HumanVsHuman extends Component {
         }
       } 
     }
-
     // if (counter === 2) {
     //   this.setState({
     //     SAN: moves
@@ -168,10 +182,14 @@ class HumanVsHuman extends Component {
     let {history} = this.state
     // console.log('Dean',this.state.SAN)
     // console.log('Sam',this.showTurn(history))
+    // SAN = this.showTurn(history)
+    console.log(this.state.history)
+    // console.log(SAN)
 
     const { fen, dropSquareStyle, squareStyles } = this.state;
 
     return this.props.children({
+      showHistory: this.showHistory,
       squareStyles,
       position: fen,
       onMouseOverSquare: this.onMouseOverSquare,
@@ -186,10 +204,12 @@ class HumanVsHuman extends Component {
 }
 
 export default function Gameboard() {
+
   return (
     <div>
       <HumanVsHuman>
         {({
+          showHistory,
           position,
           onDrop,
           onMouseOverSquare,
@@ -200,9 +220,11 @@ export default function Gameboard() {
           onSquareClick,
           onSquareRightClick,
         }) => (
+          <>
           <Chessboard
             id="humanVsHuman"
-            width={320}
+            width={720}
+            // orientation="black"
             position={position}
             onDrop={onDrop}
             onMouseOverSquare={onMouseOverSquare}
@@ -217,8 +239,12 @@ export default function Gameboard() {
             onSquareClick={onSquareClick}
             onSquareRightClick={onSquareRightClick}
           />
+          <MoveList 
+          move={showHistory}/>
+          </>
         )}
       </HumanVsHuman>
+      
     </div>
   );
 }
