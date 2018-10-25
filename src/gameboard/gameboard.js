@@ -166,8 +166,8 @@ class HumanVsHuman extends Component {
 
   render() {
     let {history} = this.state
-    console.log('Dean',this.state.SAN)
-    console.log('Sam',this.showTurn(history))
+    // console.log('Dean',this.state.SAN)
+    // console.log('Sam',this.showTurn(history))
 
     const { fen, dropSquareStyle, squareStyles } = this.state;
 
