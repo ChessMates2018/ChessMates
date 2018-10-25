@@ -20,20 +20,26 @@ class Profile extends Component {
     this.getAllOnline = this.getAllOnline.bind(this)
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     if (!this.props.username) {
+      console.log('FIRE FIRE FIRE')
       axios.get(`/api/checkuser`).then(res => {
+        console.log('dis is du RES', res)
         this.props.setUsername()
-        let user = await this.getUser()
-        let onlineUsers = await this.getAllOnline()
+        this.getInitialInfo()
       })
       .catch(err => {
+        console.log('dis is du err!',err)
         this.props.history.push('/')
       })
     } else {
-      let user = await this.getUser()
-      let onlineUsers = await this.getAllOnline()
+      this.getInitialInfo()
     }
+  }
+
+  async getInitialInfo () {
+    // let user = await this.getUser()
+    let onlineUsers = await this.getAllOnline()
   }
 
   getUser () {
