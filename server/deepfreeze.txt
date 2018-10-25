@@ -35,3 +35,15 @@ getMyGames: async (req, res) => {
         let myGames = await db.my_games(user)
         res.status(200).send(myGames)
     },s
+
+
+
+
+
+
+
+
+
+
+
+
