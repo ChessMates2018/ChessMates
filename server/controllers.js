@@ -78,18 +78,11 @@ module.exports = {
     },
     getMyGames: async (req, res) => {
         const db = req.app.get('db')
-        try{
+    
         let {user} = req.session
-        console.log(user)
-        // let count = await move_count()
-            let myGames = await db.my_games(user)
-            let count = []
-            for(let i = 0; i < myGames.length; i++){
-                let currentCount = db.move_count(i)
-                count.push(currentCount)
-            }
-            res.status(200).send(myGames)
-        } catch (e) {console.log(e)}
+        console.log('look here stupit!',user)
+        let myGames = await db.my_games(user)
+        res.status(200).send(myGames)
     },
     logout: async (req, res) => {
         const {user} = req.session
