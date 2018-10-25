@@ -4,6 +4,8 @@ import Arena from './components/Arena/Arena'
 import UserInfo from './components/UserInfo/UserInfo'
 import RecentGames from './components/RecentGames/RecentGames'
 import Leaderboard from '../../src/landingpage/components/leaderboard'
+import {connect} from 'react-redux'
+import {setUsername} from '../ducks/Reducer'
 
 class Profile extends Component {
   constructor(props) {
@@ -19,8 +21,19 @@ class Profile extends Component {
   }
 
   async componentDidMount() {
-    let user = await this.getUser()
-    let onlineUsers = await this.getAllOnline()
+    if (!this.props.username) {
+      axios.get(`/api/checkuser`).then(res => {
+        this.props.setUsername()
+        let user = await this.getUser()
+        let onlineUsers = await this.getAllOnline()
+      })
+      .catch(err => {
+        this.props.history.push('/')
+      })
+    } else {
+      let user = await this.getUser()
+      let onlineUsers = await this.getAllOnline()
+    }
   }
 
   getUser () {
@@ -56,7 +69,14 @@ class Profile extends Component {
   }
 }
 
-export default Profile 
+function setStateToProps (state) {
+  let {username} = state
+  return(
+    username
+  )
+}
+
+export default connect(setStateToProps, {setUsername})(Profile)
 
 
 

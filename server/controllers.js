@@ -1,6 +1,10 @@
 const bcrypt = require('bcryptjs')
 var session_id_count = 1
 
+let {
+DEV_KEY
+}= process.env
+
 module.exports = {
     registerUser: (req, res) => {
         const { FirstName, LastName, Email, Username, Password } = req.body
@@ -89,5 +93,23 @@ module.exports = {
         let toggle = await db.toggle_online([user])
         let order66 = await req.session.destroy()
         res.sendStatus(200)
+    },
+    checkUser: async (req, res) => {
+        const db = req.app.get('db')
+        if (DEV_KEY === 'true') {
+            let user = await db.get_user('Knight')
+            req.session.user = user[0].username
+            let {username} = req.session
+            res.status(200).send(username)
+        }
+        else {
+            if (req.session.username) {
+                let {username} = req.session
+                res.status(200).send(username)
+            }
+            else {
+                res.status(401).send('Please login.')
+            }
+        }
     }
 }
