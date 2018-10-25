@@ -1,6 +1,10 @@
 const bcrypt = require('bcryptjs')
 var session_id_count = 1
 
+let {
+DEVKEY
+}= process.env
+
 module.exports = {
     registerUser: (req, res) => {
         const { FirstName, LastName, Email, Username, Password } = req.body
@@ -50,12 +54,12 @@ module.exports = {
         })
     },
     getUser: (req, res) => {
-        console.log('IVE BEEN HIT!')
+        // console.log('IVE BEEN HIT!')
         let {user} = req.session
-        console.log('session user', req.session)
+        // console.log('session user', req.session)
         const db = req.app.get('db')
         db.get_user({user}).then(currentUser => {
-        console.log('currentUser', currentUser)
+        // console.log('currentUser', currentUser)
         res.status(200).send(currentUser)
         }).catch(err => {
             console.log(err)
@@ -89,5 +93,24 @@ module.exports = {
         let toggle = await db.toggle_online([user])
         let order66 = await req.session.destroy()
         res.sendStatus(200)
+    },
+    checkUser: async (req, res) => {
+        console.log('checkUser has Fired!')
+        const db = req.app.get('db')
+        let {user} = req.session
+
+        // if (DEVKEY === 'true') {
+        //     let user = await db.get_user('Knight')
+        //     req.session.user = user[0].username
+        //     res.status(200).send(user)
+        // }
+        // else {
+            if (req.session.user) {
+                res.status(200).send(user)
+            }
+            else {
+                res.sendStatus(401)
+            }
+        // }
     }
 }
