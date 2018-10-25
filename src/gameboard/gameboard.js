@@ -198,7 +198,7 @@ export default function Gameboard() {
           dropSquareStyle,
           onDragOverSquare,
           onSquareClick,
-          onSquareRightClick
+          onSquareRightClick,
         }) => (
           <Chessboard
             id="humanVsHuman"
