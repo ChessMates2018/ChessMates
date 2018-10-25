@@ -34,3 +34,12 @@ create table friends (
   user_id integer references users(id),
   friend integer
 );
+
+create table moves(
+  id serial primary key, 
+  gameid serial references game_history(id), 
+  color varchar(10), 
+  piece varchar(10), 
+  move varchar(10),
+  moveOrder int
+  )
