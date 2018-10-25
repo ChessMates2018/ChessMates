@@ -10,7 +10,8 @@ class RecentGames extends Component {
   }
 
   componentDidMount(){
-    axios.get('/api/myGames/').then((res) => {
+    axios.get('/api/myGames').then((res) => {
+      console.log(res)
       this.setState({
         myGames: res.data
       })
@@ -18,41 +19,48 @@ class RecentGames extends Component {
   }
 
   render () {
-  const games = this.state.myGames.map((element, index) => {
-    let white = element.user_light
-    let black = element.user_dark
-    let winner = element.winner
-    let loser = element.loser
-    let timeCtrl = element.time_ctrl
-    let numberOfMoves = element.moves.length
-    let date = element.game_date
-    return(
-      <div key={index} className="gameRowInfo">
-      <div className="col 1">
-      <p>Date: {date}</p>
-      <p>Moves: {numberOfMoves}</p>
-      <p>Time Control: {timeCtrl}</p>
-      <p>White: {white}</p>
-      <p>Black: {black}</p>
-      </div>
-
-      <div className="col 2">
-      <p>Winner</p>
-      <p>{winner}</p>
-      </div>
-
-      <div className="col 3">
-      <p>Loser</p>
-      <p>{loser}</p>
-      </div>
-      
-
-      <div className="col 4">
-      <span>View Game</span>
-      </div>
-      </div>
-    )
-  })
+  console.log('myGames', this.state.myGames)
+  const games = 0;
+  if (this.state.myGames[0]){
+      games = this.state.myGames.map((element, index) => {
+      let white = element.user_light
+      let black = element.user_dark
+      let winner = element.winner
+      let loser = element.loser
+      let timeCtrl = element.time_ctrl
+      let numberOfMoves = element.moves
+      let date = element.game_date
+      return(
+        <div key={index} className="gameRowInfo">
+        <div className="col 1">
+        <p>Date: {date}</p>
+        <p>Moves: {numberOfMoves}</p>
+        <p>Time Control: {timeCtrl}</p>
+        <p>White: {white}</p>
+        <p>Black: {black}</p>
+        </div>
+  
+        <div className="col 2">
+        <p>Winner</p>
+        <p>{winner}</p>
+        </div>
+  
+        <div className="col 3">
+        <p>Loser</p>
+        <p>{loser}</p>
+        </div>
+        
+  
+        <div className="col 4">
+        <span>View Game</span>
+        </div>
+        </div>
+      )
+    })
+  } else{
+    return null
+  }
+  
     return (
       <div>
         <h2>Recent Games</h2>
