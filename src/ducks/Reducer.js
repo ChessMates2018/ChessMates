@@ -1,8 +1,11 @@
 const initialState = {
-  username: ''
+  username: '',
+  SAN: []
 }
 
-const SET_USERNAME = 'SET_USERNAME'
+const SET_USERNAME = 'SET_USERNAME',
+      SET_SAN = 'SET_SAN'
+
 
 
 export function setUsername (username) {
