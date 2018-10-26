@@ -5,10 +5,11 @@ const axios = require('axios')
 const massive = require('massive')
 const bodyParser = require('body-parser')
 const ctrl = require('./controllers')
-
-
-
 const app = express()
+var server = require('http').createServer(app)
+var io = require('socket.io')(server)
+
+
 app.use(bodyParser.json())
 
 
@@ -53,9 +54,23 @@ app.post('/api/login', ctrl.loginUser)
 app.post('/api/logout', ctrl.logout)
 app.get('/api/myGames', ctrl.getMyGames)
 app.get(`/api/checkuser`, ctrl.checkUser)
+app.post('/api/gameMoves', ctrl.gameMoves)
 
-app.listen(SERVER_PORT, () => {
-    console.log(`spellbound on port ${SERVER_PORT}`)
+io.on('connection', function(socket){
+    console.log('user connected')
+
+    socket.on('new player', function() {
+        console.log('message recieved')
+        // io.emit('player joined', {name: player.name, room: player.room})
+    })
+    socket.on('disconnect', () => console.log('userspeacedoutyo'))
 })
+
+
+server.listen(SERVER_PORT, () => console.log(`spellbound on port ${SERVER_PORT}`))
+
+// app.listen(SERVER_PORT, () => {
+//     console.log(`spellbound on port ${SERVER_PORT}`)
+// })
 
 massive(CONNECTION_STRING).then(db => app.set('db', db))

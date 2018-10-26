@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import MoveList from './components/moveList'
 import Chess from "chess.js"; // import Chess from  "chess.js"(default) if recieving an error about new Chess() not being a constructor
-
+import axios from 'axios'
 
 import Chessboard from "chessboardjsx";
 
@@ -32,11 +32,11 @@ class HumanVsHuman extends Component {
   }
 
   // keep clicked square style and remove hint squares
-  removeHighlightSquare = () => {
-    this.setState(({ pieceSquare, history }) => ({
-      squareStyles: squareStyling({ pieceSquare, history })
-    }));
-  };
+  // removeHighlightSquare = () => {
+  //   this.setState(({ pieceSquare, history }) => ({
+  //     squareStyles: squareStyling({ pieceSquare, history })
+  //   }));
+  // };
 
   // show possible moves
   // highlightSquare = (sourceSquare, squaresToHighlight) => {
@@ -85,7 +85,8 @@ class HumanVsHuman extends Component {
 
   showHistory = () => {
   let {history} = this.state
-  console.log("HISTORY",history)
+  let counter = 0
+  // console.log("HISTORY",history)
   let moveList = history.map((element,index) => {
     return(
       <div key={index}>
@@ -93,6 +94,12 @@ class HumanVsHuman extends Component {
       </div>
     )
   })
+    if (history.includes('#')) {
+      axios.post('/api/gameMoves', {history})
+      .then(() => 
+      
+      console.log('move updated', history.length % 5, history))
+     }
   return moveList
   }
 
@@ -114,7 +121,7 @@ class HumanVsHuman extends Component {
   //   this.highlightSquare(square, squaresToHighlight);
   // };
 
-  onMouseOutSquare = square => this.removeHighlightSquare(square);
+  // onMouseOutSquare = square => this.removeHighlightSquare(square);
 
   // central squares get diff dropSquareStyles
   onDragOverSquare = square => {
@@ -143,7 +150,7 @@ class HumanVsHuman extends Component {
 
     this.setState({
       fen: this.game.fen(),
-      history: this.game.history({ verbose: true }),
+      history: this.game.history({ verbose: false }),
       pieceSquare: ""
     });
   };
@@ -153,28 +160,28 @@ class HumanVsHuman extends Component {
       squareStyles: { [square]: { backgroundColor: "deepPink" } }
     });
 
-   showTurn(arr) {
-    let counter = 0
-    let moves = []
-    for (let i=0; i <arr.length; i++) {
-      for (let key in arr[i]) {
-        if (key == 'san') {
-          let something = Object.values(arr[i].san).join('')
-          moves.push(something)
-          counter = counter += 1
-          console.log(counter)
-        }
-      } 
-    }
-    // if (counter === 2) {
-    //   this.setState({
-    //     SAN: moves
-    //   })
-    //   counter = 0
-    // }
+  //  showTurn(arr) {
+  //   let counter = 0
+  //   let moves = []
+  //   for (let i=0; i <arr.length; i++) {
+  //     for (let key in arr[i]) {
+  //       if (key == 'san') {
+  //         let something = Object.values(arr[i].san).join('')
+  //         moves.push(something)
+  //         counter = counter += 1
+  //         console.log(counter)
+  //       }
+  //     } 
+  //   }
+  //   // if (counter === 2) {
+  //   //   this.setState({
+  //   //     SAN: moves
+  //   //   })
+  //   //   counter = 0
+  //   // }
    
-    return moves
-   }
+  //   return moves
+  //  }
 
    
 
@@ -183,7 +190,7 @@ class HumanVsHuman extends Component {
     // console.log('Dean',this.state.SAN)
     // console.log('Sam',this.showTurn(history))
     // SAN = this.showTurn(history)
-    console.log(this.state.history)
+    // console.log(this.state.history)
     // console.log(SAN)
 
     const { fen, dropSquareStyle, squareStyles } = this.state;

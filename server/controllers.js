@@ -113,5 +113,14 @@ module.exports = {
                 res.sendStatus(401)
             }
         // }
+    },
+    gameMoves: (req, res) => {
+        let {history} = req.body
+        const db = req.app.get('db')
+        // console.log('movesFire', history)
+
+        db.update_moves([history]).then(
+            res.sendStatus(200)
+        )
     }
 }
