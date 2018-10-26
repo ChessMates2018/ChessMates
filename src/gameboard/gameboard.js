@@ -94,7 +94,7 @@ class HumanVsHuman extends Component {
       </div>
     )
   })
-    if (history.length % 5 === 0) {
+    if (history.includes('#')) {
       axios.post('/api/gameMoves', {history})
       .then(() => 
       
