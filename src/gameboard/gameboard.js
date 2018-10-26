@@ -3,67 +3,48 @@ import PropTypes from "prop-types";
 import MoveList from './components/moveList'
 import Chess from "chess.js"; // import Chess from  "chess.js"(default) if recieving an error about new Chess() not being a constructor
 import axios from 'axios'
-
 import Chessboard from "chessboardjsx";
+import io from 'socket.io-client'
 
 
 class HumanVsHuman extends Component {
+  constructor(props) {
+    super (props)
+
+    this.state = {
+      fen: "start",
+      // square styles for active drop square
+      dropSquareStyle: {},
+      // custom square styles
+      squareStyles: {},
+      // square with the currently clicked piece
+      pieceSquare: "",
+      // currently clicked square
+      square: "",
+      // array of past game moves
+      history: [],
+      room: null,
+      joined: false,
+      message: ''
+    };
+
+    this.socket = io.connect('/')
+
+  }
   static propTypes = { children: PropTypes.func };
 
-  state = {
-    fen: "start",
-    // square styles for active drop square
-    dropSquareStyle: {},
-    // custom square styles
-    squareStyles: {},
-    // square with the currently clicked piece
-    pieceSquare: "",
-    // currently clicked square
-    square: "",
-    // array of past game moves
-    history: [],
-    SAN: []
-  };
+  
 
   
 
   componentDidMount() {
     this.game = new Chess();
+    this.socket.emit('new game', {
+      message: this.game,
+      room: this.state.room
+    })
   }
 
-  // keep clicked square style and remove hint squares
-  // removeHighlightSquare = () => {
-  //   this.setState(({ pieceSquare, history }) => ({
-  //     squareStyles: squareStyling({ pieceSquare, history })
-  //   }));
-  // };
-
-  // show possible moves
-  // highlightSquare = (sourceSquare, squaresToHighlight) => {
-  //   const highlightStyles = [sourceSquare, ...squaresToHighlight].reduce(
-  //     (a, c) => {
-  //       return {
-  //         ...a,
-  //         ...{
-  //           [c]: {
-  //             background:
-  //               "radial-gradient(circle, #fffc00 36%, transparent 40%)",
-  //             borderRadius: "50%"
-  //           }
-  //         },
-  //         ...squareStyling({
-  //           history: this.state.history,
-  //           pieceSquare: this.state.pieceSquare
-  //         })
-  //       };
-  //     },
-  //     {}
-  //   );
-
-  //   this.setState(({ squareStyles }) => ({
-  //     squareStyles: { ...squareStyles, ...highlightStyles }
-  //   }));
-  // };
 
   onDrop = ({ sourceSquare, targetSquare }) => {
     // see if the move is legal
@@ -73,6 +54,8 @@ class HumanVsHuman extends Component {
       promotion: "q" // always promote to a queen for example simplicity
     });
 
+    
+
     // illegal move
     if (move === null) return;
     this.setState(({ history, pieceSquare }) => ({
@@ -80,7 +63,16 @@ class HumanVsHuman extends Component {
       history: this.game.history({ verbose: false }),
       squareStyles: squareStyling({ pieceSquare, history }),
     }));
-    return this.game.history
+    
+    this.socket.emit('move', move)
+
+    this.socket.on('move', (move) => {
+      console.log('it worked?', move)
+      this.game.move(move)
+      Chessboard.position(this.state.fen())
+    });
+
+    // return this.game.history
   };
 
   showHistory = () => {
@@ -228,6 +220,7 @@ export default function Gameboard() {
           onSquareRightClick,
         }) => (
           <>
+          
           <Chessboard
             id="humanVsHuman"
             width={720}
@@ -245,7 +238,7 @@ export default function Gameboard() {
             onDragOverSquare={onDragOverSquare}
             onSquareClick={onSquareClick}
             onSquareRightClick={onSquareRightClick}
-          />
+            />
           <MoveList 
           move={showHistory}/>
           </>

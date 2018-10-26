@@ -5,7 +5,7 @@ export default class Chat extends Component{
     constructor(){
         super()
 
-        this.socket = io.connect('http://localhost:3438')
+        this.socket = io.connect('/')
     }
     render(){
         // var socket = io()

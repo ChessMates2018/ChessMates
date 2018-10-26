@@ -61,10 +61,19 @@ io.on('connection', function(socket){
 
     socket.on('new player', function() {
         console.log('message recieved')
-        // io.emit('player joined', {name: player.name, room: player.room})
+        io.emit('player joined', {name: player.name, room: player.room})
     })
-    socket.on('disconnect', () => console.log('userspeacedoutyo'))
+
+    socket.on('disconnect', () => console.log('User has peaced out, yo!'))
+
+    // socket.on('move', (msg) => this.socket.broadcast.emit('move', msg))
+    socket.on('move', (move) => {
+        console.log('you made a move', move)
+        socket.broadcast.emit('move',move)
+    })
 })
+
+
 
 
 server.listen(SERVER_PORT, () => console.log(`spellbound on port ${SERVER_PORT}`))
