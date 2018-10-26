@@ -3,7 +3,7 @@ import {Switch, Route} from 'react-router-dom'
 import Gameboard from '../gameboard/gameboard'
 import Login from '../landingpage/landingpage'
 import Profile from '../profile/profile'
-// import About from '../about/about'
+import About from '../about/about'
 
 export default function Nav(){
     return(
@@ -12,7 +12,7 @@ export default function Nav(){
                 <Route exact path='/' component={Login}/> 
                 <Route path='/profile' component={Profile}/>
                 <Route path='/gameboard' component={Gameboard}/>
-                {/* // <Route path='/about' component={About}/> */}
+                <Route path='/about' component={About}/>
             </Switch>
         </div>
     )
