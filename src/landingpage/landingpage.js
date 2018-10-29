@@ -51,23 +51,38 @@ this.setState({
 })
 }
 
+
 render(){
     console.log(this.state)
+let WelcomeDiv;
+if (this.state.Div === true){
+WelcomeDiv =
+<div>
+<RegisterModal />
+</div>
+
+} else {
+    WelcomeDiv = null
+}
+
     return(
-        <div>
-            <h1>Header Span with Logo</h1>
+        <div className="landing-page">
+            <h1>Checked</h1>
             <Leaderboard />
-            <span className="welcome-button" onClick={this.toggleDiv}>Welcome</span>
+            
+            
+            <h2>Login</h2>
+            <input id="username-input" placeholder="Username" name="Username" value={this.state.Username} onChange={this.handleInput} />
+
+            <input id="password-input" placeholder="Password" name="Password" type = "password" value={this.state.Password}onChange={this.handleInput}/>
+
+            <button id="login-button" onClick={this.login}>Login</button>
+            <button className="welcome-button" onClick={this.toggleDiv}>New User? Click to register</button>
+            {WelcomeDiv}
+
         
 
-        <h2>Login</h2>
-        <input placeholder="Username" name="Username" value={this.state.Username} onChange={this.handleInput} ></input>
-
-        <input placeholder="Password" name="Password" type = "password" value={this.state.Password}onChange={this.handleInput}></input>
-
-        <button onClick={this.login}>Login</button>
-
-        <RegisterModal />
+        
 
         </div>
     )
