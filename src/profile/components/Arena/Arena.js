@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import PotentialOpponents from './SubComponents/PotentialOpponents';
 import io from 'socket.io-client'
+import axios from 'axios'
+import {connect} from 'react-redux'
 
 
 class Arena extends Component {
@@ -14,29 +16,64 @@ class Arena extends Component {
   }
 
   joinArena(info){
-    let subplayers = []
-    subplayers.push(info)
-    if(subplayers.length === 2){
-      this.setState({players: subplayers})
-      subplayers = []
-     let joined = io.on('connection', function(socket){
-        socket.join('new game')
-      })
-      io.to(this.props.history.push(`/gameboard/${joined}`))
-    }
+    let {username} = this.props
+    this.setState((prevState) => ({
+      players: [...prevState.players, username]
+    }))
   } 
+
+  runSockets = () => {
+    let socket = io.connect()
+    socket.on('connect', function(){
+      console.log('you have joined the arena')
+       socket.emit('#')
+     })
+  }
+
+  displayArena = () => {
+    let {username}  =this.props
+    let {players} = this.state
+    if (players[0]) {
+      players.map(player => {
+        return (
+          <div>
+            <div className="challenger_info">
+              <p>{username}</p>
+            </div>
+            <button
+              onClick = {this.runSockets}
+              className="challenge_btn">Come at me!</button>
+          </div>
+        )
+      })
+    } else {
+      return (
+        <p>There are no current challengers.</p>
+      )
+    }
+  }
 
   render () {
     let {opponentsList} = this.props
+    /** destructuer stull off of info.4 */
     return (
       <div>
-        <PotentialOpponents
+        {this.displayArena()}
+        {/* <PotentialOpponents
         opponentsList = {opponentsList}
-        />
-        <button onClick={this.joinArena} className="button">Join the Arena</button>
+        /> */}
+        <button 
+          onClick={this.joinArena} 
+          className="button">Join the Arena</button>
+
       </div>
     )
   }
 }
 
-export default Arena
+function mapStateToProps (state) {
+  let {username} = state
+  return {username}
+}
+
+export default connect(mapStateToProps)(Arena)

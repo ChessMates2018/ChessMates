@@ -49,15 +49,23 @@ app.use(session({
 app.get(`/api/user`, ctrl.getUser)
 app.get('/api/leaderboard', ctrl.getLeaders)
 app.get(`/api/loggedin`, ctrl.getOnlineUsers)
+app.get('/api/myGames', ctrl.getMyGames)
+app.get(`/api/checkuser`, ctrl.checkUser)
+app.get(`/api/gameNumber`, ctrl.gameNumber)
+
 app.post('/api/register', ctrl.registerUser)
 app.post('/api/login', ctrl.loginUser)
 app.post('/api/logout', ctrl.logout)
-app.get('/api/myGames', ctrl.getMyGames)
-app.get(`/api/checkuser`, ctrl.checkUser)
 app.post('/api/gameMoves', ctrl.gameMoves)
+
 
 io.on('connection', function(socket){
     console.log('user connected')
+
+    socket.on('back end test', () => {
+        console.log('back end has been hit!')
+        io.emit('test')
+    })
 
     socket.on('new player', function() {
         console.log('message recieved')
@@ -67,13 +75,19 @@ io.on('connection', function(socket){
     socket.on('disconnect', () => console.log('User has peaced out, yo!'))
 
     // socket.on('move', (msg) => this.socket.broadcast.emit('move', msg))
-    socket.on('move', (move) => {
-        console.log('you made a move', move)
-        socket.broadcast.emit('move',move)
+    socket.on('move', (newMove) => {
+        console.log('you made a move')
+        io.emit('update-game',newMove)
     })
 })
 
+// io = io.listen(server)
 
+// io.sockets.on("connection", function(socket) {
+//     socket.on("room", function (room) {
+//         socket.join(room)
+//     })
+// })
 
 
 server.listen(SERVER_PORT, () => console.log(`spellbound on port ${SERVER_PORT}`))
