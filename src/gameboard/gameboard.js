@@ -35,14 +35,13 @@ class HumanVsHuman extends Component {
 
   
 
-  
-
   componentDidMount() {
     this.game = new Chess();
-    this.socket.emit('new game', {
-      message: this.game,
-      room: this.state.room
-    })
+    // this.socket.emit('new game', {
+    //   message: this.game,
+    //   room: this.state.room
+    // })
+    this.runSockets()
   }
 
 
@@ -64,16 +63,25 @@ class HumanVsHuman extends Component {
       squareStyles: squareStyling({ pieceSquare, history }),
     }));
     
-    this.socket.emit('move', move)
+    // this.socket.emit('move', move)
 
-    this.socket.on('move', (move) => {
-      console.log('it worked?', move)
-      this.game.move(move)
-      Chessboard.position(this.state.fen())
-    });
+    // this.socket.on('move', (move) => {
+    //   console.log('it worked?', move)
+    //   this.game.move(move)
+    //   Chessboard.position(this.state.fen())
+    // });
 
     // return this.game.history
   };
+
+  //line 190
+  runSockets = () => {
+    this.socket = io()
+    this.socket.on('connect-to-room', data => 'PUT HISTORY.PUSH HERE?')
+    this.socket.on('connect-to-room', data => this.socket.emit('user-info', 'ADD USER PROPS? HERE'))
+    this.socket.on('users', (data) => this.setState({white: 'ADD PROPS', black: 'ADD PROPS'}))
+    this.socket.on('update-game', state => this.setState(state))
+  }
 
   showHistory = () => {
   let {history} = this.state
