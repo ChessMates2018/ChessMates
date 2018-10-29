@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './App.css';
 import LandingPage from './landingpage/landingpage'
 import Nav from './routing/nav'
 import Routes from './routing/routes'
