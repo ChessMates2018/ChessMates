@@ -28,7 +28,6 @@ class HumanVsHuman extends Component {
       message: ''
     };
 
-    this.socket = io.connect('/')
 
   }
   static propTypes = { children: PropTypes.func };
@@ -61,26 +60,36 @@ class HumanVsHuman extends Component {
       fen: this.game.fen(),
       history: this.game.history({ verbose: false }),
       squareStyles: squareStyling({ pieceSquare, history }),
-    }));
+    }), () => {
+      let {fen, history, squareStyles} = this.state
+      let newMove = {fen, history, squareStyles}
+      this.socket.emit('move', newMove)
+    });
     
-    // this.socket.emit('move', move)
-
-    // this.socket.on('move', (move) => {
-    //   console.log('it worked?', move)
-    //   this.game.move(move)
-    //   Chessboard.position(this.state.fen())
-    // });
-
-    // return this.game.history
   };
 
   //line 190
   runSockets = () => {
     this.socket = io()
+    this.socket.on('test', data => console.log('test fired'))
     this.socket.on('connect-to-room', data => 'PUT HISTORY.PUSH HERE?')
     this.socket.on('connect-to-room', data => this.socket.emit('user-info', 'ADD USER PROPS? HERE'))
     this.socket.on('users', (data) => this.setState({white: 'ADD PROPS', black: 'ADD PROPS'}))
-    this.socket.on('update-game', state => this.setState(state))
+    this.socket.on('update-game', (newMove) => {
+      console.log(newMove)
+      this.updateNewMove(newMove)
+    })
+  }
+
+  updateNewMove =(newMove)=> {
+    console.log('wait for iiiii....')
+    let {fen, history, squareStyles} = newMove
+    this.setState({fen, history, squareStyles})
+    console.log('.....ttttt!')
+  }
+
+  testSockets =() => {
+    this.socket.emit('back end test')
   }
 
   showHistory = () => {
@@ -205,7 +214,8 @@ class HumanVsHuman extends Component {
       dropSquareStyle,
       onDragOverSquare: this.onDragOverSquare,
       onSquareClick: this.onSquareClick,
-      onSquareRightClick: this.onSquareRightClick
+      onSquareRightClick: this.onSquareRightClick,
+      testSockets: this.testSockets
     });
   }
 }
@@ -226,6 +236,7 @@ export default function Gameboard() {
           onDragOverSquare,
           onSquareClick,
           onSquareRightClick,
+          testSockets,
         }) => (
           <>
           
@@ -249,10 +260,10 @@ export default function Gameboard() {
             />
           <MoveList 
           move={showHistory}/>
+          <button onClick={testSockets}>CLICK ME</button>
           </>
         )}
       </HumanVsHuman>
-      
     </div>
   );
 }

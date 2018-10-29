@@ -84,7 +84,7 @@ module.exports = {
         const db = req.app.get('db')
     
         let {user} = req.session
-        console.log('look here stupit!',user)
+        // console.log('look here stupit!',user)
         let myGames = await db.my_games(user)
         res.status(200).send(myGames)
     },
@@ -122,5 +122,12 @@ module.exports = {
         db.update_moves([history]).then(
             res.sendStatus(200)
         )
+    },
+
+    gameNumber: async (req, res) => {
+        const db = req.app.get('db')
+        let number = await db.game_count()
+        number ++
+        res.status(200).send({number})
     }
 }
