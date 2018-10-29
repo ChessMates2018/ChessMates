@@ -35,9 +35,10 @@ if (Password !== PasswordConfirm){
 
 
 render(){
-    console.log(this.state)
     return(
-        <div>
+        <div className="register">
+
+        <div className="toggled-view">
             <h2>Register Modal</h2>
             <h3>FirstName:</h3><input name='FirstName' placeholder="Your first name." value={this.state.FirstName} onChange={this.handleInput} ></input>
 
@@ -49,10 +50,10 @@ render(){
 
             <h3>Password:</h3><input name='Password' placeholder="Your password." value={this.state.Password} onChange={this.handleInput} ></input>
 
-            <h3>PasswordConfirm:</h3><input name='PasswordConfirm' placeholder="Please confirm your password." value={this.state.PasswordConfirm} onChange={this.handleInput} ></input>
+            <h3>PasswordConfirm:</h3><input name='PasswordConfirm' placeholder="Confirm your password." value={this.state.PasswordConfirm} onChange={this.handleInput} ></input>
 
-            <button onClick={this.createAccount}>Create Account</button>
-            <button>Cancel</button>
+            <button id="create-button" onClick={this.createAccount}>Create Account</button>
+            </div>
         </div>
     )
 }
