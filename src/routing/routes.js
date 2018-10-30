@@ -11,7 +11,7 @@ export default function Nav(){
             <Switch>
                 <Route exact path='/' component={Login}/> 
                 <Route path='/profile' component={Profile}/>
-                <Route path='/gameboard' component={Gameboard}/>
+                <Route path='/gameboard/:roomId' component={Gameboard}/>
                 <Route path='/about' component={About}/>
             </Switch>
         </div>

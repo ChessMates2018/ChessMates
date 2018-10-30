@@ -11,7 +11,7 @@ class RecentGames extends Component {
 
   componentDidMount() {
     axios.get('/api/myGames').then((res) => {
-      console.log(res)
+      // console.log(res)
       this.setState({
         myGames: res.data
       })
@@ -19,7 +19,7 @@ class RecentGames extends Component {
   }
 
   render() {
-    console.log('myGames', this.state.myGames)
+    // console.log('myGames', this.state.myGames)
     let games = 0;
     if (this.state.myGames[0]) {
       games = this.state.myGames.map((element, index) => {
