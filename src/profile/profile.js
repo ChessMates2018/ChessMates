@@ -16,17 +16,17 @@ class Profile extends Component {
       currentUser: []
     }
 
-    this.getUser = this.getUser.bind(this)
-    this.getAllOnline = this.getAllOnline.bind(this)
+    // this.getUser = this.getUser.bind(this)
+    // this.getAllOnline = this.getAllOnline.bind(this)
   }
 
   componentDidMount() {
     if (!this.props.username) {
-      console.log('FIRE FIRE FIRE')
+      // console.log('FIRE FIRE FIRE')
       axios.get(`/api/checkuser`).then(res => {
         console.log('dis is du RES', res)
-        this.props.setUsername()
-        this.getInitialInfo()
+        this.props.setUsername(res.data)
+        // this.getInitialInfo()
       })
       .catch(err => {
         console.log('dis is du err!',err)
@@ -37,30 +37,31 @@ class Profile extends Component {
     }
   }
 
-  async getInitialInfo () {
-    // let user = await this.getUser()
-    let onlineUsers = await this.getAllOnline()
-  }
+  // async getInitialInfo () {
+  //   // let user = await this.getUser()
+  //   let onlineUsers = await this.getAllOnline()
+  // }
 
-  getUser () {
-    axios.get(`/api/user`).then(res => {
-      console.log('user', res.data)
-      this.setState({
-        currentUser: res.data
-      })
-    })
-  }
+  // getUser () {
+  //   axios.get(`/api/user`).then(res => {
+  //     console.log('user', res.data)
+  //     this.setState({
+  //       currentUser: res.data
+  //     })
+  //   })
+  // }
 
-  getAllOnline () {
-    axios.get(`/api/loggedin`).then(res => {
-      console.log('all users online', res.data)
-      this.setState({
-        onlineUsers: res.data
-      })
-    })
-  }
+  // getAllOnline () {
+  //   axios.get(`/api/loggedin`).then(res => {
+  //     console.log('all users online', res.data)
+  //     this.setState({
+  //       onlineUsers: res.data
+  //     })
+  //   })
+  // }
 
   render () {
+    console.log(this.props.username)
     return (
       <div className="profile">
         <h1>Profile.JS</h1>

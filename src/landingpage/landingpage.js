@@ -53,7 +53,6 @@ this.setState({
 
 
 render(){
-    console.log(this.state)
 let WelcomeDiv;
 if (this.state.Div === true){
 WelcomeDiv =
