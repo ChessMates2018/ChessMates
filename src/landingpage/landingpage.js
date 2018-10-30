@@ -65,29 +65,24 @@ WelcomeDiv =
 
     return(
         <div className="landing-page">
-            <h1 id="title">Checked</h1>
-
-            <div className="login">
-            <h2 id="login-welcome">Welcome</h2>
-            <input id="username-input" placeholder="Username" name="Username" value={this.state.Username} onChange={this.handleInput} />
-
-            <input id="password-input" placeholder="Password" name="Password" type = "password" value={this.state.Password}onChange={this.handleInput}/>
-
-            <button id="login-button" onClick={this.login}>Login</button>
-            <button id="register-button" onClick={this.toggleDiv}>Register</button>
+            <div id="title">
+                <h1>Checked</h1>
+                <h3>The best of the best of the best</h3>
             </div>
 
-            <div className="space">
+            <div className="login">
+                <h2 id="login-welcome">Welcome</h2>
+                <input className="input" placeholder="Username" name="Username" value={this.state.Username} onChange={this.handleInput} />
+                <input className="input" placeholder="Password" name="Password" type = "password" value={this.state.Password}onChange={this.handleInput}/>
+                <button className="btn"  onClick={this.login}>Login</button>
+                <button className="btn"  onClick={this.toggleDiv}>Register</button>
             </div>
 
             <div id="WelcomeDiv">
             {WelcomeDiv}
             </div>
+
             <Leaderboard />
-
-        
-
-        
 
         </div>
     )
