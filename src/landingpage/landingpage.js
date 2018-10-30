@@ -67,7 +67,13 @@ WelcomeDiv =
         <div className="landing-page">
             <div id="title">
                 <h1>Checked</h1>
-                <h3>The best of the best of the best</h3>
+                <h3>
+                A group of chess enthusiasts checked into a hotel and were standing in the lobby
+                discussing their recent tournament victories. After about an hour, the manager 
+                came out of the office and asked them to disperse. "But why?" they asked, as they 
+                moved off. "Because," he said "I can't stand chess nuts boasting in an open foyer." 
+                <p>~ Peter Kay </p>
+                </h3>
             </div>
 
             <div className="login">

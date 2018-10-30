@@ -7,6 +7,7 @@ DEVKEY
 
 module.exports = {
     registerUser: (req, res) => {
+        console.log('brady didnt mess up')
         const { FirstName, LastName, Email, Username, Password } = req.body
         const defaultRank = 1000
         const defaultImg = null
@@ -19,6 +20,7 @@ module.exports = {
             if (user.length !== 0) {
                 res.status(200).send('Username Taken. Try another.')
             } else {
+                console.log('you have else')
                 const salt = bcrypt.genSaltSync(10)
                 const hash = bcrypt.hashSync(Password, salt)
 
