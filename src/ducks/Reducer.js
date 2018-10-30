@@ -1,12 +1,14 @@
 const initialState = {
   username: '',
   light:{},
-  dark: {}
+  dark: {},
+  roomId: ''
 }
 
 const SET_USERNAME = 'SET_USERNAME',
       SET_LIGHT_PLAYER = `SET_LIGHT_PLAYER`,
-      SET_DARK_PLAYER = `SET_DARK_PLAYER`
+      SET_DARK_PLAYER = `SET_DARK_PLAYER`,
+      SET_ROOMID = 'SET_ROOMID'
      
 
 
@@ -15,7 +17,6 @@ export function setUsername (username) {
   return {
     type: SET_USERNAME,
     payload: username
-
   }
 }
 
@@ -33,6 +34,13 @@ export function setDarkPlayer (userInfo_Dark) {
   }
 }
 
+export function setRoomId (roomId) {
+  return {
+    type: SET_ROOMID,
+    payload: roomId
+  }
+}
+
 function Reducer (state = initialState, action) {
   switch(action.type) {
     case SET_USERNAME:
@@ -43,6 +51,9 @@ function Reducer (state = initialState, action) {
       
     case SET_DARK_PLAYER:
       return Object.assign({}, state, {dark: action.payload})
+
+    case SET_ROOMID:
+      return Object.assign({}, state, {roomId: action.payload})
     
     default: return state
   }
