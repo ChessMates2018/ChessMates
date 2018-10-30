@@ -60,25 +60,31 @@ WelcomeDiv =
 <div>
 <RegisterModal />
 </div>
-
 } else {
     WelcomeDiv = null
 }
 
     return(
         <div className="landing-page">
-            <h1>Checked</h1>
-            <Leaderboard />
-            
-            
-            <h2>Login</h2>
+            <h1 id="title">Checked</h1>
+
+            <div className="login">
+            <h2 id="login-welcome">Welcome</h2>
             <input id="username-input" placeholder="Username" name="Username" value={this.state.Username} onChange={this.handleInput} />
 
             <input id="password-input" placeholder="Password" name="Password" type = "password" value={this.state.Password}onChange={this.handleInput}/>
 
             <button id="login-button" onClick={this.login}>Login</button>
-            <button className="welcome-button" onClick={this.toggleDiv}>New User? Click to register</button>
+            <button id="register-button" onClick={this.toggleDiv}>Register</button>
+            </div>
+
+            <div className="space">
+            </div>
+
+            <div id="WelcomeDiv">
             {WelcomeDiv}
+            </div>
+            <Leaderboard />
 
         
 

@@ -62,7 +62,7 @@ class Profile extends Component {
 
   render () {
     return (
-      <div>
+      <div className="profile">
         <h1>Profile.JS</h1>
         <Arena
         opponentsList = {this.state.onlineUsers}
