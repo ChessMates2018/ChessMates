@@ -24,15 +24,15 @@ const leaderBoard =  this.state.Leaders.map((element, index) => {
     let rating = element.rating
     let placing = index + 1
     return(
-        <div key={index}>
+        <div className="person" key={index}>
             <p>{`${placing}. ${username} | ${rating}`} </p>
         </div>
     )
 })
 
     return(
-        <div>
-            <h1>LeaderBoard</h1>
+        <div  className="lb-wrapper">
+            <h1>Leader Board</h1>
             <h2>Highest Rated Players</h2>
             <div className="Leaderboard">
               {leaderBoard}

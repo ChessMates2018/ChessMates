@@ -65,29 +65,30 @@ WelcomeDiv =
 
     return(
         <div className="landing-page">
-            <h1 id="title">Checked</h1>
-
-            <div className="login">
-            <h2 id="login-welcome">Welcome</h2>
-            <input id="username-input" placeholder="Username" name="Username" value={this.state.Username} onChange={this.handleInput} />
-
-            <input id="password-input" placeholder="Password" name="Password" type = "password" value={this.state.Password}onChange={this.handleInput}/>
-
-            <button id="login-button" onClick={this.login}>Login</button>
-            <button id="register-button" onClick={this.toggleDiv}>Register</button>
+            <div id="title">
+                <h1>Checked</h1>
+                <h3>
+                A group of chess enthusiasts checked into a hotel and were standing in the lobby
+                discussing their recent tournament victories. After about an hour, the manager 
+                came out of the office and asked them to disperse. "But why?" they asked, as they 
+                moved off. "Because," he said "I can't stand chess nuts boasting in an open foyer." 
+                <p>~ Peter Kay </p>
+                </h3>
             </div>
 
-            <div className="space">
+            <div className="login">
+                <h2 id="login-welcome">Welcome</h2>
+                <input className="input" placeholder="Username" name="Username" value={this.state.Username} onChange={this.handleInput} />
+                <input className="input" placeholder="Password" name="Password" type = "password" value={this.state.Password}onChange={this.handleInput}/>
+                <button className="btn"  onClick={this.login}>Login</button>
+                <button className="btn"  onClick={this.toggleDiv}>Register</button>
             </div>
 
             <div id="WelcomeDiv">
             {WelcomeDiv}
             </div>
+
             <Leaderboard />
-
-        
-
-        
 
         </div>
     )

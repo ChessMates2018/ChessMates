@@ -68,7 +68,7 @@ class Profile extends Component {
         <Arena
         opponentsList = {this.state.onlineUsers}
         />
-        <UserInfo/>
+        {/* <UserInfo/> */}
         <RecentGames/>
         <Leaderboard/>
       </div>
