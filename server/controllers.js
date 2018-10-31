@@ -129,5 +129,13 @@ module.exports = {
         let number = await db.game_count()
         number ++
         res.status(200).send({number})
+    },
+
+    joinArena: (req, res) => {
+        let {username} = req.body
+        const db = req.app.get('db')
+        db.toggle_online(username).then(
+        res.sendStatus(200)
+        )
     }
 }

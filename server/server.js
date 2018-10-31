@@ -58,6 +58,8 @@ app.post('/api/login', ctrl.loginUser)
 app.post('/api/logout', ctrl.logout)
 app.post('/api/gameMoves', ctrl.gameMoves)
 
+app.put('/api/joinArena', ctrl.joinArena)
+
 
 io.on('connection', function(socket){
     console.log('user connected')
@@ -79,6 +81,13 @@ io.on('connection', function(socket){
         console.log('you made a move')
         io.emit('update-game',newMove)
     })
+
+    socket.on('connect', () => {
+        let roomId = socket.id
+        console.log("LOOK HERE", roomId)
+      })
+
+
 })
 
 // io = io.listen(server)

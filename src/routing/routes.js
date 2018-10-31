@@ -4,6 +4,7 @@ import Gameboard from '../gameboard/gameboard'
 import Login from '../landingpage/landingpage'
 import Profile from '../profile/profile'
 import About from '../about/about'
+import AI from '../gameboard/AIgameboard'
 
 export default function Nav(){
     return(
@@ -13,6 +14,7 @@ export default function Nav(){
                 <Route path='/profile' component={Profile}/>
                 <Route path='/gameboard/:roomId' component={Gameboard}/>
                 <Route path='/about' component={About}/>
+                <Route path='/Stockfish' component={AI}/>
             </Switch>
         </div>
     )
