@@ -1,0 +1,121 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: inherit; }
+
+BODY {
+  min-height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  font-family: Arial, Helvetica, sans-serif; }
+
+H2 {
+  margin: 8px 0; }
+
+P {
+  line-height: 1.4;
+  font-size: 1rem;
+  font-family: Arial, Helvetica, sans-serif; }
+
+h1, h2, h2 {
+  color: #221A19;
+  font-family: Arial, Helvetica, sans-serif; }
+
+.landing-page {
+  text-align: center;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)), url("../images/landingpage.jpg");
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+
+.login {
+  position: relative;
+  top: 10rem;
+  padding: 5px 2px 15px 2px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  background: #221A19;
+  opacity: .8;
+  height: 13rem;
+  width: 19rem; }
+
+#login-welcome {
+  color: #fbfafa; }
+
+#WelcomeDiv {
+  height: 400px;
+  display: flex;
+  flex-direction: column; }
+
+.input {
+  height: 1.5rem;
+  width: 15rem; }
+
+.btn {
+  height: 1.5rem;
+  width: 15rem; }
+
+#title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #221A19;
+  opacity: .8;
+  position: relative;
+  top: 5rem;
+  height: 10rem;
+  width: 100%;
+  padding: 1rem 2rem; }
+  #title h1, #title h3 {
+    color: #fbfafa; }
+
+.profile {
+  background-image: url("../images/profile.jpg"); }
+
+.toggled-view {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background: #221A19;
+  width: 300px;
+  height: 100%;
+  opacity: .8;
+  color: white;
+  padding: 5px; }
+
+#create-button {
+  margin-top: 5px;
+  width: 50%; }
+
+#cancel-button {
+  margin-top: 5px;
+  width: 50%; }
+
+.lb-wrapper {
+  background-color: #221A19;
+  opacity: .8;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  bottom: 100px;
+  padding: 15px;
+  width: 100%; }
+  .lb-wrapper h1, .lb-wrapper h2, .lb-wrapper p {
+    color: #fbfafa; }
+  .lb-wrapper h2 {
+    font-size: 20px; }
+  .lb-wrapper .Leaderboard {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center; }
+    .lb-wrapper .Leaderboard .person {
+      margin-left: 9rem; }
