@@ -4,7 +4,8 @@ import MoveList from './components/moveList'
 import Chess from "chess.js"; // import Chess from  "chess.js"(default) if recieving an error about new Chess() not being a constructor
 import axios from 'axios'
 import Chessboard from "chessboardjsx";
-import io from 'socket.io-client'
+// import io from 'socket.io-client'
+import {socket} from '../utils/SocketFunctions'
 
 
 class HumanVsHuman extends Component {
@@ -36,22 +37,31 @@ class HumanVsHuman extends Component {
 
   componentDidMount() {
     this.game = new Chess();
-    // this.socket.emit('new game', {
-    //   message: this.game,
-    //   room: this.state.room
-    // })
     this.runSockets()
+    
+    this.socket.emit('new-game', {
+      message: this.game,
+      room: this.state.room
+    })
+    this.socket.on('update-game', (data) => {
+      this.updateNewMove(data)
+      console.log('data', data)
+    })
   }
 
+  movePiece(sourceSquare, targetSquare){
+    return this.game.move({
+        from: sourceSquare,
+        to: targetSquare,
+        promotion: "q" // always promote to a queen for example simplicity
+      });
+    
+  }
 
   onDrop = ({ sourceSquare, targetSquare }) => {
     // see if the move is legal
-    let move = this.game.move({
-      from: sourceSquare,
-      to: targetSquare,
-      promotion: "q" // always promote to a queen for example simplicity
-    });
-
+  
+    let move = this.movePiece(sourceSquare, targetSquare)
     
 
     // illegal move
@@ -62,30 +72,31 @@ class HumanVsHuman extends Component {
       squareStyles: squareStyling({ pieceSquare, history }),
     }), () => {
       let {fen, history, squareStyles} = this.state
-      let newMove = {fen, history, squareStyles}
+      let newMove = {fen, history, squareStyles, sourceSquare, targetSquare}
       this.socket.emit('move', newMove)
+      console.log('socket', this.socket)
     });
     
   };
 
   //line 190
   runSockets = () => {
-    this.socket = io()
+    this.socket = socket
     this.socket.on('test', data => console.log('test fired'))
     this.socket.on('connect-to-room', data => 'PUT HISTORY.PUSH HERE?')
     this.socket.on('connect-to-room', data => this.socket.emit('user-info', 'ADD USER PROPS? HERE'))
     this.socket.on('users', (data) => this.setState({white: 'ADD PROPS', black: 'ADD PROPS'}))
-    this.socket.on('update-game', (newMove) => {
-      console.log(newMove)
-      this.updateNewMove(newMove)
-    })
+    // this.socket.on('update-game', (newMove) => {
+    //   console.log(newMove)
+      // this.updateNewMove(newMove)
+    // })
   }
 
   updateNewMove =(newMove)=> {
     console.log('wait for iiiii....')
+    this.movePiece(newMove.sourceSquare, newMove.targetSquare)
     let {fen, history, squareStyles} = newMove
-    this.setState({fen, history, squareStyles})
-    console.log('.....ttttt!')
+    this.setState({fen, history, squareStyles}, () => console.log(this.state))
   }
 
   testSockets =() => {
