@@ -147,6 +147,16 @@ module.exports = {
         const db = req.app.get('db')
         let {light, dark} = req.body
         console.log('chellenged', dark)
-        db.new_game(light, dark)     
+        db.new_game(light, dark) 
+        .then(res.sendStatus(200))    
+    },
+
+    getPlayers: async (req, res) => {
+        const db = req.app.get('db')
+        let {roomId} = req.params
+
+        let players = await db.player(roomId)
+
+        res.status(200).send(players)
     }
 }
