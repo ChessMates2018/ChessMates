@@ -35,9 +35,9 @@ const leaderBoard =  this.state.Leaders.map((element, index) => {
             <h1>Leader Board</h1>
             <h2>Highest Rated Players</h2>
             <div className="Leaderboard">
-                <div className="blocker block_right"></div>
+                {/* <div className="blocker block_right"></div> */}
                 {leaderBoard}
-                <div className="blocker block_left"></div>
+                {/* <div className="blocker block_left"></div> */}
             </div>
         </div>
     )

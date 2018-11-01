@@ -46,14 +46,6 @@ h1, h2, h2 {
 #login-welcome {
   color: #fbfafa; }
 
-#WelcomeDiv {
-  position: relative;
-  bottom: 100px;
-  height: 400px;
-  display: flex;
-  flex-direction: column;
-  z-index: 30; }
-
 .input {
   height: 1.5rem;
   width: 15rem; }
@@ -94,11 +86,24 @@ h1, h2, h2 {
 .profile {
   background-image: url("../images/profile.jpg"); }
 
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg); }
+  100% {
+    transform: rotate(360deg); } }
+
+@keyframes newsFeed {
+  from {
+    left: 720px; }
+  to {
+    left: -1000px; } }
+
 .register {
   position: relative;
   z-index: 30; }
 
 .toggled-view {
+  animation: rotate 10s linear infinite;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -125,9 +130,9 @@ h1, h2, h2 {
 
 @keyframes newsFeed {
   from {
-    left: 500px; }
+    left: 720px; }
   to {
-    left: -500px; } }
+    left: -1000px; } }
 
 .lb-wrapper {
   background-color: #221A19;
@@ -144,17 +149,19 @@ h1, h2, h2 {
   .lb-wrapper h2 {
     font-size: 20px; }
   .lb-wrapper .Leaderboard {
+    overflow: hidden;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center; }
     .lb-wrapper .Leaderboard .person {
       position: relative;
-      margin-left: 50px;
-      animation: newsFeed 5s linear infinite; }
+      margin-left: 80px;
+      animation: newsFeed 15s linear infinite; }
     .lb-wrapper .Leaderboard .blocker {
       position: relative;
       bottom: 20px;
+      height: 70px;
       width: 120px; }
     .lb-wrapper .Leaderboard .block_left {
       background-color: #221A19; }
