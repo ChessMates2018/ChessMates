@@ -141,5 +141,12 @@ module.exports = {
         db.toggle_online(username).then(
         res.sendStatus(200)
         )
+    },
+    
+    newGame: (req, res) => {
+        const db = req.app.get('db')
+        let {light, dark} = req.body
+        console.log('chellenged', dark)
+        db.new_game(light, dark)     
     }
 }

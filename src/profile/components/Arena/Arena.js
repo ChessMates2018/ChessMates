@@ -28,10 +28,18 @@ class Arena extends Component {
         players: res.data
       })
     })
-    socket.on('push to board', (challenged, gameId) => {
-      console.log('challenge made', challenged)
-      if(this.props.username === challenged.challenged){
-        this.props.history.push(`/gameboard/${challenged.gameId}`)
+    console.log(this.props.username)
+    socket.on('push to board', (challenged, gameId, challenger) => {
+      let light = challenged.challenged.challenger
+      let dark = challenged.challenged.challenged
+      let THEgameId = challenged.challenged.gameId
+      // console.log('challenge made', challenged.challenged.challenged, this.props.username, challenged.challenged.gameId)
+      if(this.props.username === challenged.challenged.challenged){
+        alert('You have been challenged! Would you like to accept?')
+        axios.post('/api/newGameHistory', {dark, light})
+        this.props.history.push(`/gameboard/${challenged.challenged.gameId}`)
+      }else{
+        console.log('else town')
       }
     })
   }
@@ -46,6 +54,7 @@ class Arena extends Component {
   } 
 
   newGame = (challenged) => {
+    let challenger = this.props.username
     //MAD LOGIC
     //generate gameid
     axios.get(`/api/gameNumber`)
@@ -53,7 +62,7 @@ class Arena extends Component {
     .then(res => {
       // console.log('gameId res', res)
       let {gameId} = res.data
-      socket.emit(`challenge initiated`, {challenged, gameId})
+      socket.emit(`challenge initiated`, {challenged, gameId, challenger})
       this.props.history.push(`/gameboard/${gameId}`)
     })
     //grab username of challenged off button click and emit to socket along with gameId (this may cause timing issues, will need to see)
