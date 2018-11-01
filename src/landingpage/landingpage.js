@@ -66,14 +66,9 @@ WelcomeDiv =
     return(
         <div className="landing-page">
             <div id="title">
+                <div className="logo-img logo-right"></div>
                 <h1>Checked</h1>
-                <h3>
-                A group of chess enthusiasts checked into a hotel and were standing in the lobby
-                discussing their recent tournament victories. After about an hour, the manager 
-                came out of the office and asked them to disperse. "But why?" they asked, as they 
-                moved off. "Because," he said "I can't stand chess nuts boasting in an open foyer." 
-                <p>~ Peter Kay </p>
-                </h3>
+                <div className="logo-img logo-left"></div>
             </div>
 
             <div className="login">

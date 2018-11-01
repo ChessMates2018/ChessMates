@@ -24,7 +24,8 @@ h1, h2, h2 {
 
 .landing-page {
   text-align: center;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)), url("../images/landingpage.jpg");
+  background-image: url("../images/profile2.jpg");
+  background-size: cover;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -61,18 +62,32 @@ h1, h2, h2 {
 
 #title {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   background-color: #221A19;
-  opacity: .8;
   position: relative;
   top: 5rem;
   height: 10rem;
-  width: 100%;
+  width: 800px;
   padding: 1rem 2rem; }
-  #title h1, #title h3 {
-    color: #fbfafa; }
+  #title h1 {
+    color: #fbfafa;
+    font-weight: 100px;
+    font-size: 100px; }
+  #title .logo-img {
+    width: 200px;
+    height: 135px;
+    background-size: cover;
+    margin: 20px; }
+  #title .logo-left {
+    background-image: url("../images/2knight_white_left.png");
+    background-size: cover; }
+  #title .logo-right {
+    background-image: url("../images/2knight_white_right.png");
+    background-size: cover; }
+  #title img {
+    z-index: 10; }
 
 .profile {
   background-image: url("../images/profile.jpg"); }
@@ -99,15 +114,13 @@ h1, h2, h2 {
 
 .lb-wrapper {
   background-color: #221A19;
-  opacity: .8;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   position: relative;
   bottom: 100px;
-  padding: 15px;
-  width: 100%; }
+  padding: 15px; }
   .lb-wrapper h1, .lb-wrapper h2, .lb-wrapper p {
     color: #fbfafa; }
   .lb-wrapper h2 {
@@ -118,4 +131,6 @@ h1, h2, h2 {
     justify-content: center;
     align-items: center; }
     .lb-wrapper .Leaderboard .person {
-      margin-left: 9rem; }
+      margin-left: 80px; }
+    .lb-wrapper .Leaderboard .person:nth-child(1) {
+      margin-left: 0px; }
