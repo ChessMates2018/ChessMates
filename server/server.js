@@ -94,6 +94,10 @@ io.on('connection', function(socket){
         io.emit('player joined', {name: player.name, room: player.room})
     })
 
+    socket.on('challenge initiated', (challenged, gameId) => {
+        console.log('challenge accepted')
+        io.emit('push to board', {challenged, gameId})
+    })
 
     // socket.on('move', (msg) => this.socket.broadcast.emit('move', msg))
     socket.on('move', (newMove) => {

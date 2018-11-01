@@ -11,7 +11,7 @@ export default function PotentialOpponents (props) {
           <p>{player.username}</p>
               <button
               // onClick = {this.runSockets}
-              className="challenge_btn" onClick={() => newGame()}>Come at me!</button>
+              className="challenge_btn" onClick={() => newGame(player.username)}>Come at me!</button>
       </div>
     )
   })

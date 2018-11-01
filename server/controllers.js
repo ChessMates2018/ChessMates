@@ -93,7 +93,7 @@ module.exports = {
     logout: async (req, res) => {
         const {user} = req.session
         const db = req.app.get('db')
-        let toggle = await db.toggle_online([user])
+        let toggle = await db.toggle_offline([user])
         let order66 = await req.session.destroy()
         res.sendStatus(200)
     },
@@ -129,8 +129,10 @@ module.exports = {
     gameNumber: async (req, res) => {
         const db = req.app.get('db')
         let number = await db.game_count()
-        number ++
-        res.status(200).send({number})
+        let gameId = Number(number[0].count)
+        gameId++
+        // console.log('gameCount', realNum)
+        res.status(200).send({gameId})
     },
 
     joinArena: (req, res) => {
