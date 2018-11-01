@@ -2,7 +2,8 @@ const initialState = {
   username: '',
   light:{},
   dark: {},
-  roomId: ''
+  roomId: '',
+  // loginFn: 
 }
 
 const SET_USERNAME = 'SET_USERNAME',
