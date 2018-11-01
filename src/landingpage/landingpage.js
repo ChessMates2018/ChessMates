@@ -57,7 +57,7 @@ let WelcomeDiv;
 if (this.state.Div === true){
 WelcomeDiv =
 <div>
-<RegisterModal />
+<RegisterModal toggleDiv={this.toggleDiv} />
 </div>
 } else {
     WelcomeDiv = null
@@ -66,16 +66,10 @@ WelcomeDiv =
     return(
         <div className="landing-page">
             <div id="title">
+                <div className="logo-img logo-right"></div>
                 <h1>Checked</h1>
-                <h3>
-                A group of chess enthusiasts checked into a hotel and were standing in the lobby
-                discussing their recent tournament victories. After about an hour, the manager 
-                came out of the office and asked them to disperse. "But why?" they asked, as they 
-                moved off. "Because," he said "I can't stand chess nuts boasting in an open foyer." 
-                <p>~ Peter Kay </p>
-                </h3>
+                <div className="logo-img logo-left"></div>
             </div>
-
             <div className="login">
                 <h2 id="login-welcome">Welcome</h2>
                 <input className="input" placeholder="Username" name="Username" value={this.state.Username} onChange={this.handleInput} />
@@ -83,13 +77,8 @@ WelcomeDiv =
                 <button className="btn"  onClick={this.login}>Login</button>
                 <button className="btn"  onClick={this.toggleDiv}>Register</button>
             </div>
-
-            <div id="WelcomeDiv">
             {WelcomeDiv}
-            </div>
-
             <Leaderboard />
-
         </div>
     )
 }
