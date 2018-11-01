@@ -6,6 +6,8 @@ import RecentGames from './components/RecentGames/RecentGames'
 import Leaderboard from '../../src/landingpage/components/leaderboard'
 import {connect} from 'react-redux'
 import {setUsername} from '../ducks/Reducer'
+import {login} from '../utils/SocketFunctions'
+
 
 class Profile extends Component {
   constructor(props) {
@@ -26,6 +28,7 @@ class Profile extends Component {
       axios.get(`/api/checkuser`).then(res => {
         console.log('dis is du RES', res)
         this.props.setUsername(res.data)
+        login(res.data)
         // this.getInitialInfo()
       })
       .catch(err => {
@@ -65,9 +68,7 @@ class Profile extends Component {
     return (
       <div className="profile">
         <h1>Profile.JS</h1>
-        <Arena
-        opponentsList = {this.state.onlineUsers}
-        />
+        <Arena/>
         {/* <UserInfo/> */}
         <RecentGames/>
         <Leaderboard/>

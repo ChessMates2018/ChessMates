@@ -1,10 +1,10 @@
 import React, {Component} from 'react'
 import PotentialOpponents from './SubComponents/PotentialOpponents';
-import io from 'socket.io-client'
 import axios from 'axios'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {setLightPlayer, setDarkPlayer, setRoomId} from '../../../ducks/Reducer'
+import io from 'socket.io-client'
 
 
 
@@ -31,32 +31,37 @@ class Arena extends Component {
     let {username} = this.props
     console.log(username)
     this.setState((prevState) => ({
-      players: [...prevState.players, username], inArenaToggle: !this.state.inArenaToggle
+      players: [...prevState.players, {username}], inArenaToggle: !this.state.inArenaToggle
     }))
     axios.put('/api/joinArena', {username: username}).then()
   } 
 
   newGame = () => {
-    console.log('PROPS',this.props)
-    let {setLightPlayer, setDarkPlayer, username} = this.props
-    var randoCalrizian = Math.random();
-    console.log(randoCalrizian)
-    if(randoCalrizian >= .6){
-      setLightPlayer(username)
-    } else {
-      setDarkPlayer(username)
-    }
-    const socket = io('http://localhost:3438')
-    socket.on('connect', () => {
-      let roomId = socket.id
-      console.log(roomId)
-      this.props.setRoomId(roomId)
-    })
-    console.log(this.roomId)
+    //MAD LOGIC  
+  
+  }
+    // console.log('PROPS',this.props)
+    // let {setLightPlayer, setDarkPlayer, username} = this.props
+    // var randoCalrizian = Math.random();
+    // console.log(randoCalrizian)
+    // if(randoCalrizian >= .6){
+    //   setLightPlayer(username)
+    // } else {
+    //   setDarkPlayer(username)
+    // }
+
+    // serverside
+    // const socket = io('http://localhost:3438')
+    // socket.on('connect', () => {
+    //   let roomId = socket.id
+    //   console.log(roomId)
+    //   this.props.setRoomId(roomId)
+    // })
+    // console.log(this.roomId)
     // axios.get(`/api/gameNumber`).then(res => {
     //   this.props.history.push(`/gameboard/${res.data.number}`)
     // })
-  }
+  
 
   // displayButton = () => {
   //   setTimeout(function() {
@@ -83,13 +88,13 @@ class Arena extends Component {
     })
   }
 
-  runSockets = () => {
-    let socket = io.connect()
-    socket.on('connect', function(){
-      console.log('you have joined the arena')
-       socket.emit('#')
-     })
-  }
+  // runSockets = () => {
+  //   let socket = io.connect()
+  //   socket.on('connect', function(){
+  //     console.log('you have joined the arena')
+  //      socket.emit('#')
+  //    })
+  // }
 
   displayArena = () => {
     console.log(this.state.players[0])
@@ -120,6 +125,7 @@ class Arena extends Component {
     console.log(this.props)
     console.log(this.state.players)
     let {opponentsList} = this.props
+    
     /** destructuer stull off of info.4 */
     return (
       <div>
@@ -143,9 +149,10 @@ class Arena extends Component {
         {/* {this.displayButton()} */}
        <Link to='/Stockfish'><button>Play against Stockfish!</button></Link> 
 
-       {/* <PotentialOpponents 
-       
-       /> */}
+       <PotentialOpponents 
+        opponentsList={this.state.players}
+        newGame={this.newGame} 
+       />
 
 
       </div>

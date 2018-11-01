@@ -1,17 +1,4 @@
 require('dotenv').config()
-const express = require('express')
-const session = require('express-session')
-const axios = require('axios')
-const massive = require('massive')
-const bodyParser = require('body-parser')
-const ctrl = require('./controllers')
-const app = express()
-var server = require('http').createServer(app)
-var io = require('socket.io')(server)
-
-
-app.use(bodyParser.json())
-
 
 const {
     SERVER_PORT,
@@ -22,11 +9,25 @@ const {
     // PROTOCOL
 } = process.env
 
-app.use(session({
+const express = require('express')
+const session = require('express-session')({
     secret: SESSION_SECRET,
-    saveUninitialized: false,
-    resave: false
-}))
+    resave: true,
+    saveUninitialized: true,
+})
+const axios = require('axios')
+const massive = require('massive')
+const bodyParser = require('body-parser')
+const ctrl = require('./controllers')
+const app = express()
+var server = require('http').createServer(app)
+var io = require('socket.io')(server)
+var sharedSession = require('express-socket.io-session')
+// var cookieParser = require('cookie-parser')
+
+app.use(bodyParser.json())
+
+app.use(session)
 
 // app.use((req,res,next) => {
 //     if (ENVIRONMENT === 'dev') {
@@ -60,10 +61,29 @@ app.post('/api/gameMoves', ctrl.gameMoves)
 
 app.put('/api/joinArena', ctrl.joinArena)
 
+io.use(sharedSession(session,{
+    autoSave: true
+}))
 
 io.on('connection', function(socket){
-    console.log('user connected')
+    console.log('user connected', socket.id)
 
+    socket.on('login', (user) => {
+        let socket_id = socket.id
+        socket.handshake.session.socket_id = socket_id
+        socket.handshake.session.user = user
+        socket.handshake.session.save() 
+    })
+
+    socket.on('new-game', () => {
+        socket.join('game1')
+        console.log('joined game1')
+        // .clients((error, clients) => {
+        //     if (error) throw error
+        //     console.log(clients)
+        // }) 
+    })
+    //io.to(uniqueid).emit()
     socket.on('back end test', () => {
         console.log('back end has been hit!')
         io.emit('test')
@@ -74,13 +94,16 @@ io.on('connection', function(socket){
         io.emit('player joined', {name: player.name, room: player.room})
     })
 
-    socket.on('disconnect', () => console.log('User has peaced out, yo!'))
 
     // socket.on('move', (msg) => this.socket.broadcast.emit('move', msg))
     socket.on('move', (newMove) => {
         console.log('you made a move')
-        io.emit('update-game',newMove)
+        //add change turn to = true add to emit?
+        io.to('game1').emit('update-game',newMove)
+        console.log('messange sent game1', newMove)
     })
+    
+    socket.on('disconnect', () => console.log('User has peaced out, yo!', socket.id))
 
     socket.on('connect', () => {
         let roomId = socket.id
