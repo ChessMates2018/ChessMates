@@ -156,7 +156,7 @@ module.exports = {
         let {roomId} = req.params
 
         let players = await db.player(roomId)
-
+        console.log(players)
         res.status(200).send(players)
     }
 }

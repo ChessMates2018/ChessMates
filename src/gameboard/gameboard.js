@@ -44,15 +44,16 @@ class HumanVsHuman extends Component {
     this.game = new Chess();
     this.runSockets()
     let {roomId} = this.props.match.params
-    axios.get(`/api/getPlayers/${roomId}`)
-    .then(res => {
-      console.log(res, res.data[0].user_light)
-      this.setState({light: res.data[0].user_light, dark: res.data[0].user_dark}, 
-      console.log('game state', this.state)  
+    
+  //   axios.get(`/api/getPlayers/${roomId}`)
+  //   .then(res => {
+  //     console.log(res, res.data[0].user_light)
+  //     this.setState({light: res.data[0].user_light, dark: res.data[0].user_dark}, 
+  //     console.log('game state', this.state)  
       
-      )
-    }
-  )
+  //     )
+  //   }
+  // )
     this.socket.emit('new-game', {
       message: this.game,
       room: this.state.room

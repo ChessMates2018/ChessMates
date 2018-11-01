@@ -32,8 +32,7 @@ class Arena extends Component {
     socket.on('push to board', (challenged, gameId, challenger) => {
       let light = challenged.challenged.challenger
       let dark = challenged.challenged.challenged
-      let THEgameId = challenged.challenged.gameId
-      // console.log('challenge made', challenged.challenged.challenged, this.props.username, challenged.challenged.gameId)
+      console.log('challenge made', challenged.challenged.challenged, this.props.username, challenged.challenged.gameId)
       if(this.props.username === challenged.challenged.challenged){
         alert('You have been challenged! Would you like to accept?')
         axios.post('/api/newGameHistory', {dark, light})
