@@ -33,7 +33,7 @@ h1, h2, h2 {
 
 .login {
   position: relative;
-  top: 10rem;
+  top: 120px;
   padding: 5px 2px 15px 2px;
   display: flex;
   flex-direction: column;
@@ -41,7 +41,7 @@ h1, h2, h2 {
   justify-content: space-around;
   background: #221A19;
   opacity: .8;
-  height: 13rem;
+  height: 300px;
   width: 19rem; }
 
 #login-welcome {
@@ -68,7 +68,7 @@ h1, h2, h2 {
   background-color: #221A19;
   position: relative;
   top: 5rem;
-  height: 10rem;
+  height: 200px;
   width: 800px;
   padding: 1rem 2rem; }
   #title h1 {
@@ -92,15 +92,17 @@ h1, h2, h2 {
 .profile {
   background-image: url("../images/profile.jpg"); }
 
+.register {
+  z-index: 3000000; }
+
 .toggled-view {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  background: #221A19;
+  background: hotpink;
   width: 300px;
   height: 100%;
-  opacity: .8;
   color: white;
   padding: 5px; }
 
@@ -111,6 +113,18 @@ h1, h2, h2 {
 #cancel-button {
   margin-top: 5px;
   width: 50%; }
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg); }
+  100% {
+    transform: rotate(360deg); } }
+
+@keyframes newsFeed {
+  from {
+    left: 500px; }
+  to {
+    left: -500px; } }
 
 .lb-wrapper {
   background-color: #221A19;
@@ -131,6 +145,16 @@ h1, h2, h2 {
     justify-content: center;
     align-items: center; }
     .lb-wrapper .Leaderboard .person {
-      margin-left: 80px; }
-    .lb-wrapper .Leaderboard .person:nth-child(1) {
-      margin-left: 0px; }
+      position: relative;
+      margin-left: 50px;
+      animation: newsFeed 5s linear infinite; }
+    .lb-wrapper .Leaderboard .blocker {
+      position: relative;
+      bottom: 20px;
+      height: 70px;
+      width: 120px; }
+    .lb-wrapper .Leaderboard .block_left {
+      background-color: #221A19; }
+    .lb-wrapper .Leaderboard .block_right {
+      background-color: #221A19;
+      z-index: 10; }

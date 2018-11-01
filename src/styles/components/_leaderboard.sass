@@ -1,5 +1,8 @@
 @import '../_mixins'
-  
+@import '../_keyframes'
+
+
+
 .lb-wrapper
   @include card
   @include flexCol
@@ -14,9 +17,24 @@
   .Leaderboard
     @include flexRow
     .person
-      margin-left: 80px
-    .person:nth-child(1)
-      margin-left: 0px
+      position: relative
+      margin-left: 50px
+      animation: newsFeed 5s linear infinite
+    .blocker
+      position: relative
+      bottom: 20px
+      height: 70px
+      width: 120px
+    .block_left
+      background-color: $black
+    .block_right  
+      background-color: $black 
+      z-index: 10
+
+
+    
+      
+
       
      
     
