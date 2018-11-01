@@ -2,8 +2,8 @@ import React, {Component} from 'react'
 import axios from 'axios';
 
 class RegisterModal extends Component{
-    constructor(){
-        super()
+    constructor(props){
+        super(props)
             this.state={
                 FirstName: '',
                 LastName: '',
@@ -34,7 +34,9 @@ if (Password !== PasswordConfirm){
 })}}
 
 
-render(){
+render(props){
+let {toggleDiv} = this.props
+
     return(
         <div className="register">
             <div className="toggled-view">
@@ -52,6 +54,7 @@ render(){
                 <h3>PasswordConfirm:</h3><input name='PasswordConfirm' placeholder="Confirm your password." value={this.state.PasswordConfirm} onChange={this.handleInput} ></input>
 
                 <button id="create-button" onClick={this.createAccount}>Create Account</button>
+                <button id="cancel-button" onClick={toggleDiv}>Cancel</button>
             </div>
         </div>
     )

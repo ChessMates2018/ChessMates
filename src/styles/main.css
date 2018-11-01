@@ -7,7 +7,6 @@
 BODY {
   min-height: 100vh;
   width: 100%;
-  overflow: hidden;
   font-family: Arial, Helvetica, sans-serif; }
 
 H2 {
@@ -33,7 +32,7 @@ h1, h2, h2 {
 
 .login {
   position: relative;
-  top: 120px;
+  top: 75px;
   padding: 5px 2px 15px 2px;
   display: flex;
   flex-direction: column;
@@ -41,16 +40,19 @@ h1, h2, h2 {
   justify-content: space-around;
   background: #221A19;
   opacity: .8;
-  height: 300px;
+  height: 225px;
   width: 19rem; }
 
 #login-welcome {
   color: #fbfafa; }
 
 #WelcomeDiv {
+  position: relative;
+  bottom: 100px;
   height: 400px;
   display: flex;
-  flex-direction: column; }
+  flex-direction: column;
+  z-index: 30; }
 
 .input {
   height: 1.5rem;
@@ -67,7 +69,7 @@ h1, h2, h2 {
   align-items: center;
   background-color: #221A19;
   position: relative;
-  top: 5rem;
+  top: 45px;
   height: 200px;
   width: 800px;
   padding: 1rem 2rem; }
@@ -93,14 +95,15 @@ h1, h2, h2 {
   background-image: url("../images/profile.jpg"); }
 
 .register {
-  z-index: 3000000; }
+  position: relative;
+  z-index: 30; }
 
 .toggled-view {
   display: flex;
   flex-direction: column;
   align-items: center;
+  background: #906B42;
   justify-content: space-between;
-  background: hotpink;
   width: 300px;
   height: 100%;
   color: white;
@@ -133,8 +136,9 @@ h1, h2, h2 {
   justify-content: center;
   align-items: center;
   position: relative;
-  bottom: 100px;
-  padding: 15px; }
+  top: 140px;
+  padding: 15px;
+  height: 120px; }
   .lb-wrapper h1, .lb-wrapper h2, .lb-wrapper p {
     color: #fbfafa; }
   .lb-wrapper h2 {
@@ -151,7 +155,6 @@ h1, h2, h2 {
     .lb-wrapper .Leaderboard .blocker {
       position: relative;
       bottom: 20px;
-      height: 70px;
       width: 120px; }
     .lb-wrapper .Leaderboard .block_left {
       background-color: #221A19; }

@@ -57,7 +57,7 @@ let WelcomeDiv;
 if (this.state.Div === true){
 WelcomeDiv =
 <div>
-<RegisterModal />
+<RegisterModal toggleDiv={this.toggleDiv} />
 </div>
 } else {
     WelcomeDiv = null
@@ -70,7 +70,6 @@ WelcomeDiv =
                 <h1>Checked</h1>
                 <div className="logo-img logo-left"></div>
             </div>
-
             <div className="login">
                 <h2 id="login-welcome">Welcome</h2>
                 <input className="input" placeholder="Username" name="Username" value={this.state.Username} onChange={this.handleInput} />
@@ -78,13 +77,8 @@ WelcomeDiv =
                 <button className="btn"  onClick={this.login}>Login</button>
                 <button className="btn"  onClick={this.toggleDiv}>Register</button>
             </div>
-
-            <div id="WelcomeDiv">
             {WelcomeDiv}
-            </div>
-
             <Leaderboard />
-
         </div>
     )
 }
