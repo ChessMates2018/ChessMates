@@ -1,2 +1,2 @@
 select username from users
-where is_online = false;
+where is_online = true;
