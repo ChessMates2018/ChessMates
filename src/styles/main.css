@@ -75,9 +75,12 @@ h1, h2, h2 {
     background-size: cover;
     margin: 20px; }
   #title .logo-left {
+    position: relative;
+    right: 16px;
     background-image: url("../images/2knight_white_left.png");
     background-size: cover; }
   #title .logo-right {
+    position: relative;
     background-image: url("../images/2knight_white_right.png");
     background-size: cover; }
   #title img {
