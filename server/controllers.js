@@ -30,6 +30,7 @@ module.exports = {
                     req.session.user.session_id = session_id_count
                     session_id_count++
                     db.toggle_online()
+                    console.log('dumbass?',user[0])
                     res.status(200).send(user[0])
                 })
             }
