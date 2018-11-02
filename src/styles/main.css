@@ -46,14 +46,6 @@ h1, h2, h2 {
 #login-welcome {
   color: #fbfafa; }
 
-#WelcomeDiv {
-  position: relative;
-  bottom: 100px;
-  height: 400px;
-  display: flex;
-  flex-direction: column;
-  z-index: 30; }
-
 .input {
   height: 1.5rem;
   width: 15rem; }
@@ -83,9 +75,12 @@ h1, h2, h2 {
     background-size: cover;
     margin: 20px; }
   #title .logo-left {
+    position: relative;
+    right: 16px;
     background-image: url("../images/2knight_white_left.png");
     background-size: cover; }
   #title .logo-right {
+    position: relative;
     background-image: url("../images/2knight_white_right.png");
     background-size: cover; }
   #title img {
@@ -93,6 +88,18 @@ h1, h2, h2 {
 
 .profile {
   background-image: url("../images/profile.jpg"); }
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg); }
+  100% {
+    transform: rotate(360deg); } }
+
+@keyframes newsFeed {
+  from {
+    left: 1900px; }
+  to {
+    left: -1900px; } }
 
 .register {
   position: relative;
@@ -125,9 +132,9 @@ h1, h2, h2 {
 
 @keyframes newsFeed {
   from {
-    left: 500px; }
+    left: 1900px; }
   to {
-    left: -500px; } }
+    left: -1900px; } }
 
 .lb-wrapper {
   background-color: #221A19;
@@ -138,23 +145,28 @@ h1, h2, h2 {
   position: relative;
   top: 140px;
   padding: 15px;
-  height: 120px; }
+  height: 200px;
+  width: 1000px;
+  overflow: hidden; }
   .lb-wrapper h1, .lb-wrapper h2, .lb-wrapper p {
     color: #fbfafa; }
   .lb-wrapper h2 {
     font-size: 20px; }
   .lb-wrapper .Leaderboard {
+    overflow: hidden;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center; }
     .lb-wrapper .Leaderboard .person {
+      width: 200px;
       position: relative;
-      margin-left: 50px;
-      animation: newsFeed 5s linear infinite; }
+      margin-left: 80px;
+      animation: newsFeed 25s linear infinite; }
     .lb-wrapper .Leaderboard .blocker {
       position: relative;
       bottom: 20px;
+      height: 70px;
       width: 120px; }
     .lb-wrapper .Leaderboard .block_left {
       background-color: #221A19; }
