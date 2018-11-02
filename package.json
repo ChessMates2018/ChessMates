@@ -43,5 +43,8 @@
     "not op_mini all"
   ],
   "main": "server/server.js",
-  "proxy": "http://localhost:3438"
+  "proxy": "http://localhost:3438",
+  "devDependencies": {
+    "jest": "^23.6.0"
+  }
 }
