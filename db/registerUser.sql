@@ -3,4 +3,5 @@ INSERT INTO users
 VALUES
 ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11);
 
-SELECT * FROM users
+SELECT username, rating, email, first_name, last_name, image, wins, losses FROM users
+where username = $1

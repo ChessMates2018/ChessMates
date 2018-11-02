@@ -9,21 +9,25 @@
   position: relative
   top: 140px
   padding: 15px
-  height: 120px
+  height: 200px
+  width: 1000px
+  overflow: hidden
   h1, h2, p
     color: $white
   h2 
     font-size: 20px
   .Leaderboard
+    overflow: hidden
     @include flexRow
     .person
+      width: 200px
       position: relative
-      margin-left: 50px
-      animation: newsFeed 5s linear infinite
+      margin-left: 80px
+      animation: newsFeed 25s linear infinite
     .blocker
       position: relative
       bottom: 20px
-      // height: 70px
+      height: 70px
       width: 120px
     .block_left
       background-color: $black
