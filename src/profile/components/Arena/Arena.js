@@ -4,7 +4,10 @@ import axios from 'axios'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {setLightPlayer, setDarkPlayer, setRoomId} from '../../../ducks/Reducer'
-import io from 'socket.io-client'
+// import io from 'socket.io-client'
+import {socket} from '../../../utils/SocketFunctions'
+import {withRouter} from 'react-router-dom'
+
 
 
 
@@ -25,6 +28,19 @@ class Arena extends Component {
         players: res.data
       })
     })
+    console.log(this.props.username)
+    socket.on('push to board', (challenged, gameId, challenger) => {
+      let light = challenged.challenged.challenger
+      let dark = challenged.challenged.challenged
+      console.log('challenge made', challenged.challenged.challenged, this.props.username, challenged.challenged.gameId)
+      if(this.props.username === challenged.challenged.challenged){
+        alert('You have been challenged! Would you like to accept?')
+        axios.post('/api/newGameHistory', {dark, light})
+        this.props.history.push(`/gameboard/${challenged.challenged.gameId}`)
+      }else{
+        console.log('else town')
+      }
+    })
   }
 
   joinArena(info){
@@ -36,8 +52,20 @@ class Arena extends Component {
     axios.put('/api/joinArena', {username: username}).then()
   } 
 
-  newGame = () => {
-    //MAD LOGIC  
+  newGame = (challenged) => {
+    let challenger = this.props.username
+    //MAD LOGIC
+    //generate gameid
+    axios.get(`/api/gameNumber`)
+    //push challenger to board
+    .then(res => {
+      // console.log('gameId res', res)
+      let {gameId} = res.data
+      socket.emit(`challenge initiated`, {challenged, gameId, challenger})
+      this.props.history.push(`/gameboard/${gameId}`)
+    })
+    //grab username of challenged off button click and emit to socket along with gameId (this may cause timing issues, will need to see)
+    //set up an io.on if username === the username cooming back from socket push to board  
   
   }
     // console.log('PROPS',this.props)
@@ -165,4 +193,4 @@ function mapStateToProps (state) {
   return {username, light, dark, roomId}
 }
 
-export default connect(mapStateToProps, {setLightPlayer, setDarkPlayer, setRoomId})(Arena)
+export default withRouter(connect(mapStateToProps, {setLightPlayer, setDarkPlayer, setRoomId})(Arena))

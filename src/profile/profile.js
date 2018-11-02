@@ -9,6 +9,7 @@ import {setUsername} from '../ducks/Reducer'
 import {login} from '../utils/SocketFunctions'
 
 
+
 class Profile extends Component {
   constructor(props) {
     super(props)
@@ -29,10 +30,12 @@ class Profile extends Component {
         console.log('dis is du RES', res)
         this.props.setUsername(res.data)
         login(res.data)
+
         // this.getInitialInfo()
       })
       .catch(err => {
         console.log('dis is du err!',err)
+        axios.post('/api/logout')
         this.props.history.push('/')
       })
     } else {

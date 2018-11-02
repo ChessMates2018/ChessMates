@@ -7,6 +7,9 @@ import Chessboard from "chessboardjsx";
 // import io from 'socket.io-client'
 import {socket} from '../utils/SocketFunctions'
 
+//set up endGame
+//resignation or checkmate assings victor and loser leaving counts as resignation
+//under any other condition the game is a draw including
 
 class HumanVsHuman extends Component {
   constructor(props) {
@@ -25,7 +28,9 @@ class HumanVsHuman extends Component {
       // array of past game moves
       history: [],
       room: null,
-      joined: false,
+      light: '',
+      dark: '',
+      turn: true,
       message: ''
     };
 
@@ -38,14 +43,24 @@ class HumanVsHuman extends Component {
   componentDidMount() {
     this.game = new Chess();
     this.runSockets()
+    let {roomId} = this.props.match.params
     
+  //   axios.get(`/api/getPlayers/${roomId}`)
+  //   .then(res => {
+  //     console.log(res, res.data[0].user_light)
+  //     this.setState({light: res.data[0].user_light, dark: res.data[0].user_dark}, 
+  //     console.log('game state', this.state)  
+      
+  //     )
+  //   }
+  // )
     this.socket.emit('new-game', {
       message: this.game,
       room: this.state.room
     })
     this.socket.on('update-game', (data) => {
       this.updateNewMove(data)
-      console.log('data', data)
+      // console.log('data', data)
     })
   }
 
@@ -63,7 +78,6 @@ class HumanVsHuman extends Component {
   
     let move = this.movePiece(sourceSquare, targetSquare)
     
-
     // illegal move
     if (move === null) return;
     this.setState(({ history, pieceSquare }) => ({
@@ -86,10 +100,7 @@ class HumanVsHuman extends Component {
     this.socket.on('connect-to-room', data => 'PUT HISTORY.PUSH HERE?')
     this.socket.on('connect-to-room', data => this.socket.emit('user-info', 'ADD USER PROPS? HERE'))
     this.socket.on('users', (data) => this.setState({white: 'ADD PROPS', black: 'ADD PROPS'}))
-    // this.socket.on('update-game', (newMove) => {
-    //   console.log(newMove)
-      // this.updateNewMove(newMove)
-    // })
+
   }
 
   updateNewMove =(newMove)=> {
@@ -99,9 +110,6 @@ class HumanVsHuman extends Component {
     this.setState({fen, history, squareStyles}, () => console.log(this.state))
   }
 
-  testSockets =() => {
-    this.socket.emit('back end test')
-  }
 
   showHistory = () => {
   let {history} = this.state
@@ -180,42 +188,17 @@ class HumanVsHuman extends Component {
       squareStyles: { [square]: { backgroundColor: "deepPink" } }
     });
 
-  //  showTurn(arr) {
-  //   let counter = 0
-  //   let moves = []
-  //   for (let i=0; i <arr.length; i++) {
-  //     for (let key in arr[i]) {
-  //       if (key == 'san') {
-  //         let something = Object.values(arr[i].san).join('')
-  //         moves.push(something)
-  //         counter = counter += 1
-  //         console.log(counter)
-  //       }
-  //     } 
-  //   }
-  //   // if (counter === 2) {
-  //   //   this.setState({
-  //   //     SAN: moves
-  //   //   })
-  //   //   counter = 0
-  //   // }
-   
-  //   return moves
-  //  }
+  resignation = () => {
+    //know which one is resigning
+    //axios to update game history by game id from routing params
+    //
+  }
 
-   
-
-  render() {
-    let {history} = this.state
-    // console.log('Dean',this.state.SAN)
-    // console.log('Sam',this.showTurn(history))
-    // SAN = this.showTurn(history)
-    // console.log(this.state.history)
-    // console.log(SAN)
-
+  render() { 
     const { fen, dropSquareStyle, squareStyles } = this.state;
 
     return this.props.children({
+      resignation: this.resignation,
       showHistory: this.showHistory,
       squareStyles,
       position: fen,
@@ -231,12 +214,13 @@ class HumanVsHuman extends Component {
   }
 }
 
-export default function Gameboard() {
-
+export default function Gameboard(props) {
+  console.log('GM props', props)
   return (
     <div>
-      <HumanVsHuman>
+      <HumanVsHuman match={props.match}>
         {({
+          resignation,
           showHistory,
           position,
           onDrop,
@@ -271,7 +255,7 @@ export default function Gameboard() {
             />
           <MoveList 
           move={showHistory}/>
-          <button onClick={testSockets}>CLICK ME</button>
+          <button onClick={resignation}>Resign</button>
           </>
         )}
       </HumanVsHuman>

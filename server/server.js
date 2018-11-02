@@ -53,11 +53,13 @@ app.get(`/api/loggedin`, ctrl.getOnlineUsers)
 app.get('/api/myGames', ctrl.getMyGames)
 app.get(`/api/checkuser`, ctrl.checkUser)
 app.get(`/api/gameNumber`, ctrl.gameNumber)
+app.get('/api/getPlayers/:roomId', ctrl.getPlayers)
 
 app.post('/api/register', ctrl.registerUser)
 app.post('/api/login', ctrl.loginUser)
 app.post('/api/logout', ctrl.logout)
 app.post('/api/gameMoves', ctrl.gameMoves)
+app.post('/api/newGameHistory', ctrl.newGame)
 
 app.put('/api/joinArena', ctrl.joinArena)
 
@@ -85,15 +87,19 @@ io.on('connection', function(socket){
     })
     //io.to(uniqueid).emit()
     socket.on('back end test', () => {
-        console.log('back end has been hit!')
+        // console.log('back end has been hit!')
         io.emit('test')
     })
 
     socket.on('new player', function() {
-        console.log('message recieved')
+        // console.log('message recieved')
         io.emit('player joined', {name: player.name, room: player.room})
     })
 
+    socket.on('challenge initiated', (challenged, gameId, challenger) => {
+        console.log('challenge accepted')
+        io.emit('push to board', {challenged, gameId, challenger})
+    })
 
     // socket.on('move', (msg) => this.socket.broadcast.emit('move', msg))
     socket.on('move', (newMove) => {
