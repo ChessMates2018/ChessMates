@@ -7,7 +7,7 @@ DEVKEY
 
 module.exports = {
     registerUser: (req, res) => {
-        console.log('brady didnt mess up')
+        console.log('registerUser Fired', req.body)
         const { FirstName, LastName, Email, Username, Password } = req.body
         const defaultRank = 1000
         const defaultImg = null
@@ -16,8 +16,8 @@ module.exports = {
         const defaultWins = 0
         const defaultLosses = 0
         const db = req.app.get('db')
-        db.checkUsername({Username}).then(user => {
-            if (user.length !== 0) {
+        db.checkUsername([Username]).then(user => {
+            if (user[0]) {
                 res.status(200).send('Username Taken. Try another.')
             } else {
                 console.log('you have else')
@@ -33,6 +33,9 @@ module.exports = {
                     res.status(200).send(user[0])
                 })
             }
+        }).catch(err => {
+            console.log(err)
+            res.status(500).send(err)
         })
     },
     loginUser: (req, res) => {
