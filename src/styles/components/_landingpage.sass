@@ -2,15 +2,17 @@
 
 .landing-page
     text-align: center
-    background-image: $darken, $landing-backgroundimg
+    background-image: $landing-backgroundimg
+    background-size: cover 
     height: 100vh
     display: flex
     flex-direction: column
     align-items: center
+   
 
 .login
     position: relative
-    top: 10rem
+    top: 75px
     padding: 5px 2px 15px 2px
     display: flex
     flex-direction: column
@@ -18,8 +20,9 @@
     justify-content: space-around
     background: $black
     opacity: .8
-    height: 13rem
+    height: 225px
     width: 19rem
+    
     
 
 #login-welcome
@@ -27,9 +30,12 @@
 
     
 #WelcomeDiv
+    position: relative
+    bottom: 100px
     height: 400px
     display: flex
     flex-direction: column
+    z-index: 30
 
 
 .input
@@ -41,17 +47,31 @@
     height: 1.5rem
     width: 15rem
     
-
 #title
-    @include flexCol
+    @include flexRow
     @include card
     position: relative
-    top: 5rem
-    height: 10rem
-    width: 100%
+    top: 45px
+    height: 200px
+    width: 800px
     padding: 1rem 2rem
-    h1, h3
+    h1
         color: $white
+        font-weight: 100px
+        font-size: 100px
+    .logo-img
+        width: 200px
+        height: 135px
+        background-size: cover
+        margin: 20px 
+    .logo-left
+        background-image: $logo-left
+        background-size: cover
+    .logo-right
+        background-image: $logo-right
+        background-size: cover
+    img 
+        z-index: 10
 
    
 
