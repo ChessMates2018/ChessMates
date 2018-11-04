@@ -91,7 +91,8 @@ module.exports = {
     
         let {user} = req.session
         // console.log('look here stupit!',user)
-        let myGames = await db.my_games(user)
+        let hardCode = 'Brady'
+        let myGames = await db.my_games(hardCode)
         res.status(200).send(myGames)
     },
     logout: async (req, res) => {

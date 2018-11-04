@@ -1,3 +1,23 @@
+1) Testing. 5 PostMan and 5 Jest Tests. Cypress (Jordan).
+
+2) Styling. Profile subcomponents, chessboard subcomponents (chat feature and moveList)
+
+3) Cleanup Test Data.
+
+EndGame Logic:
+3) Resign button - Redirect Users to profile component and save game history.  Update game_history and create moves.
+
+4) If checkmate notation is recognized, save game history and redirect users to profile. 
+
+5) Under any other condition, the game will end in a draw. Delete game_history. ComponentWillUnmount.
+
+6) Talking Points for presentation and rotating order.
+** Spinning up server for demonstration of chessboard.
+
+
+
+
+
 app.get('/api/leaderboard', async (req, res) => {
     const db = req.app.get('db')
 

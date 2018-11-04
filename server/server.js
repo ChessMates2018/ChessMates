@@ -70,12 +70,12 @@ io.use(sharedSession(session,{
 io.on('connection', function(socket){
     console.log('user connected', socket.id)
 
-    socket.on('login', (user) => {
-        let socket_id = socket.id
-        socket.handshake.session.socket_id = socket_id
-        socket.handshake.session.user = user
-        socket.handshake.session.save() 
-    })
+    // socket.on('login', (user) => {
+    //     let socket_id = socket.id
+    //     socket.handshake.session.socket_id = socket_id
+    //     socket.handshake.session.user = user
+    //     socket.handshake.session.save() 
+    // })
 
     socket.on('new-game', () => {
         socket.join('game1')

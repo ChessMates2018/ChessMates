@@ -10,8 +10,8 @@ export default class Chat extends Component{
     render(){
         // var socket = io()
         return(
-            <div>
-
+            <div  className="chat">
+                <h1>I iz the chat box. LOVE ME!!!</h1>
             </div>
         )
     }

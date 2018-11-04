@@ -3,6 +3,7 @@ import LandingPage from './landingpage/landingpage'
 import Nav from './routing/nav'
 import Routes from './routing/routes'
 import {HashRouter} from 'react-router-dom'
+
 import io from 'socket.io-client'
 
 class App extends Component {
