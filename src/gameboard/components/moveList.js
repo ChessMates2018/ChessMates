@@ -1,14 +1,31 @@
-import React from 'react'
+import React, {Component} from 'react'
 
-const MoveList = (props) => {
-// console.log('props',props)
+class MoveList extends Component{
+    constructor(){
+    super()
+        this.state={
 
+        }
+  }
+
+  
+  render(props){
+      let {resignation} = this.props
     return(
+        
+        <div>
         <div className="move_list">
             <h1>MoveList</h1>
-            {props.move()}
+            {this.props.move()}
+            
+            
+        </div>
+        <button
+             onClick = {resignation}
+            >Resign</button>
         </div>
     )
+}
 }
 
 export default MoveList

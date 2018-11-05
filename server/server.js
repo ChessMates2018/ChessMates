@@ -70,12 +70,16 @@ io.use(sharedSession(session,{
 io.on('connection', function(socket){
     console.log('user connected', socket.id)
 
-    socket.on('login', (user) => {
-        let socket_id = socket.id
-        socket.handshake.session.socket_id = socket_id
-        socket.handshake.session.user = user
-        socket.handshake.session.save() 
+    socket.on("general-chat", data=>{
+        io.sockets.emit("general-message", data)
     })
+
+    // socket.on('login', (user) => {
+    //     let socket_id = socket.id
+    //     socket.handshake.session.socket_id = socket_id
+    //     socket.handshake.session.user = user
+    //     socket.handshake.session.save() 
+    // })
 
     socket.on('new-game', () => {
         socket.join('game1')
@@ -106,7 +110,7 @@ io.on('connection', function(socket){
         console.log('you made a move')
         //add change turn to = true add to emit?
         io.to('game1').emit('update-game',newMove)
-        console.log('messange sent game1', newMove)
+        console.log('message sent game1', newMove)
     })
     
     socket.on('disconnect', () => console.log('User has peaced out, yo!', socket.id))
