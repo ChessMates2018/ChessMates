@@ -51,7 +51,7 @@ module.exports = {
                 const validPassword = bcrypt.compareSync(Password, user[0].password)
                 if (validPassword) {
                     req.session.user = user[0].username
-                    req.session.user.session_id = session_id_count
+                    req.session.session_id = session_id_count
                     session_id_count++
                     db.toggle_online([Username])
                     res.sendStatus(200)
@@ -61,8 +61,31 @@ module.exports = {
             } else {
                 res.status(200).send('Username does not exist')
             }
+        }).catch(err => {
+            console.log(err)
+            res.status(500).send(err)
         })
     },
+    // loginUser: (req, res) => {
+    //     const { Username, Password } = req.body
+    //     const db = req.app.get('db')
+    //     db.checkUsername(Username).then(user => {
+    //         if (user.length) { 
+    //             const validPassword = bcrypt.compareSync(Password, user[0].password)
+    //             if (validPassword) {
+    //                 req.session.user = user[0].username
+    //                 req.session.user.session_id = session_id_count
+    //                 session_id_count++
+    //                 db.toggle_online([Username])
+    //                 res.sendStatus(200)
+    //             } else {
+    //                 res.status(200).send('Invalid Password')
+    //             }
+    //         } else {
+    //             res.status(200).send('Username does not exist')
+    //         }
+    //     })
+    // },
     getUser: (req, res) => {
         // console.log('IVE BEEN HIT!')
         let {user} = req.session
