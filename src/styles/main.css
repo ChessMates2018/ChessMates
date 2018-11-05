@@ -173,3 +173,45 @@ h1, h2, h2 {
     .lb-wrapper .Leaderboard .block_right {
       background-color: #221A19;
       z-index: 10; }
+
+.the_BFB {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  justify-content: space-around;
+  align-items: flex-start;
+  margin-top: 50px; }
+
+.move_list {
+  background: tan;
+  width: 170px;
+  height: 200px;
+  overflow: scroll;
+  overflow-x: hidden;
+  box-shadow: 0px 5px 15px gray; }
+  .move_list .move {
+    background: lightgray;
+    width: 70px;
+    display: inline-block;
+    text-align: center; }
+    .move_list .move:nth-child(odd) {
+      float: right; }
+
+.chat-container {
+  height: 385px;
+  width: 300px;
+  background: tan;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center; }
+  .chat-container .messages-window {
+    height: 330px;
+    width: 250px;
+    background: white; }
+
+.App {
+  background: url("https://images.pexels.com/photos/326311/pexels-photo-326311.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+  background-size: cover; }

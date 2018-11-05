@@ -6,10 +6,12 @@ import axios from 'axios'
 import Chessboard from "chessboardjsx";
 // import io from 'socket.io-client'
 import {socket} from '../utils/SocketFunctions'
-
+import {connect} from 'react-redux'
+import { relative } from "path";
 //set up endGame
 //resignation or checkmate assings victor and loser leaving counts as resignation
 //under any other condition the game is a draw including
+import Chat from './components/Chat'
 
 class HumanVsHuman extends Component {
   constructor(props) {
@@ -38,22 +40,12 @@ class HumanVsHuman extends Component {
   }
   static propTypes = { children: PropTypes.func };
 
-  
 
   componentDidMount() {
-    this.game = new Chess();
+    this.updatingPlayers()
     this.runSockets()
-    let {roomId} = this.props.match.params
     
-  //   axios.get(`/api/getPlayers/${roomId}`)
-  //   .then(res => {
-  //     console.log(res, res.data[0].user_light)
-  //     this.setState({light: res.data[0].user_light, dark: res.data[0].user_dark}, 
-  //     console.log('game state', this.state)  
-      
-  //     )
-  //   }
-  // )
+    this.game = new Chess();
     this.socket.emit('new-game', {
       message: this.game,
       room: this.state.room
@@ -62,6 +54,13 @@ class HumanVsHuman extends Component {
       this.updateNewMove(data)
       // console.log('data', data)
     })
+  }
+
+  updatingPlayers(){
+    let {roomId, dark, light} = this.props.match.params
+    this.setState({
+      light, dark
+    }, console.log('UPDATING', this.state))
   }
 
   movePiece(sourceSquare, targetSquare){
@@ -75,7 +74,6 @@ class HumanVsHuman extends Component {
 
   onDrop = ({ sourceSquare, targetSquare }) => {
     // see if the move is legal
-  
     let move = this.movePiece(sourceSquare, targetSquare)
     
     // illegal move
@@ -116,9 +114,11 @@ class HumanVsHuman extends Component {
   let counter = 0
   // console.log("HISTORY",history)
   let moveList = history.map((element,index) => {
+    let moveNumber = 1 + index
     return(
-      <div key={index}>
-      {element}
+      <div
+        className = "move"
+        key={index}>{element} 
       </div>
     )
   })
@@ -198,6 +198,7 @@ class HumanVsHuman extends Component {
     const { fen, dropSquareStyle, squareStyles } = this.state;
 
     return this.props.children({
+      // updatePlayers: this.updatePlayers,
       resignation: this.resignation,
       showHistory: this.showHistory,
       squareStyles,
@@ -214,12 +215,13 @@ class HumanVsHuman extends Component {
   }
 }
 
-export default function Gameboard(props) {
+ function Gameboard(props) {
   console.log('GM props', props)
   return (
-    <div>
-      <HumanVsHuman match={props.match}>
+    <div className="the_BFB">
+      <HumanVsHuman  match={props.match}>
         {({
+          // updatePlayers,
           resignation,
           showHistory,
           position,
@@ -234,10 +236,14 @@ export default function Gameboard(props) {
           testSockets,
         }) => (
           <>
-          
+          <Chat/>
+          {
+            props.username === props.match.params.light
+            ?
           <Chessboard
+            // updatePlayers={updatePlayers}
             id="humanVsHuman"
-            width={720}
+            width={777}
             // orientation="black"
             position={position}
             onDrop={onDrop}
@@ -245,7 +251,8 @@ export default function Gameboard(props) {
             onMouseOutSquare={onMouseOutSquare}
             boardStyle={{
               borderRadius: "5px",
-              boxShadow: `0 5px 15px rgba(0, 0, 0, 0.5)`
+              boxShadow: `0 5px 15px rgba(0, 0, 0, 0.5)`,
+              marginBottom: '50px'
             }}
             squareStyles={squareStyles}
             dropSquareStyle={dropSquareStyle}
@@ -253,15 +260,52 @@ export default function Gameboard(props) {
             onSquareClick={onSquareClick}
             onSquareRightClick={onSquareRightClick}
             />
+            :
+            <Chessboard
+            // updatePlayers={updatePlayers}
+            id="humanVsHuman"
+            width={777}
+            orientation="black"
+            position={position}
+            onDrop={onDrop}
+            onMouseOverSquare={onMouseOverSquare}
+            onMouseOutSquare={onMouseOutSquare}
+            boardStyle={{
+              borderRadius: "5px",
+              boxShadow: `0 5px 15px rgba(0, 0, 0, 0.5)`,
+              marginBottom: '50px'
+              // position: "relative",
+              // left:"25%",
+             
+              
+            }}
+            squareStyles={squareStyles}
+            dropSquareStyle={dropSquareStyle}
+            onDragOverSquare={onDragOverSquare}
+            onSquareClick={onSquareClick}
+            onSquareRightClick={onSquareRightClick}
+            />
+          }
           <MoveList 
-          move={showHistory}/>
-          <button onClick={resignation}>Resign</button>
+          move={showHistory}
+          resignation = {resignation}
+          />
           </>
         )}
       </HumanVsHuman>
     </div>
   );
 }
+
+function mapStateToProps(state){
+let {username} = state
+return{
+  username
+}
+}
+
+export default connect(mapStateToProps)(Gameboard)
+
 
 const squareStyling = ({ pieceSquare, history }) => {
   const sourceSquare = history.length && history[history.length - 1].from;
