@@ -11,7 +11,7 @@ import { relative } from "path";
 //set up endGame
 //resignation or checkmate assings victor and loser leaving counts as resignation
 //under any other condition the game is a draw including
-import Chat from './components/Chat'
+import Chat from './components/chat'
 
 class HumanVsHuman extends Component {
   constructor(props) {
