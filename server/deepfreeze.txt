@@ -1,6 +1,9 @@
 1) Testing. 5 PostMan and 5 Jest Tests. Cypress (Jordan).
 
 2) Styling. Profile subcomponents, chessboard subcomponents (chat feature and moveList)
+-- Username, or player's color, as identifier in chatroom.
+-- Scrolldown in moveList and Chatbox with new messages and moves.
+-- 
 
 3) Cleanup Test Data.
 
