@@ -1,11 +1,3 @@
- // let {setLightPlayer, setDarkPlayer, username} = this.props
-    // var randoCalrizian = Math.random();
-    // console.log(randoCalrizian)
-    // if(randoCalrizian >= .6){
-    //   setLightPlayer(username)
-    // } else {
-    //   setDarkPlayer(username)
-    // }
 
     function randomizePlayerStart(challenger, challenged){
         let randoCalrizian = Math.random()
@@ -19,5 +11,6 @@
             darkPlayer = challenger
         }
 
-        return (lightPlayer, darkPlayer)
+        // return ({lightPlayer, darkPlayer})
+        return true
     }
