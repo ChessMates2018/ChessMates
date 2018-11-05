@@ -190,8 +190,6 @@ h1, h2, h2 {
   overflow: scroll;
   overflow-x: hidden;
   box-shadow: 0px 5px 15px gray; }
-  .move_list::-webkit-scrollbar {
-    width: 50px; }
   .move_list .move {
     background: lightgray;
     width: 70px;
@@ -200,10 +198,19 @@ h1, h2, h2 {
     .move_list .move:nth-child(odd) {
       float: right; }
 
-.chat {
+.chat-container {
   height: 385px;
   width: 300px;
-  background: tan; }
+  background: tan;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center; }
+  .chat-container .messages-window {
+    height: 330px;
+    width: 250px;
+    background: white; }
 
 .App {
   background: url("https://images.pexels.com/photos/326311/pexels-photo-326311.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
