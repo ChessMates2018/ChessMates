@@ -28,7 +28,7 @@ class Arena extends Component {
         players: res.data
       })
     })
-    console.log(this.props.username)
+    console.log(this.props)
     socket.on('push to board', (challenged, gameId, challenger) => {
       let light = challenged.challenged.challenger
       let dark = challenged.challenged.challenged

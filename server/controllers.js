@@ -8,7 +8,8 @@ DEVKEY
 module.exports = {
     registerUser: (req, res) => {
         console.log('registerUser Fired', req.body)
-        const { FirstName, LastName, Email, Username, Password } = req.body
+        const { firstName, lastName, email, username, password } = req.body
+        console.log('paste',firstName, lastName, email, username, password)
         const defaultRank = 1000
         const defaultImg = null
         const defaultFriend = false
@@ -16,15 +17,18 @@ module.exports = {
         const defaultWins = 0
         const defaultLosses = 0
         const db = req.app.get('db')
-        db.checkUsername([Username]).then(user => {
+        db.checkUsername([username]).then(user => {
             if (user[0]) {
+                console.log('name taken?', user[0])
                 res.status(200).send('Username Taken. Try another.')
             } else {
                 console.log('you have else')
+                console.log('all he things', username, defaultRank, defaultImg, email, firstName, lastName, defaultFriend, defaultOnline, defaultWins, defaultLosses)
                 const salt = bcrypt.genSaltSync(10)
-                const hash = bcrypt.hashSync(Password, salt)
-
-                db.registerUser(Username, hash, defaultRank, defaultImg, Email, FirstName, LastName, defaultFriend, defaultOnline, defaultWins, defaultLosses).then((user) => {
+                console.log('salt', salt)
+                const hash = bcrypt.hashSync(password, salt)
+                console.log('hash', hash)
+                db.registerUser(username, hash, defaultRank, defaultImg, email, firstName, lastName, defaultFriend, defaultOnline, defaultWins, defaultLosses).then((user) => {
                     req.session.user
                     req.session.user = user[0].username
                     req.session.user.session_id = session_id_count

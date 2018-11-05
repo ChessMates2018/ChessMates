@@ -5,12 +5,12 @@ class RegisterModal extends Component{
     constructor(props){
         super(props)
             this.state={
-                FirstName: '',
-                LastName: '',
-                Email: '',
-                Username: '',
-                Password: '',
-                PasswordConfirm: ''
+                firstName: '',
+                lastName: '',
+                email: '',
+                username: '',
+                password: '',
+                passwordConfirm: ''
             }
             this.handleInput = this.handleInput.bind(this)
             this.createAccount = this.createAccount.bind(this)
@@ -23,11 +23,11 @@ this.setState({
 }
 
 createAccount(){
-let {FirstName, LastName, Email, Username, Password, PasswordConfirm} = this.state
-if (Password !== PasswordConfirm){
+let {firstName, lastName, email, username, password, passwordConfirm} = this.state
+if (password !== passwordConfirm){
     return alert('Your password confirmation does not match.')
 } else {
-    axios.post('/api/register', {Username: Username.toLocaleLowerCase(), Password:Password, FirstName:FirstName, LastName: LastName, Email: Email}).then((res) => {
+    axios.post('/api/register', {username, password, firstName, lastName, email}).then((res) => {
         if (res.data === 'Username taken. Please try again.') {
             alert(res.data)
         } 
