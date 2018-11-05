@@ -1,5 +1,5 @@
 
-    function randomizePlayerStart(challenger, challenged){
+    export function randomizePlayerStart(challenger, challenged){
         let randoCalrizian = Math.random()
         let lightPlayer = ''
         let darkPlayer = ''
@@ -11,6 +11,7 @@
             darkPlayer = challenger
         }
 
-        // return ({lightPlayer, darkPlayer})
-        return true
+        return ({lightPlayer, darkPlayer, randoCalrizian})
+        // return true
     }
+
