@@ -15,6 +15,7 @@ function randomizePlayerStart(challenger, challenged) {
     return (lightPlayer, darkPlayer)
 }
 
+
 export function login(username, password){
     
     axios.post('/api/login', { username, password }).then((res) => {
@@ -28,6 +29,8 @@ export function login(username, password){
             return "this.props.history.push('/profile')"
         }
     })
-
-
 }
+
+
+   
+
