@@ -1,0 +1,8 @@
+[
+  {
+      "username": "Rook",
+      "password": "password",
+      "rating": 90000,
+      "image": "../src/images/brady.jpg"
+  }
+]

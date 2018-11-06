@@ -1,19 +1,19 @@
 const {login}  = require('./logic')
 
-describe('user can login and is routed to their profile page', () => {
+describe('testing Login method on Landing.js', () => {
   test('returns correct user info upon login', () => {
-    expect(login('Rook', 'password').status).toBe(200)
+    expect(login('Rook', 'password')).toEqual("Rook")
   })
-  test('Only returns one user upon login', () => {
-    expect(login('Rook', 'password').length).toBe(1)
+  test('does NOT return password', () => {
+    expect(login('Rook', 'password').password).toBeFalsy()
   })
-  test('returns message if wrong password entered', () => {
-    expect(login('Rook', 'oops wrong password')).toBe('Invalid Password')
+  test('will ask for correct login', () => {
+    expect(login({},{})).toEqual('Please enter correct login info')
   })
-  test('returns message if wrong username entered', () => {
-    expect(login('oops wrong username', 'password')).toBe('Username does not exist')
+  test('will ask for password', () => {
+    expect(login('Rook', '')).toEqual('Please enter password.')
   })
-  test('does not return password', () => {
-    expect(login('Rook', 'password').password).toNotBe(true)
-  })  
+  test('will ask for username', () => {
+    expect(login('', 'password')).toEqual('Please enter username.')
+  })
 })
