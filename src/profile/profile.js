@@ -70,7 +70,8 @@ class Profile extends Component {
     console.log(this.props.username)
     return (
       <div className="profile">
-        <h1>Profile.JS</h1>
+        {/* <h1>Profile.JS</h1> */}
+        <UserInfo/>
         <Arena/>
         {/* <UserInfo/> */}
         <RecentGames/>

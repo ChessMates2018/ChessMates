@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
-import knight from '../images/knight.jpg'
+import king from '../images/new_crown.png'
 
 class Nav extends Component {
     logout() {
@@ -13,35 +13,42 @@ class Nav extends Component {
         if (this.props.location.pathname !== '/') {
             if (this.props.location.pathname !== '/gameboard/${id}') {
                 if (this.props.location.pathname === '/profile') {
+                    //profile
                     return (
-                        <div>
-                            <div>
-                                <img src={knight} />
-                                <h2>Checked</h2>
+                        <div className='navBod'>
+                            <div className='leftNav'>
+                                <img className='navImg' src={king} />
+                                <h2 className='navH2'>Checked</h2>
                             </div>
-                            <h1>Profile</h1>
-                            <Link to='/about'>
-                                <p>About</p>
-                            </Link>
-                            <button onClick={() => this.logout()}>Logout</button>
+                            <h1 className='navH1'>Profile</h1>
+                            <div className='navMenu'>
+                                <Link style={{textDecoration: 'none'}} to='/about'>
+                                    <p className='aboutLink'>About</p>
+                                </Link>
+                                <button className='logoutBtn' onClick={() => this.logout()}>Logout</button>
+                            </div>
                         </div>
                     )
-                } else{
+                } else {
+                    // about
                     return (
-                        <div>
-                            <div>
-                                <img src={knight} />
-                                <h2>Checked</h2>
+                        <div className='navBod'>
+                            <div className='leftNav'>
+                                <img className='navImg' src={king} />
+                                <h2 className='navH2'>Checked</h2>
                             </div>
-                            <h1>Profile</h1>
-                            <Link to='/profile'>
-                                <p>Profile</p>
-                            </Link>
+                            <h1 className='navH1'>About</h1>
+                            <div className='navMenu'>
+                                <Link to='/profile'>
+                                    <p className='aboutLink'>Profile</p>
+                                </Link>
+                                <button className='logoutBtn' onClick={() => this.logout()}>Logout</button>
+                            </div>
                         </div>
                     )
                 }
             }
-        }else{
+        } else {
             return null
         }
     }
