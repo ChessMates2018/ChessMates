@@ -1,3 +1,15 @@
+
+    export function randomizePlayerStart(challenger, challenged){
+        let randoCalrizian = Math.random()
+        let lightPlayer = ''
+        let darkPlayer = ''
+        if(randoCalrizian >= .6){
+            lightPlayer = challenger
+            darkPlayer = challenged
+        }else{
+            lightPlayer = challenged
+            darkPlayer = challenger
+        }
 // let {setLightPlayer, setDarkPlayer, username} = this.props
 // var randoCalrizian = Math.random();
 // console.log(randoCalrizian)
@@ -6,21 +18,10 @@
 // } else {
 //   setDarkPlayer(username)
 // }
-
-function randomizePlayerStart(challenger, challenged) {
-    let randoCalrizian = Math.random()
-    let lightPlayer = ''
-    let darkPlayer = ''
-    if (randoCalrizian >= .6) {
-        lightPlayer = challenger
-        darkPlayer = challenged
-    } else {
-        lightPlayer = challenged
-        darkPlayer = challenger
-    }
-
-    return (lightPlayer, darkPlayer)
+return ({lightPlayer, darkPlayer, randoCalrizian})
+// return true
 }
+
 
 export function login(username, password){
     
@@ -34,6 +35,8 @@ export function login(username, password){
             return "this.props.history.push('/profile')"
         }
     })
-
-
 }
+
+
+   
+

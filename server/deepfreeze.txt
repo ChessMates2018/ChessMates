@@ -17,6 +17,8 @@ EndGame Logic:
 6) Talking Points for presentation and rotating order.
 ** Spinning up server for demonstration of chessboard.
 
+7) make it possible to leave arena
+
 
 
 

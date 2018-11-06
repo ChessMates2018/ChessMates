@@ -17,7 +17,7 @@ class Arena extends Component {
 
     this.state = {
       players: [],
-      inArenaToggle: true
+      inArenaToggle: false
     }
     this.joinArena = this.joinArena.bind(this)
   }
