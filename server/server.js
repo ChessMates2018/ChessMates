@@ -63,9 +63,9 @@ app.post('/api/newGameHistory', ctrl.newGame)
 
 app.put('/api/joinArena', ctrl.joinArena)
 
-io.use(sharedSession(session,{
-    autoSave: true
-}))
+// io.use(sharedSession(session,{
+//     autoSave: true
+// }))
 
 io.on('connection', function(socket){
     console.log('user connected', socket.id)
