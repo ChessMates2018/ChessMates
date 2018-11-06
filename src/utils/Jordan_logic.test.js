@@ -1,8 +1,8 @@
 const {login}  = require('./logic')
 
-RTCSessionDescription('user can login and is routed to their profile page', () => {
+describe('user can login and is routed to their profile page', () => {
   test('returns correct user info upon login', () => {
-    expect(login('Rook', 'password')).toBe()
+    expect(login('Rook', 'password').status).toBe(200)
   })
   test('Only returns one user upon login', () => {
     expect(login('Rook', 'password').length).toBe(1)

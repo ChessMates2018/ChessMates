@@ -1,11 +1,4 @@
-// let {setLightPlayer, setDarkPlayer, username} = this.props
-// var randoCalrizian = Math.random();
-// console.log(randoCalrizian)
-// if(randoCalrizian >= .6){
-//   setLightPlayer(username)
-// } else {
-//   setDarkPlayer(username)
-// }
+import axios from 'axios'
 
 function randomizePlayerStart(challenger, challenged) {
     let randoCalrizian = Math.random()
@@ -24,7 +17,8 @@ function randomizePlayerStart(challenger, challenged) {
 
 export function login(username, password){
     
-    axios.post('/api/login', { Username, Password }).then((res) => {
+    axios.post('/api/login', { username, password }).then((res) => {
+        console.log('look here',res.data)
         if (res.data === 'Invalid Password') {
             return res.data
         } else if (res.data === 'Username does not exist') {
