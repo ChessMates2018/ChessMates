@@ -2,18 +2,18 @@ const {TopofLeaderboard} = require('./Brady_logic')
 
 describe("Top rated users' informations are being returned correctly", () => {
     test("returns the highest rated user first", () => {
-        expect(TopofLeaderboard("Knight")).toBeTruthy()
+        expect(TopofLeaderboard("Knight")).toBe(true)
     })
-    test("highest rated player will have a rating greater than 1000", () => {
-        expect(TopofLeaderboard("Knight")).toBeGreaterThan(1000)
+    test("highest rated players will have a rating greater than 1000", () => {
+        expect(TopofLeaderboard(1000)).toBeTruthy()
     })
-    test("users on leaderboard will have their username, rating, and picture retrieved to be displayed", () => {
-        expect(TopofLeaderboard('Knight')).toBe(true)
+    test("users on leaderboard will not always have a picture retrieved to be displayed", () => {
+        expect(TopofLeaderboard('test3')).toBe(false)
     })
-    test("Highest rated player will have a ranking of first", () => {
-        expect(TopofLeaderboard('Knight')).toBe(true)
+    test("second ranked player will have a rating of 90000", () => {
+        expect(TopofLeaderboard('Rook')).toBe(90000)
     })
-    test("Players higher in rating will have a higher ranking in the leaderboard. ex(3rd and 4th)", () => {
-        expect(TopofLeaderboard('Bishop', 'test 5')).toBe(true)
+    test("Players lower in ranking will have less, or equal, rating than those higher in ranking", () => {
+        expect(TopofLeaderboard('test 5')).toBeLessThanOrEqual(90000)
     })
 })
