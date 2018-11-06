@@ -86,9 +86,6 @@ h1, h2, h2 {
   #title img {
     z-index: 10; }
 
-.profile {
-  background-image: url("../images/profile.jpg"); }
-
 @keyframes rotate {
   0% {
     transform: rotate(0deg); }
@@ -211,6 +208,44 @@ h1, h2, h2 {
     height: 330px;
     width: 250px;
     background: white; }
+
+.navBod {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px; }
+
+.leftNav {
+  width: 10px;
+  display: flex;
+  align-items: center; }
+  .leftNav .navH2 {
+    color: #fbfafa;
+    font-size: 40px;
+    transform: rotate(20deg);
+    margin-right: 20px; }
+
+.navImg {
+  margin-right: -40px;
+  height: 80px; }
+
+.navH1 {
+  color: #fbfafa;
+  font-size: 40px;
+  margin-left: 40px; }
+
+.navMenu {
+  display: flex; }
+  .navMenu .aboutLink {
+    color: #fbfafa;
+    margin-right: 10px;
+    font-size: 20px; }
+  .navMenu .logoutBtn {
+    background: none;
+    border-style: none;
+    width: 80px;
+    color: tan;
+    font-size: 18px; }
 
 .App {
   background: url("https://images.pexels.com/photos/326311/pexels-photo-326311.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
