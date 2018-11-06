@@ -54,6 +54,10 @@ class HumanVsHuman extends Component {
       this.updateNewMove(data)
       // console.log('data', data)
     })
+    this.socket.on('checkMaaate', (data) => {
+      console.log('GOT TO CHECKMATE')
+      alert(data)
+    })
   }
 
   updatingPlayers(){
@@ -88,8 +92,12 @@ class HumanVsHuman extends Component {
       this.socket.emit('move', newMove)
       console.log('socket', this.socket)
     });
-    
   };
+
+
+  endInCheckMate = () => {
+  alert('Game has ended in checkmate.')
+  }
 
   //line 190
   runSockets = () => {
@@ -105,7 +113,17 @@ class HumanVsHuman extends Component {
     console.log('wait for iiiii....')
     this.movePiece(newMove.sourceSquare, newMove.targetSquare)
     let {fen, history, squareStyles} = newMove
-    this.setState({fen, history, squareStyles}, () => console.log(this.state))
+    this.setState({fen, history, squareStyles}, () => {
+     let checkMate = '';
+      this.state.history.forEach(string => {
+      checkMate = string.indexOf('#')
+      })
+      if(checkMate === -1){
+        return null
+      } else {
+        socket.emit('checkMaaate', 'Checkmate!', <button>Exit Game</button>)
+      }
+    })
   }
 
 
