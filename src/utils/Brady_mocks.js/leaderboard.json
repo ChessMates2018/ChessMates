@@ -1,0 +1,50 @@
+[{
+    "username": "Knight",
+    "rating": 90000,
+    "image": "../src/images/brady.jpg"
+},
+{
+    "username": "Rook",
+    "rating": 90000,
+    "image": "../src/images/jordan.jpg"
+},
+{
+    "username": "Bishop",
+    "rating": 90000,
+    "image": "../src/images/michelle.jpg"
+},
+{
+    "username": "test 5",
+    "rating": 1000,
+    "image": "../src/images/dummy.jpg"
+},
+{
+    "username": "test3",
+    "rating": 1000,
+    "image": null
+},
+{
+    "username": "test 6",
+    "rating": 1000,
+    "image": null
+},
+{
+    "username": "test 11",
+    "rating": 1000,
+    "image": null
+},
+{
+    "username": "test 8",
+    "rating": 1000,
+    "image": null
+},
+{
+    "username": "test 13",
+    "rating": 1000,
+    "image": null
+},
+{
+    "username": "test",
+    "rating": 1000,
+    "image": null
+}]

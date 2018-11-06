@@ -11,6 +11,7 @@ class MoveList extends Component{
   
   render(props){
       let {resignation} = this.props
+      
     return(
         
         <div>
