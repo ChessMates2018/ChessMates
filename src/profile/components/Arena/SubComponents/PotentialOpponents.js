@@ -18,8 +18,7 @@ import {connect} from 'react-redux'
   })
 
   return (
-    <div>
-      <h1>PotentialOpponents.js</h1>
+    <div id = 'potOppsBlock'>
       {opponent}
     </div>
   )
