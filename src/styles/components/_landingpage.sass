@@ -2,25 +2,34 @@
 
 .landing-page
     text-align: center
-    background-image: $landing-backgroundimg
-    background-size: cover 
+    // background-image: url('https://picjumbo.com/wp-content/uploads/white-marble-stone-background-texture-pattern_free_stock_photos_picjumbo_marble_free_stock_photos_picjumbo_com-2210x1473.jpg')
+    // background-size: cover 
+    background: $darken, $marble
     height: 100vh
     display: flex
     flex-direction: column
     align-items: center
+    justify-content: center
+    .rapper
+        background-color: $black
+        @include flexCol
+        position: relative
+        // top: 60px
+        justify-content: space-between
+        border-radius: 50
+        height: auto
    
 
 .login
     position: relative
-    top: 75px
-    padding: 5px 2px 15px 2px
+    // top: 45px
+    padding: 25px 2px 
     display: flex
     flex-direction: column
     align-items: center
-    justify-content: space-around
-    background: $black
-    opacity: .8
-    height: 225px
+    justify-content: space-evenly
+    // background: red
+    height: 350px
     width: 19rem
     
     
@@ -32,17 +41,28 @@
 .input
     height: 1.5rem
     width: 15rem
+    border-style: none
+    border-bottom: 1px $white solid
+    background: none
+    text-align: start
+    color: $white
+    &::placeholder
+        color: $white
     
-
+    
 .btn
     height: 1.5rem
     width: 15rem
+    background-image: linear-gradient(to bottom left, darken($slate_grey,5), $white)
+    border-style: none
+    color: $black
+    border-radius: 2px
+    
     
 #title
     @include flexRow
-    @include card
     position: relative
-    top: 45px
+    // top: 45px
     height: 200px
     width: 800px
     padding: 1rem 2rem
