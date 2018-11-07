@@ -234,6 +234,9 @@ h1, h2, h2 {
   font-size: 40px;
   margin-left: 40px; }
 
+.navH1:nth-child(odd) {
+  color: tan; }
+
 .navMenu {
   display: flex; }
   .navMenu .aboutLink {
