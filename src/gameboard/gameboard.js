@@ -239,7 +239,7 @@ class HumanVsHuman extends Component {
   
   return (
     <div className="the_BFB">
-      <HumanVsHuman  theHistory = {props.history} match={props.match}>
+      <HumanVsHuman theHistory={props.history} match={props.match}>
         {({
           // updatePlayers,
           resignation,
