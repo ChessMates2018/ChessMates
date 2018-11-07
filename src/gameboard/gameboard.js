@@ -33,7 +33,8 @@ class HumanVsHuman extends Component {
       light: '',
       dark: '',
       turn: true,
-      message: ''
+      message: '',
+      isMated: false 
     };
 
 
@@ -56,7 +57,7 @@ class HumanVsHuman extends Component {
     })
     this.socket.on('checkMaaate', (data) => {
       console.log('GOT TO CHECKMATE')
-      alert(data)
+      this.props.theHistory.push('/profile')
     })
   }
 
@@ -121,7 +122,7 @@ class HumanVsHuman extends Component {
       if(checkMate === -1){
         return null
       } else {
-        socket.emit('checkMaaate', 'Checkmate!', <button>Exit Game</button>)
+        socket.emit('checkMaaate', 'Checkmate!')
       }
     })
   }
@@ -214,7 +215,7 @@ class HumanVsHuman extends Component {
 
   render() { 
     const { fen, dropSquareStyle, squareStyles } = this.state;
-
+    
     return this.props.children({
       // updatePlayers: this.updatePlayers,
       resignation: this.resignation,
@@ -235,9 +236,10 @@ class HumanVsHuman extends Component {
 
  function Gameboard(props) {
   console.log('GM props', props)
+  
   return (
     <div className="the_BFB">
-      <HumanVsHuman  match={props.match}>
+      <HumanVsHuman  theHistory = {props.history} match={props.match}>
         {({
           // updatePlayers,
           resignation,

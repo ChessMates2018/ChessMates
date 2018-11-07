@@ -9,7 +9,7 @@ constructor(){
         this.state={
             Username: '',
             Password: '',
-            Div: false
+            Div: true
         }
         this.handleInput = this.handleInput.bind(this)
         this.toggleDiv = this.toggleDiv.bind(this)
@@ -60,25 +60,26 @@ WelcomeDiv =
 <RegisterModal toggleDiv={this.toggleDiv} />
 </div>
 } else {
-    WelcomeDiv = null
+    WelcomeDiv = 
+    <div className="login">
+        <input className="input" placeholder="Username" name="Username" value={this.state.Username} onChange={this.handleInput} />
+        <input className="input" placeholder="Password" name="Password" type = "password" value={this.state.Password}onChange={this.handleInput}/>
+        <button className="btn"  onClick={this.login}>Login</button>
+        <button className="btn"  onClick={this.toggleDiv}>Register</button>
+    </div>
 }
-
+let {Div} = this.state
     return(
         <div className="landing-page">
-            <div id="title">
-                <div className="logo-img logo-right"></div>
-                <h1>Checked</h1>
-                <div className="logo-img logo-left"></div>
+            <div className="rapper">
+                <div id="title">
+                    <div className="logo-img logo-right"></div>
+                    <h1>Checked</h1>
+                    <div className="logo-img logo-left"></div>
+                </div>
+                {WelcomeDiv}
+                <Leaderboard />
             </div>
-            <div className="login">
-                <h2 id="login-welcome">Welcome</h2>
-                <input className="input" placeholder="Username" name="Username" value={this.state.Username} onChange={this.handleInput} />
-                <input className="input" placeholder="Password" name="Password" type = "password" value={this.state.Password}onChange={this.handleInput}/>
-                <button className="btn"  onClick={this.login}>Login</button>
-                <button className="btn"  onClick={this.toggleDiv}>Register</button>
-            </div>
-            {WelcomeDiv}
-            <Leaderboard />
         </div>
     )
 }

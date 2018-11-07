@@ -34,7 +34,6 @@ class Arena extends Component {
       let dark = challenged.challenged.challenged
       console.log('challenge made', challenged.challenged.challenged, this.props.username, challenged.challenged.gameId)
       if(this.props.username === challenged.challenged.challenged){
-        alert('You have been challenged! Would you like to accept?')
         axios.post('/api/newGameHistory', {dark, light})
         this.props.history.push(`/gameboard/${challenged.challenged.gameId}/${dark}/${light}`)
       }else{
@@ -68,38 +67,7 @@ class Arena extends Component {
     //set up an io.on if username === the username cooming back from socket push to board  
   
   }
-    // console.log('PROPS',this.props)
-    // let {setLightPlayer, setDarkPlayer, username} = this.props
-    // var randoCalrizian = Math.random();
-    // console.log(randoCalrizian)
-    // if(randoCalrizian >= .6){
-    //   setLightPlayer(username)
-    // } else {
-    //   setDarkPlayer(username)
-    // }
-
-    // serverside
-    // const socket = io('http://localhost:3438')
-    // socket.on('connect', () => {
-    //   let roomId = socket.id
-    //   console.log(roomId)
-    //   this.props.setRoomId(roomId)
-    // })
-    // console.log(this.roomId)
-    // axios.get(`/api/gameNumber`).then(res => {
-    //   this.props.history.push(`/gameboard/${res.data.number}`)
-    // })
-  
-
-  // displayButton = () => {
-  //   setTimeout(function() {
-  //     return(
-  //       <Link to={`/gameboard/${this.props.roomId}`}> <button 
-  //         onClick={this.joinArena} 
-  //         className="button">Join the Arena</button></Link>
-  //     )
-  //   }, 500)
-  // }
+    
 
   leaveArena = () => {
     let {players} = this.state
@@ -116,13 +84,7 @@ class Arena extends Component {
     })
   }
 
-  // runSockets = () => {
-  //   let socket = io.connect()
-  //   socket.on('connect', function(){
-  //     console.log('you have joined the arena')
-  //      socket.emit('#')
-  //    })
-  // }
+ 
 
   displayArena = () => {
     console.log(this.state.players[0])

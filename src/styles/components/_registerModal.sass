@@ -2,24 +2,35 @@
     
 .register
     position: relative
-    z-index: 30
+    height: 350px
 
 .toggled-view
+    // background: red
     display: flex
     flex-direction: column
     align-items: center
-    background: $sienna
     justify-content: space-between
     width: 300px
     height: 100%
     color: white
-    padding: 5px
+    // margin-top: 30px
+    // padding: 5px
+    input
+        border-style: none
+        background: none
+        border-bottom: solid 1px $white
+        color: $white
+        text-align: start
+        width: 15rem
+        height: 1.5rem
+        &::placeholder
+            color: $white
+button
+    width: 15rem
+    height: 1.5rem
+    background-image: linear-gradient(to bottom left, darken($slate_grey,5), $white)
+    border-style: none
+    color: $black
+    border-radius: 2px
 
-#create-button
-    margin-top: 5px
-    width: 50%
-
-#cancel-button
-    margin-top: 5px
-    width: 50%
 
