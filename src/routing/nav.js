@@ -39,7 +39,7 @@ class Nav extends Component {
                             </div>
                             <h1 className='navH1'>About</h1>
                             <div className='navMenu'>
-                                <Link to='/profile'>
+                                <Link style={{textDecoration: 'none'}} to='/profile'>
                                     <p className='aboutLink'>Profile</p>
                                 </Link>
                                 <button className='logoutBtn' onClick={() => this.logout()}>Logout</button>
