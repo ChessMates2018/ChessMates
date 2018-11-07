@@ -102,6 +102,13 @@ h1, h2, h2 {
   #title img {
     z-index: 10; }
 
+.profile {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px; }
+
 @keyframes rotate {
   0% {
     transform: rotate(0deg); }
@@ -271,6 +278,36 @@ button {
     width: 80px;
     color: tan;
     font-size: 18px; }
+
+.userInfoBlock {
+  background-color: #141414;
+  box-shadow: 2px 2px 3px #141414;
+  color: #fbfafa;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 20px 0px;
+  border-radius: 2px;
+  top: 50px;
+  left: 50px;
+  width: 450px; }
+  .userInfoBlock img {
+    width: 150px; }
+  .userInfoBlock .userName {
+    color: #fbfafa; }
+    .userInfoBlock .userName .sub_userName {
+      font-size: 20px;
+      color: tan; }
+  .userInfoBlock #updateBtn {
+    width: 100px;
+    margin: 10px; }
+  .userInfoBlock .UI_Content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; }
 
 .App {
   background: url("../images/marble1.jpg");

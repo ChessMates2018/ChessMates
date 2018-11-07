@@ -31,7 +31,7 @@ class Profile extends Component {
         this.props.setUsername(res.data)
         login(res.data)
 
-        // this.getInitialInfo()
+        // this.getUser()
       })
       .catch(err => {
         console.log('dis is du err!',err)
@@ -39,7 +39,7 @@ class Profile extends Component {
         this.props.history.push('/')
       })
     } else {
-      this.getInitialInfo()
+      // this.getUser()
     }
   }
 
@@ -57,21 +57,22 @@ class Profile extends Component {
   //   })
   // }
 
-  // getAllOnline () {
-  //   axios.get(`/api/loggedin`).then(res => {
-  //     console.log('all users online', res.data)
-  //     this.setState({
-  //       onlineUsers: res.data
-  //     })
-  //   })
-  // }
+  getAllOnline () {
+    axios.get(`/api/loggedin`).then(res => {
+      console.log('all users online', res.data)
+      this.setState({
+        onlineUsers: res.data
+      })
+    })
+  }
 
   render () {
     console.log(this.props.username)
+    let {currentUser} = this.state
     return (
       <div className="profile">
         {/* <h1>Profile.JS</h1> */}
-        <UserInfo/>
+        <UserInfo currentUser = {currentUser[0]}/>
         <Arena/>
         {/* <UserInfo/> */}
         <RecentGames/>
