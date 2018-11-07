@@ -7,9 +7,9 @@ DEVKEY
 
 module.exports = {
     registerUser: (req, res) => {
-        console.log('registerUser Fired', req.body)
+        // console.log('registerUser Fired', req.body)
         const { firstName, lastName, email, username, password } = req.body
-        console.log('paste',firstName, lastName, email, username, password)
+        console.log('dat body', req.body)
         const defaultRank = 1000
         const defaultImg = null
         const defaultFriend = false
@@ -19,7 +19,7 @@ module.exports = {
         const db = req.app.get('db')
         db.checkUsername([username]).then(user => {
             if (user[0]) {
-                console.log('name taken?', user[0])
+                console.log('look at me', user[0])
                 res.status(200).send('Username Taken. Try another.')
             } else {
                 console.log('you have else')

@@ -14,13 +14,13 @@ class UserInfo extends Component {
     return (
       <div className ="wrapper">
         <section>
-          <img src={defaultImage} alt="default profile image"/>
+          {/* <img src={defaultImage} alt="default profile image"/> */}
         </section>
         <section>
           <h1 className="userName">Username</h1>
           <div className="stats_box">
             <h3 className="stats">Rating</h3>
-            <h3 className="stats">Win:Loss ratio</h3>
+            {/* <h3 className="stats">Win:Loss ratio</h3> */}
             <h3 className="stats">Most Frequent Opponent</h3>
             <h3 className="stats">Number of Games played</h3>
           </div>
