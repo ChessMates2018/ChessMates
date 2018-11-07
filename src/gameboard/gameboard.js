@@ -56,7 +56,7 @@ class HumanVsHuman extends Component {
     })
     this.socket.on('checkMaaate', (data) => {
       console.log('GOT TO CHECKMATE')
-      alert(data)
+      this.props.theHistory.push('/profile')
     })
   }
 
@@ -237,7 +237,7 @@ class HumanVsHuman extends Component {
   console.log('GM props', props)
   return (
     <div className="the_BFB">
-      <HumanVsHuman  match={props.match}>
+      <HumanVsHuman theHistory={props.history} match={props.match}>
         {({
           // updatePlayers,
           resignation,

@@ -131,6 +131,7 @@ class Arena extends Component {
     console.log(players)
     if (players[0]) {
       players.map(player => {
+        if(!this.props.username){
         return (
             <div>
                <p>{player}</p>
@@ -138,7 +139,7 @@ class Arena extends Component {
               // onClick = {this.runSockets}
               className="challenge_btn">Come at me!</button>
             </div> 
-        )
+        )}
       })
     } else {
       return (
@@ -177,7 +178,8 @@ class Arena extends Component {
         {/* {this.displayButton()} */}
        <Link to='/Stockfish'><button>Play against Stockfish!</button></Link> 
 
-       <PotentialOpponents 
+       <PotentialOpponents
+        currentPlayer={this.props.username}
         opponentsList={this.state.players}
         newGame={this.newGame} 
        />

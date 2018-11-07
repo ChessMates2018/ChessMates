@@ -1,11 +1,12 @@
 import React from 'react'
+import {connect} from 'react-redux'
 
-export default function PotentialOpponents (props) {
+ function PotentialOpponents (props) {
 
   let {opponentsList, newGame} = props
   let opponent = opponentsList.map((player, index) => {
-    console.log(player)
     // let {player, rating, wins, losses, image} = player
+    if(player.username !== props.currentPlayer){
     return (
       <div key = {index} className="potentialOpponent">
           <p>{player.username}</p>
@@ -13,7 +14,7 @@ export default function PotentialOpponents (props) {
               // onClick = {this.runSockets}
               className="challenge_btn" onClick={() => newGame(player.username)}>Come at me!</button>
       </div>
-    )
+    )}
   })
 
   return (
@@ -23,3 +24,12 @@ export default function PotentialOpponents (props) {
     </div>
   )
 }
+
+function mapStateToProps(state){
+let {username} = state
+return{
+  username
+}
+}
+
+export default connect(mapStateToProps) (PotentialOpponents)
