@@ -274,6 +274,9 @@ class HumanVsHuman extends Component {
               boxShadow: `0 5px 15px rgba(0, 0, 0, 0.5)`,
               marginBottom: '50px'
             }}
+            darkSquareStyle = {{
+              backgroundColor: ''
+            }}
             squareStyles={squareStyles}
             dropSquareStyle={dropSquareStyle}
             onDragOverSquare={onDragOverSquare}
@@ -294,10 +297,13 @@ class HumanVsHuman extends Component {
               borderRadius: "5px",
               boxShadow: `0 5px 15px rgba(0, 0, 0, 0.5)`,
               marginBottom: '50px'
-              // position: "relative",
-              // left:"25%",
-             
-              
+            
+            }}
+            darkSquareStyle = {{
+              backgroundColor: 'gray'
+            }}
+            lightSquareStyle = {{
+              backgroundColor: 'white'
             }}
             squareStyles={squareStyles}
             dropSquareStyle={dropSquareStyle}

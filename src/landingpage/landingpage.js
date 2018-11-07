@@ -4,12 +4,12 @@ import RegisterModal from './components/registerModal'
 import axios from 'axios';
 
 class LandingPage extends Component {
-constructor(){
-    super()
+constructor(props){
+    super(props)
         this.state={
             Username: '',
             Password: '',
-            Div: true
+            Div: false
         }
         this.handleInput = this.handleInput.bind(this)
         this.toggleDiv = this.toggleDiv.bind(this)
@@ -57,7 +57,7 @@ let WelcomeDiv;
 if (this.state.Div === true){
 WelcomeDiv =
 <div>
-<RegisterModal toggleDiv={this.toggleDiv} />
+<RegisterModal history = {this.props.history} toggleDiv={this.toggleDiv} />
 </div>
 } else {
     WelcomeDiv = 

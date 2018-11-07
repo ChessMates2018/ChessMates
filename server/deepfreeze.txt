@@ -90,3 +90,14 @@ endInCheckMate = ({sourceSquare, targetSquare}, arr) => {
 
 INSIDE OF onDROP:
   this.endInCheckMate({sourceSquare, targetSquare}, this.state.history.pop())
+
+
+
+
+
+      darkSquareStyle = {{
+              backgroundColor: 'gray'
+            }}
+            lightSquareStyle = {{
+              backgroundColor: 'white'
+            }}
