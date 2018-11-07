@@ -1,6 +1,7 @@
 
     export function randomizePlayerStart(challenger, challenged){
-        let randoCalrizian = Math.random()
+        let randoCalrizian = .7
+        // let randoCalrizian = Math.random()
         let lightPlayer = ''
         let darkPlayer = ''
         if(randoCalrizian >= .6){
@@ -10,14 +11,6 @@
             lightPlayer = challenged
             darkPlayer = challenger
         }
-// let {setLightPlayer, setDarkPlayer, username} = this.props
-// var randoCalrizian = Math.random();
-// console.log(randoCalrizian)
-// if(randoCalrizian >= .6){
-//   setLightPlayer(username)
-// } else {
-//   setDarkPlayer(username)
-// }
 return ({lightPlayer, darkPlayer, randoCalrizian})
 // return true
 }
