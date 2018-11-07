@@ -71,12 +71,18 @@ class Profile extends Component {
     let {currentUser} = this.state
     return (
       <div className="profile">
+      <div className="emptySpace"></div>
+        <div className="profile_section">
+          <UserInfo currentUser = {currentUser[0]}/>
+          <Leaderboard/>
+        </div>
+        <div className="profile_section">
+          <Arena/>
+        </div>
         {/* <h1>Profile.JS</h1> */}
-        <UserInfo currentUser = {currentUser[0]}/>
-        <Arena/>
         {/* <UserInfo/> */}
-        <RecentGames/>
-        <Leaderboard/>
+        {/* <RecentGames/> */}
+      <div className="emptySpace"></div>
       </div>
     )
   }

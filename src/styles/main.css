@@ -104,10 +104,15 @@ h1, h2, h2 {
 
 .profile {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin-top: 20px; }
+  flex-direction: row-reverse;
+  justify-content: space-evenly;
+  align-items: start;
+  margin-top: 120px; }
+  .profile .emptySpace {
+    width: 150px; }
 
 @keyframes rotate {
   0% {
@@ -318,7 +323,7 @@ button {
   justify-content: center;
   align-items: center;
   padding: 20px;
-  margin-top: 50px; }
+  width: 450px; }
   .arenaBlock .arena_btn {
     margin-top: 20px; }
   .arenaBlock h3 {
@@ -336,7 +341,7 @@ button {
   justify-content: center;
   align-items: center;
   justify-content: start;
-  height: 400px;
+  height: 282px;
   overflow: scroll;
   overflow-x: hidden; }
   #potOppsBlock .potentialOpponent {
@@ -354,4 +359,5 @@ button {
 
 .App {
   background: url("../images/marble1.jpg");
-  background-size: cover; }
+  background-size: cover;
+  height: 100vh; }
