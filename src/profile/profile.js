@@ -22,7 +22,7 @@ class Profile extends Component {
     this.state = {
       onlineUsers: [],
       currentUser: [],
-      showIcons: false
+      showIcons: false,
     }
 
     // this.getUser = this.getUser.bind(this)
@@ -91,11 +91,11 @@ class Profile extends Component {
                 showTheIcons = {this.showTheIcons}
                 currentUser = {currentUser[0]}/>
               <div className = {(this.state.showIcons? 'imageOpps': 'hiding')}>
-                <img onClick = {() => this.changeIcon(`../../../images/default_king.jpg`)} src={king} alt=""/>
-                <img onClick = {() => this.changeIcon(`../../../images/default_queen.jpg`)}src={queen} alt=""/>
-                <img onClick = {() => this.changeIcon(`../../../images/default_bishop.jpg`)}src={bishop} alt=""/>
-                <img onClick = {() => this.changeIcon(`../../../images/default_knight.jpg`)}src={knight} alt=""/>
-                <img onClick = {() => this.changeIcon(`../../../images/default_rook.jpg`)}src={rook} alt=""/>
+                <img onClick = {() => this.changeIcon(king)} src={king} alt=""/>
+                <img onClick = {() => this.changeIcon(queen)}src={queen} alt=""/>
+                <img onClick = {() => this.changeIcon(bishop)}src={bishop} alt=""/>
+                <img onClick = {() => this.changeIcon(knight)}src={knight} alt=""/>
+                <img onClick = {() => this.changeIcon(rook)}src={rook} alt=""/>
               </div>
             </div>
             <Leaderboard/>
