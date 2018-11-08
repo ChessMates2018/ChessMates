@@ -318,6 +318,9 @@ button {
 .team-mate-bio {
   background: #97999a; }
 
+.team-mate-contact {
+  background: #c4ccc4; }
+
 .card {
   border: 1px black solid;
   height: 100%;
@@ -334,6 +337,13 @@ button {
   flex-direction: column;
   justify-content: center;
   align-items: center; }
+
+.back {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  justify-content: space-between; }
 
 .card .side {
   backface-visibility: hidden;

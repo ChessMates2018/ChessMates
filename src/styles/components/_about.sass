@@ -38,6 +38,8 @@
 .team-mate-bio
     background: $light_slate_grey
 
+.team-mate-contact
+    background: $dark_sea_green
 
 .card 
   border: 1px black solid
@@ -53,6 +55,10 @@
 .front
   @include flexCol
 
+.back
+  @include flexCol
+  justify-content: space-between
+
 .card .side 
   backface-visibility: hidden
   border-radius: 6px
@@ -61,8 +67,6 @@
   overflow: hidden
   width: 100%
   
-
-
 .card .back 
   color: #0087cc
   line-height: 150px

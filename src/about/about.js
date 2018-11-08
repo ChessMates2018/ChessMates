@@ -27,10 +27,13 @@ export default class About extends Component{
                 <div className="team-mate-bio">
                 <p>A full stack web developer, chess enthusiast, FAA certified drone pilot, and musician, who enjoys working collaboratively to tackle complex problems. </p>
                 </div>
+                <div className="team-mate-email">
+                <p>what?</p>
+                <i className="fas fa-envelope"></i>
+                </div>
                 <div className="team-mate-contact">
                 <p>Github</p>
                 <p>Linkedin</p>
-                <p>Email</p>
                 </div>
                 </div>
                 </div>
