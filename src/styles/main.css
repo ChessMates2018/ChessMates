@@ -276,13 +276,14 @@ button {
   height: 100vh; }
 
 #about-checked {
-  background: blue;
+  background: #eaeaed linear-gradient(to bottom left, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2));
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center; }
 
 #team-mate-section {
+  margin-top: 15px;
   display: flex;
   flex-direction: row;
   justify-content: center;
