@@ -112,6 +112,8 @@ class HumanVsHuman extends Component {
 
   updateNewMove =(newMove)=> {
     console.log('wait for iiiii....')
+    let {roomId} = this.props.match.params
+    console.log('roomId', roomId)
     this.movePiece(newMove.sourceSquare, newMove.targetSquare)
     let {fen, history, squareStyles} = newMove
     this.setState({fen, history, squareStyles}, () => {
@@ -122,6 +124,10 @@ class HumanVsHuman extends Component {
       if(checkMate === -1){
         return null
       } else {
+        console.log('roomId_under else', roomId)
+        axios.delete(`/api/order66/${roomId}`).then(res => {
+          console.log(res)
+        })
         socket.emit('checkMaaate', 'Checkmate!')
       }
     })

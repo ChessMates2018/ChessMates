@@ -11,7 +11,7 @@ class Nav extends Component {
     }
     render() {
         if (this.props.location.pathname !== '/') {
-            if (this.props.location.pathname !== '/gameboard/${id}') {
+            if (this.props.location.pathname !== '/gameboard/:roomId/:dark/:light') {
                 if (this.props.location.pathname === '/profile') {
                     //profile
                     return (

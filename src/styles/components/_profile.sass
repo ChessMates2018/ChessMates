@@ -1,2 +1,52 @@
+@import '../_keyframes'
+
+
+
+.outerBlock
+  // background-color: pink
+  @include  flexCol
+  
 .profile
-    
+  @include flexRow
+  flex-direction: row-reverse
+  justify-content: space-between
+  align-items: start 
+  // background-color: green
+  margin-top: 120px
+  width: 1325px
+
+  
+  
+  .profile_section
+    .sun_profile_section
+      // background-color: pink
+      @include flexRow
+      justify-content: space-between
+      align-items: flex-start
+      .hiding
+        @include flexRow
+        width: 350px
+        flex-wrap: wrap
+        opacity: 0
+        img
+          border: solid $black 1px
+          width: 80px
+          margin: 0px 5px
+          margin-bottom: 10px
+      .imageOpps
+        @include flexRow
+        width: 350px
+        flex-wrap: wrap
+        animation: shoeMeTheIcons 1s linear 
+        img
+          border: solid $black 1px
+          width: 80px
+          margin: 0px 5px
+          margin-bottom: 10px
+          // opacity: 1
+          
+          
+
+
+
+  
