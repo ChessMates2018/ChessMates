@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
 import io from 'socket.io-client'
+import {connect} from 'react-redux'
 
-export default class Chat extends Component{
+class Chat extends Component{
     constructor(){
         super()
         this.state={
@@ -37,12 +38,14 @@ handleKeyUp = e => {
 
 
     render(){
+        let {username} = this.props
+        console.log(username)
         return(
             <section className="chat-container">
             <div className="messages-window">
             {
                 this.state.generalMessages.map((gm,i)=>{
-                  return (<p key={i}>{gm}</p>)
+                  return (<p key={i}>{username}: {gm}</p>)
                 })
               }
             </div>
@@ -61,3 +64,12 @@ handleKeyUp = e => {
         )
     }
 }
+
+function mapStateToProps(reduxState){
+    let {username} = reduxState
+    return(
+        username
+    )
+}
+
+export default connect(mapStateToProps)(Chat)
