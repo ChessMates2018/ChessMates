@@ -10,8 +10,8 @@ export default class About extends Component{
         return(
             <section id="about-page">
             <div id="about-checked">
-            <h1>About Checked</h1>
-            <p>Checked is a web-based chess application where users can create an account and casually play their friends, or other users of the site, in real-time. This project was built in React and styled with SASS, uses BCrypt for authorization, and the backend was built with Express, Massive, PostgreSQL,and Socket.io. </p>
+            <h1 id="subtitle">'Checked' for The Casual Chess Player</h1>
+            <p>Checked is a web-based chess application where users can create an account and casually play their friends, or other users, in real-time. This project was built in React and styled with SASS, uses BCrypt for authorization, and the backend was built with Express, Massive, PostgreSQL,and Socket.io. This application was built collaboratively by the developers listed below and submitted as a group assignment for Devmountain's final benchmark project. It was created in the Fall of 2018. </p>
             </div>
 
 
@@ -30,8 +30,7 @@ export default class About extends Component{
                 <p>A full stack web developer, chess enthusiast, FAA certified drone pilot, and musician, who enjoys working collaboratively to tackle complex problems. </p>
                 </div>
                 <div className="team-mate-email">
-                <p>what?</p>
-                <i className="fas fa-envelope"></i>
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAD1SURBVGhD7ZlBDoIwFAW79RQe0et4F8/jIVxpi/5EYLQFWu0j/yWT0AkknTXB5/P55HbZCeG+E1AqglIRlIqgVASlIuEcub0JNdLdU8OwY0QtyALS3WdTCPoaMF2PQdmAU+TwfJyth6BcQLp7ahhevr4OPQWVBqS7p/dHH/cQtDTAGB2MfwStDTBQGr8I2hpgoJzSIqhWgIHyEzWCagcYKHOsCWoVYKAspTSoZYCBcim5IFqtAAPlWkqCagcYKLdCQa0CDJS1sKCWAQZKRVAqglIRlIqgVASlIigVQakISkVQKoJSEZSKoFQEfywq4vP5fDIL4QFM/YS3ZgtmFQAAAABJRU5ErkJggg==" />
                 </div>
                 <div className="team-mate-contact">
                 <p>Portfolio</p>
@@ -54,11 +53,10 @@ export default class About extends Component{
                 </div>
                 <div className="side back">
                 <div className="team-mate-bio">
-                <p>A full stack web developer, chess enthusiast, FAA certified drone pilot, and musician, who enjoys working collaboratively to tackle complex problems. </p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
                 </div>
                 <div className="team-mate-email">
-                <p>what?</p>
-                <i className="fas fa-envelope"></i>
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAD1SURBVGhD7ZlBDoIwFAW79RQe0et4F8/jIVxpi/5EYLQFWu0j/yWT0AkknTXB5/P55HbZCeG+E1AqglIRlIqgVASlIuEcub0JNdLdU8OwY0QtyALS3WdTCPoaMF2PQdmAU+TwfJyth6BcQLp7ahhevr4OPQWVBqS7p/dHH/cQtDTAGB2MfwStDTBQGr8I2hpgoJzSIqhWgIHyEzWCagcYKHOsCWoVYKAspTSoZYCBcim5IFqtAAPlWkqCagcYKLdCQa0CDJS1sKCWAQZKRVAqglIRlIqgVASlIigVQakISkVQKoJSEZSKoFQEfywq4vP5fDIL4QFM/YS3ZgtmFQAAAABJRU5ErkJggg==" />
                 </div>
                 <div className="team-mate-contact">
                 <p>Portfolio</p>
@@ -80,11 +78,10 @@ export default class About extends Component{
                 </div>
                 <div className="side back">
                 <div className="team-mate-bio">
-                <p>A full stack web developer, chess enthusiast, FAA certified drone pilot, and musician, who enjoys working collaboratively to tackle complex problems. </p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
                 </div>
                 <div className="team-mate-email">
-                <p>what?</p>
-                <i className="fas fa-envelope"></i>
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAD1SURBVGhD7ZlBDoIwFAW79RQe0et4F8/jIVxpi/5EYLQFWu0j/yWT0AkknTXB5/P55HbZCeG+E1AqglIRlIqgVASlIuEcub0JNdLdU8OwY0QtyALS3WdTCPoaMF2PQdmAU+TwfJyth6BcQLp7ahhevr4OPQWVBqS7p/dHH/cQtDTAGB2MfwStDTBQGr8I2hpgoJzSIqhWgIHyEzWCagcYKHOsCWoVYKAspTSoZYCBcim5IFqtAAPlWkqCagcYKLdCQa0CDJS1sKCWAQZKRVAqglIRlIqgVASlIigVQakISkVQKoJSEZSKoFQEfywq4vP5fDIL4QFM/YS3ZgtmFQAAAABJRU5ErkJggg==" />
                 </div>
                 <div className="team-mate-contact">
                 <p>Portfolio</p>

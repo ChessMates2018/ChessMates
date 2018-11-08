@@ -282,6 +282,9 @@ button {
   justify-content: center;
   align-items: center; }
 
+#subtitle {
+  color: black; }
+
 #team-mate-section {
   margin-top: 15px;
   display: flex;
@@ -316,10 +319,7 @@ button {
   width: 80%; }
 
 .team-mate-bio {
-  background: #97999a; }
-
-.team-mate-contact {
-  background: #c4ccc4; }
+  background: tan; }
 
 .card {
   border: 1px black solid;
@@ -354,7 +354,6 @@ button {
   width: 100%; }
 
 .card .back {
-  color: #0087cc;
   line-height: 150px;
   text-align: center;
   transform: rotateY(180deg); }
@@ -364,7 +363,7 @@ button {
 
 .team-mate-contact {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center; }
 

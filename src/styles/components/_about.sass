@@ -7,6 +7,8 @@
     @include flexCol
 
 
+#subtitle
+    color: black
 
 // team bio section && flip containers
 #team-mate-section
@@ -36,10 +38,7 @@
     width: 80%
 
 .team-mate-bio
-    background: $light_slate_grey
-
-.team-mate-contact
-    background: $dark_sea_green
+    background: tan
 
 .card 
   border: 1px black solid
@@ -68,7 +67,6 @@
   width: 100%
   
 .card .back 
-  color: #0087cc
   line-height: 150px
   text-align: center
   transform: rotateY(180deg)
@@ -77,7 +75,7 @@
   background: #eaeaed $darken
 
 .team-mate-contact
-    @include flexCol
+    @include flexRow
 
 .contact-img
     height: 50px
