@@ -202,5 +202,17 @@ module.exports = {
             console.log(err)
             res.status(500).send(err)
         })
+    },
+
+    order66: (req, res) => {
+        let {roomId} = req.params
+        console.log('roomID', roomId)
+        const db = req.app.get('db')
+        db.order66({roomId}).then(() => {
+            res.sendStatus(200)
+        }).catch(err => {
+            console.log(err)
+            res.status(200).send(err)
+        })
     }
 }
