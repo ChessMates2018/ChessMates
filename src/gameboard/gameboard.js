@@ -216,7 +216,7 @@ class HumanVsHuman extends Component {
   resignation = () => {
     //know which one is resigning
     //axios to update game history by game id from routing params
-    //
+    //this.props.theHistory.push('/profile')
   }
 
   render() { 
@@ -281,7 +281,10 @@ class HumanVsHuman extends Component {
               marginBottom: '50px'
             }}
             darkSquareStyle = {{
-              backgroundColor: ''
+              backgroundColor: 'gray'
+            }}
+            lightSquareStyle = {{
+              backgroundColor: 'white'
             }}
             squareStyles={squareStyles}
             dropSquareStyle={dropSquareStyle}
