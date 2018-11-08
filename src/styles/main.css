@@ -316,10 +316,13 @@ button {
 
 .team-mate-img {
   height: 100%;
-  width: 80%; }
+  width: 80%;
+  border: 8px tan solid; }
 
 .team-mate-bio {
-  background: tan; }
+  background: tan;
+  border: 1px black solid;
+  width: 100%; }
 
 .card {
   border: 1px black solid;
