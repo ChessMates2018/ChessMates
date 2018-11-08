@@ -12,10 +12,6 @@
 #team-mate-section
     @include flexRow
     justify-content: space-evenly
-    
-.team-mate-img
-    width: 200px
-    height: 200px
 
 //flip container divs
 .card-container 
@@ -27,7 +23,20 @@
   @include flexCol
   justify-content: space-around
   align-items: space-evenly
-  
+
+.img-container
+    width: 100%
+    height: 250px
+    @include flexCol
+
+.team-mate-img
+    height: 100%
+    width: 80%
+
+.team-mate-bio
+    background: $light_slate_grey
+
+
 .card 
   border: 1px black solid
   height: 100%
@@ -39,38 +48,24 @@
 .card:hover 
   transform: rotateY(180deg)
 
+.front
+  @include flexCol
+
 .card .side 
-  background: #eaeaed
   backface-visibility: hidden
   border-radius: 6px
   height: 100%
   position: absolute
   overflow: hidden
   width: 100%
-  @include flexCol
   
 
+
 .card .back 
-  background: #eaeaed
   color: #0087cc
   line-height: 150px
   text-align: center
   transform: rotateY(180deg)
 
-
-// .team-mate-div
-//     background: red
-//     @include flexCol
-//     width: 250px
-//     height: 400px
-//     margin: 50px
-
-// .team-mate-img
-//     width: 200px
-//     height: 200px
-
-// .team-mate-name
-//     text-transform: capitalize
-
-// .team-mate-title
-//     text-transform: capitalize
+.card
+    background: #eaeaed $darken

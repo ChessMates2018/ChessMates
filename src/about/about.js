@@ -14,92 +14,74 @@ export default class About extends Component{
 
 
             <section id="team-mate-section">
-            <div class="card-container">
-                <div class="card">
-                <div class="side">
+            <div className="card-container">
+                <div className="card">
+                <div className="side front">
+                <div className="img-container">
                 <img className="team-mate-img" src={BradyPic} alt="Brady Snuggs" />
+                </div>
                 <h2>Brady Snuggs</h2>
                 <h3>Co-Developer</h3>
                 </div>
-                <div class="side back">
+                <div className="side back">
+                <div className="team-mate-bio">
                 <p>A full stack web developer, chess enthusiast, FAA certified drone pilot, and musician, who enjoys working collaboratively to tackle complex problems. </p>
+                </div>
+                <div className="team-mate-contact">
                 <p>Github</p>
                 <p>Linkedin</p>
                 <p>Email</p>
                 </div>
                 </div>
                 </div>
+                </div>
+               
 
-                <div class="card-container">
-                <div class="card">
-                <div class="side">
+                <div className="card-container">
+                <div className="card">
+                <div className="side front">
+                <div className="img-container">
                 <img className="team-mate-img" src={MichellePic} alt="Michelle Jones" />
+                </div>
                 <h2>Michelle Jones</h2>
                 <h3>Co-Developer</h3>
                 </div>
-                <div class="side back">
-                <p>A full stack web developer and many other things! data data data data data data data data data data data data data data data data data data data data data. </p>
+                <div className="side back">
+                <div className="team-mate-bio">
+                <p>A full stack web developer and many other things! data data data data data data data data data data data data data data data data data data data data data. 
+                </p>
+                </div>
+                <div className="team-mate-contact">
                 <p>Github</p>
                 <p>Linkedin</p>
                 <p>Email</p>
                 </div>
                 </div>
                 </div>
+                </div>
 
-                <div class="card-container">
-                <div class="card">
-                <div class="side">
+                <div className="card-container">
+                <div className="card">
+                <div className="side front">
+                <div className="img-container">
                 <img className="team-mate-img" src={JordanPic} alt="Jordan Smithson" />
+                </div>
                 <h2>Jordan Smithson</h2>
                 <h3>Co-Developer</h3>
                 </div>
-                <div class="side back">
+                <div className="side back">
+                <div className="team-mate-bio">
                 <p>A full stack web developer and many other things! data data data data data data data data data data data data data data data data data data data data data. </p>
+                </div>
+                <div className="team-mate-contact">
                 <p>Github</p>
                 <p>Linkedin</p>
                 <p>Email</p>
                 </div>
                 </div>
                 </div>
-
-
-
-                {/* <div className="team-mate-div" ontouchstart="this.classList.toggle('hover');">
-                    <div className="flipper">
-                        <div className="front">
-                    <img className="team-mate-img" src={BradyPic} alt='Brady posing with Edgar Allen Poe cutout'/>
-                    <h2 className="team-mate-name">Brady Snuggs</h2>
-                    <h4 className="team-mate-title">Co-Developer</h4>
-                        </div>
-
-                        <div className="back">
-                            <div className="team-mate-bio">
-                    <p>A full stack web developer, chess enthusiast, FAA certified drone pilot, and musician, who enjoys working collaboratively to tackle complex problems. </p>
-                            </div>
-                        <div className="team-mate-contact">
-                        <p>github</p>
-                        <p>linkedin</p>
-                        <p>email</p>
-                        </div>
-                        </div>
-                    </div>
                 </div>
-
-                <div className="team-mate-div">
-                    <img className="team-mate-img" src='' alt=''/>
-                    <h2 className="team-mate-name">Michelle Jones</h2>
-                    <p>This is some dummy data. sdofijsodfijsdfsdofij sdfoisjdfosidjf.s sdofijsdofijsdfoisjdf. sdofijosidfjosdi. sdofisodifjsoidfjsodifjsdf. sdofisdjfoijoijsoidfj.</p>
-                </div>
-
-
-                <div className="team-mate-div">
-                    <img className="team-mate-img" src='' alt=''/>
-                    <h2 className="team-mate-name">Jordan Smithson</h2>
-                    <p>This is dummy data. sdfoijsdfoisjdfoi,k sdflisjdflisdfj lkjdsflskdf. sdfijosidfjsdf. wefwoeifjsdf,. wefihsoifosdifsdf. wefiojoijsdf.</p>
-                </div> */}
                 </section>
-
-                
                 
             </section>
         )
