@@ -286,7 +286,7 @@ button {
   color: black; }
 
 #team-mate-section {
-  margin-top: 15px;
+  margin-top: 70px;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -296,7 +296,7 @@ button {
 .card-container {
   cursor: pointer;
   height: 500px;
-  perspective: 600;
+  perspective: 800;
   position: relative;
   width: 300px;
   display: flex;
@@ -317,7 +317,8 @@ button {
 .team-mate-img {
   height: 100%;
   width: 80%;
-  border: 8px tan solid; }
+  border: 8px tan solid;
+  box-shadow: 5px 5px 5px; }
 
 .team-mate-bio {
   background: tan;
@@ -370,9 +371,23 @@ button {
   justify-content: center;
   align-items: center; }
 
-.contact-img {
+.linkedin-img {
   height: 50px;
   width: 50px; }
+
+.github-img {
+  height: 44px;
+  width: 44px; }
+
+a {
+  text-decoration: none;
+  color: #141414; }
+
+.portfolio-text {
+  font-size: 20px; }
+
+.team-mate-contact a {
+  display: flex; }
 
 .App {
   background: url("../images/marble1.jpg");

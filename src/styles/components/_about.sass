@@ -12,7 +12,7 @@
 
 // team bio section && flip containers
 #team-mate-section
-    margin-top: 15px
+    margin-top: 70px
     @include flexRow
     justify-content: space-evenly
     
@@ -21,7 +21,7 @@
 .card-container 
   cursor: pointer
   height: 500px
-  perspective: 600
+  perspective: 800
   position: relative
   width: 300px
   @include flexCol
@@ -37,7 +37,7 @@
     height: 100%
     width: 80%
     border: 8px tan solid
-    box-shadow:
+    box-shadow: 5px 5px 5px
 
 .team-mate-bio
     background: tan
@@ -81,6 +81,20 @@
 .team-mate-contact
     @include flexRow
 
-.contact-img
+.linkedin-img
     height: 50px
     width: 50px
+
+.github-img
+    height: 44px
+    width: 44px
+
+a
+    text-decoration: none
+    color: #141414
+
+.portfolio-text
+    font-size: 20px
+
+.team-mate-contact a
+    display: flex

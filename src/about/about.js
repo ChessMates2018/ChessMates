@@ -29,13 +29,24 @@ export default class About extends Component{
                 <div className="team-mate-bio">
                 <p>A full stack web developer, chess enthusiast, FAA certified drone pilot, and musician, who enjoys working collaboratively to tackle complex problems. </p>
                 </div>
+                <div className="portfolio">
+                <a href="bradysnuggs.net"><p className="portfolio-text">My portfolio</p></a>
+                </div>
                 <div className="team-mate-email">
+                <a href="mailto:bradyesnuggs@gmail.com">
                 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAD1SURBVGhD7ZlBDoIwFAW79RQe0et4F8/jIVxpi/5EYLQFWu0j/yWT0AkknTXB5/P55HbZCeG+E1AqglIRlIqgVASlIuEcub0JNdLdU8OwY0QtyALS3WdTCPoaMF2PQdmAU+TwfJyth6BcQLp7ahhevr4OPQWVBqS7p/dHH/cQtDTAGB2MfwStDTBQGr8I2hpgoJzSIqhWgIHyEzWCagcYKHOsCWoVYKAspTSoZYCBcim5IFqtAAPlWkqCagcYKLdCQa0CDJS1sKCWAQZKRVAqglIRlIqgVASlIigVQakISkVQKoJSEZSKoFQEfywq4vP5fDIL4QFM/YS3ZgtmFQAAAABJRU5ErkJggg==" />
+                </a>
                 </div>
                 <div className="team-mate-contact">
-                <p>Portfolio</p>
-                <img className="contact-img" src={github} alt="Github link" />
-                <img className="contact-img" src={linkedin} alt="Github link" />
+
+                <a href="https://github.com/Besnuggs">
+                <img className="github-img" src={github} alt="Github link" />
+                </a>
+
+                <a href="https://www.linkedin.com/in/bradysnuggs/">
+                <img className="linkedin-img" src={linkedin} alt="linkedin link" />
+                </a>
+
                 </div>
                 </div>
                 </div>
@@ -55,13 +66,25 @@ export default class About extends Component{
                 <div className="team-mate-bio">
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
                 </div>
-                <div className="team-mate-email">
-                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAD1SURBVGhD7ZlBDoIwFAW79RQe0et4F8/jIVxpi/5EYLQFWu0j/yWT0AkknTXB5/P55HbZCeG+E1AqglIRlIqgVASlIuEcub0JNdLdU8OwY0QtyALS3WdTCPoaMF2PQdmAU+TwfJyth6BcQLp7ahhevr4OPQWVBqS7p/dHH/cQtDTAGB2MfwStDTBQGr8I2hpgoJzSIqhWgIHyEzWCagcYKHOsCWoVYKAspTSoZYCBcim5IFqtAAPlWkqCagcYKLdCQa0CDJS1sKCWAQZKRVAqglIRlIqgVASlIigVQakISkVQKoJSEZSKoFQEfywq4vP5fDIL4QFM/YS3ZgtmFQAAAABJRU5ErkJggg==" />
+                <div className="portfolio">
+                <a href="https://michelleeditor2.wixsite.com/portfolio"><p className="portfolio-text">My portfolio</p></a>
                 </div>
+                <div className="team-mate-email">
+                <a href="mailto:michelle.editor2@gmail.com">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAD1SURBVGhD7ZlBDoIwFAW79RQe0et4F8/jIVxpi/5EYLQFWu0j/yWT0AkknTXB5/P55HbZCeG+E1AqglIRlIqgVASlIuEcub0JNdLdU8OwY0QtyALS3WdTCPoaMF2PQdmAU+TwfJyth6BcQLp7ahhevr4OPQWVBqS7p/dHH/cQtDTAGB2MfwStDTBQGr8I2hpgoJzSIqhWgIHyEzWCagcYKHOsCWoVYKAspTSoZYCBcim5IFqtAAPlWkqCagcYKLdCQa0CDJS1sKCWAQZKRVAqglIRlIqgVASlIigVQakISkVQKoJSEZSKoFQEfywq4vP5fDIL4QFM/YS3ZgtmFQAAAABJRU5ErkJggg==" />
+                </a>
+                </div>
+                
                 <div className="team-mate-contact">
-                <p>Portfolio</p>
-                <img className="contact-img" src={github} alt="Github link" />
-                <img className="contact-img" src={linkedin} alt="Github link" />
+
+                <a href="https://github.com/Besnuggs">
+                <img className="github-img" src={github} alt="Github link" />
+                </a>
+
+                <a href="https://www.linkedin.com/in/michelle-jones-dev/">
+                <img className="linkedin-img" src={linkedin} alt="linkedin link" />
+                </a>
+
                 </div>
                 </div>
                 </div>
@@ -80,13 +103,24 @@ export default class About extends Component{
                 <div className="team-mate-bio">
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
                 </div>
+                <div className="portfolio">
+                <a href="#"><p className="portfolio-text">My portfolio</p></a>
+                </div>
                 <div className="team-mate-email">
+                <a href="mailto:jordantroysmithson@gmail.com">
                 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAD1SURBVGhD7ZlBDoIwFAW79RQe0et4F8/jIVxpi/5EYLQFWu0j/yWT0AkknTXB5/P55HbZCeG+E1AqglIRlIqgVASlIuEcub0JNdLdU8OwY0QtyALS3WdTCPoaMF2PQdmAU+TwfJyth6BcQLp7ahhevr4OPQWVBqS7p/dHH/cQtDTAGB2MfwStDTBQGr8I2hpgoJzSIqhWgIHyEzWCagcYKHOsCWoVYKAspTSoZYCBcim5IFqtAAPlWkqCagcYKLdCQa0CDJS1sKCWAQZKRVAqglIRlIqgVASlIigVQakISkVQKoJSEZSKoFQEfywq4vP5fDIL4QFM/YS3ZgtmFQAAAABJRU5ErkJggg==" />
+                </a>
                 </div>
                 <div className="team-mate-contact">
-                <p>Portfolio</p>
-                <img className="contact-img" src={github} alt="Github link" />
-                <img className="contact-img" src={linkedin} alt="Github link" />
+
+                <a href="https://github.com/Besnuggs">
+                <img className="github-img" src={github} alt="Github link" />
+                </a>
+
+                <a href="https://www.linkedin.com/in/jordan-smithson/">
+                <img className="linkedin-img" src={linkedin} alt="linkedin link" />
+                </a>
+
                 </div>
                 </div>
                 </div>
