@@ -190,5 +190,17 @@ module.exports = {
         let players = await db.player(roomId)
         console.log(players)
         res.status(200).send(players)
+    },
+
+    updateIcon: (req, res) => {
+        let {val} = req.body
+        const db = req.app.get('db'),
+              username = req.session.user
+        db.update_icon({val, username}).then(
+            res.sendStatus(200)
+        ).catch(err => {
+            console.log(err)
+            res.status(500).send(err)
+        })
     }
 }

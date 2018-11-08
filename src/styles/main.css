@@ -102,6 +102,24 @@ h1, h2, h2 {
   #title img {
     z-index: 10; }
 
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg); }
+  100% {
+    transform: rotate(360deg); } }
+
+@keyframes newsFeed {
+  from {
+    left: 1900px; }
+  to {
+    left: -1900px; } }
+
+@keyframes shoeMeTheIcons {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+
 .outerBlock {
   display: flex;
   flex-direction: column;
@@ -125,13 +143,27 @@ h1, h2, h2 {
     align-items: center;
     justify-content: space-between;
     align-items: flex-start; }
+    .profile .profile_section .sun_profile_section .hiding {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      width: 350px;
+      flex-wrap: wrap;
+      opacity: 0; }
+      .profile .profile_section .sun_profile_section .hiding img {
+        border: solid #141414 1px;
+        width: 80px;
+        margin: 0px 5px;
+        margin-bottom: 10px; }
     .profile .profile_section .sun_profile_section .imageOpps {
       display: flex;
       flex-direction: row;
       justify-content: center;
       align-items: center;
       width: 350px;
-      flex-wrap: wrap; }
+      flex-wrap: wrap;
+      animation: shoeMeTheIcons 1s linear; }
       .profile .profile_section .sun_profile_section .imageOpps img {
         border: solid #141414 1px;
         width: 80px;
@@ -149,6 +181,12 @@ h1, h2, h2 {
     left: 1900px; }
   to {
     left: -1900px; } }
+
+@keyframes shoeMeTheIcons {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
 
 .register {
   position: relative;
@@ -192,6 +230,12 @@ button {
     left: 1900px; }
   to {
     left: -1900px; } }
+
+@keyframes shoeMeTheIcons {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
 
 .lb-wrapper {
   display: flex;

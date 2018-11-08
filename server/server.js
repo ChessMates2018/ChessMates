@@ -62,6 +62,7 @@ app.post('/api/gameMoves', ctrl.gameMoves)
 app.post('/api/newGameHistory', ctrl.newGame)
 
 app.put('/api/joinArena', ctrl.joinArena)
+app.put(`/api/user/`, ctrl.updateIcon)
 
 // io.use(sharedSession(session,{
 //     autoSave: true
