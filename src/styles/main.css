@@ -62,7 +62,7 @@ h1, h2, h2 {
   text-align: start;
   color: #fbfafa; }
   .input::placeholder {
-    color: #fbfafa; }
+    color: tan; }
 
 .btn {
   height: 1.5rem;
@@ -114,6 +114,80 @@ h1, h2, h2 {
   to {
     left: -1900px; } }
 
+@keyframes shoeMeTheIcons {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+
+.outerBlock {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
+
+.profile {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: start;
+  margin-top: 120px;
+  width: 1325px; }
+  .profile .profile_section .sun_profile_section {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    justify-content: space-between;
+    align-items: flex-start; }
+    .profile .profile_section .sun_profile_section .hiding {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      width: 350px;
+      flex-wrap: wrap;
+      opacity: 0; }
+      .profile .profile_section .sun_profile_section .hiding img {
+        border: solid #141414 1px;
+        width: 80px;
+        margin: 0px 5px;
+        margin-bottom: 10px; }
+    .profile .profile_section .sun_profile_section .imageOpps {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      width: 350px;
+      flex-wrap: wrap;
+      animation: shoeMeTheIcons 1s linear; }
+      .profile .profile_section .sun_profile_section .imageOpps img {
+        border: solid #141414 1px;
+        width: 80px;
+        margin: 0px 5px;
+        margin-bottom: 10px; }
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg); }
+  100% {
+    transform: rotate(360deg); } }
+
+@keyframes newsFeed {
+  from {
+    left: 1900px; }
+  to {
+    left: -1900px; } }
+
+@keyframes shoeMeTheIcons {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+
 .register {
   position: relative;
   height: 350px; }
@@ -135,7 +209,7 @@ h1, h2, h2 {
     width: 15rem;
     height: 1.5rem; }
     .toggled-view input::placeholder {
-      color: #fbfafa; }
+      color: tan; }
 
 button {
   width: 15rem;
@@ -157,6 +231,12 @@ button {
   to {
     left: -1900px; } }
 
+@keyframes shoeMeTheIcons {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+
 .lb-wrapper {
   display: flex;
   flex-direction: column;
@@ -169,8 +249,10 @@ button {
   width: 800px;
   overflow: hidden;
   background: #141414; }
-  .lb-wrapper h1, .lb-wrapper h2, .lb-wrapper p {
+  .lb-wrapper h1, .lb-wrapper h2 {
     color: #fbfafa; }
+  .lb-wrapper p {
+    color: #d9c09e; }
   .lb-wrapper h2 {
     font-size: 20px; }
   .lb-wrapper .Leaderboard {
@@ -389,6 +471,85 @@ a {
 .team-mate-contact a {
   display: flex; }
 
+.userInfoBlock {
+  background-color: #141414;
+  box-shadow: 2px 2px 3px #141414;
+  color: #fbfafa;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 20px 0px;
+  border-radius: 2px;
+  position: relative;
+  width: 450px;
+  z-index: 10; }
+  .userInfoBlock img {
+    width: 135px;
+    margin: 0px 20px; }
+  .userInfoBlock .userName {
+    color: #fbfafa; }
+    .userInfoBlock .userName .sub_userName {
+      font-size: 20px;
+      color: tan; }
+  .userInfoBlock #updateBtn {
+    width: 100px;
+    margin: 10px; }
+  .userInfoBlock .UI_Content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; }
+  .userInfoBlock .test {
+    height: 50px;
+    width: 50px;
+    background-color: blue; }
+
+.arenaBlock {
+  background-color: #141414;
+  box-shadow: 2px 2px 3px #141414;
+  color: #fbfafa;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  width: 450px; }
+  .arenaBlock .arena_btn {
+    margin-top: 20px; }
+  .arenaBlock h3 {
+    color: #fbfafa;
+    margin-bottom: 20px; }
+
+#potOppsBlock {
+  background-color: #e4dede;
+  box-shadow: 0px 0px 10px #fbfafa;
+  color: #141414;
+  margin: 0px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  justify-content: start;
+  height: 282px;
+  overflow: scroll;
+  overflow-x: hidden; }
+  #potOppsBlock .potentialOpponent {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #f0ecec;
+    box-shadow: 2px 2px 3px gray;
+    margin: 10px 20px;
+    padding: 10px 0px;
+    width: 325px;
+    height: 70px; }
+
 .App {
   background: url("../images/marble1.jpg");
-  background-size: cover; }
+  background-size: cover;
+  height: 100vh; }

@@ -7,6 +7,11 @@ import Leaderboard from '../../src/landingpage/components/leaderboard'
 import {connect} from 'react-redux'
 import {setUsername} from '../ducks/Reducer'
 import {login} from '../utils/SocketFunctions'
+import king from '../images/default_king.jpg'
+import queen from '../images/default_queen.jpg'
+import bishop from '../images/default_bishop.jpg'
+import knight from '../images/default_knight.jpg'
+import rook from '../images/default_rook.jpg'
 
 
 
@@ -16,7 +21,8 @@ class Profile extends Component {
 
     this.state = {
       onlineUsers: [],
-      currentUser: []
+      currentUser: [],
+      showIcons: false
     }
 
     // this.getUser = this.getUser.bind(this)
@@ -31,7 +37,7 @@ class Profile extends Component {
         this.props.setUsername(res.data)
         login(res.data)
 
-        // this.getInitialInfo()
+        
       })
       .catch(err => {
         console.log('dis is du err!',err)
@@ -39,43 +45,65 @@ class Profile extends Component {
         this.props.history.push('/')
       })
     } else {
-      this.getInitialInfo()
+     
     }
   }
 
-  // async getInitialInfo () {
-  //   // let user = await this.getUser()
-  //   let onlineUsers = await this.getAllOnline()
-  // }
+  showTheIcons = () => {
+   let {showIcons} = this.state
+   if (showIcons) {
+     this.setState({
+       showIcons: false
+     })
+   } else {
+     this.setState({
+       showIcons: true
+     })
+   }
+  }
 
-  // getUser () {
-  //   axios.get(`/api/user`).then(res => {
-  //     console.log('user', res.data)
-  //     this.setState({
-  //       currentUser: res.data
-  //     })
-  //   })
-  // }
+  changeIcon = (val) => {
+    console.log('Change Icon Fired')
+    axios.put(`/api/user/`, {val}).then(res => {
+      console.log(res)
+      this.showTheIcons()
+    })
+  }
 
-  // getAllOnline () {
-  //   axios.get(`/api/loggedin`).then(res => {
-  //     console.log('all users online', res.data)
-  //     this.setState({
-  //       onlineUsers: res.data
-  //     })
-  //   })
-  // }
+  getAllOnline () {
+    axios.get(`/api/loggedin`).then(res => {
+      console.log('all users online', res.data)
+      this.setState({
+        onlineUsers: res.data
+      })
+    })
+  }
 
   render () {
-    console.log(this.props.username)
+    // console.log(this.props.username)
+    let {currentUser} = this.state
     return (
-      <div className="profile">
-        {/* <h1>Profile.JS</h1> */}
-        <UserInfo/>
-        <Arena/>
-        {/* <UserInfo/> */}
-        <RecentGames/>
-        <Leaderboard/>
+      <div className="outerBlock">
+        <div className="profile">
+          <div className="profile_section">
+            <div className="sun_profile_section">
+              <UserInfo 
+                showTheIcons = {this.showTheIcons}
+                currentUser = {currentUser[0]}/>
+              <div className = {(this.state.showIcons? 'imageOpps': 'hiding')}>
+                <img onClick = {() => this.changeIcon(`../../../images/default_king.jpg`)} src={king} alt=""/>
+                <img onClick = {() => this.changeIcon(`../../../images/default_queen.jpg`)}src={queen} alt=""/>
+                <img onClick = {() => this.changeIcon(`../../../images/default_bishop.jpg`)}src={bishop} alt=""/>
+                <img onClick = {() => this.changeIcon(`../../../images/default_knight.jpg`)}src={knight} alt=""/>
+                <img onClick = {() => this.changeIcon(`../../../images/default_rook.jpg`)}src={rook} alt=""/>
+              </div>
+            </div>
+            <Leaderboard/>
+          </div>
+          <div className="profile_section">
+            <Arena/>
+          </div>
+        </div>
       </div>
     )
   }
