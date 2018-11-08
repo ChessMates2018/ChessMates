@@ -1,2 +1,2 @@
-SELECT username, password FROM users
+SELECT * FROM users
 where username = $1

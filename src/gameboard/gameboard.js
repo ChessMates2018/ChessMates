@@ -33,7 +33,8 @@ class HumanVsHuman extends Component {
       light: '',
       dark: '',
       turn: true,
-      message: ''
+      message: '',
+      isMated: false 
     };
 
 
@@ -121,7 +122,7 @@ class HumanVsHuman extends Component {
       if(checkMate === -1){
         return null
       } else {
-        socket.emit('checkMaaate', 'Checkmate!', <button>Exit Game</button>)
+        socket.emit('checkMaaate', 'Checkmate!')
       }
     })
   }
@@ -214,7 +215,7 @@ class HumanVsHuman extends Component {
 
   render() { 
     const { fen, dropSquareStyle, squareStyles } = this.state;
-
+    
     return this.props.children({
       // updatePlayers: this.updatePlayers,
       resignation: this.resignation,
@@ -235,6 +236,7 @@ class HumanVsHuman extends Component {
 
  function Gameboard(props) {
   console.log('GM props', props)
+  
   return (
     <div className="the_BFB">
       <HumanVsHuman theHistory={props.history} match={props.match}>
@@ -272,6 +274,9 @@ class HumanVsHuman extends Component {
               boxShadow: `0 5px 15px rgba(0, 0, 0, 0.5)`,
               marginBottom: '50px'
             }}
+            darkSquareStyle = {{
+              backgroundColor: ''
+            }}
             squareStyles={squareStyles}
             dropSquareStyle={dropSquareStyle}
             onDragOverSquare={onDragOverSquare}
@@ -292,10 +297,13 @@ class HumanVsHuman extends Component {
               borderRadius: "5px",
               boxShadow: `0 5px 15px rgba(0, 0, 0, 0.5)`,
               marginBottom: '50px'
-              // position: "relative",
-              // left:"25%",
-             
-              
+            
+            }}
+            darkSquareStyle = {{
+              backgroundColor: 'gray'
+            }}
+            lightSquareStyle = {{
+              backgroundColor: 'white'
             }}
             squareStyles={squareStyles}
             dropSquareStyle={dropSquareStyle}

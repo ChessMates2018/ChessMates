@@ -1,3 +1,4 @@
+const JordanTestData = require('./Jordan_mocks.json')
 
     export function randomizePlayerStart(challenger, challenged){
         let randoCalrizian = .7
@@ -17,18 +18,20 @@ return ({lightPlayer, darkPlayer, randoCalrizian})
 
 
 export function login(username, password){
-    
-    axios.post('/api/login', { Username, Password }).then((res) => {
-        if (res.data === 'Invalid Password') {
-            return res.data
-        } else if (res.data === 'Username does not exist') {
-            return res.data
-        } else {
-            console.log(this.props)
-            return "this.props.history.push('/profile')"
-        }
-    })
+    let data = JordanTestData[0]
+    if (data.username === username && data.password === password) {
+        return data.username
+    } else if (typeof username !== 'string' || typeof password !== 'string') {
+        return 'Please enter correct login info'
+    } else if (data.username === username && password === '') {
+        return 'Please enter password.'
+    } else if (username === '' && data.password === password) {
+        return 'Please enter username.'
+    }
+
 }
+    
+    
 
 
    

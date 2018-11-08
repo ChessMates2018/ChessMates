@@ -18,29 +18,36 @@ P {
   font-family: Arial, Helvetica, sans-serif; }
 
 h1, h2, h2 {
-  color: #221A19;
+  color: #141414;
   font-family: Arial, Helvetica, sans-serif; }
 
 .landing-page {
   text-align: center;
-  background-image: url("../images/profile2.jpg");
-  background-size: cover;
+  background: linear-gradient(to bottom left, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)), url("../images/marble1.jpg");
   height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center; }
+  align-items: center;
+  justify-content: center; }
+  .landing-page .rapper {
+    background-color: #141414;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    justify-content: space-between;
+    border-radius: 50;
+    height: auto; }
 
 .login {
   position: relative;
-  top: 75px;
-  padding: 5px 2px 15px 2px;
+  padding: 25px 2px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
-  background: #221A19;
-  opacity: .8;
-  height: 225px;
+  justify-content: space-evenly;
+  height: 350px;
   width: 19rem; }
 
 #login-welcome {
@@ -48,20 +55,29 @@ h1, h2, h2 {
 
 .input {
   height: 1.5rem;
-  width: 15rem; }
+  width: 15rem;
+  border-style: none;
+  border-bottom: 1px #fbfafa solid;
+  background: none;
+  text-align: start;
+  color: #fbfafa; }
+  .input::placeholder {
+    color: #fbfafa; }
 
 .btn {
   height: 1.5rem;
-  width: 15rem; }
+  width: 15rem;
+  background-image: linear-gradient(to bottom left, #525354, #fbfafa);
+  border-style: none;
+  color: #141414;
+  border-radius: 2px; }
 
 #title {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  background-color: #221A19;
   position: relative;
-  top: 45px;
   height: 200px;
   width: 800px;
   padding: 1rem 2rem; }
@@ -100,26 +116,34 @@ h1, h2, h2 {
 
 .register {
   position: relative;
-  z-index: 30; }
+  height: 350px; }
 
 .toggled-view {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: #906B42;
   justify-content: space-between;
   width: 300px;
   height: 100%;
-  color: white;
-  padding: 5px; }
+  color: white; }
+  .toggled-view input {
+    border-style: none;
+    background: none;
+    border-bottom: solid 1px #fbfafa;
+    color: #fbfafa;
+    text-align: start;
+    width: 15rem;
+    height: 1.5rem; }
+    .toggled-view input::placeholder {
+      color: #fbfafa; }
 
-#create-button {
-  margin-top: 5px;
-  width: 50%; }
-
-#cancel-button {
-  margin-top: 5px;
-  width: 50%; }
+button {
+  width: 15rem;
+  height: 1.5rem;
+  background-image: linear-gradient(to bottom left, #525354, #fbfafa);
+  border-style: none;
+  color: #141414;
+  border-radius: 2px; }
 
 @keyframes rotate {
   0% {
@@ -134,17 +158,17 @@ h1, h2, h2 {
     left: -1900px; } }
 
 .lb-wrapper {
-  background-color: #221A19;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   position: relative;
-  top: 140px;
+  margin-top: 70px;
   padding: 15px;
-  height: 200px;
-  width: 1000px;
-  overflow: hidden; }
+  height: 150px;
+  width: 800px;
+  overflow: hidden;
+  background: #141414; }
   .lb-wrapper h1, .lb-wrapper h2, .lb-wrapper p {
     color: #fbfafa; }
   .lb-wrapper h2 {
@@ -166,9 +190,9 @@ h1, h2, h2 {
       height: 70px;
       width: 120px; }
     .lb-wrapper .Leaderboard .block_left {
-      background-color: #221A19; }
+      background-color: #141414; }
     .lb-wrapper .Leaderboard .block_right {
-      background-color: #221A19;
+      background-color: #141414;
       z-index: 10; }
 
 .the_BFB {
@@ -213,7 +237,8 @@ h1, h2, h2 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px; }
+  padding: 20px;
+  background: #141414; }
 
 .leftNav {
   width: 10px;
@@ -259,5 +284,5 @@ h1, h2, h2 {
   background: red; }
 
 .App {
-  background: url("https://images.pexels.com/photos/326311/pexels-photo-326311.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+  background: url("../images/marble1.jpg");
   background-size: cover; }
