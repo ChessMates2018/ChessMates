@@ -62,7 +62,7 @@ h1, h2, h2 {
   text-align: start;
   color: #fbfafa; }
   .input::placeholder {
-    color: #fbfafa; }
+    color: tan; }
 
 .btn {
   height: 1.5rem;
@@ -152,7 +152,7 @@ h1, h2, h2 {
     width: 15rem;
     height: 1.5rem; }
     .toggled-view input::placeholder {
-      color: #fbfafa; }
+      color: tan; }
 
 button {
   width: 15rem;
@@ -186,8 +186,10 @@ button {
   width: 800px;
   overflow: hidden;
   background: #141414; }
-  .lb-wrapper h1, .lb-wrapper h2, .lb-wrapper p {
+  .lb-wrapper h1, .lb-wrapper h2 {
     color: #fbfafa; }
+  .lb-wrapper p {
+    color: #d9c09e; }
   .lb-wrapper h2 {
     font-size: 20px; }
   .lb-wrapper .Leaderboard {
