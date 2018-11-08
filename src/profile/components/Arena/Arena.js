@@ -17,7 +17,7 @@ class Arena extends Component {
 
     this.state = {
       players: [],
-      inArenaToggle: false
+      inArenaToggle: true
     }
     this.joinArena = this.joinArena.bind(this)
   }
@@ -86,29 +86,29 @@ class Arena extends Component {
 
  
 
-  displayArena = () => {
-    console.log(this.state.players[0])
-    let {username}  = this.props
-    let {players} = this.state
-    console.log(players)
-    if (players[0]) {
-      players.map(player => {
-        if(!this.props.username){
-        return (
-            <div>
-               <p>{player}</p>
-              <button
-              // onClick = {this.runSockets}
-              className="challenge_btn">Come at me!</button>
-            </div> 
-        )}
-      })
-    } else {
-      return (
-        <p>There are no current challengers.</p>
-      )
-    }
-  }
+  // displayArena = () => {
+  //   console.log(this.state.players[0])
+  //   let {username}  = this.props
+  //   let {players} = this.state
+  //   console.log(players)
+  //   if (players[0]) {
+  //     players.map(player => {
+  //       if(!this.props.username){
+  //       return (
+  //           <div>
+  //              <p>{player}</p>
+  //             <button
+  //             // onClick = {this.runSockets}
+  //             className="challenge_btn">Come at me!</button>
+  //           </div> 
+  //       )}
+  //     })
+  //   } else {
+  //     return (
+  //       <p>There are no current challengers.</p>
+  //     )
+  //   }
+  // }
 
 
 
@@ -119,9 +119,14 @@ class Arena extends Component {
     
     /** destructuer stull off of info.4 */
     return (
-      <div>
-        <h2>Arena</h2>
-        {this.displayArena()}
+      <div className = 'arenaBlock'>
+        <h3>Opponents</h3>
+        <PotentialOpponents
+        currentPlayer={this.props.username}
+        opponentsList={this.state.players}
+        newGame={this.newGame} 
+        />
+        {/* {this.displayArena()} */}
         {/* <PotentialOpponents
         opponentsList = {opponentsList}
         /> */}
@@ -130,21 +135,16 @@ class Arena extends Component {
           ?
           <button 
           onClick={this.joinArena} 
-          className="button">Join the Arena</button>
+          className="button arena_btn">Join the Arena</button>
           :
           <button
             onClick = {this.leaveArena} 
-            className="button">Fly you fools!</button>
+            className="button arena_btn">Leave the Arena</button>
          
         }
         {/* {this.displayButton()} */}
-       <Link to='/Stockfish'><button>Play against Stockfish!</button></Link> 
+       {/* <Link to='/Stockfish'><button>Play against Stockfish!</button></Link>  */}
 
-       <PotentialOpponents
-        currentPlayer={this.props.username}
-        opponentsList={this.state.players}
-        newGame={this.newGame} 
-       />
 
 
       </div>
