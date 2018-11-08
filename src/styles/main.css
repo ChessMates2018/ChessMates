@@ -102,17 +102,22 @@ h1, h2, h2 {
   #title img {
     z-index: 10; }
 
+.outerBlock {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
+
 .profile {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   flex-direction: row-reverse;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: start;
-  margin-top: 120px; }
-  .profile .emptySpace {
-    width: 150px; }
+  margin-top: 120px;
+  width: 1325px; }
 
 @keyframes rotate {
   0% {
