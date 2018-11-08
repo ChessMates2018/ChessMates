@@ -1,7 +1,76 @@
 #about-page
-    @include flexCol
     height: 100vh
-    width: 100vw
+    
 
-.team-mate-div
-    background: red
+#about-checked
+    background: blue
+    @include flexCol
+
+
+
+// team bio section && flip containers
+#team-mate-section
+    @include flexRow
+    justify-content: space-evenly
+    
+.team-mate-img
+    width: 200px
+    height: 200px
+
+//flip container divs
+.card-container 
+  cursor: pointer
+  height: 500px
+  perspective: 600
+  position: relative
+  width: 300px
+  @include flexCol
+  justify-content: space-around
+  align-items: space-evenly
+  
+.card 
+  border: 1px black solid
+  height: 100%
+  position: absolute
+  transform-style: preserve-3d
+  transition: all 1s ease-in-out
+  width: 100%
+
+.card:hover 
+  transform: rotateY(180deg)
+
+.card .side 
+  background: #eaeaed
+  backface-visibility: hidden
+  border-radius: 6px
+  height: 100%
+  position: absolute
+  overflow: hidden
+  width: 100%
+  @include flexCol
+  
+
+.card .back 
+  background: #eaeaed
+  color: #0087cc
+  line-height: 150px
+  text-align: center
+  transform: rotateY(180deg)
+
+
+// .team-mate-div
+//     background: red
+//     @include flexCol
+//     width: 250px
+//     height: 400px
+//     margin: 50px
+
+// .team-mate-img
+//     width: 200px
+//     height: 200px
+
+// .team-mate-name
+//     text-transform: capitalize
+
+// .team-mate-title
+//     text-transform: capitalize
