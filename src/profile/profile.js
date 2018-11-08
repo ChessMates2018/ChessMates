@@ -7,6 +7,11 @@ import Leaderboard from '../../src/landingpage/components/leaderboard'
 import {connect} from 'react-redux'
 import {setUsername} from '../ducks/Reducer'
 import {login} from '../utils/SocketFunctions'
+import king from '../images/default_king.jpg'
+import queen from '../images/default_queen.jpg'
+import bishop from '../images/default_bishop.jpg'
+import knight from '../images/default_knight.jpg'
+import rook from '../images/default_rook.jpg'
 
 
 
@@ -72,18 +77,22 @@ class Profile extends Component {
     return (
       <div className="outerBlock">
         <div className="profile">
-        {/* <div className="emptySpace"></div> */}
           <div className="profile_section">
-            <UserInfo currentUser = {currentUser[0]}/>
+            <div className="sun_profile_section">
+              <UserInfo currentUser = {currentUser[0]}/>
+              <div className = 'imageOpps'>
+                <img src={king} alt=""/>
+                <img src={queen} alt=""/>
+                <img src={bishop} alt=""/>
+                <img src={knight} alt=""/>
+                <img src={rook} alt=""/>
+              </div>
+            </div>
             <Leaderboard/>
           </div>
           <div className="profile_section">
             <Arena/>
           </div>
-          {/* <h1>Profile.JS</h1> */}
-          {/* <UserInfo/> */}
-          {/* <RecentGames/> */}
-        {/* <div className="emptySpace"></div> */}
         </div>
       </div>
     )

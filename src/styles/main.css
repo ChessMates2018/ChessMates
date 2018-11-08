@@ -118,6 +118,25 @@ h1, h2, h2 {
   align-items: start;
   margin-top: 120px;
   width: 1325px; }
+  .profile .profile_section .sun_profile_section {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    justify-content: space-between;
+    align-items: flex-start; }
+    .profile .profile_section .sun_profile_section .imageOpps {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      width: 350px;
+      flex-wrap: wrap; }
+      .profile .profile_section .sun_profile_section .imageOpps img {
+        border: solid #141414 1px;
+        width: 80px;
+        margin: 0px 5px;
+        margin-bottom: 10px; }
 
 @keyframes rotate {
   0% {
@@ -302,11 +321,12 @@ button {
   justify-content: space-evenly;
   padding: 20px 0px;
   border-radius: 2px;
-  top: 50px;
-  left: 50px;
-  width: 450px; }
+  position: relative;
+  width: 450px;
+  z-index: 10; }
   .userInfoBlock img {
-    width: 150px; }
+    width: 135px;
+    margin: 0px 20px; }
   .userInfoBlock .userName {
     color: #fbfafa; }
     .userInfoBlock .userName .sub_userName {
@@ -320,6 +340,10 @@ button {
     flex-direction: column;
     justify-content: center;
     align-items: center; }
+  .userInfoBlock .test {
+    height: 50px;
+    width: 50px;
+    background-color: blue; }
 
 .arenaBlock {
   background-color: #141414;
