@@ -64,7 +64,7 @@ export default class About extends Component{
                 </div>
                 <div className="side back">
                 <div className="team-mate-bio">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+                <p>One of the quotes I live by is: "Harder is better." I love tackling hard projects and creating beautiful things...Which makes web development just about the perfect field for me. I can't wait to see what comes next.</p>
                 </div>
                 <div className="portfolio">
                 <a href="https://michelleeditor2.wixsite.com/portfolio"><p className="portfolio-text">My portfolio</p></a>
