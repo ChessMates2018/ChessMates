@@ -284,6 +284,8 @@ button {
   align-items: center;
   justify-content: space-around;
   align-items: flex-start;
+  position: relative;
+  background-color: pink;
   margin-top: 50px; }
 
 .move_list {
@@ -362,7 +364,10 @@ button {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center; }
+  align-items: center;
+  padding: 15px 20px; }
+  #about-checked p {
+    text-indent: 50px; }
 
 #subtitle {
   color: black; }
@@ -551,5 +556,8 @@ a {
 
 .App {
   background: url("../images/marble1.jpg");
-  background-size: cover;
-  height: 100vh; }
+  height: 100vh;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+    -o-background-size-background-size: cover; }
