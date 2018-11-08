@@ -2,6 +2,8 @@ import React, {Component} from 'react'
 import BradyPic from '../images/posingwithPoe.jpg'
 import JordanPic from '../images/Jordan-headshot.jpg'
 import MichellePic from '../images/Michelle_profile.jpg'
+import github from '../images/github.png'
+import linkedin from '../images/linkedin.png'
 
 export default class About extends Component{
     render(){
@@ -32,8 +34,9 @@ export default class About extends Component{
                 <i className="fas fa-envelope"></i>
                 </div>
                 <div className="team-mate-contact">
-                <p>Github</p>
-                <p>Linkedin</p>
+                <p>Portfolio</p>
+                <img className="contact-img" src={github} alt="Github link" />
+                <img className="contact-img" src={linkedin} alt="Github link" />
                 </div>
                 </div>
                 </div>
@@ -51,13 +54,16 @@ export default class About extends Component{
                 </div>
                 <div className="side back">
                 <div className="team-mate-bio">
-                <p>A full stack web developer and many other things! data data data data data data data data data data data data data data data data data data data data data. 
-                </p>
+                <p>A full stack web developer, chess enthusiast, FAA certified drone pilot, and musician, who enjoys working collaboratively to tackle complex problems. </p>
+                </div>
+                <div className="team-mate-email">
+                <p>what?</p>
+                <i className="fas fa-envelope"></i>
                 </div>
                 <div className="team-mate-contact">
-                <p>Github</p>
-                <p>Linkedin</p>
-                <p>Email</p>
+                <p>Portfolio</p>
+                <img className="contact-img" src={github} alt="Github link" />
+                <img className="contact-img" src={linkedin} alt="Github link" />
                 </div>
                 </div>
                 </div>
@@ -74,12 +80,16 @@ export default class About extends Component{
                 </div>
                 <div className="side back">
                 <div className="team-mate-bio">
-                <p>A full stack web developer and many other things! data data data data data data data data data data data data data data data data data data data data data. </p>
+                <p>A full stack web developer, chess enthusiast, FAA certified drone pilot, and musician, who enjoys working collaboratively to tackle complex problems. </p>
+                </div>
+                <div className="team-mate-email">
+                <p>what?</p>
+                <i className="fas fa-envelope"></i>
                 </div>
                 <div className="team-mate-contact">
-                <p>Github</p>
-                <p>Linkedin</p>
-                <p>Email</p>
+                <p>Portfolio</p>
+                <img className="contact-img" src={github} alt="Github link" />
+                <img className="contact-img" src={linkedin} alt="Github link" />
                 </div>
                 </div>
                 </div>

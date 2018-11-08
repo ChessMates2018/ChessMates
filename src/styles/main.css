@@ -362,6 +362,16 @@ button {
 .card {
   background: #eaeaed linear-gradient(to bottom left, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)); }
 
+.team-mate-contact {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
+
+.contact-img {
+  height: 50px;
+  width: 50px; }
+
 .App {
   background: url("../images/marble1.jpg");
   background-size: cover; }
