@@ -37,8 +37,11 @@ class UserInfo extends Component {
       <div>
         <div className ="userInfoBlock">
           <section className = 'UI_Content'>
-            <img src={require('../../../images/default_king.jpg')} alt="default profile image"/>
-          </section>
+          {/* {this.state.currentUser ? */}
+             {/* <img src={require(image)} alt="default profile image"/> */}
+             <img src={require('../../../images/default_king.jpg')} alt="default profile image"/>
+          {/* } */}
+            </section>
           <section className = 'UI_Content'>
             <h1 className="userName">{`${username}:`} <span className = 'sub_userName'>{` lv ${rating}`}</span> </h1>
             {/* <div className="stats_box"> */}

@@ -11,7 +11,6 @@ class Nav extends Component {
     }
     render() {
         if (this.props.location.pathname !== '/') {
-            if (this.props.location.pathname !== '/gameboard/:roomId/:dark/:light') {
                 if (this.props.location.pathname === '/profile') {
                     //profile
                     return (
@@ -29,7 +28,7 @@ class Nav extends Component {
                             </div>
                         </div>
                     )
-                } else {
+                } else if (this.props.location.pathname === '/about') {
                     // about
                     return (
                         <div className='navBod'>
@@ -46,7 +45,22 @@ class Nav extends Component {
                             </div>
                         </div>
                     )
-                }
+                } else {
+                    return (
+                        <div className='navBod'>
+                            <div className='leftNav'>
+                                <img className='navImg' src={king} />
+                                <h2 className='navH2'>Checked</h2>
+                            </div>
+                            <h1 className='navH1'>Game Board</h1>
+                            <div className='navMenu'>
+                                <Link style={{textDecoration: 'none'}} to='/profile'>
+                                    <p className='aboutLink'>Profile</p>
+                                </Link>
+                                <button className='logoutBtn' onClick={() => this.logout()}>Logout</button>
+                            </div>
+                        </div>
+                    )
             }
         } else {
             return null
