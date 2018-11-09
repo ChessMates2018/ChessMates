@@ -33,7 +33,7 @@ export default class About extends Component{
                 <a href="bradysnuggs.net"><p className="portfolio-text">My portfolio</p></a>
                 </div>
                 <div className="team-mate-email">
-                <a href="mailto:bradyesnuggs@gmail.com">
+                <a href="mailto:bradyesnuggs@gmail.com?subject=We love your work, give us more!">
                 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAD1SURBVGhD7ZlBDoIwFAW79RQe0et4F8/jIVxpi/5EYLQFWu0j/yWT0AkknTXB5/P55HbZCeG+E1AqglIRlIqgVASlIuEcub0JNdLdU8OwY0QtyALS3WdTCPoaMF2PQdmAU+TwfJyth6BcQLp7ahhevr4OPQWVBqS7p/dHH/cQtDTAGB2MfwStDTBQGr8I2hpgoJzSIqhWgIHyEzWCagcYKHOsCWoVYKAspTSoZYCBcim5IFqtAAPlWkqCagcYKLdCQa0CDJS1sKCWAQZKRVAqglIRlIqgVASlIigVQakISkVQKoJSEZSKoFQEfywq4vP5fDIL4QFM/YS3ZgtmFQAAAABJRU5ErkJggg==" />
                 </a>
                 </div>
@@ -70,14 +70,14 @@ export default class About extends Component{
                 <a href="https://michelleeditor2.wixsite.com/portfolio"><p className="portfolio-text">My portfolio</p></a>
                 </div>
                 <div className="team-mate-email">
-                <a href="mailto:michelle.editor2@gmail.com">
+                <a href="mailto:michelle.editor2@gmail.com?subject=Checked looks awesome, let's set up an interview.">
                 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAD1SURBVGhD7ZlBDoIwFAW79RQe0et4F8/jIVxpi/5EYLQFWu0j/yWT0AkknTXB5/P55HbZCeG+E1AqglIRlIqgVASlIuEcub0JNdLdU8OwY0QtyALS3WdTCPoaMF2PQdmAU+TwfJyth6BcQLp7ahhevr4OPQWVBqS7p/dHH/cQtDTAGB2MfwStDTBQGr8I2hpgoJzSIqhWgIHyEzWCagcYKHOsCWoVYKAspTSoZYCBcim5IFqtAAPlWkqCagcYKLdCQa0CDJS1sKCWAQZKRVAqglIRlIqgVASlIigVQakISkVQKoJSEZSKoFQEfywq4vP5fDIL4QFM/YS3ZgtmFQAAAABJRU5ErkJggg==" />
                 </a>
                 </div>
                 
                 <div className="team-mate-contact">
 
-                <a href="https://github.com/Besnuggs"style={{marginBottom: '25px'}}>
+                <a href="https://github.com/FreedomChaser">
                 <img className="github-img" src={github} alt="Github link" />
                 </a>
 
@@ -107,13 +107,13 @@ export default class About extends Component{
                 <a href="#"><p className="portfolio-text">My portfolio</p></a>
                 </div>
                 <div className="team-mate-email">
-                <a href="mailto:jordantroysmithson@gmail.com">
+                <a href="mailto:jordantroysmithson@gmail.com?subject=Nice work on Checked!&body=Hello Jordan, %0D%0A%0D%0A We would like to extend an amazing job offer to you! %0D%0A%0D%0A">
                 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAD1SURBVGhD7ZlBDoIwFAW79RQe0et4F8/jIVxpi/5EYLQFWu0j/yWT0AkknTXB5/P55HbZCeG+E1AqglIRlIqgVASlIuEcub0JNdLdU8OwY0QtyALS3WdTCPoaMF2PQdmAU+TwfJyth6BcQLp7ahhevr4OPQWVBqS7p/dHH/cQtDTAGB2MfwStDTBQGr8I2hpgoJzSIqhWgIHyEzWCagcYKHOsCWoVYKAspTSoZYCBcim5IFqtAAPlWkqCagcYKLdCQa0CDJS1sKCWAQZKRVAqglIRlIqgVASlIigVQakISkVQKoJSEZSKoFQEfywq4vP5fDIL4QFM/YS3ZgtmFQAAAABJRU5ErkJggg==" />
                 </a>
                 </div>
                 <div className="team-mate-contact">
 
-                <a href="https://github.com/Besnuggs">
+                <a href="https://github.com/JordanOfTroy">
                 <img className="github-img" src={github} alt="Github link" />
                 </a>
 

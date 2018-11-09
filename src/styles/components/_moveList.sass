@@ -1,10 +1,22 @@
+.ML_rapper
+    background-color: tan
+    @include flexCol
+    height: 300px
+    width: 220px
+    justify-content: space-around
+    box-shadow: 2px 2px 10px gray
+    .resign_btn
+        width: 100px
+
+    
+    
 .move_list
-    background: tan
+    background: $white
     width: 170px
     height: 200px
     overflow: scroll
     overflow-x: hidden
-    box-shadow: 0px 5px 15px gray
+    box-shadow: 2px 2px 10px gray
     // &::-webkit-scrollbar
     //     width: 50px
    
@@ -14,5 +26,5 @@
         width: 70px
         display: inline-block
         text-align: center
-        &:nth-child(odd)
+        &:nth-child(even)
             float: right
