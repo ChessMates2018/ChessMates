@@ -224,6 +224,7 @@ class HumanVsHuman extends Component {
     
     return this.props.children({
       // updatePlayers: this.updatePlayers,
+
       resignation: this.resignation,
       showHistory: this.showHistory,
       squareStyles,
@@ -242,6 +243,7 @@ class HumanVsHuman extends Component {
 
  function Gameboard(props) {
   console.log('GM props', props)
+  let {light, dark} = props.match.params
   
   return (
     <div className="the_BFB">
@@ -262,7 +264,10 @@ class HumanVsHuman extends Component {
           testSockets,
         }) => (
           <>
-          <Chat/>
+          <Chat
+          light={light}
+          dark={dark}
+          />
           {
             props.username === props.match.params.light
             ?
