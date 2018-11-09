@@ -27,7 +27,7 @@ export default class About extends Component{
                 </div>
                 <div className="side back">
                 <div className="team-mate-bio">
-                <p>A full stack web developer, chess enthusiast, FAA certified drone pilot, and musician, who enjoys working collaboratively to tackle complex problems. </p>
+                <p>I'm a full stack web developer, chess enthusiast, FAA certified drone pilot, and musician, who enjoys working collaboratively to tackle complex problems. Always looking for new skill sets to add to my skillstack. </p>
                 </div>
                 <div className="portfolio">
                 <a href="bradysnuggs.net"><p className="portfolio-text">My portfolio</p></a>
