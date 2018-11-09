@@ -355,14 +355,26 @@ button {
     font-size: 18px; }
 
 #about-page {
-  height: 100vh; }
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 10px; }
+
+#checked-description {
+  background: #bc9055;
+  padding: 4px 7px; }
 
 #about-checked {
   background: #eaeaed linear-gradient(to bottom left, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2));
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center; }
+  align-items: center;
+  width: 1250px;
+  align-item: center; }
 
 #subtitle {
   color: black; }
@@ -373,11 +385,12 @@ button {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  justify-content: space-evenly; }
+  justify-content: space-around;
+  width: 1300px; }
 
 .card-container {
   cursor: pointer;
-  height: 500px;
+  height: 400px;
   perspective: 800;
   position: relative;
   width: 300px;
@@ -400,15 +413,17 @@ button {
   height: 100%;
   width: 80%;
   border: 8px tan solid;
-  box-shadow: 5px 5px 5px; }
+  box-shadow: 2px 2px 2px; }
 
 .team-mate-bio {
   background: tan;
-  border: 1px black solid;
+  margin: 5px;
+  padding: 5px;
   width: 100%; }
 
 .card {
   border: 1px black solid;
+  border-radius: 3px;
   height: 100%;
   position: absolute;
   transform-style: preserve-3d;
@@ -442,7 +457,8 @@ button {
 .card .back {
   line-height: 150px;
   text-align: center;
-  transform: rotateY(180deg); }
+  transform: rotateY(180deg);
+  padding: 10px 10px 0 10px; }
 
 .card {
   background: #eaeaed linear-gradient(to bottom left, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)); }
