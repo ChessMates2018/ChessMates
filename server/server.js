@@ -1,9 +1,9 @@
 require('dotenv').config()
-const path = require('path'); // Usually moved to the start of file
+// const path = require('path'); // Usually moved to the start of file
 
-app.get('*', (req, res)=>{
-    res.sendFile(path.join(__dirname, '../build/index.html'));
-});
+// app.get('*', (req, res)=>{
+//     res.sendFile(path.join(__dirname, '../build/index.html'));
+// });
 
 const {
     SERVER_PORT,
