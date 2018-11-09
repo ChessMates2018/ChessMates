@@ -77,7 +77,7 @@ export default class About extends Component{
                 
                 <div className="team-mate-contact">
 
-                <a href="https://github.com/FreedomChaser">
+                <a href="https://github.com/FreedomChaser" style={{marginBottom: '25px'}}>
                 <img className="github-img" src={github} alt="Github link" />
                 </a>
 

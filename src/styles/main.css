@@ -422,9 +422,7 @@ button {
   align-item: center;
   padding: 10px;
   box-shadow: 2px 2px 5px grey;
-  padding: 15px 20px; 
-}
-
+  padding: 15px 20px; }
   #about-checked p {
     text-indent: 50px; }
 
@@ -537,7 +535,8 @@ a {
   font-size: 20px; }
 
 .team-mate-contact a {
-  display: flex; }
+  display: flex;
+  padding-bottom: 30px; }
 
 .userInfoBlock {
   background-color: #141414;
