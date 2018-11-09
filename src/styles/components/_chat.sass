@@ -1,5 +1,5 @@
 .chat-container
-    height: 385px
+    height: 480px
     width: 300px
     background: tan
     position: relative
@@ -7,13 +7,35 @@
     flex-direction: column
     justify-content: space-around
     align-items: center
+    box-shadow: 2px 2px 10px gray
+
     
     
     .messages-window
         height: 330px
         width: 250px
         background: white
+        box-shadow: 2px 2px 10px gray
+        word-wrap: break-word
+        padding: 10px
+        overflow: hidden
+        overflow-y: scroll
+        .gm
+            text-align: start
+            background-color: gray
+            margin-bottom: 7px
+            padding: 5px
+            border-radius: 4px
+            &:nth-child(even)
+                text-align: end
+                background-color: lighten(gray, 20)
+        
 
     .input-container
     
     .input-field
+        height: 70px
+        width: 250px
+        border-style: none
+        box-shadow: inset 2px 2px 10px gray
+        padding: 10px

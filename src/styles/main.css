@@ -64,13 +64,16 @@ h1, h2, h2 {
   .input::placeholder {
     color: tan; }
 
-.btn {
+button {
   height: 1.5rem;
   width: 15rem;
   background-image: linear-gradient(to bottom left, #525354, #fbfafa);
   border-style: none;
   color: #141414;
   border-radius: 2px; }
+  button:hover {
+    background-image: linear-gradient(to top right, #525354, tan);
+    border: solid grey 1px; }
 
 #title {
   display: flex;
@@ -284,36 +287,72 @@ button {
   align-items: center;
   justify-content: space-around;
   align-items: flex-start;
-  margin-top: 50px; }
+  position: relative;
+  background-image: url("../images/marble1.jpg");
+  padding-top: 50px; }
+
+.ML_rapper {
+  background-color: tan;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+  width: 220px;
+  justify-content: space-around;
+  box-shadow: 2px 2px 10px gray; }
+  .ML_rapper .resign_btn {
+    width: 100px; }
 
 .move_list {
-  background: tan;
+  background: #fbfafa;
   width: 170px;
   height: 200px;
   overflow: scroll;
   overflow-x: hidden;
-  box-shadow: 0px 5px 15px gray; }
+  box-shadow: 2px 2px 10px gray; }
   .move_list .move {
     background: lightgray;
     width: 70px;
     display: inline-block;
     text-align: center; }
-    .move_list .move:nth-child(odd) {
+    .move_list .move:nth-child(even) {
       float: right; }
 
 .chat-container {
-  height: 385px;
+  height: 480px;
   width: 300px;
   background: tan;
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  align-items: center; }
+  align-items: center;
+  box-shadow: 2px 2px 10px gray; }
   .chat-container .messages-window {
     height: 330px;
     width: 250px;
-    background: white; }
+    background: white;
+    box-shadow: 2px 2px 10px gray;
+    word-wrap: break-word;
+    padding: 10px;
+    overflow: hidden;
+    overflow-y: scroll; }
+    .chat-container .messages-window .gm {
+      text-align: start;
+      background-color: gray;
+      margin-bottom: 7px;
+      padding: 5px;
+      border-radius: 4px; }
+      .chat-container .messages-window .gm:nth-child(even) {
+        text-align: end;
+        background-color: #b3b3b3; }
+  .chat-container .input-field {
+    height: 70px;
+    width: 250px;
+    border-style: none;
+    box-shadow: inset 2px 2px 10px gray;
+    padding: 10px; }
 
 .navBod {
   display: flex;
@@ -365,7 +404,10 @@ button {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center; }
+  align-items: center;
+  padding: 15px 20px; }
+  #about-checked p {
+    text-indent: 50px; }
 
 #subtitle {
   color: black; }
@@ -554,5 +596,8 @@ a {
 
 .App {
   background: url("../images/marble1.jpg");
-  background-size: cover;
-  height: 100vh; }
+  height: 100vh;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+    -o-background-size-background-size: cover; }

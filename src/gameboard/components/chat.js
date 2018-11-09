@@ -3,13 +3,14 @@ import io from 'socket.io-client'
 import {connect} from 'react-redux'
 
 class Chat extends Component{
-    constructor(){
-        super()
+    constructor(props){
+        super(props)
         this.state={
             generalUserInput: "", 
             generalMessages: [],
             white: "",
-            black: ""
+            black: "",
+            user: ""
         }
         this.socket = io.connect('/')
     }
@@ -17,6 +18,8 @@ class Chat extends Component{
 componentDidMount(){
     this.socket = io();
     this.socket.on("general-message", data => {
+    //   this.setState({user: data.user})
+
       console.log('got general mesage');
       let gm = this.state.generalMessages.slice();
       gm.push(data);
@@ -25,8 +28,16 @@ componentDidMount(){
 }
 
 submitMessage = (message, roomName) => {
+    // let {light,dark} = this.props
+    // let {username} = this.props
     console.log(roomName)
-    this.socket.emit(`${roomName}-chat`, message);
+    // if(light === username){
+    //     let user = light
+    //     this.socket.emit(`${roomName}-chat`, {message});
+    // } else {
+        // let user = dark
+        this.socket.emit(`${roomName}-chat`, message);
+// }
 }
 
 handleKeyUp = e => {
@@ -38,26 +49,27 @@ handleKeyUp = e => {
 
 
     render(){
-        let {username} = this.props
-        console.log(username)
+        // console.log('CHAT PROPS', this.props)
+        // console.log('look at me', username)
         return(
             <section className="chat-container">
+            <h3>Insult box</h3>
             <div className="messages-window">
             {
                 this.state.generalMessages.map((gm,i)=>{
-                  return (<p key={i}>{username}: {gm}</p>)
+                  return (<p key={i} className = 'gm'>{gm}</p>)
                 })
               }
             </div>
             <div className="input-container">
-            <input
-            className="input-field"
+            <textarea name="" id="" cols="30" rows="5"
+                className="input-field"
                 type="text"
                 value={this.state.generalUserInput}
                 onChange={e => this.setState({ generalUserInput: e.target.value })}
                 name="general"
                 onKeyUp={this.handleKeyUp}
-            />
+            ></textarea>
             </div>
             
             </section>
@@ -67,9 +79,9 @@ handleKeyUp = e => {
 
 function mapStateToProps(reduxState){
     let {username} = reduxState
-    return(
+    return{
         username
-    )
+    }
 }
 
 export default connect(mapStateToProps)(Chat)
