@@ -130,7 +130,8 @@ class Arena extends Component {
         {/* <PotentialOpponents
         opponentsList = {opponentsList}
         /> */}
-        {
+        <h2 id="challenge-header">Challenge a user in the Arena!</h2>
+        {/* {
           this.state.inArenaToggle
           ?
           <button 
@@ -141,7 +142,7 @@ class Arena extends Component {
             onClick = {this.leaveArena} 
             className="button arena_btn">Leave the Arena</button>
          
-        }
+        } */}
         {/* {this.displayButton()} */}
        {/* <Link to='/Stockfish'><button>Play against Stockfish!</button></Link>  */}
 
