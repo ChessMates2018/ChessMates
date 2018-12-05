@@ -1,0 +1,97 @@
+// Widescreens
+@include mediaXl {
+
+  }
+  
+  // Desktops & Laptops
+  @include mediaLg {
+ 
+  }
+  
+  @include mediaLgLandScape {
+  
+  
+  }
+  
+  // Tablets & Small Laptops
+  @include mediaMd {
+  
+  
+  }
+  
+  @include mediaMdLandScape{
+    
+}
+    
+  
+  
+  // Smartphones
+  @include mediaSm {
+//NavBody
+.navBod{
+    width: 140%;
+}
+//landing page
+.landing-page .lb-wrapper{
+    visibility: hidden;
+}
+
+#title h1{
+    font-size: 30px;
+    margin-left: -15px;
+}
+
+#title .logo-img{
+    margin: -20px;
+}
+
+.register{
+    margin-bottom: -120px;
+}
+
+
+.landing-page{
+   width: 100vw;
+   overflow: hidden;
+   }
+
+//Profile
+.outerBlock{
+width: 100vw;
+// overflow: hidden;
+}
+
+.profile{
+    width:100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.outerBlock .lb-wrapper{
+    visibility: hidden;
+}
+
+.outerBlock .userInfoBlock #updateBtn{
+    visibility: hidden;
+}
+
+.outerBlock .userInfoBlock{
+    margin-top: -110px;
+    margin-left: 340px;
+    
+}
+
+.outerBlock .userInfoBlock img{
+    
+   
+}
+
+.arenaBlock{
+margin-top: -250px;
+margin-left: 100px;
+// height: 60%;
+// width: 60%;
+}
+}
