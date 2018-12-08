@@ -93,12 +93,12 @@ class HumanVsHuman extends Component {
       this.socket.emit('move', newMove)
       console.log('socket', this.socket)
     });
+
+    if (this.game.in_stalemate() === true){
+       alert('Game Over! Stalemate!')
+      }
   };
 
-
-  endInCheckMate = () => {
-  alert('Game has ended in checkmate.')
-  }
 
   //line 190
   runSockets = () => {
@@ -221,7 +221,7 @@ class HumanVsHuman extends Component {
 
   render() { 
     const { fen, dropSquareStyle, squareStyles } = this.state;
-    
+    console.log(Chess.in_stalemate)
     return this.props.children({
       // updatePlayers: this.updatePlayers,
 
@@ -244,7 +244,6 @@ class HumanVsHuman extends Component {
  function Gameboard(props) {
   console.log('GM props', props)
   let {light, dark} = props.match.params
-  
   return (
     <div className="the_BFB">
       <HumanVsHuman theHistory={props.history} match={props.match}>
