@@ -86,10 +86,10 @@ io.on('connection', function(socket){
         io.sockets.emit("general-message", data)
     })
 
-    socket.on("checkMaaate", data => {
-        console.log('Made it to server with checkmate')
-        io.emit("checkMaaate", data)
-    })
+    // socket.on("checkMaaate", data => {
+    //     console.log('Made it to server with checkmate')
+    //     io.emit("checkMaaate", data)
+    // })
     // socket.on('login', (user) => {
     //     let socket_id = socket.id
     //     socket.handshake.session.socket_id = socket_id
