@@ -12,6 +12,8 @@ import { relative } from "path";
 //resignation or checkmate assings victor and loser leaving counts as resignation
 //under any other condition the game is a draw including
 import Chat from './components/chat'
+import EndgameModal from './components/EndgameModal'
+
 
 class HumanVsHuman extends Component {
   constructor(props) {
@@ -34,7 +36,7 @@ class HumanVsHuman extends Component {
       dark: '',
       turn: true,
       message: '',
-      isMated: false 
+      endGame: false 
     };
 
 
@@ -57,7 +59,7 @@ class HumanVsHuman extends Component {
     })
     this.socket.on('checkMaaate', (data) => {
       console.log('GOT TO CHECKMATE')
-      this.props.theHistory.push('/profile')
+      // this.props.theHistory.push('/profile')
     })
   }
 
@@ -77,6 +79,13 @@ class HumanVsHuman extends Component {
     
   }
 
+  endgameConditions = () => {
+    let {in_checkmate, in_stalemate, insufficient_material, in_threefold_repetition} = this.game
+    if (in_checkmate()) {
+      this.setState({endGame: true})
+    }
+  }
+
   onDrop = ({ sourceSquare, targetSquare }) => {
     // see if the move is legal
     let move = this.movePiece(sourceSquare, targetSquare)
@@ -93,10 +102,8 @@ class HumanVsHuman extends Component {
       this.socket.emit('move', newMove)
       console.log('socket', this.socket)
     });
-
-    if (this.game.in_stalemate() === true){
-       alert('Game Over! Stalemate!')
-      }
+    
+    this.endgameConditions()
   };
 
 
@@ -220,8 +227,8 @@ class HumanVsHuman extends Component {
   }
 
   render() { 
-    const { fen, dropSquareStyle, squareStyles } = this.state;
-    console.log(Chess.in_stalemate)
+    const { fen, dropSquareStyle, squareStyles, endGame } = this.state;
+    console.log(endGame)
     return this.props.children({
       // updatePlayers: this.updatePlayers,
 
@@ -236,12 +243,15 @@ class HumanVsHuman extends Component {
       onDragOverSquare: this.onDragOverSquare,
       onSquareClick: this.onSquareClick,
       onSquareRightClick: this.onSquareRightClick,
-      testSockets: this.testSockets
+      testSockets: this.testSockets,
     });
   }
 }
 
+
+
  function Gameboard(props) {
+  
   console.log('GM props', props)
   let {light, dark} = props.match.params
   return (
@@ -329,6 +339,13 @@ class HumanVsHuman extends Component {
           move={showHistory}
           resignation = {resignation}
           />
+         
+          <EndgameModal
+            light={light}
+            dark={dark}
+            endGame={props.endGame}
+          />
+          
           </>
         )}
       </HumanVsHuman>
