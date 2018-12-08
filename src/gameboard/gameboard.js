@@ -84,13 +84,13 @@ class HumanVsHuman extends Component {
     })
     this.socket.on('update-game', (data) => {
       this.updateNewMove(data)
-      // console.log('data', data)
-    })
-    this.socket.on('checkMaaate', (data) => {
-      console.log('GOT TO CHECKMATE')
       this.endgameConditions()
-      // this.props.theHistory.push('/profile')
     })
+    // this.socket.on('checkMaaate', (data) => {
+    //   console.log('GOT TO CHECKMATE')
+      
+    //   // this.props.theHistory.push('/profile')
+    // })
   }
 
   toggleModal (e) {
@@ -114,6 +114,7 @@ class HumanVsHuman extends Component {
   }
 
   endgameConditions = () => {
+    console.log('ENDGAME HAS FIRED!')
     let {winner, light, dark} = this.state
     let {in_checkmate, in_stalemate, insufficient_material, in_threefold_repetition, turn} = this.game
     if (in_checkmate()) {
@@ -128,10 +129,13 @@ class HumanVsHuman extends Component {
       //callback - axios.put - {winner/username, loser/username} - +10 points to winner/ -10 points to loser
       // 
     } else if(in_stalemate()){
+      console.log('this is a stalemate')
       this.setState({isOpen: true, message:`Game Over! The game has ended in stalemate.`})
     } else if(insufficient_material()){
+      console.log('this is insufficient material.')
       this.setState({isOpen: true, message:`Game Over! The game has ended in a draw: Insufficient material.`})
     } else if(in_threefold_repetition()){
+      console.log('This is a threefold repeat.')
       this.setState({isOpen: true, message:`Game Over! The game has ended in a draw: Threefold repetition.`})
     }
   }
@@ -171,22 +175,24 @@ class HumanVsHuman extends Component {
     console.log('roomId', roomId)
     this.movePiece(newMove.sourceSquare, newMove.targetSquare)
     let {fen, history, squareStyles} = newMove
-    this.setState({fen, history, squareStyles}, () => {
-     let checkMate = '';
-      this.state.history.forEach(string => {
-      checkMate = string.indexOf('#')
-      })
-      if(checkMate === -1){
-        return null
-      } else {
-        console.log('roomId_under else', roomId)
-        axios.delete(`/api/order66/${roomId}`).then(res => {
-          console.log(res)
-        })
-        socket.emit('checkMaaate', 'Checkmate!')
-      }
-    })
+    this.setState({fen, history, squareStyles})
   }
+
+  // Michelle's Original Code for Identifying CheckMate
+  // , () => {
+  //   let checkMate = '';
+  //    this.state.history.forEach(string => {
+  //    checkMate = string.indexOf('#')
+  //    })
+  //    if(checkMate === -1){
+  //      return null
+  //    } else {
+  //      console.log('roomId_under else', roomId)
+  //      axios.delete(`/api/order66/${roomId}`).then(res => {
+  //        console.log(res)
+  //      })
+  //      socket.emit('checkMaaate', 'Checkmate!')
+  //    }}
 
 
   showHistory = () => {
@@ -276,8 +282,6 @@ class HumanVsHuman extends Component {
 
   render() { 
     const { fen, dropSquareStyle, squareStyles, endGame, isOpen, winner, message, light, dark } = this.state;
-    console.log(dark, 'THIS IS THE WINNER')
-    console.log(winner, 'This is winner')
     return this.props.children({
       // updatePlayers: this.updatePlayers,
       isOpen: isOpen,
@@ -303,8 +307,6 @@ class HumanVsHuman extends Component {
 
 
  function Gameboard(props) {
-  
-  console.log('GM props', props)
   let {light, dark} = props.match.params
   return (
     <div className="the_BFB">
