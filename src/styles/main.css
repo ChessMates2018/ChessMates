@@ -397,7 +397,20 @@ button {
     font-size: 18px; }
 
 #about-page {
-  height: 100vh; }
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 70px;
+  background-image: url("../images/marble1.jpg");
+  overflow: hidden; }
+
+#checked-description {
+  background: #eaeaed linear-gradient(to bottom left, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2));
+  padding: 4px 7px;
+  box-shadow: 0px 0px 5px grey; }
 
 #about-checked {
   background: #eaeaed linear-gradient(to bottom left, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2));
@@ -405,6 +418,10 @@ button {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 1250px;
+  align-item: center;
+  padding: 10px;
+  box-shadow: 2px 2px 5px grey;
   padding: 15px 20px; }
   #about-checked p {
     text-indent: 50px; }
@@ -418,11 +435,12 @@ button {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  justify-content: space-evenly; }
+  justify-content: space-around;
+  width: 1300px; }
 
 .card-container {
   cursor: pointer;
-  height: 500px;
+  height: 400px;
   perspective: 800;
   position: relative;
   width: 300px;
@@ -445,15 +463,17 @@ button {
   height: 100%;
   width: 80%;
   border: 8px tan solid;
-  box-shadow: 5px 5px 5px; }
+  box-shadow: 2px 2px 2px; }
 
 .team-mate-bio {
   background: tan;
-  border: 1px black solid;
+  margin: 5px;
+  padding: 5px;
   width: 100%; }
 
 .card {
   border: 1px black solid;
+  border-radius: 3px;
   height: 100%;
   position: absolute;
   transform-style: preserve-3d;
@@ -487,7 +507,8 @@ button {
 .card .back {
   line-height: 150px;
   text-align: center;
-  transform: rotateY(180deg); }
+  transform: rotateY(180deg);
+  padding: 10px 10px 0 10px; }
 
 .card {
   background: #eaeaed linear-gradient(to bottom left, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)); }
@@ -514,7 +535,8 @@ a {
   font-size: 20px; }
 
 .team-mate-contact a {
-  display: flex; }
+  display: flex;
+  padding-bottom: 30px; }
 
 .userInfoBlock {
   background-color: #141414;
@@ -567,6 +589,10 @@ a {
     color: #fbfafa;
     margin-bottom: 20px; }
 
+#challenge-header {
+  color: #fff;
+  padding-top: 15px; }
+
 #potOppsBlock {
   background-color: #e4dede;
   box-shadow: 0px 0px 10px #fbfafa;
@@ -601,3 +627,36 @@ a {
   -moz-background-size: cover;
   -o-background-size: cover;
     -o-background-size-background-size: cover; }
+
+@media screen and (max-width: 500px) and (orientation: portrait) {
+  .navBod {
+    width: 140%; }
+  .landing-page .lb-wrapper {
+    visibility: hidden; }
+  #title h1 {
+    font-size: 30px;
+    margin-left: -15px; }
+  #title .logo-img {
+    margin: -20px; }
+  .register {
+    margin-bottom: -120px; }
+  .landing-page {
+    width: 100vw;
+    overflow: hidden; }
+  .outerBlock {
+    width: 100vw; }
+  .profile {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center; }
+  .outerBlock .lb-wrapper {
+    visibility: hidden; }
+  .outerBlock .userInfoBlock #updateBtn {
+    visibility: hidden; }
+  .outerBlock .userInfoBlock {
+    margin-top: -110px;
+    margin-left: 340px; }
+  .arenaBlock {
+    margin-top: -250px;
+    margin-left: 100px; } }

@@ -11,7 +11,7 @@ export default class About extends Component{
             <section id="about-page">
             <div id="about-checked">
             <h1 id="subtitle">Casual Chess for the Curmudgeon</h1>
-            <p>Checked is a web-based chess application where users can create an account and casually play their friends, or other users, in real-time. This project was built in React and styled with SASS, uses BCrypt for authorization, and the backend was built with Express, Massive, PostgreSQL,and Socket.io. This application was built collaboratively by the developers listed below and submitted as a group assignment for Devmountain's final benchmark project. It was created in the Fall of 2018. </p>
+            <p id="checked-description">Checked is a web-based chess application where users can create an account and casually play their friends, or other users, in real-time. This project was built in React and styled with SASS, uses BCrypt for authorization, and the backend was built with Express, Massive, PostgreSQL,and Socket.io. This application was built collaboratively by the developers listed below and submitted as a group assignment for Devmountain's final benchmark project. It was created in the Fall of 2018. </p>
             </div>
 
 
@@ -27,7 +27,7 @@ export default class About extends Component{
                 </div>
                 <div className="side back">
                 <div className="team-mate-bio">
-                <p>A full stack web developer, chess enthusiast, FAA certified drone pilot, and musician, who enjoys working collaboratively to tackle complex problems. </p>
+                <p>I'm a full stack web developer, chess enthusiast, FAA certified drone pilot, and musician, who enjoys working collaboratively to tackle complex problems. Always looking for new skill sets to add to my skillstack, and to expand my knowledge base. </p>
                 </div>
                 <div className="portfolio">
                 <a href="bradysnuggs.net"><p className="portfolio-text">My portfolio</p></a>
@@ -64,7 +64,7 @@ export default class About extends Component{
                 </div>
                 <div className="side back">
                 <div className="team-mate-bio">
-                <p>One of the quotes I live by is: "Harder is better." I love tackling hard projects and creating beautiful things...Which makes web development just about the perfect field for me. I can't wait to see what comes next.</p>
+                <p>One of the quotes I live by is: "Harder is better." I love tackling hard projects and creating beautiful things...Which makes web development just about the perfect field for me. Not to mention the endless chances to learn new things and grow my skill set. I can't wait to see what comes next.</p>
                 </div>
                 <div className="portfolio">
                 <a href="https://michelleeditor2.wixsite.com/portfolio"><p className="portfolio-text">My portfolio</p></a>
@@ -77,11 +77,11 @@ export default class About extends Component{
                 
                 <div className="team-mate-contact">
 
-                <a href="https://github.com/FreedomChaser">
+                <a href="https://github.com/FreedomChaser" style={{marginBottom: '25px'}}>
                 <img className="github-img" src={github} alt="Github link" />
                 </a>
 
-                <a href="https://www.linkedin.com/in/michelle-jones-dev/">
+                <a href="https://www.linkedin.com/in/michelle-jones-dev/" style={{marginBottom: '25px'}}>
                 <img className="linkedin-img" src={linkedin} alt="linkedin link" />
                 </a>
 
@@ -101,7 +101,7 @@ export default class About extends Component{
                 </div>
                 <div className="side back">
                 <div className="team-mate-bio">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+                <p> Full stack web developer who enjoys learning new skills and finding elegant solutions to complex problems. I have experience developing in React, Node, SQL, and JavaScript. Always looking to grow and expand my knowledge base. </p>
                 </div>
                 <div className="portfolio">
                 <a href="#"><p className="portfolio-text">My portfolio</p></a>

@@ -1,4 +1,9 @@
 require('dotenv').config()
+// const path = require('path'); // Usually moved to the start of file
+
+// app.get('*', (req, res)=>{
+//     res.sendFile(path.join(__dirname, '../build/index.html'));
+// });
 
 const {
     SERVER_PORT,
@@ -24,6 +29,10 @@ var server = require('http').createServer(app)
 var io = require('socket.io')(server)
 var sharedSession = require('express-socket.io-session')
 // var cookieParser = require('cookie-parser')
+
+
+app.use( express.static( `${__dirname}/../build` ) );
+
 
 app.use(bodyParser.json())
 
