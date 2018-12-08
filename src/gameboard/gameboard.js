@@ -12,7 +12,34 @@ import { relative } from "path";
 //resignation or checkmate assings victor and loser leaving counts as resignation
 //under any other condition the game is a draw including
 import Chat from './components/chat'
-import EndgameModal from './components/EndgameModal'
+import Modal from 'styled-react-modal'
+
+const StyledModal = Modal.styled`
+  width: 30rem;
+  height: 10rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3px;
+  box-shadow: 0px 0px 15px white;
+  font-family: Helvetica, Arial;    
+  h1 {
+    color: white;
+  }
+  h3 {
+    color: white;
+    padding: 10px;
+    text-align: center;
+    margin-bottom: 10px;
+
+  }
+  button {
+    margin-top: 20px 0px;
+    box-shadow: 0px 0px 15px white;
+    font-weight: bold;    
+  }
+`
 
 
 class HumanVsHuman extends Component {
@@ -36,10 +63,12 @@ class HumanVsHuman extends Component {
       dark: '',
       turn: true,
       message: '',
-      endGame: false 
+      isOpen: false,
+      winner: '',
+      loser: ''
     };
 
-
+    this.toggleModal = this.toggleModal.bind(this)
   }
   static propTypes = { children: PropTypes.func };
 
@@ -59,8 +88,13 @@ class HumanVsHuman extends Component {
     })
     this.socket.on('checkMaaate', (data) => {
       console.log('GOT TO CHECKMATE')
+      this.endgameConditions()
       // this.props.theHistory.push('/profile')
     })
+  }
+
+  toggleModal (e) {
+    this.setState({ isOpen: !this.state.isOpen })
   }
 
   updatingPlayers(){
@@ -80,9 +114,25 @@ class HumanVsHuman extends Component {
   }
 
   endgameConditions = () => {
-    let {in_checkmate, in_stalemate, insufficient_material, in_threefold_repetition} = this.game
+    let {winner, light, dark} = this.state
+    let {in_checkmate, in_stalemate, insufficient_material, in_threefold_repetition, turn} = this.game
     if (in_checkmate()) {
-      this.setState({endGame: true})
+      if(turn() === "b"){
+        this.setState({winner: light})
+      } else if (turn() === "w") {
+        this.setState({winner: dark})
+      } 
+      //determine winner/loser - light/dark from state - in_checkmate returns true
+      this.setState({isOpen: true, message:`Checkmate! ${winner} has won.`})
+      
+      //callback - axios.put - {winner/username, loser/username} - +10 points to winner/ -10 points to loser
+      // 
+    } else if(in_stalemate()){
+      this.setState({isOpen: true, message:`Game Over! The game has ended in stalemate.`})
+    } else if(insufficient_material()){
+      this.setState({isOpen: true, message:`Game Over! The game has ended in a draw: Insufficient material.`})
+    } else if(in_threefold_repetition()){
+      this.setState({isOpen: true, message:`Game Over! The game has ended in a draw: Threefold repetition.`})
     }
   }
 
@@ -102,8 +152,6 @@ class HumanVsHuman extends Component {
       this.socket.emit('move', newMove)
       console.log('socket', this.socket)
     });
-    
-    this.endgameConditions()
   };
 
 
@@ -227,11 +275,15 @@ class HumanVsHuman extends Component {
   }
 
   render() { 
-    const { fen, dropSquareStyle, squareStyles, endGame } = this.state;
-    console.log(endGame)
+    const { fen, dropSquareStyle, squareStyles, endGame, isOpen, winner, message, light, dark } = this.state;
+    console.log(dark, 'THIS IS THE WINNER')
+    console.log(winner, 'This is winner')
     return this.props.children({
       // updatePlayers: this.updatePlayers,
-
+      isOpen: isOpen,
+      toggleModal: this.toggleModal,
+      winner: winner,
+      message: message,
       resignation: this.resignation,
       showHistory: this.showHistory,
       squareStyles,
@@ -271,6 +323,10 @@ class HumanVsHuman extends Component {
           onSquareClick,
           onSquareRightClick,
           testSockets,
+          isOpen,
+          toggleModal,
+          winner,
+          message
         }) => (
           <>
           <Chat
@@ -339,17 +395,26 @@ class HumanVsHuman extends Component {
           move={showHistory}
           resignation = {resignation}
           />
-         
-          <EndgameModal
-            light={light}
-            dark={dark}
-            endGame={props.endGame}
-          />
+          
+        <StyledModal
+          isOpen={isOpen}
+          onBackgroundClick={toggleModal}
+          onEscapeKeydown={toggleModal}
+          light={light}
+          dark={dark}
+          winner={winner}
+          message={message}
+          >
+          
+          <h1>Game Over</h1>
+          <h3>{message}</h3>
+          <button onClick={toggleModal}>Accept</button>
+        </StyledModal>
           
           </>
         )}
       </HumanVsHuman>
-    </div>
+    </div> 
   );
 }
 
