@@ -222,13 +222,18 @@ module.exports = {
         console.log('elo', elo)
         console.log('winner', winner)
         console.log('loser', loser)
+        let username = req.session.user
 
-        db.update_rating([elo, winner, loser]).then(() => {
+        if (winner === username) {
+            console.log('i love you long time')
+            db.update_rating([elo, winner, loser]).then(() => {
             res.sendStatus(200)
         })
         .catch(err => {
             console.log(err)
             res.status(500).send(err)
-        })
+        })}
     }
+
+
 }
