@@ -119,12 +119,15 @@ class HumanVsHuman extends Component {
     let {in_checkmate, in_stalemate, insufficient_material, in_threefold_repetition, turn} = this.game
     if (in_checkmate()) {
       if(turn() === "b"){
-        this.setState({winner: light})
+        console.log(light)
+        this.setState({winner: light, isOpen: true, message: `Checkmate! ${light} has won.`})
       } else if (turn() === "w") {
-        this.setState({winner: dark})
+        console.log(dark)
+        this.setState({winner: dark, isOpen: true, message: `Checkmate! ${dark} has won.`})
+        console.log(winner)
       } 
       //determine winner/loser - light/dark from state - in_checkmate returns true
-      this.setState({isOpen: true, message:`Checkmate! ${winner} has won.`})
+      // this.setState({isOpen: true, message:`Checkmate! ${winner} has won.`})
       
       //callback - axios.put - {winner/username, loser/username} - +10 points to winner/ -10 points to loser
       // 
