@@ -115,16 +115,25 @@ class HumanVsHuman extends Component {
 
   endgameConditions = () => {
     console.log('ENDGAME HAS FIRED!')
-    let {winner, light, dark} = this.state
+    let {light, dark} = this.state
     let {in_checkmate, in_stalemate, insufficient_material, in_threefold_repetition, turn} = this.game
     if (in_checkmate()) {
       if(turn() === "b"){
         console.log(light)
-        this.setState({winner: light, isOpen: true, message: `Checkmate! ${light} has won.`})
+        this.setState({winner: light, loser: dark, isOpen: true, message: `Checkmate! ${light} has won.`}, () => {
+          let {winner, loser} = this.state
+          console.log('winner', winner)
+          console.log('loser', loser)
+          axios.put(`/api/updateRating/`, {elo: 10, winner, loser})
+        })
       } else if (turn() === "w") {
         console.log(dark)
-        this.setState({winner: dark, isOpen: true, message: `Checkmate! ${dark} has won.`})
-        console.log(winner)
+        this.setState({winner: dark, loser: light, isOpen: true, message: `Checkmate! ${dark} has won.`}, () => {
+          let {winner, loser} = this.state
+          console.log(winner, 'winner')
+          console.log(loser, 'loser')
+          axios.put(`/api/updateRating/`, {elo: 10, winner, loser})
+        })
       } 
       //determine winner/loser - light/dark from state - in_checkmate returns true
       // this.setState({isOpen: true, message:`Checkmate! ${winner} has won.`})

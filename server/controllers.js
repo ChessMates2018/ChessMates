@@ -214,5 +214,21 @@ module.exports = {
             console.log(err)
             res.status(200).send(err)
         })
+    },
+
+    updateRating: (req, res) => {
+        const db = req.app.get('db')
+        let {elo, winner, loser} = req.body
+        console.log('elo', elo)
+        console.log('winner', winner)
+        console.log('loser', loser)
+
+        db.update_rating([elo, winner, loser]).then(() => {
+            res.sendStatus(200)
+        })
+        .catch(err => {
+            console.log(err)
+            res.status(500).send(err)
+        })
     }
 }
