@@ -15,7 +15,7 @@ export default function Nav(){
                 <Route path='/gameboard/:roomId/:dark/:light' component={Gameboard}/>
                 {/* <Route path='/gameboard/:roomId' render={(props) => <Gameboard {...this.props}/>}/> */}
                 <Route path='/about' component={About}/>
-                <Route path='/Stockfish' component={AI}/>
+                <Route path='/AIgameboard/:roomId/:dark/:light' component={AI}/>
             </Switch>
         </div>
     )
