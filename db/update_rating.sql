@@ -1,11 +1,11 @@
 update users
 set rating = rating + $1, 
-    wins = wins + $4
-where username = $2;
+    wins = wins + $5
+where username = $3;
 
 update users
-set rating = rating - $1, 
-    losses = losses + $5
-where username = $3;
+set rating = rating - $2, 
+    losses = losses + $6
+where username = $4;
 
 

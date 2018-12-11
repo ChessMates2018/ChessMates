@@ -60,7 +60,15 @@ class HumanVsHuman extends Component {
       history: [],
       room: null,
       light: '',
+      lightRating: 0,
+      darkRating: 0,
       dark: '',
+      lightPointsWin: 0,
+      lightPointsDraw: 0,
+      lightPointsLose: 0,
+      darkPointsWin: 0,
+      darkPointsDraw: 0,
+      darkPointsLose: 0,
       turn: true,
       message: '',
       isOpen: false,
@@ -97,6 +105,19 @@ class HumanVsHuman extends Component {
     this.setState({ isOpen: !this.state.isOpen })
   }
 
+  getPlayerRatings(){
+    let {dark, light} = this.props.match.params
+    let userStr = `${light},${dark}`
+    let usernames = userStr.split(',')
+    axios.get(`/api/getRatings/${usernames}`).then(res => {
+      let lightRating  = res.data[0]
+      let darkRating = res.data[1]
+      this.setState({
+        lightRating, darkRating
+      }, () => this.eloCalculator())
+    })
+  }
+
   updatingPlayers(){
     let {roomId, dark, light} = this.props.match.params
     this.setState({
@@ -113,42 +134,76 @@ class HumanVsHuman extends Component {
     
   }
 
+  eloCalculator = (result) => {
+    let {lightRating, darkRating} = this.state
+    let win = 1
+    let draw = 0.5
+    let loss = 0
+    //If Light Player Wins
+    let newLightEloWin = lightRating+Math.round((32-((Math.floor(lightRating/2101)+Math.floor(lightRating/2401))*8)) * (win - (1 / (1 + Math.pow(10, -(lightRating - darkRating) / 400)))));
+    //If Light Player Draws
+    let newLightEloDraw = lightRating+Math.round((32-((Math.floor(lightRating/2101)+Math.floor(lightRating/2401))*8)) * (draw - (1 / (1 + Math.pow(10, -(lightRating - darkRating) / 400)))));
+    //If Light Player Loses
+    let newLightEloLose = lightRating+Math.round((32-((Math.floor(lightRating/2101)+Math.floor(lightRating/2401))*8)) * (loss - (1 / (1 + Math.pow(10, -(lightRating - darkRating) / 400)))));
+
+    //If Dark Player wins
+    let newDarkEloWin = darkRating+Math.round((32-((Math.floor(darkRating/2101)+Math.floor(darkRating/2401))*8)) * (win - (1 / (1 + Math.pow(10, -(darkRating - lightRating) / 400)))));
+    //If Dark Player Draws
+    let newDarkEloDraw = darkRating+Math.round((32-((Math.floor(darkRating/2101)+Math.floor(darkRating/2401))*8)) * (draw - (1 / (1 + Math.pow(10, -(darkRating - lightRating) / 400)))));
+    //If Dark Player Loses
+    let newDarkEloLose = darkRating+Math.round((32-((Math.floor(darkRating/2101)+Math.floor(darkRating/2401))*8)) * (loss - (1 / (1 + Math.pow(10, -(darkRating - lightRating) / 400)))));
+    
+    this.setState({
+      lightPointsWin: newLightEloWin,
+      lightPointsDraw: newLightEloDraw,
+      lightPointsLose: newLightEloLose,
+      darkPointsWin: newDarkEloWin,
+      darkPointsDraw: newDarkEloDraw,
+      darkPointsLose: newDarkEloLose
+    })
+  }
+
   endgameConditions = () => {
-    console.log('ENDGAME HAS FIRED!')
-    let {light, dark} = this.state
+    let {light, dark, lightRating, darkRating, lightPointsWin, lightPointsDraw, lightPointsLose, darkPointsWin, darkPointsDraw, darkPointsLose} = this.state
     let {in_checkmate, in_stalemate, insufficient_material, in_threefold_repetition, turn} = this.game
+    let lightEloDraw = lightPointsDraw;
+    let darkEloDraw = darkPointsDraw;
     if (in_checkmate()) {
       if(turn() === "b"){
+        let win = 1;
+        let loss = 1;
+        let eloGain = lightPointsWin - lightRating;
+        let eloLost = darkRating - darkPointsLose;
+        console.log(eloGain, eloLost)
         this.setState({winner: light, loser: dark, isOpen: true, message: `Checkmate! ${light} has won.`}, () => {
           let {winner, loser} = this.state
-          console.log('winner', winner)
-          console.log('loser', loser)
-          axios.put(`/api/updateRating/`, {elo: 10, winner, loser})
+          axios.put(`/api/updateRating/`, {win, loss, eloGain, eloLost, winner, loser})
         })
       } else if (turn() === "w") {
-        console.log(dark)
-        let {winner, loser} = this.state
+        let win = 1;
+        let loss = 1;
+        let eloGain = darkPointsWin - darkRating;
+        let eloLost = lightRating - lightPointsLose;
         this.setState({winner: dark, loser: light, isOpen: true, message: `Checkmate! ${dark} has won.`}, () => {
           let{winner, loser} = this.state
-          console.log(winner, 'winner')
-          console.log(loser, 'loser')
-          axios.put(`/api/updateRating/`, {elo: 10, winner, loser})
+          axios.put(`/api/updateRating/`, {win, loss, eloGain, eloLost, winner, loser})
         })
       } 
-      //determine winner/loser - light/dark from state - in_checkmate returns true
-      // this.setState({isOpen: true, message:`Checkmate! ${winner} has won.`})
-      
-      //callback - axios.put - {winner/username, loser/username} - +10 points to winner/ -10 points to loser
-      // 
     } else if(in_stalemate()){
       console.log('this is a stalemate')
-      this.setState({isOpen: true, message:`Game Over! The game has ended in stalemate.`})
+      this.setState({isOpen: true, message:`Game Over! The game has ended in stalemate.`}, () =>{
+        axios.put('/api/updateRatingsDraw/', {light, dark, lightEloDraw, darkEloDraw})
+      })
     } else if(insufficient_material()){
       console.log('this is insufficient material.')
-      this.setState({isOpen: true, message:`Game Over! The game has ended in a draw: Insufficient material.`})
+      this.setState({isOpen: true, message:`Game Over! The game has ended in a draw: Insufficient material.`}, () => {
+        axios.put('/api/updateRatingsDraw/', {light, dark, lightEloDraw, darkEloDraw})
+      })
     } else if(in_threefold_repetition()){
       console.log('This is a threefold repeat.')
-      this.setState({isOpen: true, message:`Game Over! The game has ended in a draw: Threefold repetition.`})
+      this.setState({isOpen: true, message:`Game Over! The game has ended in a draw: Threefold repetition.`}, () => {
+        axios.put('/api/updateRatingsDraw/', {light, dark, lightEloDraw, darkEloDraw})
+      })
     }
   }
 

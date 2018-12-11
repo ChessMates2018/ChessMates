@@ -3,6 +3,8 @@ const initialState = {
   light:{},
   dark: {},
   roomId: '',
+  lightRating: 0,
+  darkRating: 0
   // loginFn: 
 }
 

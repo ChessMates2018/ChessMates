@@ -37,7 +37,8 @@ class UserInfo extends Component {
   }
 
   render () {
-  let {username, rating, image} = this.state.currentUser
+  console.log(this.state)
+  let {username, rating, image, wins, losses} = this.state.currentUser
   // let imageStr = JSON.stringify(image)
   console.log('current', image)
   let {showTheIcons} = this.props
@@ -61,6 +62,8 @@ class UserInfo extends Component {
             </section>
           <section className = 'UI_Content'>
             <h1 className="userName">{`${username}:`} <span className = 'sub_userName'>{` lv ${rating}`}</span> </h1>
+            <p>Wins: {wins}</p>
+            <p>Losses: {losses}</p>
             {/* <div className="stats_box"> */}
               {/* <h3 className="stats">{rating}</h3> */}
               {/* <h3 className="stats">Win:Loss ratio</h3> */}
