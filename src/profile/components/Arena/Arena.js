@@ -148,10 +148,6 @@ class Arena extends Component {
          
         } */}
         {/* {this.displayButton()} */}
-       <Link to='/AIgameboard'><button>Play against Stockfish!</button></Link> 
-
-
-
       </div>
     )
   }
