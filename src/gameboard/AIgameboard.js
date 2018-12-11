@@ -1,255 +1,423 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import Chess from "chess.js"; // import Chess from  "chess.js"(default) if recieving an error about new Chess not being a constructor
+import MoveList from './components/moveList'
+import Chess from "chess.js"; 
+import axios from 'axios'
+import Chessboard from "chessboardjsx";
+import {socket} from '../utils/SocketFunctions'
+import {connect} from 'react-redux'
+import Chat from './components/chat'
+import Modal from 'styled-react-modal'
 
-const STOCKFISH = window.STOCKFISH;
-const game = new Chess();
+const StyledModal = Modal.styled`
+  width: 30rem;
+  height: 10rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3px;
+  box-shadow: 0px 0px 15px white;
+  font-family: Helvetica, Arial;    
+  h1 {
+    color: white;
+  }
+  h3 {
+    color: white;
+    padding: 10px;
+    text-align: center;
+    margin-bottom: 10px;
 
-class AI extends Component {
+  }
+  button {
+    margin-top: 20px 0px;
+    box-shadow: 0px 0px 15px white;
+    font-weight: bold;    
+  }
+`
+
+
+class HumanVsHuman extends Component {
+  constructor(props) {
+    super (props)
+
+    this.state = {
+      fen: "start",
+      dropSquareStyle: {},
+      squareStyles: {},
+      pieceSquare: "",
+      square: "",
+      positionCount: 0,
+      history: [],
+      room: null,
+      light: '',
+      dark: '',
+      turn: true,
+      message: '',
+      isOpen: false,
+      winner: '',
+      loser: ''
+    };
+    this.toggleModal = this.toggleModal.bind(this)
+  }
   static propTypes = { children: PropTypes.func };
 
-  state = { fen: "start" };
 
   componentDidMount() {
-    this.setState({ fen: game.fen() });
+    this.updatingPlayers()
+    this.runSockets()
+    this.game = new Chess();
+    this.socket.emit('new-game', {
+      message: this.game,
+      room: this.state.room
+    })
+    this.socket.on('update-game', (data) => {
+      this.updateNewMove(data)
+      this.endgameConditions()
+    })
+  }
 
-    this.engineGame().prepareMove();
+  toggleModal (e) {
+    this.setState({ isOpen: !this.state.isOpen })
+  }
+
+  updatingPlayers(){
+    let {roomId, dark, light} = this.props.match.params
+    this.setState({
+      light, dark
+    }, console.log('UPDATING', this.state))
+  }
+
+  movePiece(sourceSquare, targetSquare){
+    return this.game.move({
+        from: sourceSquare,
+        to: targetSquare,
+        promotion: "q" // always promote to a queen for example simplicity
+        //Will need to set up options for piece selection upon pawn reaching eighth rank.
+      });
+  }
+
+  endgameConditions = () => {
+    console.log('WHAT THE FUCK?')
+    let {light, dark} = this.state
+    let {in_checkmate, in_stalemate, insufficient_material, in_threefold_repetition, turn} = this.game
+    if (in_checkmate()) {
+      if(turn() === "b"){
+        this.setState({winner: light, loser: dark, isOpen: true, message: `Checkmate! ${light} has won.`}, () => {
+          let {winner, loser} = this.state
+          axios.put(`/api/updateRating/`, {elo: 10, winner, loser})
+        })
+      } else if (turn() === "w") {
+        console.log(dark)
+        let {winner, loser} = this.state
+        this.setState({winner: dark, loser: light, isOpen: true, message: `Checkmate! ${dark} has won.`}, () => {
+          let{winner, loser} = this.state
+          axios.put(`/api/updateRating/`, {elo: 10, winner, loser})
+        })
+      } 
+    } else if(in_stalemate()){
+      console.log('this is a stalemate')
+      this.setState({isOpen: true, message:`Game Over! The game has ended in stalemate.`})
+    } else if(insufficient_material()){
+      console.log('this is insufficient material.')
+      this.setState({isOpen: true, message:`Game Over! The game has ended in a draw: Insufficient material.`})
+    } else if(in_threefold_repetition()){
+      console.log('This is a threefold repeat.')
+      this.setState({isOpen: true, message:`Game Over! The game has ended in a draw: Threefold repetition.`})
+    }
   }
 
   onDrop = ({ sourceSquare, targetSquare }) => {
     // see if the move is legal
-    const move = game.move({
-      from: sourceSquare,
-      to: targetSquare,
-      promotion: "q"
+    let move = this.movePiece(sourceSquare, targetSquare)
+    // illegal move
+    if (move === null) return;
+    this.setState(({ history, pieceSquare }) => ({
+      fen: this.game.fen(),
+      history: this.game.history({ verbose: false }),
+      squareStyles: squareStyling({ pieceSquare, history }),
+    }), () => {
+      let {fen, history, squareStyles} = this.state
+      let newMove = {fen, history, squareStyles, sourceSquare, targetSquare}
+      this.socket.emit('move', newMove)
+      console.log('socket', this.socket)
+      window.setTimeout(this.computerMove(), 250);
+    });
+  };
+
+  computerMove = () => {
+    let game = this.game
+    let possibleMoves = this.game.moves({
+      verbose:true
+    })
+    //game over
+    if (possibleMoves.length === 0) return;
+
+    let randomIndex = Math.floor(Math.random() * possibleMoves.length);
+    let move = possibleMoves[randomIndex];
+    
+    let {from, to} = move
+    let sourceSquare = from;
+    let targetSquare = to;
+    let compMove = this.movePiece(sourceSquare, targetSquare)
+    if (compMove === null) return;
+
+    this.setState(({ history, pieceSquare }) => ({
+      fen: this.game.fen(),
+      history: this.game.history({ verbose: false }),
+      squareStyles: squareStyling({ pieceSquare, history }),
+    }), () => {
+      let {fen, history, squareStyles} = this.state
+      let newMove = {fen, history, squareStyles,sourceSquare, targetSquare}
+      this.socket.emit('move', newMove)
+      console.log('socket', this.socket)
+    });
+  }
+
+  runSockets = () => {
+    this.socket = socket
+    this.socket.on('test', data => console.log('test fired'))
+    this.socket.on('connect-to-room', data => 'PUT HISTORY.PUSH HERE?')
+    this.socket.on('connect-to-room', data => this.socket.emit('user-info', 'ADD USER PROPS? HERE'))
+    this.socket.on('users', (data) => this.setState({white: 'ADD PROPS', black: 'ADD PROPS'}))
+  }
+
+  updateNewMove =(newMove)=> {
+    let {roomId} = this.props.match.params
+    this.movePiece(newMove.sourceSquare, newMove.targetSquare)
+    let {fen, history, squareStyles} = newMove
+    this.setState({fen, history, squareStyles})
+  }
+
+
+  showHistory = () => {
+  let {history} = this.state
+  let counter = 0
+  // console.log("HISTORY",history)
+  let moveList = history.map((element,index) => {
+    let moveNumber = 1 + index
+    return(
+      <div
+        className = "move"
+        key={index}>{element} 
+      </div>
+    )
+  })
+    if (history.includes('#')) {
+      axios.post('/api/gameMoves', {history})
+      .then(() => 
+      
+      console.log('move updated', history.length % 5, history))
+     }
+  return moveList
+  }
+
+  // central squares get diff dropSquareStyles
+  onDragOverSquare = square => {
+    this.setState({
+      dropSquareStyle:
+        square === "e4" || square === "d4" || square === "e5" || square === "d5"
+          ? { backgroundColor: "cornFlowerBlue" }
+          : { boxShadow: "inset 0 0 1px 4px rgb(255, 255, 0)" }
+    });
+  };
+
+  onSquareClick = square => {
+    this.setState(({ history }) => ({
+      squareStyles: squareStyling({ pieceSquare: square, history }),
+      pieceSquare: square
+    }));
+
+    let move = this.game.move({
+      from: this.state.pieceSquare,
+      to: square,
+      promotion: "q" // always promote to a queen for example simplicity
     });
 
     // illegal move
     if (move === null) return;
 
-    return new Promise(resolve => {
-      this.setState({ fen: game.fen() });
-      resolve();
-    }).then(() => this.engineGame().prepareMove());
+    this.setState({
+      fen: this.game.fen(),
+      history: this.game.history({ verbose: false }),
+      pieceSquare: ""
+    });
   };
 
-  engineGame = options => {
-    options = options || {};
+  onSquareRightClick = square =>
+    this.setState({
+      squareStyles: { [square]: { backgroundColor: "deepPink" } }
+    });
 
-    /// We can load Stockfish via Web Workers or via STOCKFISH() if loaded from a <script> tag.
-    let engine =
-      typeof STOCKFISH === "function"
-        ? STOCKFISH()
-        : new Worker(options.stockfishjs || "stockfish.js");
-    let evaler =
-      typeof STOCKFISH === "function"
-        ? STOCKFISH()
-        : new Worker(options.stockfishjs || "stockfish.js");
-    let engineStatus = {};
-    let time = { wtime: 3000, btime: 3000, winc: 1500, binc: 1500 };
-    let playerColor = "black";
-    let clockTimeoutID = null;
-    // let isEngineRunning = false;
-    let announced_game_over;
-    // do not pick up pieces if the game is over
-    // only pick up pieces for White
+  resignation = () => {
+    //know which one is resigning
+    //axios to update users win/losses/ratings
+    //
+  }
 
-    setInterval(function() {
-      if (announced_game_over) {
-        return;
-      }
-
-      if (game.game_over()) {
-        announced_game_over = true;
-      }
-    }, 500);
-
-    function uciCmd(cmd, which) {
-      // console.log('UCI: ' + cmd);
-
-      (which || engine).postMessage(cmd);
-    }
-    uciCmd("uci");
-
-    function clockTick() {
-      let t =
-        (time.clockColor === "white" ? time.wtime : time.btime) +
-        time.startTime -
-        Date.now();
-      let timeToNextSecond = (t % 1000) + 1;
-      clockTimeoutID = setTimeout(clockTick, timeToNextSecond);
-    }
-
-    function stopClock() {
-      if (clockTimeoutID !== null) {
-        clearTimeout(clockTimeoutID);
-        clockTimeoutID = null;
-      }
-      if (time.startTime > 0) {
-        let elapsed = Date.now() - time.startTime;
-        time.startTime = null;
-        if (time.clockColor === "white") {
-          time.wtime = Math.max(0, time.wtime - elapsed);
-        } else {
-          time.btime = Math.max(0, time.btime - elapsed);
-        }
-      }
-    }
-
-    function startClock() {
-      if (game.turn() === "w") {
-        time.wtime += time.winc;
-        time.clockColor = "white";
-      } else {
-        time.btime += time.binc;
-        time.clockColor = "black";
-      }
-      time.startTime = Date.now();
-      clockTick();
-    }
-
-    function get_moves() {
-      let moves = "";
-      let history = game.history({ verbose: true });
-
-      for (let i = 0; i < history.length; ++i) {
-        let move = history[i];
-        moves +=
-          " " + move.from + move.to + (move.promotion ? move.promotion : "");
-      }
-
-      return moves;
-    }
-
-    const prepareMove = () => {
-      stopClock();
-      // this.setState({ fen: game.fen() });
-      let turn = game.turn() === "w" ? "white" : "black";
-      if (!game.game_over()) {
-        // if (turn === playerColor) {
-        if (turn !== playerColor) {
-          // playerColor = playerColor === 'white' ? 'black' : 'white';
-          uciCmd("position startpos moves" + get_moves());
-          uciCmd("position startpos moves" + get_moves(), evaler);
-          uciCmd("eval", evaler);
-
-          if (time && time.wtime) {
-            uciCmd(
-              "go " +
-                (time.depth ? "depth " + time.depth : "") +
-                " wtime " +
-                time.wtime +
-                " winc " +
-                time.winc +
-                " btime " +
-                time.btime +
-                " binc " +
-                time.binc
-            );
-          } else {
-            uciCmd("go " + (time.depth ? "depth " + time.depth : ""));
-          }
-          // isEngineRunning = true;
-        }
-        if (game.history().length >= 2 && !time.depth && !time.nodes) {
-          startClock();
-        }
-      }
-    };
-
-    evaler.onmessage = function(event) {
-      let line;
-
-      if (event && typeof event === "object") {
-        line = event.data;
-      } else {
-        line = event;
-      }
-
-      // console.log('evaler: ' + line);
-
-      /// Ignore some output.
-      if (
-        line === "uciok" ||
-        line === "readyok" ||
-        line.substr(0, 11) === "option name"
-      ) {
-        return;
-      }
-    };
-
-    engine.onmessage = event => {
-      let line;
-
-      if (event && typeof event === "object") {
-        line = event.data;
-      } else {
-        line = event;
-      }
-      // console.log('Reply: ' + line);
-      if (line === "uciok") {
-        engineStatus.engineLoaded = true;
-      } else if (line === "readyok") {
-        engineStatus.engineReady = true;
-      } else {
-        let match = line.match(/^bestmove ([a-h][1-8])([a-h][1-8])([qrbn])?/);
-        /// Did the AI move?
-        if (match) {
-          // isEngineRunning = false;
-          game.move({ from: match[1], to: match[2], promotion: match[3] });
-          this.setState({ fen: game.fen() });
-          prepareMove();
-          uciCmd("eval", evaler);
-          //uciCmd("eval");
-          /// Is it sending feedback?
-        } else if (
-          (match = line.match(/^info .*\bdepth (\d+) .*\bnps (\d+)/))
-        ) {
-          engineStatus.search = "Depth: " + match[1] + " Nps: " + match[2];
-        }
-
-        /// Is it sending feed back with a score?
-        if ((match = line.match(/^info .*\bscore (\w+) (-?\d+)/))) {
-          let score = parseInt(match[2], 10) * (game.turn() === "w" ? 1 : -1);
-          /// Is it measuring in centipawns?
-          if (match[1] === "cp") {
-            engineStatus.score = (score / 100.0).toFixed(2);
-            /// Did it find a mate?
-          } else if (match[1] === "mate") {
-            engineStatus.score = "Mate in " + Math.abs(score);
-          }
-
-          /// Is the score bounded?
-          if ((match = line.match(/\b(upper|lower)bound\b/))) {
-            engineStatus.score =
-              ((match[1] === "upper") === (game.turn() === "w")
-                ? "<= "
-                : ">= ") + engineStatus.score;
-          }
-        }
-      }
-      // displayStatus();
-    };
-
-    return {
-      start: function() {
-        uciCmd("ucinewgame");
-        uciCmd("isready");
-        engineStatus.engineReady = false;
-        engineStatus.search = null;
-        prepareMove();
-        announced_game_over = false;
-      },
-      prepareMove: function() {
-        prepareMove();
-      }
-    };
-  };
-
-  render() {
-    const { fen } = this.state;
-    return this.props.children({ position: fen, onDrop: this.onDrop });
+  render() { 
+    const { fen, dropSquareStyle, squareStyles, endGame, isOpen, winner, message, light, dark } = this.state;
+    return this.props.children({
+      // updatePlayers: this.updatePlayers,
+      isOpen: isOpen,
+      toggleModal: this.toggleModal,
+      winner: winner,
+      message: message,
+      resignation: this.resignation,
+      showHistory: this.showHistory,
+      squareStyles,
+      position: fen,
+      onMouseOverSquare: this.onMouseOverSquare,
+      onMouseOutSquare: this.onMouseOutSquare,
+      onDrop: this.onDrop,
+      dropSquareStyle,
+      onDragOverSquare: this.onDragOverSquare,
+      onSquareClick: this.onSquareClick,
+      onSquareRightClick: this.onSquareRightClick,
+      testSockets: this.testSockets,
+      computerMove: this.computerMove
+    });
   }
 }
 
-export default AI;
+
+
+ function Gameboard(props) {
+  let {light, dark} = props.match.params
+  return (
+    <div className="the_BFB">
+      <HumanVsHuman theHistory={props.history} match={props.match}>
+        {({
+          // updatePlayers,
+          resignation,
+          showHistory,
+          position,
+          onDrop,
+          onMouseOverSquare,
+          onMouseOutSquare,
+          squareStyles,
+          dropSquareStyle,
+          onDragOverSquare,
+          onSquareClick,
+          onSquareRightClick,
+          testSockets,
+          isOpen,
+          toggleModal,
+          winner,
+          message
+        }) => (
+          <>
+          <Chat
+          light={light}
+          dark={dark}
+          />
+          {
+            props.username === props.match.params.light
+            ?
+          <Chessboard
+            id="humanVsHuman"
+            width={777}
+            position={position}
+            onDrop={onDrop}
+            onMouseOverSquare={onMouseOverSquare}
+            onMouseOutSquare={onMouseOutSquare}
+            boardStyle={{
+              borderRadius: "5px",
+              boxShadow: `0 5px 15px rgba(0, 0, 0, 0.5)`,
+              marginBottom: '50px'
+            }}
+            darkSquareStyle = {{
+              backgroundColor: 'gray'
+            }}
+            lightSquareStyle = {{
+              backgroundColor: 'white'
+            }}
+            squareStyles={squareStyles}
+            dropSquareStyle={dropSquareStyle}
+            onDragOverSquare={onDragOverSquare}
+            onSquareClick={onSquareClick}
+            onSquareRightClick={onSquareRightClick}
+            />
+            :
+            <Chessboard
+            // updatePlayers={updatePlayers}
+            id="humanVsHuman"
+            width={777}
+            orientation="black"
+            position={position}
+            onDrop={onDrop}
+            onMouseOverSquare={onMouseOverSquare}
+            onMouseOutSquare={onMouseOutSquare}
+            boardStyle={{
+              borderRadius: "5px",
+              boxShadow: `0 5px 15px rgba(0, 0, 0, 0.5)`,
+              marginBottom: '50px'
+            
+            }}
+            darkSquareStyle = {{
+              backgroundColor: 'gray'
+            }}
+            lightSquareStyle = {{
+              backgroundColor: 'white'
+            }}
+            squareStyles={squareStyles}
+            dropSquareStyle={dropSquareStyle}
+            onDragOverSquare={onDragOverSquare}
+            onSquareClick={onSquareClick}
+            onSquareRightClick={onSquareRightClick}
+            />
+          }
+          <MoveList 
+          move={showHistory}
+          resignation = {resignation}
+          />
+          
+        <StyledModal
+          isOpen={isOpen}
+          onBackgroundClick={toggleModal}
+          onEscapeKeydown={toggleModal}
+          light={light}
+          dark={dark}
+          winner={winner}
+          message={message}
+          >
+          
+          <h1>Game Over</h1>
+          <h3>{message}</h3>
+          <button onClick={toggleModal}>Accept</button>
+        </StyledModal>
+          
+          </>
+        )}
+      </HumanVsHuman>
+    </div> 
+  );
+}
+
+function mapStateToProps(state){
+let {username} = state
+return{
+  username
+}
+}
+
+export default connect(mapStateToProps)(Gameboard)
+
+
+const squareStyling = ({ pieceSquare, history }) => {
+  const sourceSquare = history.length && history[history.length - 1].from;
+  const targetSquare = history.length && history[history.length - 1].to;
+  return {
+    [pieceSquare]: { backgroundColor: "rgba(255, 255, 0, 0.4)" },
+    ...(history.length && {
+      [sourceSquare]: {
+        backgroundColor: "rgba(255, 255, 0, 0.4)"
+      }
+    }),
+    ...(history.length && {
+      [targetSquare]: {
+        backgroundColor: "rgba(255, 255, 0, 0.4)"
+      }
+    })
+  };
+};

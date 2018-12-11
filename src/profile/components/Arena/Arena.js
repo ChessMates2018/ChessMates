@@ -61,7 +61,11 @@ class Arena extends Component {
       // console.log('gameId res', res)
       let {gameId} = res.data
       socket.emit(`challenge initiated`, {challenged, gameId, challenger})
+      if(challenged === "Computer"){
+        this.props.history.push(`/AIgameboard/${gameId}/${challenged}/${challenger}`)
+      } else {
       this.props.history.push(`/gameboard/${gameId}/${challenged}/${challenger}`)
+    }
     })
     //grab username of challenged off button click and emit to socket along with gameId (this may cause timing issues, will need to see)
     //set up an io.on if username === the username cooming back from socket push to board  
@@ -144,10 +148,6 @@ class Arena extends Component {
          
         } */}
         {/* {this.displayButton()} */}
-       {/* <Link to='/Stockfish'><button>Play against Stockfish!</button></Link>  */}
-
-
-
       </div>
     )
   }

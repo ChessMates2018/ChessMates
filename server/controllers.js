@@ -215,18 +215,14 @@ module.exports = {
             res.status(200).send(err)
         })
     },
-
     updateRating: (req, res) => {
         const db = req.app.get('db')
         let {elo, winner, loser} = req.body
-        console.log('elo', elo)
-        console.log('winner', winner)
-        console.log('loser', loser)
         let username = req.session.user
-
+        let win = 1;
+        let loss = 1;
         if (winner === username) {
-            console.log('i love you long time')
-            db.update_rating([elo, winner, loser]).then(() => {
+            db.update_rating([elo, winner, loser, win, loss]).then(() => {
             res.sendStatus(200)
         })
         .catch(err => {
