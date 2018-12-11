@@ -7,7 +7,6 @@ DEVKEY
 
 module.exports = {
     registerUser: (req, res) => {
-        // console.log('registerUser Fired', req.body)
         const { firstName, lastName, email, username, password } = req.body
         console.log('dat body', req.body)
         const defaultRank = 1000
@@ -19,7 +18,6 @@ module.exports = {
         const db = req.app.get('db')
         db.checkUsername([username]).then(user => {
             if (user[0]) {
-                console.log('look at me', user[0])
                 res.status(200).send('Username Taken. Try another.')
             } else {
                 console.log('you have else')
@@ -34,7 +32,6 @@ module.exports = {
                     req.session.user.session_id = session_id_count
                     session_id_count++
                     db.toggle_online()
-                    console.log('dumbass?',user[0])
                     res.status(200).send(user[0])
                 })
             }
@@ -203,7 +200,6 @@ module.exports = {
             res.status(500).send(err)
         })
     },
-
     order66: (req, res) => {
         let {roomId} = req.params
         console.log('roomID', roomId)
@@ -215,21 +211,49 @@ module.exports = {
             res.status(200).send(err)
         })
     },
+
+    getRatings: async (req,res) => {
+        let playerRatingArray = [];
+        const db = req.app.get('db')
+        let {usernames} = req.params
+        let usernameArray = usernames.split(',')
+        let light = usernameArray[0]
+        let dark = usernameArray[1]
+        let lightRating = await db.getLightRating([light])
+        let darkRating = await db.getDarkRating([dark])
+        let playerLightRating = lightRating[0].rating
+        let playerDarkRating = darkRating[0].rating
+        playerRatingArray[0] = playerLightRating
+        playerRatingArray[1] = playerDarkRating
+        console.log(playerRatingArray)
+        res.status(200).send(playerRatingArray).catch(err => {
+            console.log(err)
+            res.status(500).send(err)
+        })   
+    },
     updateRating: (req, res) => {
         const db = req.app.get('db')
-        let {elo, winner, loser} = req.body
+        let {eloGain, eloLost, winner, loser, win, loss} = req.body
+        console.log(eloGain, eloLost)
         let username = req.session.user
-        let win = 1;
-        let loss = 1;
         if (winner === username) {
-            db.update_rating([elo, winner, loser, win, loss]).then(() => {
+            db.update_rating([eloGain, eloLost, winner, loser, win, loss]).then(() => {
             res.sendStatus(200)
         })
         .catch(err => {
             console.log(err)
             res.status(500).send(err)
         })}
+    },
+    updateRatingsDraw: (req,res) => {
+        const db = req.app.get('db')
+        console.log(req.body)
+        let{lightEloDraw, darkEloDraw, light, dark} = req.body
+        db.update_rating_draw([lightEloDraw, darkEloDraw, light, dark]).then(() => {
+            res.sendStatus(200)
+        }).catch(err => {
+            console.log(err)
+            res.status(500).send(err)
+        })
     }
-
-
 }

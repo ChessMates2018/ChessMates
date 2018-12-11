@@ -63,6 +63,7 @@ app.get('/api/myGames', ctrl.getMyGames)
 app.get(`/api/checkuser`, ctrl.checkUser)
 app.get(`/api/gameNumber`, ctrl.gameNumber)
 app.get('/api/getPlayers/:roomId', ctrl.getPlayers)
+app.get('/api/getRatings/:usernames', ctrl.getRatings)
 
 app.post('/api/register', ctrl.registerUser)
 app.post('/api/login', ctrl.loginUser)
@@ -73,6 +74,7 @@ app.post('/api/newGameHistory', ctrl.newGame)
 app.put('/api/joinArena', ctrl.joinArena)
 app.put(`/api/user/`, ctrl.updateIcon)
 app.put(`/api/updateRating/`, ctrl.updateRating)
+app.put(`/api/updateRatingsDraw/`, ctrl.updateRatingsDraw)
 
 app.delete(`/api/order66/:roomId`, ctrl.order66)
 

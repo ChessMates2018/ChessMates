@@ -62,6 +62,7 @@ class Profile extends Component {
    }
   }
 
+
   changeIcon = (val) => {
     console.log('Change Icon Fired')
     axios.put(`/api/user/`, {val}).then(res => {

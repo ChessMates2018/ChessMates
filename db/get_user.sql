@@ -1,2 +1,2 @@
-select username, rating, image from users
+select username, rating, image, wins, losses from users
 where username = ${user}
