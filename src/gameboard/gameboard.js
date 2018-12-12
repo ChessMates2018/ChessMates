@@ -74,7 +74,6 @@ class HumanVsHuman extends Component {
       loser: '',
       results: ''
     };
-    this.updateNewMove = this.updateNewMove.bind(this)
     this.toggleModal = this.toggleModal.bind(this)
   }
   static propTypes = { children: PropTypes.func };
