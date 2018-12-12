@@ -234,7 +234,6 @@ module.exports = {
     updateRating: (req, res) => {
         const db = req.app.get('db')
         let {eloGain, eloLost, winner, loser, win, loss} = req.body
-        console.log(eloGain, eloLost)
         let username = req.session.user
         if (winner === username) {
             db.update_rating([eloGain, eloLost, winner, loser, win, loss]).then(() => {
@@ -247,7 +246,6 @@ module.exports = {
     },
     updateRatingsDraw: (req,res) => {
         const db = req.app.get('db')
-        console.log(req.body)
         let{lightEloDraw, darkEloDraw, light, dark} = req.body
         db.update_rating_draw([lightEloDraw, darkEloDraw, light, dark]).then(() => {
             res.sendStatus(200)

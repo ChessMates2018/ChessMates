@@ -33,11 +33,8 @@ class Profile extends Component {
     if (!this.props.username) {
       // console.log('FIRE FIRE FIRE')
       axios.get(`/api/checkuser`).then(res => {
-        console.log('dis is du RES', res)
         this.props.setUsername(res.data)
         login(res.data)
-
-        
       })
       .catch(err => {
         console.log('dis is du err!',err)

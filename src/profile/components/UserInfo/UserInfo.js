@@ -21,15 +21,12 @@ class UserInfo extends Component {
   }
 
   componentWillUpdate(prevProps, prevState){
-    console.log(prevProps)
     if(prevProps.image !== this.state.currentUser.image){
-      console.log('updating')
     }
   }
   
   getUser = () => {
     axios.get(`/api/user`).then(res => {
-      console.log('user', res.data)
       this.setState({
         currentUser: res.data[0],
       })
@@ -37,10 +34,8 @@ class UserInfo extends Component {
   }
 
   render () {
-  console.log(this.state)
   let {username, rating, image, wins, losses} = this.state.currentUser
   // let imageStr = JSON.stringify(image)
-  console.log('current', image)
   let {showTheIcons} = this.props
     return (
       <div>

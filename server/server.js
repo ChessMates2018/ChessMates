@@ -78,10 +78,7 @@ app.put(`/api/updateRatingsDraw/`, ctrl.updateRatingsDraw)
 
 app.delete(`/api/order66/:roomId`, ctrl.order66)
 
-// io.use(sharedSession(session,{
-//     autoSave: true
-// }))
-
+// Sockets
 io.on('connection', function(socket){
     console.log('user connected', socket.id)
 
@@ -89,31 +86,11 @@ io.on('connection', function(socket){
         io.sockets.emit("general-message", data)
     })
 
-    // socket.on("checkMaaate", data => {
-    //     console.log('Made it to server with checkmate')
-    //     io.emit("checkMaaate", data)
-    // })
-    // socket.on('login', (user) => {
-    //     let socket_id = socket.id
-    //     socket.handshake.session.socket_id = socket_id
-    //     socket.handshake.session.user = user
-    //     socket.handshake.session.save() 
-    // })
-
     socket.on('new-game', () => {
         socket.join('game1')
         console.log('joined game1')
-        // .clients((error, clients) => {
-        //     if (error) throw error
-        //     console.log(clients)
-        // }) 
     })
-    //io.to(uniqueid).emit()
-    socket.on('back end test', () => {
-        // console.log('back end has been hit!')
-        io.emit('test')
-    })
-
+   
     socket.on('new player', function() {
         // console.log('message recieved')
         io.emit('player joined', {name: player.name, room: player.room})
