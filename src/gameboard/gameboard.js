@@ -234,8 +234,10 @@ class HumanVsHuman extends Component {
 
   updateNewMove =(newMove)=> {
     this.movePiece(newMove.sourceSquare, newMove.targetSquare)
-    let {fen, history, squareStyles} = newMove
-    this.setState({fen: this.game.fen()})
+    this.setState(({ history, pieceSquare }) => ({
+      fen: this.game.fen(),
+      history: this.game.history({ verbose: false }),
+      squareStyles: squareStyling({ pieceSquare, history })
   }
 
   // Michelle's Original Code for Identifying CheckMate
