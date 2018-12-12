@@ -238,7 +238,8 @@ class HumanVsHuman extends Component {
       fen: this.game.fen(),
       history: this.game.history({ verbose: false }),
       squareStyles: squareStyling({ pieceSquare, history })
-  }
+  }))
+}
 
   // Michelle's Original Code for Identifying CheckMate
   // , () => {
