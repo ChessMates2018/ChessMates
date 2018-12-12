@@ -240,7 +240,7 @@ class HumanVsHuman extends Component {
   }
 
   updateNewMove =(newMove)=> {
-    // this.movePiece(newMove.sourceSquare, newMove.targetSquare)
+    this.movePiece(newMove.sourceSquare, newMove.targetSquare)
     let {fen, history, squareStyles} = newMove
     this.setState({fen, history, squareStyles})
   }
