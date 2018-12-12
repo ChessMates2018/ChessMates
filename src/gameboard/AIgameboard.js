@@ -18,16 +18,14 @@ const StyledModal = Modal.styled`
   align-items: center;
   border-radius: 3px;
   box-shadow: 0px 0px 15px white;
-  font-family: Helvetica, Arial;    
-  h1 {
+  font-family: Helvetica, Arial;   
+  h1,h2,h3,h4{
     color: white;
-  }
+  } 
   h3 {
-    color: white;
     padding: 10px;
     text-align: center;
     margin-bottom: 10px;
-
   }
   button {
     margin-top: 20px 0px;
@@ -64,7 +62,8 @@ class HumanVsHuman extends Component {
       message: '',
       isOpen: false,
       winner: '',
-      loser: ''
+      loser: '',
+      results: ''
     };
     this.toggleModal = this.toggleModal.bind(this)
   }
@@ -158,8 +157,7 @@ class HumanVsHuman extends Component {
         let loss = 1;
         let eloGain = lightPointsWin - lightRating;
         let eloLost = darkRating - darkPointsLose;
-        console.log(eloGain, eloLost)
-        this.setState({winner: light, loser: dark, isOpen: true, message: `Checkmate! ${light} has won.`}, () => {
+        this.setState({winner: light, loser: dark, isOpen: true, message: `Checkmate! ${light} has won.`, results: `${light} has gained ${eloGain} points and ${dark} has lost ${eloLost} points.`}, () => {
           let {winner, loser} = this.state
           axios.put(`/api/updateRating/`, {win, loss, eloGain, eloLost, winner, loser})
         })
@@ -168,24 +166,21 @@ class HumanVsHuman extends Component {
         let loss = 1;
         let eloGain = darkPointsWin - darkRating;
         let eloLost = lightRating - lightPointsLose;
-        this.setState({winner: dark, loser: light, isOpen: true, message: `Checkmate! ${dark} has won.`}, () => {
+        this.setState({winner: dark, loser: light, isOpen: true, message: `Checkmate! ${dark} has won.`, results: `${dark} has gained ${eloGain} points and ${light} has lost ${eloLost} points.`}, () => {
           let{winner, loser} = this.state
           axios.put(`/api/updateRating/`, {win, loss, eloGain, eloLost, winner, loser})
         })
       } 
     } else if(in_stalemate()){
-      console.log('this is a stalemate')
-      this.setState({isOpen: true, message:`Game Over! The game has ended in stalemate.`}, () =>{
+      this.setState({isOpen: true, message:`Game Over! The game has ended in stalemate.`, results: `${light}'s new rating is ${lightEloDraw} and ${dark}'s new rating is ${darkEloDraw}.`}, () =>{
         axios.put('/api/updateRatingsDraw/', {light, dark, lightEloDraw, darkEloDraw})
       })
     } else if(insufficient_material()){
-      console.log('this is insufficient material.')
-      this.setState({isOpen: true, message:`Game Over! The game has ended in a draw: Insufficient material.`}, () => {
+      this.setState({isOpen: true, message:`Game Over! The game has ended in a draw: Insufficient material.`, results: `${light}'s new rating is ${lightEloDraw} and ${dark}'s new rating is ${darkEloDraw}.`}, () => {
         axios.put('/api/updateRatingsDraw/', {light, dark, lightEloDraw, darkEloDraw})
       })
     } else if(in_threefold_repetition()){
-      console.log('This is a threefold repeat.')
-      this.setState({isOpen: true, message:`Game Over! The game has ended in a draw: Threefold repetition.`}, () => {
+      this.setState({isOpen: true, message:`Game Over! The game has ended in a draw: Threefold repetition.`, results: `${light}'s new rating is ${lightEloDraw} and ${dark}'s new rating is ${darkEloDraw}.`}, () => {
         axios.put('/api/updateRatingsDraw/', {light, dark, lightEloDraw, darkEloDraw})
       })
     }
@@ -320,8 +315,7 @@ class HumanVsHuman extends Component {
   }
 
   render() { 
-    console.log(this.state)
-    const { fen, dropSquareStyle, squareStyles, endGame, isOpen, winner, message, light, dark } = this.state;
+    const { fen, dropSquareStyle, squareStyles, endGame, isOpen, winner, message, light, dark, results } = this.state;
     return this.props.children({
       // updatePlayers: this.updatePlayers,
       isOpen: isOpen,
@@ -340,7 +334,8 @@ class HumanVsHuman extends Component {
       onSquareClick: this.onSquareClick,
       onSquareRightClick: this.onSquareRightClick,
       testSockets: this.testSockets,
-      computerMove: this.computerMove
+      computerMove: this.computerMove,
+      results: results
     });
   }
 }
@@ -369,7 +364,8 @@ class HumanVsHuman extends Component {
           isOpen,
           toggleModal,
           winner,
-          message
+          message,
+          results
         }) => (
           <>
           <Chat
@@ -445,10 +441,12 @@ class HumanVsHuman extends Component {
           dark={dark}
           winner={winner}
           message={message}
+          results={results}
           >
           
           <h1>Game Over</h1>
           <h3>{message}</h3>
+          <h4>{results}</h4>
           <button onClick={toggleModal}>Accept</button>
         </StyledModal>
           
