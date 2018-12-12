@@ -83,7 +83,6 @@ class HumanVsHuman extends Component {
   componentDidMount() {
     this.updatingPlayers()
     this.runSockets()
-    
     this.game = new Chess();
     this.socket.emit('new-game', {
       message: this.game,
@@ -111,6 +110,7 @@ class HumanVsHuman extends Component {
     axios.get(`/api/getRatings/${usernames}`).then(res => {
       let lightRating  = res.data[0]
       let darkRating = res.data[1]
+      console.log(lightRating, darkRating)
       this.setState({
         lightRating, darkRating
       }, () => this.eloCalculator())
@@ -121,7 +121,7 @@ class HumanVsHuman extends Component {
     let {roomId, dark, light} = this.props.match.params
     this.setState({
       light, dark
-    }, console.log('UPDATING', this.state))
+    }, this.getPlayerRatings())
   }
 
   movePiece(sourceSquare, targetSquare){
@@ -343,6 +343,7 @@ class HumanVsHuman extends Component {
   }
 
   render() { 
+    console.log(this.state)
     const { fen, dropSquareStyle, squareStyles, endGame, isOpen, winner, message, light, dark, results } = this.state;
     return this.props.children({
       // updatePlayers: this.updatePlayers,
