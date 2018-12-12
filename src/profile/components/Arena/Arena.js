@@ -28,13 +28,11 @@ class Arena extends Component {
         players: res.data
       })
     })
-    console.log(this.props)
     socket.on('push to board', (challenged, gameId, challenger) => {
       console.log(challenged)
       console.log(challenger)
       let light = challenged.challenged.challenger
       let dark = challenged.challenged.challenged
-      console.log('challenge made', challenged.challenged.challenged, this.props.username, challenged.challenged.gameId)
       if(this.props.username === challenged.challenged.challenged){
         axios.post('/api/newGameHistory', {dark, light})
         this.props.history.push(`/gameboard/${challenged.challenged.gameId}/${dark}/${light}`)
@@ -119,8 +117,6 @@ class Arena extends Component {
 
 
   render () {
-    console.log(this.props)
-    console.log(this.state.players)
     let {opponentsList} = this.props
     
     /** destructuer stull off of info.4 */

@@ -19,13 +19,11 @@ constructor(props){
 login(){
 let {Username, Password} = this.state
 axios.post('/api/login', {Username, Password}).then((res) => {
-    console.log(res.data)
 if (res.data === 'Invalid Password'){
     alert(res.data)
 } else if (res.data === 'Username does not exist') {
     alert(res.data)
 } else{
-    console.log(this.props)
     this.props.history.push('/profile')
 }
 })

@@ -226,18 +226,20 @@ class HumanVsHuman extends Component {
   runSockets = () => {
     this.socket = socket
     this.socket.on('test', data => console.log('test fired'))
-    this.socket.on('connect-to-room', data => 'PUT HISTORY.PUSH HERE?')
-    this.socket.on('connect-to-room', data => this.socket.emit('user-info', 'ADD USER PROPS? HERE'))
+    // this.socket.on('connect-to-room', data => 'PUT HISTORY.PUSH HERE?')
+    // this.socket.on('connect-to-room', data => this.socket.emit('user-info', 'ADD USER PROPS? HERE'))
     this.socket.on('users', (data) => this.setState({white: 'ADD PROPS', black: 'ADD PROPS'}))
 
   }
 
   updateNewMove =(newMove)=> {
-    let {roomId} = this.props.match.params
-    console.log('roomId', roomId)
     this.movePiece(newMove.sourceSquare, newMove.targetSquare)
-    let {fen, history, squareStyles} = newMove
-    this.setState({fen, history, squareStyles})
+    // let {fen, history, squareStyles} = newMove
+    this.setState(({ history, pieceSquare }) => ({
+      fen: this.game.fen(),
+      history: this.game.history({ verbose: false }),
+      squareStyles: squareStyling({ pieceSquare, history }),
+    }))
   }
 
   // Michelle's Original Code for Identifying CheckMate
