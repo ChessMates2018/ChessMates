@@ -207,7 +207,6 @@ class HumanVsHuman extends Component {
   onDrop = ({ sourceSquare, targetSquare }) => {
     // see if the move is legal
     let move = this.movePiece(sourceSquare, targetSquare)
-    
     // illegal move
     if (move === null) return;
     this.setState(({ history, pieceSquare }) => ({
@@ -234,13 +233,9 @@ class HumanVsHuman extends Component {
   }
 
   updateNewMove =(newMove)=> {
-    this.movePiece(newMove.sourceSquare, newMove.targetSquare)
+    // this.movePiece(newMove.sourceSquare, newMove.targetSquare)
     let {fen, history, squareStyles} = newMove
-    this.setState(({ history, pieceSquare }) => ({
-      fen: this.game.fen(),
-      history: this.game.history({ verbose: false }),
-      squareStyles: squareStyling({ pieceSquare, history }),
-    }))
+    this.setState({fen, history, squareStyles})
   }
 
   // Michelle's Original Code for Identifying CheckMate
