@@ -79,7 +79,6 @@ class HumanVsHuman extends Component {
       room: this.state.room
     })
     this.socket.on('update-game', (data) => {
-      Gameboard(data)
       this.updateNewMove(data)
       this.endgameConditions()
     })
@@ -241,13 +240,9 @@ class HumanVsHuman extends Component {
   }
 
   updateNewMove =(newMove)=> {
-    this.movePiece(newMove.sourceSquare, newMove.targetSquare)
-    // let {fen, history, squareStyles} = newMove
-    this.setState(({ history, pieceSquare }) => ({
-      fen: this.game.fen(),
-      history: this.game.history({ verbose: false }),
-      squareStyles: squareStyling({ pieceSquare, history }),
-    }))
+    // this.movePiece(newMove.sourceSquare, newMove.targetSquare)
+    let {fen, history, squareStyles} = newMove
+    this.setState({fen, history, squareStyles})
   }
 
   showHistory = () => {
@@ -343,9 +338,7 @@ class HumanVsHuman extends Component {
 
 
 
- function Gameboard(props, data) {
-  let {fen} = data
-  let newFen = fen
+ function Gameboard(props) {
   let {light, dark} = props.match.params
   return (
     <div className="the_BFB">
@@ -355,7 +348,6 @@ class HumanVsHuman extends Component {
           resignation,
           showHistory,
           position,
-          newfen,
           onDrop,
           onMouseOverSquare,
           onMouseOutSquare,
@@ -382,7 +374,7 @@ class HumanVsHuman extends Component {
           <Chessboard
             id="humanVsHuman"
             width={777}
-            position={newFen || position}
+            position={position}
             onDrop={onDrop}
             onMouseOverSquare={onMouseOverSquare}
             onMouseOutSquare={onMouseOutSquare}
@@ -409,7 +401,7 @@ class HumanVsHuman extends Component {
             id="humanVsHuman"
             width={777}
             orientation="black"
-            position={newFen || position}
+            position={position}
             onDrop={onDrop}
             onMouseOverSquare={onMouseOverSquare}
             onMouseOutSquare={onMouseOutSquare}
