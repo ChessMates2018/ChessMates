@@ -79,6 +79,7 @@ class HumanVsHuman extends Component {
       room: this.state.room
     })
     this.socket.on('update-game', (data) => {
+      Gameboard(data)
       this.updateNewMove(data)
       this.endgameConditions()
     })
@@ -342,7 +343,9 @@ class HumanVsHuman extends Component {
 
 
 
- function Gameboard(props) {
+ function Gameboard(props, data) {
+  let {fen} = data
+  let newFen = fen
   let {light, dark} = props.match.params
   return (
     <div className="the_BFB">
@@ -352,6 +355,7 @@ class HumanVsHuman extends Component {
           resignation,
           showHistory,
           position,
+          newfen,
           onDrop,
           onMouseOverSquare,
           onMouseOutSquare,
@@ -378,7 +382,7 @@ class HumanVsHuman extends Component {
           <Chessboard
             id="humanVsHuman"
             width={777}
-            position={position}
+            position={newFen || position}
             onDrop={onDrop}
             onMouseOverSquare={onMouseOverSquare}
             onMouseOutSquare={onMouseOutSquare}
@@ -405,7 +409,7 @@ class HumanVsHuman extends Component {
             id="humanVsHuman"
             width={777}
             orientation="black"
-            position={position}
+            position={newFen || position}
             onDrop={onDrop}
             onMouseOverSquare={onMouseOverSquare}
             onMouseOutSquare={onMouseOutSquare}
