@@ -89,6 +89,7 @@ class HumanVsHuman extends Component {
       room: this.state.room
     })
     this.socket.on('update-game', (data) => {
+      this.Gameboard(data)
       this.updateNewMove(data)
       this.endgameConditions()
     })
@@ -234,7 +235,7 @@ class HumanVsHuman extends Component {
 
   updateNewMove =(newMove)=> {
     this.movePiece(newMove.sourceSquare, newMove.targetSquare)
-    // let {fen, history, squareStyles} = newMove
+    let {fen, history, squareStyles} = newMove
     this.setState(({ history, pieceSquare }) => ({
       fen: this.game.fen(),
       history: this.game.history({ verbose: false }),
