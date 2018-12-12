@@ -74,6 +74,7 @@ class HumanVsHuman extends Component {
       loser: '',
       results: ''
     };
+
     this.toggleModal = this.toggleModal.bind(this)
   }
   static propTypes = { children: PropTypes.func };
@@ -88,7 +89,6 @@ class HumanVsHuman extends Component {
       room: this.state.room
     })
     this.socket.on('update-game', (data) => {
-      this.Gameboard(data)
       this.updateNewMove(data)
       this.endgameConditions()
     })
@@ -206,6 +206,7 @@ class HumanVsHuman extends Component {
   onDrop = ({ sourceSquare, targetSquare }) => {
     // see if the move is legal
     let move = this.movePiece(sourceSquare, targetSquare)
+    
     // illegal move
     if (move === null) return;
     this.setState(({ history, pieceSquare }) => ({
@@ -232,14 +233,9 @@ class HumanVsHuman extends Component {
   }
 
   updateNewMove =(newMove)=> {
-    let {fen, history, squareStyles, sourceSquare, targetSquare} = newMove
-    let move = this.movePiece(sourceSquare, targetSquare)
-    if (move === null) return;
-    this.setState(({ history, pieceSquare }) => ({
-      fen: this.game.fen(),
-      history: this.game.history({ verbose: false }),
-      squareStyles: squareStyling({ pieceSquare, history }),
-    }))
+    this.movePiece(newMove.sourceSquare, newMove.targetSquare)
+    let {fen, history, squareStyles} = newMove
+    this.setState({fen, history, squareStyles})
   }
 
   // Michelle's Original Code for Identifying CheckMate
