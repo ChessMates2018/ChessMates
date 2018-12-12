@@ -201,7 +201,7 @@ class HumanVsHuman extends Component {
       let newMove = {fen, history, squareStyles, sourceSquare, targetSquare}
       this.socket.emit('move', newMove)
       console.log('socket', this.socket)
-      window.setTimeout(this.computerMove(), 1000);
+      window.setTimeout(this.computerMove(), 3000);
     });
   };
 
