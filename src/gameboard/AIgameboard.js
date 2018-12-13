@@ -79,7 +79,6 @@ class HumanVsHuman extends Component {
       room: this.state.room
     })
     this.socket.on('update-game', (data) => {
-      console.log(this.game.fen(), 'this game fen after receiving data')
       this.updateNewMove(data)
       this.endgameConditions()
     })
@@ -201,7 +200,6 @@ class HumanVsHuman extends Component {
       let {fen, history, squareStyles} = this.state
       let newMove = {fen, history, squareStyles, sourceSquare, targetSquare}
       this.socket.emit('move', newMove)
-      console.log('socket', this.socket)
       window.setTimeout(this.computerMove(), 3000);
     });
   };
@@ -231,7 +229,6 @@ class HumanVsHuman extends Component {
       let {fen, history, squareStyles} = this.state
       let newMove = {fen, history, squareStyles,sourceSquare, targetSquare}
       this.socket.emit('move', newMove)
-      console.log('socket', this.socket)
     });
   }
 
@@ -312,7 +309,6 @@ class HumanVsHuman extends Component {
   }
 
   render() { 
-    console.log(this.state.fen, 'state fen')
     const { fen, dropSquareStyle, squareStyles, endGame, isOpen, winner, message, light, dark, results } = this.state;
     return this.props.children({
       // updatePlayers: this.updatePlayers,
@@ -341,7 +337,6 @@ class HumanVsHuman extends Component {
 
 
  function Gameboard(props) {
-   this.console.log(this.state.fen)
   let {light, dark} = props.match.params
   return (
     <div className="the_BFB">
