@@ -89,6 +89,7 @@ class HumanVsHuman extends Component {
       room: this.state.room
     })
     this.socket.on('update-game', (data) => {
+      console.log(this.game.fen(), 'this is game.fen when socket is received.')
       this.updateNewMove(data)
       this.endgameConditions()
     })
@@ -110,7 +111,6 @@ class HumanVsHuman extends Component {
     axios.get(`/api/getRatings/${usernames}`).then(res => {
       let lightRating  = res.data[0]
       let darkRating = res.data[1]
-      console.log(lightRating, darkRating)
       this.setState({
         lightRating, darkRating
       }, () => this.eloCalculator())
@@ -234,6 +234,8 @@ class HumanVsHuman extends Component {
 
   updateNewMove =(newMove)=> {
     this.movePiece(newMove.sourceSquare, newMove.targetSquare)
+    let {fen, history, squareStyles} = newMove
+    console.log(fen, 'this is fen in updateNewMove')
     this.setState(({ history, pieceSquare }) => ({
       fen: this.game.fen(),
       history: this.game.history({ verbose: false }),
@@ -344,7 +346,6 @@ class HumanVsHuman extends Component {
   }
 
   render() { 
-    console.log(this.state)
     const { fen, dropSquareStyle, squareStyles, endGame, isOpen, winner, message, light, dark, results } = this.state;
     return this.props.children({
       // updatePlayers: this.updatePlayers,
