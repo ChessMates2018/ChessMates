@@ -64,7 +64,8 @@ class HumanVsHuman extends Component {
       loser: '',
       results: '',
       areYouSure: false,
-      resigned: false
+      resigned: false,
+      finished: false
     };
     this.toggleModal = this.toggleModal.bind(this)
   }
@@ -158,7 +159,7 @@ class HumanVsHuman extends Component {
         let loss = 1;
         let eloGain = lightPointsWin - lightRating;
         let eloLost = darkRating - darkPointsLose;
-        this.setState({winner: light, loser: dark, isOpen: true, message: `Checkmate! ${light} has won.`, results: `${light} has gained ${eloGain} points and ${dark} has lost ${eloLost} points.`}, () => {
+        this.setState({finished: true,winner: light, loser: dark, isOpen: true, message: `Checkmate! ${light} has won.`, results: `${light} has gained ${eloGain} points and ${dark} has lost ${eloLost} points.`}, () => {
           let {winner, loser} = this.state
           axios.put(`/api/updateRating/`, {win, loss, eloGain, eloLost, winner, loser})
         })
@@ -167,21 +168,21 @@ class HumanVsHuman extends Component {
         let loss = 1;
         let eloGain = darkPointsWin - darkRating;
         let eloLost = lightRating - lightPointsLose;
-        this.setState({winner: dark, loser: light, isOpen: true, message: `Checkmate! ${dark} has won.`, results: `${dark} has gained ${eloGain} points and ${light} has lost ${eloLost} points.`}, () => {
+        this.setState({finished: true, winner: dark, loser: light, isOpen: true, message: `Checkmate! ${dark} has won.`, results: `${dark} has gained ${eloGain} points and ${light} has lost ${eloLost} points.`}, () => {
           let{winner, loser} = this.state
           axios.put(`/api/updateRating/`, {win, loss, eloGain, eloLost, winner, loser})
         })
       } 
     } else if(in_stalemate()){
-      this.setState({isOpen: true, message:`Game Over! The game has ended in stalemate.`, results: `${light}'s new rating is ${lightEloDraw} and ${dark}'s new rating is ${darkEloDraw}.`}, () =>{
+      this.setState({finished: true, isOpen: true, message:`Game Over! The game has ended in stalemate.`, results: `${light}'s new rating is ${lightEloDraw} and ${dark}'s new rating is ${darkEloDraw}.`}, () =>{
         axios.put('/api/updateRatingsDraw/', {light, dark, lightEloDraw, darkEloDraw})
       })
     } else if(insufficient_material()){
-      this.setState({isOpen: true, message:`Game Over! The game has ended in a draw: Insufficient material.`, results: `${light}'s new rating is ${lightEloDraw} and ${dark}'s new rating is ${darkEloDraw}.`}, () => {
+      this.setState({finished: true, isOpen: true, message:`Game Over! The game has ended in a draw: Insufficient material.`, results: `${light}'s new rating is ${lightEloDraw} and ${dark}'s new rating is ${darkEloDraw}.`}, () => {
         axios.put('/api/updateRatingsDraw/', {light, dark, lightEloDraw, darkEloDraw})
       })
     } else if(in_threefold_repetition()){
-      this.setState({isOpen: true, message:`Game Over! The game has ended in a draw: Threefold repetition.`, results: `${light}'s new rating is ${lightEloDraw} and ${dark}'s new rating is ${darkEloDraw}.`}, () => {
+      this.setState({finished: true, isOpen: true, message:`Game Over! The game has ended in a draw: Threefold repetition.`, results: `${light}'s new rating is ${lightEloDraw} and ${dark}'s new rating is ${darkEloDraw}.`}, () => {
         axios.put('/api/updateRatingsDraw/', {light, dark, lightEloDraw, darkEloDraw})
       })
     }
@@ -305,7 +306,7 @@ class HumanVsHuman extends Component {
     });
 
   resignation = (e) => {
-    if (this.state.resigned) return
+    if (this.state.resigned || this.state.finished) return
     let win = 1;
     let loss = 1;
     let {light, dark, lightRating, darkRating, lightPointsWin, lightPointsDraw, lightPointsLose, darkPointsWin, darkPointsDraw, darkPointsLose} = this.state
