@@ -189,6 +189,7 @@ class HumanVsHuman extends Component {
 
 
   onDrop = ({ sourceSquare, targetSquare }) => {
+    if (this.state.resigned) return
     // see if the move is legal
     let move = this.movePiece(sourceSquare, targetSquare)
     // illegal move
