@@ -232,7 +232,6 @@ module.exports = {
     },
     updateRating: (req, res) => {
         const db = req.app.get('db')
-        console.log(req.body)
         let {eloGain, eloLost, winner, loser, win, loss} = req.body
         let username = req.session.user
         if (winner === username) {
