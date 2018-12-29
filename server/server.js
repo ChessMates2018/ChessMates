@@ -80,7 +80,6 @@ app.delete(`/api/order66/:roomId`, ctrl.order66)
 
 // Sockets
 io.on('connection', function(socket){
-    console.log('user connected', socket.id)
 
     socket.on("general-chat", data=>{
         io.sockets.emit("general-message", data)
@@ -88,7 +87,7 @@ io.on('connection', function(socket){
 
     socket.on('new-game', () => {
         socket.join('game1')
-        console.log('joined game1')
+        
     })
    
     socket.on('new player', function() {
@@ -97,26 +96,23 @@ io.on('connection', function(socket){
     })
 
     socket.on('challenge initiated', (challenged, gameId, challenger) => {
-        console.log('challenge accepted')
+        
         io.emit('push to board', {challenged, gameId, challenger})
     })
 
     // socket.on('move', (msg) => this.socket.broadcast.emit('move', msg))
     socket.on('move', (newMove) => {
-        console.log('you made a move')
+        
         //add change turn to = true add to emit?
         io.to('game1').emit('update-game',newMove)
-        console.log('message sent game1', newMove)
+        
     })
     
     socket.on('disconnect', () => console.log('User has peaced out, yo!', socket.id))
 
     socket.on('connect', () => {
         let roomId = socket.id
-        console.log("LOOK HERE", roomId)
       })
-
-
 })
 
 // io = io.listen(server)
