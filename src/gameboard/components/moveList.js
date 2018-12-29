@@ -10,10 +10,9 @@ class MoveList extends Component{
 
   
   render(props){
-      let {resignation} = this.props
-      
+      let {resignation, light, dark} = this.props
+      console.log(`%c ${light}`, "color: red; font-size: 24px")
     return(
-        
         <div className='ML_rapper'>
             <h3>MoveList</h3>
             <div className="move_list">
@@ -21,7 +20,7 @@ class MoveList extends Component{
             </div>
             <button
                 className = "resign_btn"
-                 onClick = {resignation}
+                 onClick = {(e) => resignation(e)}
             >Resign</button>
         </div>
     )
