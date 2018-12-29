@@ -225,7 +225,6 @@ module.exports = {
         let playerDarkRating = darkRating[0].rating
         playerRatingArray[0] = playerLightRating
         playerRatingArray[1] = playerDarkRating
-        console.log(playerRatingArray)
         res.status(200).send(playerRatingArray).catch(err => {
             console.log(err)
             res.status(500).send(err)
@@ -233,6 +232,7 @@ module.exports = {
     },
     updateRating: (req, res) => {
         const db = req.app.get('db')
+        console.log(req.body)
         let {eloGain, eloLost, winner, loser, win, loss} = req.body
         let username = req.session.user
         if (winner === username) {
@@ -242,6 +242,13 @@ module.exports = {
         .catch(err => {
             console.log(err)
             res.status(500).send(err)
+        })} else if (winner === "Computer"){
+            db.update_rating([eloGain, eloLost, winner, loser, win, loss]).then(() => {
+                res.sendStatus(200)
+            })
+            .catch(err => {
+                console.log(err)
+                res.status(500).send(err)
         })}
     },
     updateRatingsDraw: (req,res) => {

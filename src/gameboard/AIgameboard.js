@@ -9,6 +9,7 @@ import {connect} from 'react-redux'
 import Chat from './components/chat'
 import Modal from 'styled-react-modal'
 
+
 const StyledModal = Modal.styled`
   width: 30rem;
   height: 10rem;
@@ -34,11 +35,9 @@ const StyledModal = Modal.styled`
   }
 `
 
-
 class HumanVsHuman extends Component {
   constructor(props) {
     super (props)
-
     this.state = {
       fen: "start",
       dropSquareStyle: {},
@@ -63,7 +62,8 @@ class HumanVsHuman extends Component {
       isOpen: false,
       winner: '',
       loser: '',
-      results: ''
+      results: '',
+      areYouSure: false
     };
     this.toggleModal = this.toggleModal.bind(this)
   }
@@ -302,16 +302,22 @@ class HumanVsHuman extends Component {
       squareStyles: { [square]: { backgroundColor: "deepPink" } }
     });
 
-  resignation = () => {
-    //know which one is resigning
-    //axios to update users win/losses/ratings
-    //
+  resignation = (e) => {
+    let win = 1;
+    let loss = 1;
+    let {light, dark, lightRating, darkRating, lightPointsWin, lightPointsDraw, lightPointsLose, darkPointsWin, darkPointsDraw, darkPointsLose} = this.state
+    let eloGain = lightPointsWin - lightRating;
+    let eloLost = darkRating - darkPointsLose;
+    this.setState({winner: dark, loser: light, isOpen: true, message: `You have resigned. ${dark} has won.`, results: `${dark} has gained ${eloGain} points and ${light} has lost ${eloLost} points.`}, () => {
+      let{winner, loser} = this.state
+      axios.put(`/api/updateRating/`, {win, loss, eloGain, eloLost, winner, loser})
+      console.log('WHAT THE FUCK.')
+    })
   }
 
   render() { 
-    const { fen, dropSquareStyle, squareStyles, endGame, isOpen, winner, message, light, dark, results } = this.state;
+    const { fen, dropSquareStyle, squareStyles, endGame, isOpen, winner, message, light, dark, results, areYouSure } = this.state;
     return this.props.children({
-      // updatePlayers: this.updatePlayers,
       isOpen: isOpen,
       toggleModal: this.toggleModal,
       winner: winner,
@@ -342,7 +348,6 @@ class HumanVsHuman extends Component {
     <div className="the_BFB">
       <HumanVsHuman theHistory={props.history} match={props.match}>
         {({
-          // updatePlayers,
           resignation,
           showHistory,
           position,
@@ -354,12 +359,12 @@ class HumanVsHuman extends Component {
           onDragOverSquare,
           onSquareClick,
           onSquareRightClick,
-          testSockets,
           isOpen,
           toggleModal,
           winner,
           message,
-          results
+          results,
+          areYouSure
         }) => (
           <>
           <Chat
@@ -395,7 +400,6 @@ class HumanVsHuman extends Component {
             />
             :
             <Chessboard
-            // updatePlayers={updatePlayers}
             id="humanVsHuman"
             width={777}
             orientation="black"
@@ -425,8 +429,11 @@ class HumanVsHuman extends Component {
           <MoveList 
           move={showHistory}
           resignation = {resignation}
+          light={light}
+          dark={dark}
           />
           
+
         <StyledModal
           isOpen={isOpen}
           onBackgroundClick={toggleModal}

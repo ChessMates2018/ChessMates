@@ -260,7 +260,7 @@ class HumanVsHuman extends Component {
   showHistory = () => {
   let {history} = this.state
   let counter = 0
-  // console.log("HISTORY",history)
+
   let moveList = history.map((element,index) => {
     let moveNumber = 1 + index
     return(
@@ -337,9 +337,7 @@ class HumanVsHuman extends Component {
     });
 
   resignation = () => {
-    //know which one is resigning
-    //axios to update game history by game id from routing params
-    //this.props.theHistory.push('/profile')
+    alert('Are you sure you want to quit?')
   }
 
   render() { 
@@ -460,6 +458,8 @@ class HumanVsHuman extends Component {
           <MoveList 
           move={showHistory}
           resignation = {resignation}
+          light={light}
+          dark={dark}
           />
           
         <StyledModal
