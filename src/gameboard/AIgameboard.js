@@ -63,7 +63,8 @@ class HumanVsHuman extends Component {
       winner: '',
       loser: '',
       results: '',
-      areYouSure: false
+      areYouSure: false,
+      resigned: false
     };
     this.toggleModal = this.toggleModal.bind(this)
   }
@@ -303,15 +304,15 @@ class HumanVsHuman extends Component {
     });
 
   resignation = (e) => {
+    if (this.state.resigned) return
     let win = 1;
     let loss = 1;
     let {light, dark, lightRating, darkRating, lightPointsWin, lightPointsDraw, lightPointsLose, darkPointsWin, darkPointsDraw, darkPointsLose} = this.state
     let eloGain = lightPointsWin - lightRating;
     let eloLost = darkRating - darkPointsLose;
-    this.setState({winner: dark, loser: light, isOpen: true, message: `You have resigned. ${dark} has won.`, results: `${dark} has gained ${eloGain} points and ${light} has lost ${eloLost} points.`}, () => {
+    this.setState({resigned: true, winner: dark, loser: light, isOpen: true, message: `You have resigned. ${dark} has won.`, results: `${dark} has gained ${eloGain} points and ${light} has lost ${eloLost} points.`}, () => {
       let{winner, loser} = this.state
       axios.put(`/api/updateRating/`, {win, loss, eloGain, eloLost, winner, loser})
-      console.log('WHAT THE FUCK.')
     })
   }
 

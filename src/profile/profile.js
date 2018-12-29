@@ -37,7 +37,6 @@ class Profile extends Component {
         login(res.data)
       })
       .catch(err => {
-        console.log('dis is du err!',err)
         axios.post('/api/logout')
         this.props.history.push('/')
       })
@@ -61,7 +60,6 @@ class Profile extends Component {
 
 
   changeIcon = (val) => {
-    console.log('Change Icon Fired')
     axios.put(`/api/user/`, {val}).then(res => {
       console.log(res)
       this.showTheIcons()
@@ -70,7 +68,6 @@ class Profile extends Component {
 
   getAllOnline () {
     axios.get(`/api/loggedin`).then(res => {
-      console.log('all users online', res.data)
       this.setState({
         onlineUsers: res.data
       })
