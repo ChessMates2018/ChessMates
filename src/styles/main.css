@@ -123,6 +123,12 @@ button {
   100% {
     opacity: 1; } }
 
+@keyframes goodByeIcons {
+  0% {
+    opacity: 1; }
+  100% {
+    opacity: 0; } }
+
 .outerBlock {
   display: flex;
   flex-direction: column;
@@ -153,6 +159,7 @@ button {
       align-items: center;
       width: 350px;
       flex-wrap: wrap;
+      animation: goodByeIcons .7s linear;
       opacity: 0; }
       .profile .profile_section .sun_profile_section .hiding img {
         border: solid #141414 1px;
@@ -166,7 +173,7 @@ button {
       align-items: center;
       width: 350px;
       flex-wrap: wrap;
-      animation: shoeMeTheIcons 1s linear; }
+      animation: shoeMeTheIcons .7s linear; }
       .profile .profile_section .sun_profile_section .imageOpps img {
         border: solid #141414 1px;
         width: 80px;
@@ -190,6 +197,12 @@ button {
     opacity: 0; }
   100% {
     opacity: 1; } }
+
+@keyframes goodByeIcons {
+  0% {
+    opacity: 1; }
+  100% {
+    opacity: 0; } }
 
 .register {
   position: relative;
@@ -239,6 +252,12 @@ button {
     opacity: 0; }
   100% {
     opacity: 1; } }
+
+@keyframes goodByeIcons {
+  0% {
+    opacity: 1; }
+  100% {
+    opacity: 0; } }
 
 .lb-wrapper {
   display: flex;
@@ -604,21 +623,22 @@ a {
   justify-content: center;
   align-items: center;
   justify-content: start;
-  height: 282px;
+  height: 16rem;
   overflow: scroll;
   overflow-x: hidden; }
   #potOppsBlock .potentialOpponent {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    justify-content: space-between;
     background-color: #f0ecec;
     box-shadow: 2px 2px 3px gray;
-    margin: 10px 20px;
-    padding: 10px 0px;
-    width: 325px;
-    height: 70px; }
+    padding-bottom: 2rem;
+    margin-bottom: 1rem;
+    width: 20rem;
+    height: 7rem; }
+    #potOppsBlock .potentialOpponent #player-name {
+      padding-top: 1rem;
+      text-align: center;
+      padding-bottom: 1rem; }
+    #potOppsBlock .potentialOpponent #challenge_btn {
+      margin-left: 2rem; }
 
 .App {
   background: url("../images/marble1.jpg");

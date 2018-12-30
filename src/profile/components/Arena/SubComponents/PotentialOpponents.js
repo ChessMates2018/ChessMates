@@ -9,10 +9,10 @@ import {connect} from 'react-redux'
     if(player.username !== props.currentPlayer){
     return (
       <div key = {index} className="potentialOpponent">
-          <p>{player.username}</p>
+          <p id="player-name">{player.username}</p>
               <button
               // onClick = {this.runSockets}
-              className="challenge_btn" onClick={() => newGame(player.username)}>Come at me!</button>
+              id="challenge_btn" onClick={() => newGame(player.username)}>Come at me!</button>
       </div>
     )}
   })

@@ -13,8 +13,6 @@ import bishop from '../images/default_bishop.jpg'
 import knight from '../images/default_knight.jpg'
 import rook from '../images/default_rook.jpg'
 
-
-
 class Profile extends Component {
   constructor(props) {
     super(props)
@@ -55,14 +53,11 @@ class Profile extends Component {
    }
   }
 
-
   changeIcon = (val) => {
     axios.put(`/api/user/`, {val}).then(res => {
       this.showTheIcons()
     })
   }
-
- 
 
   getAllOnline () {
     axios.get(`/api/loggedin`).then(res => {
