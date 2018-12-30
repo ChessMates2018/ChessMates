@@ -30,7 +30,7 @@ export default class About extends Component{
                 <p>I'm a full stack web developer, chess enthusiast, FAA certified drone pilot, and musician, who enjoys working collaboratively to tackle complex problems. Always looking for new skill sets to add to my skillstack, and to expand my knowledge base. </p>
                 </div>
                 <div className="portfolio">
-                <a href="bradysnuggs.net"><p className="portfolio-text">My portfolio</p></a>
+                <a href="https://www.bradysnuggs.net/" target="_blank"><p className="portfolio-text">My portfolio</p></a>
                 </div>
                 <div className="team-mate-email">
                 <a href="mailto:bradyesnuggs@gmail.com?subject=We love your work, give us more!">
@@ -104,7 +104,7 @@ export default class About extends Component{
                 <p> Full stack web developer who enjoys learning new skills and finding elegant solutions to complex problems. I have experience developing in React, Node, SQL, and JavaScript. Always looking to grow and expand my knowledge base. </p>
                 </div>
                 <div className="portfolio">
-                <a href="#"><p className="portfolio-text">My portfolio</p></a>
+                <a href="https://www.jordanoftroy.com/"><p className="portfolio-text">My portfolio</p></a>
                 </div>
                 <div className="team-mate-email">
                 <a href="mailto:jordantroysmithson@gmail.com?subject=Nice work on Checked!&body=Hello Jordan, %0D%0A%0D%0A We would like to extend an amazing job offer to you! %0D%0A%0D%0A">
