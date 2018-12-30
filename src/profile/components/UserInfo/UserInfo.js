@@ -5,26 +5,28 @@ import bishop from '../../../images/default_bishop.jpg'
 import knight from '../../../images/default_knight.jpg'
 import rook from '../../../images/default_rook.jpg'
 import axios from 'axios'
+import {connect} from 'react-redux'
+
 
 class UserInfo extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      currentUser: {}
-      
+      currentUser: {},
+      updateImage: ''
     }
   }
 
-  componentDidMount() {
+  componentDidMount(props) {
     this.getUser()
   }
 
-  componentWillUpdate(prevProps, prevState){
-    if(prevProps.image !== this.state.currentUser.image){
-    }
+  componentWillReceiveProps(nextprops){
+    this.getUser()
   }
-  
+
+
   getUser = () => {
     axios.get(`/api/user`).then(res => {
       this.setState({
@@ -33,16 +35,14 @@ class UserInfo extends Component {
     })
   }
 
-  render () {
+
+  render (props) {
   let {username, rating, image, wins, losses} = this.state.currentUser
-  // let imageStr = JSON.stringify(image)
   let {showTheIcons} = this.props
     return (
       <div>
         <div className ="userInfoBlock">
           <section className = 'UI_Content'>
-          {/* <img src={king} alt="default profile image"/> */}
-          
           {image == king ?
              <img src={king} alt="default king icon"/>
             : image == queen ? 
@@ -53,31 +53,20 @@ class UserInfo extends Component {
              <img src={knight} alt="default knight icon"/>
             : image == rook &&
              <img src={rook} alt="default rook icon"/>
-          }
+          } 
             </section>
           <section className = 'UI_Content'>
             <h1 className="userName">{`${username}:`} <span className = 'sub_userName'>{` lv ${rating}`}</span> </h1>
             <p>Wins: {wins}</p>
             <p>Losses: {losses}</p>
-            {/* <div className="stats_box"> */}
-              {/* <h3 className="stats">{rating}</h3> */}
-              {/* <h3 className="stats">Win:Loss ratio</h3> */}
-              {/* <h3 className="stats">Most Frequent Opponent</h3>
-              <h3 className="stats">Number of Games played</h3> */}
-            {/* </div> */}
             <button id = 'updateBtn' onClick = {showTheIcons}>Choose Image</button>
           </section >
         </div>
-          {/* <section className="imgOpts">
-            <img src={king} alt=""/>
-            <img src={queen} alt=""/>
-            <img src={bishop} alt=""/>
-            <img src={knight} alt=""/>
-            <img src={rook} alt=""/>
-          </section> */}
+        
       </div>
     )
   }
 }
 
-export default UserInfo
+
+export default (UserInfo)
