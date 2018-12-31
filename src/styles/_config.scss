@@ -1,4 +1,19 @@
 // Media Query Mixins
+//Media Screen - Extra Small Screens
+@mixin mediaXSm {
+  @media screen and (max-width: 420px) and (orientation: portrait) {
+    @content;
+  }
+}
+
+@mixin mediaXSmLandScape {
+  @media screen and (max-width: 568px) and (orientation: landscape) {
+    @content;
+  }
+}
+
+
+//Media Screen - Small Screens
 @mixin mediaSm {
     @media screen and (max-width: 500px) and (orientation: portrait) {
       @content;
@@ -11,9 +26,9 @@
     }
   }
   
-  
+  //Media Screen - Medium Screens
   @mixin mediaMd {
-    @media screen and (max-width: 768px) and (orientation: portrait) {
+    @media screen and (min-width: 501px) and (max-width: 768px) and (orientation: portrait) {
       @content;
     }
   }
@@ -24,6 +39,7 @@
     }
   }
   
+   //Media Screen - Large Screens
   @mixin mediaLg {
     @media screen and (min-width: 769px) and (max-width: 1170px) and (orientation: portrait) {
       @content;
@@ -36,6 +52,7 @@
     }
   }
   
+   //Media Screen - Extra Large Screens 
   @mixin mediaXl {
     @media screen and (min-width: 1171px) and (orientation: portrait) {
       @content;

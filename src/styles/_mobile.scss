@@ -1,97 +1,275 @@
-// Widescreens
+// Widescreens - min-width: 1171px
 @include mediaXl {
+  //NavBody
 
+  //LandingPage
+
+  //Profile
+
+  //About
+
+  //Gameboard
+
+  //GameboardAi
+}
+  
+// Desktops & Laptops - min-width: 769px and max-width: max-width: 1170px
+@include mediaLg {
+    //NavBody
+
+    //LandingPage
+
+    //Profile
+
+    //About
+
+    //Gameboard
+
+    //GameboardAi
   }
   
-  // Desktops & Laptops
-  @include mediaLg {
- 
+@include mediaLgLandScape {
+  //NavBody
+
+  //LandingPage
+
+  //Profile
+
+  //About
+
+  //Gameboard
+
+  //GameboardAi
+  
   }
   
-  @include mediaLgLandScape {
-  
-  
-  }
-  
-  // Tablets & Small Laptops
-  @include mediaMd {
-  
-  
-  }
-  
-  @include mediaMdLandScape{
-    
-}
-    
-  
-  
-  // Smartphones
-  @include mediaSm {
-//NavBody
-.navBod{
-    width: 140%;
-}
-//landing page
-.landing-page .lb-wrapper{
-    visibility: hidden;
-}
+// Tablets & Small Laptops - max-width: 768px
+@include mediaMd {
+    //NavBody
 
-#title h1{
-    font-size: 30px;
-    margin-left: -15px;
-}
+    //LandingPage
+    .landing-page {
+        width: 100%;
 
-#title .logo-img{
-    margin: -20px;
-}
+        .rapper {
+            width: 80%;
 
-.register{
-    margin-bottom: -120px;
-}
+            #title {
+                width: 100%;
 
+                h1 {
+                    font-size: 4rem;
+                }
 
-.landing-page{
-   width: 100vw;
-   overflow: hidden;
-   }
+                .logo-img {
+                    height: 7rem;
+                    width: 7rem;
+                }
 
-//Profile
-.outerBlock{
-width: 100vw;
-// overflow: hidden;
-}
+                .logo-left {
+                    margin-left: 1.25rem;
+                }
+            }
+        }
 
-.profile{
-    width:100vw;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+        .lb-wrapper{
+            width: 100%;
+        }
+    }
 
-
-.outerBlock .lb-wrapper{
-    visibility: hidden;
-}
-
-.outerBlock .userInfoBlock #updateBtn{
-    visibility: hidden;
-}
-
-.outerBlock .userInfoBlock{
-    margin-top: -110px;
-    margin-left: 340px;
-    
-}
-
-.outerBlock .userInfoBlock img{
-    
    
+    //Profile
+
+    //About
+
+    //Gameboard
+
+    //GameboardAI
+  
+  }
+  
+@include mediaMdLandScape {
+    //NavBody
+
+    //LandingPage
+    .landing-page .lb-wrapper{
+        display: none;
+    }
+
+    //Profile
+
+    //About
+
+    //Gameboard
+
+    //GameboardAi
+    
 }
 
-.arenaBlock{
-margin-top: -250px;
-margin-left: 100px;
-// height: 60%;
-// width: 60%;
+// Smartphones - max-width: 500px 
+@include mediaSmLandScape{
+    //NavBody
+
+    //LandingPage
+    
+
+    //Profile
+
+    //About
+
+    //Gameboard
+
+    //GameboardAi
 }
+
+
+@include mediaSm {
+    //NavBody
+    .navBod{
+        width: 140%;
+    }
+
+    //landing page
+    .rapper{
+        width: 92%;
+        border-bottom: solid $black 50px;
+    }
+
+    .landing-page .lb-wrapper{
+        display: none;
+    }
+
+    #title h1{
+        font-size: 2rem;
+        margin-left: -15px;
+    }
+
+    #title .logo-img {
+        margin: 8px;
+        width: 150px;
+    }
+
+
+    .landing-page{
+    width: 100vw;
+    overflow: hidden;
+    }
+
+
+    //Profile
+    .outerBlock{
+    width: 100vw;
+    // overflow: hidden;
+    }
+
+    .profile{
+        width:100vw;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+
+    .outerBlock .lb-wrapper{
+        visibility: hidden;
+    }
+
+    .outerBlock .userInfoBlock #updateBtn{
+        visibility: hidden;
+    }
+
+    .outerBlock .userInfoBlock{
+        margin-top: -110px;
+        margin-left: 340px;
+        
+    }
+
+    .arenaBlock{
+    margin-top: -250px;
+    margin-left: 100px;
+
+    }
+
+    //About
+
+    //Gameboard
+
+    //GameboardAi
+
 }
+
+// Smaller Smartphones - max-width: 420px
+@include mediaXSmLandScape {
+    //Nav Body
+
+    //Landing Page
+    .landing-page {
+        width: 100%;
+
+        .rapper {
+            width: 80%;
+
+            #title {
+                width: 100%;
+                // display: flex;
+                // align-items: center;
+                // justify-content: center;
+
+                h1 {
+                    font-size: 40px;
+                }
+
+                .logo-img {
+                    height: 50px;
+                    width: 50px;
+                    // background-color: pink;
+                }
+
+                .logo-left {
+                    margin-left: 35px;
+                }
+            }
+        }
+
+        
+    }
+    
+    .landing-page .lb-wrapper{
+        display: none;
+    }
+
+
+    //Profile
+
+    //About
+
+    //Gameboard
+
+    //GameboardAi
+}
+
+
+@include mediaXSm {
+    //Nave Body
+
+    //Landing Page
+    #title h1{
+        margin-left: .05rem
+    }
+
+    #title .logo-img {
+        margin: -1rem;
+        width: 100px;
+        height: 100px;
+        left: 4px
+    }
+
+    //Profile
+
+    //About
+
+    //Gameboard
+              
+    //GameboardAi
+}
+
