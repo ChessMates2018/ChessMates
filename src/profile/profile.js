@@ -13,8 +13,6 @@ import bishop from '../images/default_bishop.jpg'
 import knight from '../images/default_knight.jpg'
 import rook from '../images/default_rook.jpg'
 
-
-
 class Profile extends Component {
   constructor(props) {
     super(props)
@@ -25,8 +23,7 @@ class Profile extends Component {
       showIcons: false,
     }
 
-    // this.getUser = this.getUser.bind(this)
-    // this.getAllOnline = this.getAllOnline.bind(this)
+    
   }
 
   componentDidMount() {
@@ -40,9 +37,7 @@ class Profile extends Component {
         axios.post('/api/logout')
         this.props.history.push('/')
       })
-    } else {
-     
-    }
+    } else return
   }
 
   showTheIcons = () => {
@@ -58,10 +53,8 @@ class Profile extends Component {
    }
   }
 
-
   changeIcon = (val) => {
     axios.put(`/api/user/`, {val}).then(res => {
-      console.log(res)
       this.showTheIcons()
     })
   }
@@ -75,7 +68,6 @@ class Profile extends Component {
   }
 
   render () {
-    // console.log(this.props.username)
     let {currentUser} = this.state
     return (
       <div className="outerBlock">
@@ -87,10 +79,10 @@ class Profile extends Component {
                 currentUser = {currentUser[0]}/>
               <div className = {(this.state.showIcons? 'imageOpps': 'hiding')}>
                 <img onClick = {() => this.changeIcon(king)} src={king} alt=""/>
-                <img onClick = {() => this.changeIcon(queen)}src={queen} alt=""/>
-                <img onClick = {() => this.changeIcon(bishop)}src={bishop} alt=""/>
-                <img onClick = {() => this.changeIcon(knight)}src={knight} alt=""/>
-                <img onClick = {() => this.changeIcon(rook)}src={rook} alt=""/>
+                <img onClick = {() => this.changeIcon(queen)} src={queen} alt=""/>
+                <img onClick = {() => this.changeIcon(bishop)} src={bishop} alt=""/>
+                <img onClick = {() => this.changeIcon(knight)} src={knight} alt=""/>
+                <img onClick = {() => this.changeIcon(rook)} src={rook} alt=""/>
               </div>
             </div>
             <Leaderboard/>
@@ -110,6 +102,8 @@ function setStateToProps (state) {
     username
   )
 }
+
+
 
 export default connect(setStateToProps, {setUsername})(Profile)
 

@@ -4,8 +4,7 @@ const initialState = {
   dark: {},
   roomId: '',
   lightRating: 0,
-  darkRating: 0
-  // loginFn: 
+  darkRating: 0,
 }
 
 const SET_USERNAME = 'SET_USERNAME',
@@ -13,9 +12,6 @@ const SET_USERNAME = 'SET_USERNAME',
       SET_DARK_PLAYER = `SET_DARK_PLAYER`,
       SET_ROOMID = 'SET_ROOMID'
      
-
-
-
 export function setUsername (username) {
   return {
     type: SET_USERNAME,
@@ -43,6 +39,7 @@ export function setRoomId (roomId) {
     payload: roomId
   }
 }
+
 
 function Reducer (state = initialState, action) {
   switch(action.type) {

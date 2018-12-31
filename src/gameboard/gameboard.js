@@ -92,6 +92,9 @@ class HumanVsHuman extends Component {
       this.updateNewMove(data)
       this.endgameConditions()
     })
+    this.socket.on('resign', (resign) => {
+      this.endgameConditions(resign)
+    })
     // this.socket.on('checkMaaate', (data) => {
     //   console.log('GOT TO CHECKMATE')
       
@@ -161,11 +164,32 @@ class HumanVsHuman extends Component {
     })
   }
 
-  endgameConditions = () => {
+  endgameConditions = (resign) => {
     let {light, dark, lightRating, darkRating, lightPointsWin, lightPointsDraw, lightPointsLose, darkPointsWin, darkPointsDraw, darkPointsLose} = this.state
     let {in_checkmate, in_stalemate, insufficient_material, in_threefold_repetition, turn} = this.game
     let lightEloDraw = lightPointsDraw;
     let darkEloDraw = darkPointsDraw;
+
+    if (resign === light) {
+        let win = 1;
+        let loss = 1;
+        let eloGain = darkPointsWin - darkRating;
+        let eloLost = lightRating - lightPointsLose;
+        this.setState({winner: dark, loser: light, isOpen: true, message: `${light} resigns! ${dark} has won.`, results: `${dark} has gained ${eloGain} points and ${light} has lost ${eloLost} points.`}, () => {
+          let{winner, loser} = this.state
+          axios.put(`/api/updateRating/`, {win, loss, eloGain, eloLost, winner, loser})
+        })
+      } else if (resign === dark){
+        let win = 1;
+        let loss = 1;
+        let eloGain = lightPointsWin - lightRating;
+        let eloLost = darkRating - darkPointsLose;
+        this.setState({winner: light, loser: dark, isOpen: true, message: ` ${dark} Resigns! ${light} has won.`, results: `${light} has gained ${eloGain} points and ${dark} has lost ${eloLost} points.`}, () => {
+          let {winner, loser} = this.state
+          axios.put(`/api/updateRating/`, {win, loss, eloGain, eloLost, winner, loser})
+        })
+      }
+    
     if (in_checkmate()) {
       if(turn() === "b"){
         let win = 1;
@@ -204,6 +228,7 @@ class HumanVsHuman extends Component {
 
   onDrop = ({ sourceSquare, targetSquare }) => {
     // see if the move is legal
+    if (this.state.winner) return
     let move = this.movePiece(sourceSquare, targetSquare)
     
     // illegal move
@@ -227,7 +252,6 @@ class HumanVsHuman extends Component {
     // this.socket.on('connect-to-room', data => 'PUT HISTORY.PUSH HERE?')
     // this.socket.on('connect-to-room', data => this.socket.emit('user-info', 'ADD USER PROPS? HERE'))
     this.socket.on('users', (data) => this.setState({white: 'ADD PROPS', black: 'ADD PROPS'}))
-
   }
 
   updateNewMove =(newMove)=> {
@@ -336,8 +360,9 @@ class HumanVsHuman extends Component {
       squareStyles: { [square]: { backgroundColor: "deepPink" } }
     });
 
-  resignation = () => {
-    alert('Are you sure you want to quit?')
+  resignation = (username) => {
+    let resign = username
+    this.socket.emit('resign', resign)
   }
 
   render() { 
@@ -360,7 +385,7 @@ class HumanVsHuman extends Component {
       onDragOverSquare: this.onDragOverSquare,
       onSquareClick: this.onSquareClick,
       onSquareRightClick: this.onSquareRightClick,
-      testSockets: this.testSockets,
+      testSockets: this.testSockets
     });
   }
 }
@@ -371,7 +396,7 @@ class HumanVsHuman extends Component {
   let {light, dark} = props.match.params
   return (
     <div className="the_BFB">
-      <HumanVsHuman theHistory={props.history} match={props.match}>
+      <HumanVsHuman username={props.username}  theHistory={props.history} match={props.match}>
         {({
           // updatePlayers,
           resignation,
@@ -458,8 +483,7 @@ class HumanVsHuman extends Component {
           <MoveList 
           move={showHistory}
           resignation = {resignation}
-          light={light}
-          dark={dark}
+          username= {props.username}
           />
           
         <StyledModal

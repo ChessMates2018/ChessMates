@@ -19,7 +19,6 @@ componentDidMount(){
     this.socket = io();
     this.socket.on("general-message", data => {
     //   this.setState({user: data.user})
-
       console.log('got general mesage');
       let gm = this.state.generalMessages.slice();
       gm.push(data);
