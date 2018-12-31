@@ -90,6 +90,10 @@ io.on('connection', function(socket){
         
     })
    
+    socket.on('resign', (resign) => {
+        io.to('game1').emit('resign', resign)
+    })
+
     socket.on('new player', function() {
         // console.log('message recieved')
         io.emit('player joined', {name: player.name, room: player.room})
@@ -105,7 +109,6 @@ io.on('connection', function(socket){
         
         //add change turn to = true add to emit?
         io.to('game1').emit('update-game',newMove)
-        
     })
     
     socket.on('disconnect', () => console.log('User has peaced out, yo!', socket.id))

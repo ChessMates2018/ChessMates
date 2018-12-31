@@ -1,17 +1,11 @@
 import React, {Component} from 'react'
 
 class MoveList extends Component{
-    constructor(){
-    super()
-        this.state={
-
-        }
-  }
+   
 
   
-  render(props){
-      let {resignation, light, dark} = this.props
-      console.log(`%c ${light}`, "color: red; font-size: 24px")
+  render(){
+      let {username, resignation} = this.props
     return(
         <div className='ML_rapper'>
             <h3>MoveList</h3>
@@ -20,7 +14,7 @@ class MoveList extends Component{
             </div>
             <button
                 className = "resign_btn"
-                 onClick = {(e) => resignation(e)}
+                 onClick = {() => resignation(username)}
             >Resign</button>
         </div>
     )
