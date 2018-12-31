@@ -361,6 +361,7 @@ class HumanVsHuman extends Component {
     });
 
   resignation = (username) => {
+    if (this.state.winner) return
     let resign = username
     this.socket.emit('resign', resign)
   }
