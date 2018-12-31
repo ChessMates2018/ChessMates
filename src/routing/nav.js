@@ -24,7 +24,7 @@ class Nav extends Component {
                                 <Link style={{textDecoration: 'none'}} to='/about'>
                                     <p className='aboutLink'>About</p>
                                 </Link>
-                                <button className='logoutBtn' onClick={() => this.logout()}>Logout</button>
+                                <span className='logoutBtn' onClick={() => this.logout()}>Logout</span>
                             </div>
                         </div>
                     )
@@ -41,7 +41,7 @@ class Nav extends Component {
                                 <Link style={{textDecoration: 'none'}} to='/profile'>
                                     <p className='aboutLink'>Profile</p>
                                 </Link>
-                                <button className='logoutBtn' onClick={() => this.logout()}>Logout</button>
+                                <span className='logoutBtn' onClick={() => this.logout()}>Logout</span>
                             </div>
                         </div>
                     )
