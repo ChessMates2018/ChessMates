@@ -287,15 +287,15 @@ class HumanVsHuman extends Component {
 
 
 updateHistory = (clickMove) => {
-  let {fen, history, targetSquare, sourceSquare} = clickMove
+  let {targetSquare, sourceSquare, history} = clickMove
   let move = this.movePiece(sourceSquare, targetSquare)
   if (move === null) return
 
-  this.setState(({history, pieceSquare}) => ({
+  this.setState({
     fen: this.game.fen(),
-    history: this.game.history({verbose:false}),
-    squareStyles: squareStyling({pieceSquare, history})
-  }))
+    history: history,
+    squareStyles: squareStyling({sourceSquare, history})
+  })
 }
 
 updateNewMove =(move)=> {
