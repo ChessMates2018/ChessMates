@@ -293,8 +293,6 @@ updateHistory = (clickMove) => {
 
   this.setState({
     fen: this.game.fen(),
-    history: history,
-    squareStyles: squareStyling({sourceSquare, history})
   })
 }
 
@@ -304,31 +302,12 @@ updateNewMove =(move)=> {
 
   // illegal move
   if (newMove === null) return;
-
+  let {fen, history, squareStyles} = move
   this.setState(({ history, pieceSquare }) => ({
     fen: this.game.fen(),
-    history: this.game.history({ verbose: false }),
-    squareStyles: squareStyling({ pieceSquare, history })
 })
 )
 }
-
-  // Michelle's Original Code for Identifying CheckMate
-  // , () => {
-  //   let checkMate = '';
-  //    this.state.history.forEach(string => {
-  //    checkMate = string.indexOf('#')
-  //    })
-  //    if(checkMate === -1){
-  //      return null
-  //    } else {
-  //      console.log('roomId_under else', roomId)
-  //      axios.delete(`/api/order66/${roomId}`).then(res => {
-  //        console.log(res)
-  //      })
-  //      socket.emit('checkMaaate', 'Checkmate!')
-  //    }}
-
 
   showHistory = () => {
   let {history} = this.state
