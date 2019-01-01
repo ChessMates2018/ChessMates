@@ -74,7 +74,6 @@ class HumanVsHuman extends Component {
       loser: '',
       results: ''
     };
-
     this.toggleModal = this.toggleModal.bind(this)
   }
   static propTypes = { children: PropTypes.func };
@@ -88,12 +87,8 @@ class HumanVsHuman extends Component {
       message: this.game,
       room: this.state.room
     })
-    this.socket.on('update-game', (move, click) => {
-      if(click){
-        this.updateNewMove(click)
-      } else if (move){
+    this.socket.on('update-game', (move) => {
       this.updateNewMove(move)
-    }
       this.endgameConditions()
     })
     this.socket.on('resign', (resign) => {
@@ -271,29 +266,33 @@ class HumanVsHuman extends Component {
 //   }))
 // }
 
-updateNewMove =(move, click)=> {
-  if (click){
-  let {square} = click
-  this.setState(({ history }) => ({
-    squareStyles: squareStyling({ pieceSquare: square, history }),
-    pieceSquare: click.square
-  }));
+//Open up if all else fails.
+// updateHistory = (square) => {
+//     console.log('click', square)
+//     this.setState(({ history }) => ({
+//       squareStyles: squareStyling({ pieceSquare: square, history }),
+//       pieceSquare: square
+//     }));
 
-    let move = this.game.move({
-      from: this.state.pieceSquare,
-      to: square,
-      promotion: "q" // always promote to a queen for example simplicity
-    });
+//       let move = this.game.move({
+//         from: this.state.pieceSquare,
+//         to: square,
+//         promotion: "q" // always promote to a queen for example simplicity
+//       });
+  
+//       // illegal move
+//       if (move === null) return;
+  
+//       this.setState({
+//         fen: this.game.fen(),
+//         history: this.game.history({ verbose: false }),
+//         pieceSquare: ""
+//       }, console.log('is this bitch firing?'));
+//     }
 
-    // illegal move
-    if (move === null) return;
 
-    this.setState({
-      fen: this.game.fen(),
-      history: this.game.history({ verbose: false }),
-      pieceSquare: ""
-    });
-  } else if(move){
+updateNewMove =(move)=> {
+  console.log(move)
   let newMove = this.movePiece(move.sourceSquare, move.targetSquare)
 
   // illegal move
@@ -303,9 +302,11 @@ updateNewMove =(move, click)=> {
     fen: this.game.fen(),
     history: this.game.history({ verbose: false }),
     squareStyles: squareStyling({ pieceSquare, history })
-}))
+})
+)
 }
-}
+
+
 
   // Michelle's Original Code for Identifying CheckMate
   // , () => {
@@ -403,7 +404,7 @@ updateNewMove =(move, click)=> {
     //Checks to see if game is over.
     if (this.state.winner) return
 
-    this.socket.emit('move', square)
+    // this.socket.emit('square', square)
   };
 
   onSquareRightClick = square =>
