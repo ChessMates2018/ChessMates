@@ -402,7 +402,7 @@ updateNewMove =(move, click)=> {
   onSquareClick = square => {
     //Checks to see if game is over.
     if (this.state.winner) return
-    
+
     this.socket.emit('move', square)
   };
 
@@ -420,7 +420,6 @@ updateNewMove =(move, click)=> {
   render() { 
     const { fen, dropSquareStyle, squareStyles, endGame, isOpen, winner, message, light, dark, results } = this.state;
     return this.props.children({
-      // updatePlayers: this.updatePlayers,
       isOpen: isOpen,
       toggleModal: this.toggleModal,
       winner: winner,
@@ -437,7 +436,8 @@ updateNewMove =(move, click)=> {
       onDragOverSquare: this.onDragOverSquare,
       onSquareClick: this.onSquareClick,
       onSquareRightClick: this.onSquareRightClick,
-      testSockets: this.testSockets
+      testSockets: this.testSockets,
+      updateNewMove: this.updateNewMove
     });
   }
 }
@@ -467,7 +467,8 @@ updateNewMove =(move, click)=> {
           toggleModal,
           winner,
           message,
-          results
+          results,
+          updateNewMove
         }) => (
           <>
           <Chat
@@ -486,6 +487,7 @@ updateNewMove =(move, click)=> {
             onDrop={onDrop}
             onMouseOverSquare={onMouseOverSquare}
             onMouseOutSquare={onMouseOutSquare}
+            updateNewMove={updateNewMove}
             boardStyle={{
               borderRadius: "5px",
               boxShadow: `0 5px 15px rgba(0, 0, 0, 0.5)`,
@@ -507,6 +509,7 @@ updateNewMove =(move, click)=> {
             <Chessboard
             // updatePlayers={updatePlayers}
             id="humanVsHuman"
+            updateNewMove={updateNewMove}
             width={777}
             orientation="black"
             position={position}
