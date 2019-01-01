@@ -11,7 +11,7 @@ export default class About extends Component{
             <section id="about-page">
             <div id="about-checked">
             <h1 id="subtitle">Casual Chess for the Curmudgeon</h1>
-            <p id="checked-description">Checked is a web-based chess application where users can create an account and casually play their friends, or other users, in real-time. This project was built in React and styled with SASS, uses BCrypt for authorization, and the backend was built with Express, Massive, PostgreSQL,and Socket.io. This application was built collaboratively by the developers listed below and submitted as a group assignment for Devmountain's final benchmark project. It was created in the Fall of 2018. </p>
+            <p id="checked-description">Checked is a web-based chess application where users can create an account and casually play their friends, or other users, in real-time. This project was built in React and styled with SASS, uses BCrypt for authorization, and the backend was built with Express, Massive, PostgreSQL, and Socket.io. This application was built collaboratively by the developers listed below and submitted as a group assignment for Devmountain's final benchmark project. It was created in the Fall of 2018. </p>
             </div>
 
 

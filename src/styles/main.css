@@ -407,13 +407,12 @@ button {
   .navMenu .aboutLink {
     color: #fbfafa;
     margin-right: 10px;
-    font-size: 20px; }
-  .navMenu .logoutBtn {
-    background: none;
-    border-style: none;
-    width: 80px;
-    color: tan;
     font-size: 18px; }
+  .navMenu .logoutBtn {
+    padding-top: 2px;
+    color: tan;
+    font-size: 18px;
+    cursor: pointer; }
 
 #about-page {
   height: 90vh;
@@ -648,18 +647,213 @@ a {
   -o-background-size: cover;
     -o-background-size-background-size: cover; }
 
+@media screen and (min-width: 769px) and (max-width: 1170px) and (orientation: portrait) {
+  .navBod .navH1 {
+    padding-left: 11rem; }
+  .navBod .navMenu {
+    width: 14rem;
+    display: flex;
+    justify-content: space-between;
+    align-content: center; }
+    .navBod .navMenu .aboutLink {
+      font-size: 2rem; }
+    .navBod .navMenu .logoutBtn {
+      padding-top: .25rem;
+      font-size: 2rem; }
+  .outerBlock {
+    width: 100vw;
+    margin: 0 auto;
+    padding: 0 auto; }
+    .outerBlock .profile {
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 auto;
+      display: flex;
+      flex-direction: column; }
+      .outerBlock .profile .profile_section {
+        width: 100vw;
+        margin: 0 auto;
+        padding: 0 auto; }
+        .outerBlock .profile .profile_section .lb-wrapper {
+          width: 95%;
+          margin-left: 1.2rem;
+          margin-top: -.01rem;
+          margin-bottom: 1rem; }
+        .outerBlock .profile .profile_section .sun_profile_section {
+          display: flex;
+          flex-direction: column; }
+          .outerBlock .profile .profile_section .sun_profile_section div {
+            width: 100%;
+            margin: 0 auto;
+            padding: 0 auto;
+            margin-top: 1rem; }
+          .outerBlock .profile .profile_section .sun_profile_section .hiding, .outerBlock .profile .profile_section .sun_profile_section .imageOpps {
+            width: 75%; }
+          .outerBlock .profile .profile_section .sun_profile_section .userInfoBlock {
+            width: 95%;
+            margin: 0 auto;
+            padding: 0 auto; }
+            .outerBlock .profile .profile_section .sun_profile_section .userInfoBlock .UI_Content {
+              width: 100%;
+              margin: 0 auto; }
+            .outerBlock .profile .profile_section .sun_profile_section .userInfoBlock #updateBtn {
+              visibility: visible; }
+  .arenaBlock {
+    width: 95%;
+    margin: 0 auto;
+    height: 45rem; }
+    .arenaBlock #potOppsBlock {
+      height: 35rem;
+      width: 95%;
+      margin: 0 auto; }
+      .arenaBlock #potOppsBlock .potentialOpponent {
+        width: 75%;
+        text-align: center; }
+        .arenaBlock #potOppsBlock .potentialOpponent #challenge_btn {
+          width: 65%;
+          height: 2.5rem;
+          margin: 0 auto; }
+    .arenaBlock #challenge-header {
+      text-align: center; }
+  #about-page {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: space-evenly; }
+    #about-page #about-checked {
+      width: 100%;
+      text-align: center;
+      margin-top: -3rem; }
+      #about-page #about-checked h1 {
+        margin-bottom: 1rem; }
+      #about-page #about-checked #checked-description {
+        text-align: left; }
+    #about-page #team-mate-section {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      margin-top: 1rem;
+      margin-bottom: 1rem; }
+      #about-page #team-mate-section .card-container {
+        margin-bottom: 1rem; } }
+
+@media screen and (min-width: 501px) and (max-width: 768px) and (orientation: portrait) {
+  .navBod .navH1 {
+    padding-left: 11rem; }
+  .navBod .navMenu {
+    width: 10rem;
+    display: flex;
+    justify-content: space-evenly;
+    align-content: center; }
+  .landing-page {
+    width: 100%; }
+    .landing-page .rapper {
+      width: 80%; }
+      .landing-page .rapper #title {
+        width: 100%; }
+        .landing-page .rapper #title h1 {
+          font-size: 4rem; }
+        .landing-page .rapper #title .logo-img {
+          height: 7rem;
+          width: 7rem; }
+        .landing-page .rapper #title .logo-left {
+          margin-left: 1.25rem; }
+    .landing-page .lb-wrapper {
+      width: 100%; }
+  .outerBlock {
+    width: 100vw;
+    margin: 0 auto;
+    padding: 0 auto; }
+    .outerBlock .profile {
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 auto;
+      display: flex;
+      flex-direction: column; }
+      .outerBlock .profile .profile_section {
+        width: 100vw;
+        margin: 0 auto;
+        padding: 0 auto; }
+        .outerBlock .profile .profile_section .lb-wrapper {
+          width: 95%;
+          margin-left: 1.2rem;
+          margin-top: -.01rem;
+          margin-bottom: 1rem; }
+        .outerBlock .profile .profile_section .sun_profile_section {
+          display: flex;
+          flex-direction: column; }
+          .outerBlock .profile .profile_section .sun_profile_section div {
+            width: 100%;
+            margin: 0 auto;
+            padding: 0 auto;
+            margin-top: 1rem; }
+          .outerBlock .profile .profile_section .sun_profile_section .hiding, .outerBlock .profile .profile_section .sun_profile_section .imageOpps {
+            width: 75%; }
+          .outerBlock .profile .profile_section .sun_profile_section .userInfoBlock {
+            width: 95%;
+            margin: 0 auto;
+            padding: 0 auto; }
+            .outerBlock .profile .profile_section .sun_profile_section .userInfoBlock .UI_Content {
+              width: 100%;
+              margin: 0 auto; }
+            .outerBlock .profile .profile_section .sun_profile_section .userInfoBlock #updateBtn {
+              visibility: visible; }
+  .arenaBlock {
+    width: 95%;
+    margin: 0 auto; }
+    .arenaBlock #potOppsBlock {
+      width: 95%;
+      margin: 0 auto; }
+      .arenaBlock #potOppsBlock .potentialOpponent {
+        width: 100%;
+        text-align: center; }
+        .arenaBlock #potOppsBlock .potentialOpponent #challenge_btn {
+          width: 65%;
+          margin: 0 auto; }
+    .arenaBlock #challenge-header {
+      text-align: center; }
+  #about-page {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: space-evenly; }
+    #about-page #about-checked {
+      width: 100%;
+      text-align: center;
+      margin-top: -3rem; }
+      #about-page #about-checked h1 {
+        margin-bottom: 1rem; }
+      #about-page #about-checked #checked-description {
+        text-align: left; }
+    #about-page #team-mate-section {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      margin-top: 1rem;
+      margin-bottom: 1rem; }
+      #about-page #team-mate-section .card-container {
+        margin-bottom: 1rem; } }
+
+@media screen and (max-width: 768px) and (orientation: landscape) {
+  .landing-page .lb-wrapper {
+    display: none; } }
+
 @media screen and (max-width: 500px) and (orientation: portrait) {
   .navBod {
     width: 140%; }
+  .rapper {
+    width: 92%;
+    border-bottom: solid #141414 50px; }
   .landing-page .lb-wrapper {
-    visibility: hidden; }
+    display: none; }
   #title h1 {
-    font-size: 30px;
+    font-size: 2rem;
     margin-left: -15px; }
   #title .logo-img {
-    margin: -20px; }
-  .register {
-    margin-bottom: -120px; }
+    margin: 8px;
+    width: 150px; }
   .landing-page {
     width: 100vw;
     overflow: hidden; }
@@ -680,3 +874,112 @@ a {
   .arenaBlock {
     margin-top: -250px;
     margin-left: 100px; } }
+
+@media screen and (max-width: 568px) and (orientation: landscape) {
+  .landing-page {
+    width: 100%; }
+    .landing-page .rapper {
+      width: 80%; }
+      .landing-page .rapper #title {
+        width: 100%; }
+        .landing-page .rapper #title h1 {
+          font-size: 40px; }
+        .landing-page .rapper #title .logo-img {
+          height: 50px;
+          width: 50px; }
+        .landing-page .rapper #title .logo-left {
+          margin-left: 35px; }
+  .landing-page .lb-wrapper {
+    display: none; } }
+
+@media screen and (max-width: 420px) and (orientation: portrait) {
+  .navBod {
+    width: 100vw;
+    display: flex;
+    justify-content: space-evenly; }
+    .navBod .leftNav {
+      display: none; }
+    .navBod .navH1 {
+      display: none; }
+    .navBod .navMenu {
+      width: 100%;
+      display: flex;
+      justify-content: space-evenly; }
+      .navBod .navMenu .logoutBtn {
+        padding-top: 1.4px; }
+  #title h1 {
+    margin-left: .05rem; }
+  #title .logo-img {
+    margin: -1rem;
+    width: 100px;
+    height: 100px;
+    left: 4px; }
+  .outerBlock {
+    width: 100vw;
+    margin: 0 auto;
+    padding: 0 auto; }
+    .outerBlock .profile {
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 auto; }
+      .outerBlock .profile .profile_section {
+        width: 100vw;
+        margin: 0 auto;
+        padding: 0 auto; }
+        .outerBlock .profile .profile_section .lb-wrapper {
+          display: none; }
+        .outerBlock .profile .profile_section .sun_profile_section {
+          display: flex;
+          flex-direction: column; }
+          .outerBlock .profile .profile_section .sun_profile_section div {
+            width: 100%;
+            margin: 0 auto;
+            padding: 0 auto;
+            margin-top: 1rem; }
+          .outerBlock .profile .profile_section .sun_profile_section .hiding, .outerBlock .profile .profile_section .sun_profile_section .imageOpps {
+            width: 75%; }
+          .outerBlock .profile .profile_section .sun_profile_section .userInfoBlock {
+            width: 95%;
+            margin: 0 auto;
+            padding: 0 auto; }
+            .outerBlock .profile .profile_section .sun_profile_section .userInfoBlock .UI_Content {
+              width: 100%;
+              margin: 0 auto; }
+            .outerBlock .profile .profile_section .sun_profile_section .userInfoBlock #updateBtn {
+              visibility: visible; }
+  .arenaBlock {
+    width: 95%;
+    margin: 0 auto; }
+    .arenaBlock #potOppsBlock {
+      width: 95%;
+      margin: 0 auto; }
+      .arenaBlock #potOppsBlock .potentialOpponent {
+        width: 100%;
+        text-align: center; }
+        .arenaBlock #potOppsBlock .potentialOpponent #challenge_btn {
+          width: 65%;
+          margin: 0 auto; }
+    .arenaBlock #challenge-header {
+      text-align: center; }
+  #about-page {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: space-evenly; }
+    #about-page #about-checked {
+      width: 100%;
+      text-align: center;
+      margin-top: -3rem; }
+      #about-page #about-checked h1 {
+        margin-bottom: 1rem; }
+      #about-page #about-checked #checked-description {
+        text-align: left; }
+    #about-page #team-mate-section {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      margin-top: 1rem;
+      margin-bottom: 1rem; }
+      #about-page #team-mate-section .card-container {
+        margin-bottom: 1rem; } }
