@@ -113,13 +113,13 @@ io.on('connection', function(socket){
 
     socket.on('clickMove', (clickMove) => {
         //add change turn to = true add to emit?
-        io.to('game1').emit('update-history', clickMove)
+        socket.broadcast.to('game1').emit('update-history', clickMove)
     })
 
     socket.on('move', (move) => {
         
         //add change turn to = true add to emit?
-        io.to('game1').emit('update-game', move)
+        socket.broadcast.to('game1').emit('update-game', move)
     })
     
     socket.on('disconnect', () => console.log('User has peaced out, yo!', socket.id))
