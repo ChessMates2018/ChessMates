@@ -293,6 +293,8 @@ updateHistory = (clickMove) => {
 
   this.setState({
     fen: this.game.fen(),
+    history: history,
+    pieceSquare: ''
   })
 }
 
@@ -305,6 +307,8 @@ updateNewMove =(move)=> {
   let {fen, history, squareStyles} = move
   this.setState(({ history, pieceSquare }) => ({
     fen: this.game.fen(),
+    history: this.game.history({ verbose: false }),
+    squareStyles: squareStyling({ pieceSquare, history })
 })
 )
 }
