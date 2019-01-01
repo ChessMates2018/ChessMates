@@ -88,18 +88,17 @@ class HumanVsHuman extends Component {
       message: this.game,
       room: this.state.room
     })
-    this.socket.on('update-game', (move) => {
+    this.socket.on('update-game', (move, click) => {
+      if(click){
+        this.updateNewMove(click)
+      } else if (move){
       this.updateNewMove(move)
+    }
       this.endgameConditions()
     })
     this.socket.on('resign', (resign) => {
       this.endgameConditions(resign)
     })
-    // this.socket.on('checkMaaate', (data) => {
-    //   console.log('GOT TO CHECKMATE')
-      
-    //   // this.props.theHistory.push('/profile')
-    // })
   }
 
   toggleModal (e) {
@@ -132,7 +131,6 @@ class HumanVsHuman extends Component {
         to: targetSquare,
         promotion: "q" // always promote to a queen for example simplicity
       });
-    
   }
 
   eloCalculator = (result) => {
@@ -247,11 +245,10 @@ class HumanVsHuman extends Component {
   // };
 
   onDrop = ({ sourceSquare, targetSquare }) => {
-    // see if the move is legal
+    // see if game is already over.
     if (this.state.winner) return
     
     let move = {sourceSquare, targetSquare}
-
     this.socket.emit('move', move)
   };
 
@@ -260,8 +257,6 @@ class HumanVsHuman extends Component {
   runSockets = () => {
     this.socket = socket
     this.socket.on('test', data => console.log('test fired'))
-    // this.socket.on('connect-to-room', data => 'PUT HISTORY.PUSH HERE?')
-    // this.socket.on('connect-to-room', data => this.socket.emit('user-info', 'ADD USER PROPS? HERE'))
     this.socket.on('users', (data) => this.setState({white: 'ADD PROPS', black: 'ADD PROPS'}))
   }
 
@@ -276,17 +271,40 @@ class HumanVsHuman extends Component {
 //   }))
 // }
 
-updateNewMove =(move)=> {
-  console.log(move)
+updateNewMove =(move, click)=> {
+  if (click){
+  let {square} = click
+  this.setState(({ history }) => ({
+    squareStyles: squareStyling({ pieceSquare: square, history }),
+    pieceSquare: click.square
+  }));
+
+    let move = this.game.move({
+      from: this.state.pieceSquare,
+      to: square,
+      promotion: "q" // always promote to a queen for example simplicity
+    });
+
+    // illegal move
+    if (move === null) return;
+
+    this.setState({
+      fen: this.game.fen(),
+      history: this.game.history({ verbose: false }),
+      pieceSquare: ""
+    });
+  } else if(move){
   let newMove = this.movePiece(move.sourceSquare, move.targetSquare)
+
   // illegal move
   if (newMove === null) return;
-  
+
   this.setState(({ history, pieceSquare }) => ({
     fen: this.game.fen(),
     history: this.game.history({ verbose: false }),
     squareStyles: squareStyling({ pieceSquare, history })
 }))
+}
 }
 
   // Michelle's Original Code for Identifying CheckMate
@@ -358,26 +376,34 @@ updateNewMove =(move)=> {
     });
   };
 
+  // //Original Code
+  // onSquareClick = square => {
+  //   this.setState(({ history }) => ({
+  //     squareStyles: squareStyling({ pieceSquare: square, history }),
+  //     pieceSquare: square
+  //   }));
+
+  //   let move = this.game.move({
+  //     from: this.state.pieceSquare,
+  //     to: square,
+  //     promotion: "q" // always promote to a queen for example simplicity
+  //   });
+
+  //   // illegal move
+  //   if (move === null) return;
+
+  //   this.setState({
+  //     fen: this.game.fen(),
+  //     history: this.game.history({ verbose: false }),
+  //     pieceSquare: ""
+  //   });
+  // };
+
   onSquareClick = square => {
-    this.setState(({ history }) => ({
-      squareStyles: squareStyling({ pieceSquare: square, history }),
-      pieceSquare: square
-    }));
-
-    let move = this.game.move({
-      from: this.state.pieceSquare,
-      to: square,
-      promotion: "q" // always promote to a queen for example simplicity
-    });
-
-    // illegal move
-    if (move === null) return;
-
-    this.setState({
-      fen: this.game.fen(),
-      history: this.game.history({ verbose: false }),
-      pieceSquare: ""
-    });
+    //Checks to see if game is over.
+    if (this.state.winner) return
+    
+    this.socket.emit('move', square)
   };
 
   onSquareRightClick = square =>

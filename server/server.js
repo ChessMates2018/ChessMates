@@ -111,10 +111,10 @@ io.on('connection', function(socket){
     //     io.to('game1').emit('update-game',newMove)
     // })
 
-    socket.on('move', (move) => {
+    socket.on('move', (move, square) => {
         
         //add change turn to = true add to emit?
-        io.to('game1').emit('update-game',move)
+        io.to('game1').emit('update-game', move, square)
     })
     
     socket.on('disconnect', () => console.log('User has peaced out, yo!', socket.id))
