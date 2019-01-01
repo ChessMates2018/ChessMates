@@ -128,6 +128,40 @@
     
 
     //About
+    #about-page{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: space-evenly;
+
+       #about-checked{
+           width: 100%;
+           text-align: center;
+           margin-top: -3rem;
+
+           h1 {
+               margin-bottom: 1rem;
+           }
+
+           #checked-description {
+               text-align: left;
+           }
+           
+       }
+
+       #team-mate-section{
+           display: flex;
+           flex-direction: column;
+           justify-content: space-around;
+           margin-top: 1rem;
+           margin-bottom: 1rem;
+
+           .card-container {
+               margin-bottom: 1rem;
+           }
+       }
+   }
 
     //Gameboard
 
@@ -281,6 +315,40 @@
 
 
     //About
+    #about-page{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: space-evenly;
+
+       #about-checked{
+           width: 100%;
+           text-align: center;
+           margin-top: -3rem;
+
+           h1 {
+               margin-bottom: 1rem;
+           }
+
+           #checked-description {
+               text-align: left;
+           }
+           
+       }
+
+       #team-mate-section{
+           display: flex;
+           flex-direction: column;
+           justify-content: space-around;
+           margin-top: 1rem;
+           margin-bottom: 1rem;
+
+           .card-container {
+               margin-bottom: 1rem;
+           }
+       }
+   }
 
     //Gameboard
 
@@ -567,6 +635,40 @@
     }
 
     //About
+     #about-page{
+         width: 100%;
+         height: 100%;
+         display: flex;
+         flex-direction: column;
+         align-items: space-evenly;
+
+        #about-checked{
+            width: 100%;
+            text-align: center;
+            margin-top: -3rem;
+
+            h1 {
+                margin-bottom: 1rem;
+            }
+
+            #checked-description {
+                text-align: left;
+            }
+            
+        }
+
+        #team-mate-section{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+
+            .card-container {
+                margin-bottom: 1rem;
+            }
+        }
+    }
     
 
     //Gameboard

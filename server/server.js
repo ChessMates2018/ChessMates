@@ -104,11 +104,17 @@ io.on('connection', function(socket){
         io.emit('push to board', {challenged, gameId, challenger})
     })
 
-    // socket.on('move', (msg) => this.socket.broadcast.emit('move', msg))
-    socket.on('move', (newMove) => {
+    // //original move code
+    // socket.on('move', (newMove) => {
+        
+    //     //add change turn to = true add to emit?
+    //     io.to('game1').emit('update-game',newMove)
+    // })
+
+    socket.on('move', (move) => {
         
         //add change turn to = true add to emit?
-        io.to('game1').emit('update-game',newMove)
+        io.to('game1').emit('update-game',move)
     })
     
     socket.on('disconnect', () => console.log('User has peaced out, yo!', socket.id))

@@ -88,8 +88,8 @@ class HumanVsHuman extends Component {
       message: this.game,
       room: this.state.room
     })
-    this.socket.on('update-game', (data) => {
-      this.updateNewMove(data)
+    this.socket.on('update-game', (move) => {
+      this.updateNewMove(move)
       this.endgameConditions()
     })
     this.socket.on('resign', (resign) => {
@@ -226,22 +226,33 @@ class HumanVsHuman extends Component {
     }
   }
 
+  // //Original Code
+  // onDrop = ({ sourceSquare, targetSquare }) => {
+  //   // see if the move is legal
+  //   if (this.state.winner) return
+
+  //   let move = this.movePiece(sourceSquare, targetSquare)
+  //   // illegal move
+  //   if (move === null) return;
+    
+  //   this.setState(({ history, pieceSquare }) => ({
+  //     fen: this.game.fen(),
+  //     history: this.game.history({ verbose: false }),
+  //     squareStyles: squareStyling({ pieceSquare, history }),
+  //   }), () => {
+  //     let {fen, history, squareStyles} = this.state
+  //     let newMove = {fen, history, squareStyles, sourceSquare, targetSquare}
+  //     this.socket.emit('move', newMove)
+  //   });
+  // };
+
   onDrop = ({ sourceSquare, targetSquare }) => {
     // see if the move is legal
     if (this.state.winner) return
-    let move = this.movePiece(sourceSquare, targetSquare)
     
-    // illegal move
-    if (move === null) return;
-    this.setState(({ history, pieceSquare }) => ({
-      fen: this.game.fen(),
-      history: this.game.history({ verbose: false }),
-      squareStyles: squareStyling({ pieceSquare, history }),
-    }), () => {
-      let {fen, history, squareStyles} = this.state
-      let newMove = {fen, history, squareStyles, sourceSquare, targetSquare}
-      this.socket.emit('move', newMove)
-    });
+    let move = {sourceSquare, targetSquare}
+
+    this.socket.emit('move', move)
   };
 
 
@@ -254,14 +265,28 @@ class HumanVsHuman extends Component {
     this.socket.on('users', (data) => this.setState({white: 'ADD PROPS', black: 'ADD PROPS'}))
   }
 
-  updateNewMove =(newMove)=> {
-    this.movePiece(newMove.sourceSquare, newMove.targetSquare)
-    let {fen, history, squareStyles} = newMove
-    this.setState(({ history, pieceSquare }) => ({
-      fen: this.game.fen(),
-      history: this.game.history({ verbose: false }),
-      squareStyles: squareStyling({ pieceSquare, history })
-  }))
+//   //original code
+//   updateNewMove =(newMove)=> {
+//     this.movePiece(newMove.sourceSquare, newMove.targetSquare)
+//     let {fen, history, squareStyles} = newMove
+//     this.setState(({ history, pieceSquare }) => ({
+//       fen: this.game.fen(),
+//       history: this.game.history({ verbose: false }),
+//       squareStyles: squareStyling({ pieceSquare, history })
+//   }))
+// }
+
+updateNewMove =(move)=> {
+  console.log(move)
+  let newMove = this.movePiece(move.sourceSquare, move.targetSquare)
+  // illegal move
+  if (newMove === null) return;
+  
+  this.setState(({ history, pieceSquare }) => ({
+    fen: this.game.fen(),
+    history: this.game.history({ verbose: false }),
+    squareStyles: squareStyling({ pieceSquare, history })
+}))
 }
 
   // Michelle's Original Code for Identifying CheckMate
