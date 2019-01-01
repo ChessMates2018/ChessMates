@@ -111,9 +111,9 @@ io.on('connection', function(socket){
     //     io.to('game1').emit('update-game',newMove)
     // })
 
-    socket.on('square', (square) => {
+    socket.on('clickMove', (clickMove) => {
         //add change turn to = true add to emit?
-        io.to('game1').emit('update-history', square)
+        io.to('game1').emit('update-history', clickMove)
     })
 
     socket.on('move', (move) => {
