@@ -87,6 +87,10 @@ class HumanVsHuman extends Component {
       message: this.game,
       room: this.state.room
     })
+    this.socket.on('update-history', (clickMove) => {
+      this.updateHistory(clickMove)
+      this.endgameConditions()
+    })
     this.socket.on('update-game', (move) => {
       this.updateNewMove(move)
       this.endgameConditions()
@@ -219,34 +223,25 @@ class HumanVsHuman extends Component {
     }
   }
 
-  // //Original Code
-  // onDrop = ({ sourceSquare, targetSquare }) => {
-  //   // see if the move is legal
-  //   if (this.state.winner) return
-
-  //   let move = this.movePiece(sourceSquare, targetSquare)
-  //   // illegal move
-  //   if (move === null) return;
-    
-  //   this.setState(({ history, pieceSquare }) => ({
-  //     fen: this.game.fen(),
-  //     history: this.game.history({ verbose: false }),
-  //     squareStyles: squareStyling({ pieceSquare, history }),
-  //   }), () => {
-  //     let {fen, history, squareStyles} = this.state
-  //     let newMove = {fen, history, squareStyles, sourceSquare, targetSquare}
-  //     this.socket.emit('move', newMove)
-  //   });
-  // };
-
+  //Original Code
   onDrop = ({ sourceSquare, targetSquare }) => {
-    // see if game is already over.
+    // see if the move is legal
     if (this.state.winner) return
-    
-    let move = {sourceSquare, targetSquare}
-    this.socket.emit('move', move)
-  };
 
+    let move = this.movePiece(sourceSquare, targetSquare)
+    // illegal move
+    if (move === null) return;
+    
+    this.setState(({ history, pieceSquare }) => ({
+      fen: this.game.fen(),
+      history: this.game.history({ verbose: false }),
+      squareStyles: squareStyling({ pieceSquare, history }),
+    }), () => {
+      let {fen, history, squareStyles} = this.state
+      let newMove = {fen, history, squareStyles, sourceSquare, targetSquare}
+      this.socket.emit('move', newMove)
+    });
+  };
 
   //line 190
   runSockets = () => {
@@ -291,6 +286,18 @@ class HumanVsHuman extends Component {
 //     }
 
 
+updateHistory = (clickMove) => {
+  let {fen, history, targetSquare, sourceSquare} = clickMove
+  let move = this.movePiece(sourceSquare, targetSquare)
+  if (move === null) return
+
+  this.setState(({history, pieceSquare}) => ({
+    fen: this.game.fen(),
+    history: this.game.history({verbose:false}),
+    squareStyles: squareStyling({pieceSquare, history})
+  }))
+}
+
 updateNewMove =(move)=> {
   console.log(move)
   let newMove = this.movePiece(move.sourceSquare, move.targetSquare)
@@ -305,8 +312,6 @@ updateNewMove =(move)=> {
 })
 )
 }
-
-
 
   // Michelle's Original Code for Identifying CheckMate
   // , () => {
@@ -338,34 +343,8 @@ updateNewMove =(move)=> {
       </div>
     )
   })
-    if (history.includes('#')) {
-      axios.post('/api/gameMoves', {history})
-      .then(() => 
-      
-      console.log('move updated', history.length % 5, history))
-     }
   return moveList
   }
-
-  // onMouseOverSquare = square => {
-  //   // get list of possible moves for this square
-  //   let moves = this.game.moves({
-  //     square: square,
-  //     verbose: true
-  //   });
-
-  //   // exit if there are no moves available for this square
-  //   if (moves.length === 0) return;
-
-  //   let squaresToHighlight = [];
-  //   for (var i = 0; i < moves.length; i++) {
-  //     squaresToHighlight.push(moves[i].to);
-  //   }
-
-  //   this.highlightSquare(square, squaresToHighlight);
-  // };
-
-  // onMouseOutSquare = square => this.removeHighlightSquare(square);
 
   // central squares get diff dropSquareStyles
   onDragOverSquare = square => {
@@ -377,35 +356,36 @@ updateNewMove =(move)=> {
     });
   };
 
-  // //Original Code
-  // onSquareClick = square => {
-  //   this.setState(({ history }) => ({
-  //     squareStyles: squareStyling({ pieceSquare: square, history }),
-  //     pieceSquare: square
-  //   }));
-
-  //   let move = this.game.move({
-  //     from: this.state.pieceSquare,
-  //     to: square,
-  //     promotion: "q" // always promote to a queen for example simplicity
-  //   });
-
-  //   // illegal move
-  //   if (move === null) return;
-
-  //   this.setState({
-  //     fen: this.game.fen(),
-  //     history: this.game.history({ verbose: false }),
-  //     pieceSquare: ""
-  //   });
-  // };
-
+  //Original Code
   onSquareClick = square => {
-    //Checks to see if game is over.
-    if (this.state.winner) return
+    this.setState(({ history }) => ({
+      squareStyles: squareStyling({ pieceSquare: square, history }),
+      pieceSquare: square
+    }));
 
-    // this.socket.emit('square', square)
+    let move = this.game.move({
+      from: this.state.pieceSquare,
+      to: square,
+      promotion: "q" // always promote to a queen for example simplicity
+    });
+
+    let targetSquare = square;
+    let sourceSquare = this.state.pieceSquare
+
+    // illegal move
+    if (move === null) return;
+
+    this.setState({
+      fen: this.game.fen(),
+      history: this.game.history({ verbose: false }),
+      pieceSquare: ""
+    }, () => {
+      let {fen, history} = this.state
+      let clickMove = {fen, history, targetSquare, sourceSquare}
+      socket.emit('clickMove', clickMove)
+    });
   };
+
 
   onSquareRightClick = square =>
     this.setState({
