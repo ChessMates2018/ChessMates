@@ -750,6 +750,8 @@ a {
     height: 20rem;
     order: 2;
     margin-bottom: 10px; }
+    .chat-container .input-container {
+      margin-top: 1rem; }
   .ML_rapper {
     width: 20rem;
     height: 20rem;
@@ -864,6 +866,8 @@ a {
     height: 20rem;
     order: 2;
     margin-bottom: 10px; }
+    .chat-container .input-container {
+      margin-top: 1rem; }
   .ML_rapper {
     width: 20rem;
     height: 20rem;
@@ -1028,6 +1032,8 @@ a {
     height: 20rem;
     order: 2;
     margin-bottom: 10px; }
+    .chat-container .input-container {
+      margin-top: 1rem; }
   .ML_rapper {
     width: 20rem;
     height: 20rem;
