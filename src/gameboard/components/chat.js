@@ -10,46 +10,41 @@ class Chat extends Component{
             generalMessages: [],
             white: "",
             black: "",
-            user: ""
+            user: "",
+            userOpponent: ""
         }
         this.socket = io.connect('/')
     }
 
 componentDidMount(){
+    this.setState({
+        user: this.props.username
+    })
     this.socket = io();
     this.socket.on("general-message", data => {
-    //   this.setState({user: data.user})
-      console.log('got general mesage');
+      let {user, message} = data
       let gm = this.state.generalMessages.slice();
-      gm.push(data);
-      this.setState({ generalMessages: gm });
+      gm.push(`${user}: ${message}`);
+      this.setState({ generalMessages: gm});
     });
 }
 
-submitMessage = (message, roomName) => {
-    // let {light,dark} = this.props
-    // let {username} = this.props
-    console.log(roomName)
-    // if(light === username){
-    //     let user = light
-    //     this.socket.emit(`${roomName}-chat`, {message});
-    // } else {
-        // let user = dark
-        this.socket.emit(`${roomName}-chat`, message);
-// }
+submitMessage = (user, message, roomName) => {
+        let messageObj = {user, message}
+        this.socket.emit(`${roomName}-chat`, messageObj);
 }
 
 handleKeyUp = e => {
+    let {user} = this.state
     if (e.key === "Enter") {
-      this.submitMessage(this.state[e.target.name+'UserInput'], e.target.name);
+      this.submitMessage(user, this.state[e.target.name+'UserInput'], e.target.name);
       this.setState({ [e.target.name+'UserInput']: "" });
     }
   };
 
 
     render(){
-        // console.log('CHAT PROPS', this.props)
-        // console.log('look at me', username)
+        let {user} = this.state
         return(
             <section className="chat-container">
             <h3>Insult box</h3>

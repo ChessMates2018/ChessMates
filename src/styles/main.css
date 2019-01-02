@@ -361,13 +361,8 @@ button {
     overflow-y: scroll; }
     .chat-container .messages-window .gm {
       text-align: start;
-      background-color: gray;
-      margin-bottom: 7px;
-      padding: 5px;
+      padding: 2px;
       border-radius: 4px; }
-      .chat-container .messages-window .gm:nth-child(even) {
-        text-align: end;
-        background-color: #b3b3b3; }
   .chat-container .input-field {
     height: 70px;
     width: 250px;
