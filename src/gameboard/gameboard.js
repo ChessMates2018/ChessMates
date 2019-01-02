@@ -83,18 +83,21 @@ class HumanVsHuman extends Component {
     this.updatingPlayers()
     this.runSockets()
     this.game = new Chess();
+    let {turn} = this.game
+    console.log(this.props)
     this.socket.emit('new-game', {
       message: this.game,
       room: this.state.room
     })
+    
     this.socket.on('update-history', (clickMove) => {
       this.updateHistory(clickMove)
-      this.endgameConditions()
     })
+
     this.socket.on('update-game', (move) => {
       this.updateNewMove(move)
-      this.endgameConditions()
     })
+
     this.socket.on('resign', (resign) => {
       this.endgameConditions(resign)
     })
@@ -225,8 +228,11 @@ class HumanVsHuman extends Component {
 
   //Original Code
   onDrop = ({ sourceSquare, targetSquare }) => {
-    // see if the move is legal
+    //check if game is already over. If yes, then cancel function
     if (this.state.winner) return
+
+    //check if it's player's turn. If false, the cancel function
+    if (!this.state.turn) return
 
     let move = this.movePiece(sourceSquare, targetSquare)
     // illegal move
@@ -250,41 +256,6 @@ class HumanVsHuman extends Component {
     this.socket.on('users', (data) => this.setState({white: 'ADD PROPS', black: 'ADD PROPS'}))
   }
 
-//   //original code
-//   updateNewMove =(newMove)=> {
-//     this.movePiece(newMove.sourceSquare, newMove.targetSquare)
-//     let {fen, history, squareStyles} = newMove
-//     this.setState(({ history, pieceSquare }) => ({
-//       fen: this.game.fen(),
-//       history: this.game.history({ verbose: false }),
-//       squareStyles: squareStyling({ pieceSquare, history })
-//   }))
-// }
-
-//Open up if all else fails.
-// updateHistory = (square) => {
-//     console.log('click', square)
-//     this.setState(({ history }) => ({
-//       squareStyles: squareStyling({ pieceSquare: square, history }),
-//       pieceSquare: square
-//     }));
-
-//       let move = this.game.move({
-//         from: this.state.pieceSquare,
-//         to: square,
-//         promotion: "q" // always promote to a queen for example simplicity
-//       });
-  
-//       // illegal move
-//       if (move === null) return;
-  
-//       this.setState({
-//         fen: this.game.fen(),
-//         history: this.game.history({ verbose: false }),
-//         pieceSquare: ""
-//       }, console.log('is this bitch firing?'));
-//     }
-
 
 updateHistory = (clickMove) => {
   let {targetSquare, sourceSquare, history} = clickMove
@@ -294,7 +265,8 @@ updateHistory = (clickMove) => {
   this.setState({
     fen: this.game.fen(),
     history: history,
-    pieceSquare: ''
+    pieceSquare: '',
+    turn: true
   })
 }
 
@@ -308,7 +280,7 @@ updateNewMove =(move)=> {
   this.setState(({ history, pieceSquare }) => ({
     fen: this.game.fen(),
     history: this.game.history({ verbose: false }),
-    squareStyles: squareStyling({ pieceSquare, history })
+    pieceSquare: ''
 })
 )
 }
@@ -339,8 +311,16 @@ updateNewMove =(move)=> {
     });
   };
 
-  //Original Code
+  
   onSquareClick = square => {
+    //check if it's player's turn. If false, the cancel function
+    if (!this.state.turn) return
+
+     //check if game is already over. If yes, then cancel function
+     if (this.state.winner) return
+
+
+
     this.setState(({ history }) => ({
       squareStyles: squareStyling({ pieceSquare: square, history }),
       pieceSquare: square
@@ -381,9 +361,22 @@ updateNewMove =(move)=> {
     this.socket.emit('resign', resign)
   }
 
+  screenWidthCalc(screenWidth){
+    if (screenWidth < 320){
+      return 240
+    } else if (screenWidth < 400){
+      return 280
+    } else if (screenWidth < 500){
+      return 360
+    } else if (screenWidth < 1000){
+      return 550
+    }
+  }
+
   render() { 
     const { fen, dropSquareStyle, squareStyles, endGame, isOpen, winner, message, light, dark, results } = this.state;
     return this.props.children({
+      screenWidthCalc: this.screenWidthCalc, 
       isOpen: isOpen,
       toggleModal: this.toggleModal,
       winner: winner,
@@ -414,7 +407,7 @@ updateNewMove =(move)=> {
     <div className="the_BFB">
       <HumanVsHuman username={props.username}  theHistory={props.history} match={props.match}>
         {({
-          // updatePlayers,
+          screenWidthCalc,
           resignation,
           showHistory,
           position,
@@ -426,7 +419,6 @@ updateNewMove =(move)=> {
           onDragOverSquare,
           onSquareClick,
           onSquareRightClick,
-          testSockets,
           isOpen,
           toggleModal,
           winner,
@@ -443,10 +435,9 @@ updateNewMove =(move)=> {
             props.username === props.match.params.light
             ?
           <Chessboard
-            // updatePlayers={updatePlayers}
+            username= {props.username}
             id="humanVsHuman"
-            width={777}
-            // orientation="black"
+            calcWidth={({ screenWidth }) => screenWidthCalc(screenWidth)}
             position={position}
             onDrop={onDrop}
             onMouseOverSquare={onMouseOverSquare}
@@ -471,10 +462,10 @@ updateNewMove =(move)=> {
             />
             :
             <Chessboard
-            // updatePlayers={updatePlayers}
             id="humanVsHuman"
+            username= {props.username}
             updateNewMove={updateNewMove}
-            width={777}
+            calcWidth={({ screenWidth }) => screenWidthCalc(screenWidth)}
             orientation="black"
             position={position}
             onDrop={onDrop}

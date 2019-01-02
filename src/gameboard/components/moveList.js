@@ -16,6 +16,9 @@ class MoveList extends Component{
                 className = "resign_btn"
                  onClick = {() => resignation(username)}
             >Resign</button>
+            <button
+                className = "draw_btn"
+            >Offer Draw</button>
         </div>
     )
 }

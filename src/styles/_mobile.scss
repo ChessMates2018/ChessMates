@@ -163,7 +163,28 @@
        }
    }
 
-    //Gameboard
+        //Gameboard
+        .the_BFB{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: -5px;
+        }
+        
+        .chat-container{
+            margin-top: -25px;
+            width: 20rem;
+            height: 20rem;
+            order: 2;
+            margin-bottom: 10px;
+        }
+    
+        .ML_rapper{
+            width: 20rem;
+            height: 20rem;
+            order: 3;
+            margin-bottom: 10px;
+        }
 
     //GameboardAi
   }
@@ -350,7 +371,28 @@
        }
    }
 
-    //Gameboard
+        //Gameboard
+        .the_BFB{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: -5px;
+        }
+        
+        .chat-container{
+            margin-top: -25px;
+            width: 20rem;
+            height: 20rem;
+            order: 2;
+            margin-bottom: 10px;
+        }
+    
+        .ML_rapper{
+            width: 20rem;
+            height: 20rem;
+            order: 3;
+            margin-bottom: 10px;
+        }
 
     //GameboardAI
   
@@ -654,7 +696,6 @@
             #checked-description {
                 text-align: left;
             }
-            
         }
 
         #team-mate-section{
@@ -670,9 +711,29 @@
         }
     }
     
-
     //Gameboard
-              
+    .the_BFB{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: -5px;
+    }
+    
+    .chat-container{
+        margin-top: -25px;
+        width: 20rem;
+        height: 20rem;
+        order: 2;
+        margin-bottom: 10px;
+    }
+
+    .ML_rapper{
+        width: 20rem;
+        height: 20rem;
+        order: 3;
+        margin-bottom: 10px;
+    }
+
     //GameboardAi
 }
 
