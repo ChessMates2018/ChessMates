@@ -202,8 +202,8 @@ class HumanVsHuman extends Component {
     }), () => {
       let {fen, history, squareStyles} = this.state
       let newMove = {fen, history, squareStyles, sourceSquare, targetSquare}
-      this.socket.emit('move', newMove)
       window.setTimeout(this.computerMove(), 3000);
+      this.endgameConditions()
     });
   };
 
@@ -318,9 +318,22 @@ class HumanVsHuman extends Component {
     })
   }
 
+  screenWidthCalc(screenWidth){
+    if (screenWidth < 320){
+      return 240
+    } else if (screenWidth < 400){
+      return 280
+    } else if (screenWidth < 500){
+      return 360
+    } else if (screenWidth < 1000){
+      return 550
+    }
+  }
+
   render() { 
     const { fen, dropSquareStyle, squareStyles, endGame, isOpen, winner, message, light, dark, results, areYouSure } = this.state;
     return this.props.children({
+      screenWidthCalc: this.screenWidthCalc,
       isOpen: isOpen,
       toggleModal: this.toggleModal,
       winner: winner,
@@ -343,14 +356,13 @@ class HumanVsHuman extends Component {
   }
 }
 
-
-
  function Gameboard(props) {
   let {light, dark} = props.match.params
   return (
     <div className="the_BFB">
       <HumanVsHuman theHistory={props.history} match={props.match}>
         {({
+          screenWidthCalc,
           resignation,
           showHistory,
           position,
@@ -367,7 +379,6 @@ class HumanVsHuman extends Component {
           winner,
           message,
           results,
-          areYouSure
         }) => (
           <>
           <Chat
@@ -379,7 +390,7 @@ class HumanVsHuman extends Component {
             ?
           <Chessboard
             id="humanVsHuman"
-            width={777}
+            calcWidth={({ screenWidth }) => screenWidthCalc(screenWidth)}
             position={position}
             onDrop={onDrop}
             onMouseOverSquare={onMouseOverSquare}
@@ -404,7 +415,7 @@ class HumanVsHuman extends Component {
             :
             <Chessboard
             id="humanVsHuman"
-            width={777}
+            calcWidth={({ screenWidth }) => screenWidthCalc(screenWidth)}
             orientation="black"
             position={position}
             onDrop={onDrop}

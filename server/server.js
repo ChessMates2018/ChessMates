@@ -1,10 +1,4 @@
 require('dotenv').config()
-// const path = require('path'); // Usually moved to the start of file
-
-// app.get('*', (req, res)=>{
-//     res.sendFile(path.join(__dirname, '../build/index.html'));
-// });
-
 const {
     SERVER_PORT,
     CONNECTION_STRING,
@@ -28,11 +22,9 @@ const app = express()
 var server = require('http').createServer(app)
 var io = require('socket.io')(server)
 var sharedSession = require('express-socket.io-session')
-// var cookieParser = require('cookie-parser')
 
 
 app.use( express.static( `${__dirname}/../build` ) );
-
 
 app.use(bodyParser.json())
 
@@ -49,11 +41,6 @@ app.use(session)
 //         next()
 //     }
 // })
-
-
-
-
-
 
 // User Endpoints
 app.get(`/api/user`, ctrl.getUser)
@@ -87,7 +74,6 @@ io.on('connection', function(socket){
 
     socket.on('new-game', () => {
         socket.join('game1')
-        
     })
    
     socket.on('resign', (resign) => {
@@ -120,6 +106,11 @@ io.on('connection', function(socket){
         
         //add change turn to = true add to emit?
         socket.broadcast.to('game1').emit('update-game', move)
+    })
+
+    socket.on('toggleTurn', (toggleTurn) => {
+        //add change turn to = true add to emit?
+        socket.broadcast.to('game1').emit('update-turn', toggleTurn)
     })
     
     socket.on('disconnect', () => console.log('User has peaced out, yo!', socket.id))
