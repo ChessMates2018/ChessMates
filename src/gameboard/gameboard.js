@@ -430,6 +430,7 @@ updateNewMove =(move)=> {
           <Chat
           light={light}
           dark={dark}
+          username= {props.username}
           />
           {
             props.username === props.match.params.light
