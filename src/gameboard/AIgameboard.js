@@ -200,8 +200,6 @@ class HumanVsHuman extends Component {
       history: this.game.history({ verbose: false }),
       squareStyles: squareStyling({ pieceSquare, history }),
     }), () => {
-      let {fen, history, squareStyles} = this.state
-      let newMove = {fen, history, squareStyles, sourceSquare, targetSquare}
       window.setTimeout(this.computerMove(), 3000);
       this.endgameConditions()
     });
@@ -297,6 +295,9 @@ class HumanVsHuman extends Component {
       fen: this.game.fen(),
       history: this.game.history({ verbose: false }),
       pieceSquare: ""
+    }, () => {
+      window.setTimeout(this.computerMove(), 3000);
+      this.endgameConditions()
     });
   };
 
