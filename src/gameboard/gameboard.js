@@ -85,22 +85,15 @@ class HumanVsHuman extends Component {
       message: this.game,
       room: this.state.room
     })
-    
     this.socket.on('update-history', (clickMove) => {
-      console.log('update-history is firing.')
       this.updateHistory(clickMove)
     })
-
     this.socket.on('update-game', (move) => {
-      console.log('update-game is firing.')
       this.updateNewMove(move)
     })
-
     this.socket.on('resign', (resign) => {
       this.endgameConditions(resign)
     })
-
-    this.socket.on('endgame', this.endgameConditions())
   }
 
   toggleModal (e) {
@@ -247,6 +240,7 @@ class HumanVsHuman extends Component {
       let {fen, history, squareStyles} = this.state
       let newMove = {fen, history, squareStyles, sourceSquare, targetSquare}
       this.socket.emit('move', newMove)
+      this.endgameConditions()
     });
   };
 
@@ -267,8 +261,8 @@ updateHistory = (clickMove) => {
     fen: this.game.fen(),
     history: history,
     pieceSquare: '',
-  }, () => {
-    this.socket.emit('endgame')
+  }, ()=>{
+    this.endgameConditions()
   })
 }
 
@@ -283,7 +277,7 @@ updateNewMove =(move)=> {
     history: history,
     pieceSquare: ''
 }, () => {
-  this.socket.emit('endgame')
+  this.endgameConditions()
 })
 }
 
@@ -348,6 +342,7 @@ updateNewMove =(move)=> {
       let {fen, history} = this.state
       let clickMove = {fen, history, targetSquare, sourceSquare}
       socket.emit('clickMove', clickMove)
+      this.endgameConditions()
     });
   };
 
