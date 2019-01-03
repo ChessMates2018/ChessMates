@@ -87,10 +87,12 @@ class HumanVsHuman extends Component {
     })
     
     this.socket.on('update-history', (clickMove) => {
+      console.log('update-history is firing.')
       this.updateHistory(clickMove)
     })
 
     this.socket.on('update-game', (move) => {
+      console.log('update-game is firing.')
       this.updateNewMove(move)
     })
 
@@ -163,6 +165,7 @@ class HumanVsHuman extends Component {
   }
 
   endgameConditions = (resign) => {
+    console.log('endGame is firing!')
     let {light, dark, lightRating, darkRating, lightPointsWin, lightPointsDraw, lightPointsLose, darkPointsWin, darkPointsDraw, darkPointsLose} = this.state
     let {in_checkmate, in_stalemate, insufficient_material, in_threefold_repetition, turn} = this.game
     let lightEloDraw = lightPointsDraw;
@@ -270,20 +273,18 @@ updateHistory = (clickMove) => {
 }
 
 updateNewMove =(move)=> {
-  console.log(move)
   let newMove = this.movePiece(move.sourceSquare, move.targetSquare)
 
   // illegal move
   if (newMove === null) return;
   let {fen, history, squareStyles} = move
-  this.setState(({ history, pieceSquare }) => ({
+  this.setState({
     fen: this.game.fen(),
-    history: this.game.history({ verbose: false }),
+    history: history,
     pieceSquare: ''
 }, () => {
   this.socket.emit('endgame')
 })
-)
 }
 
   showHistory = () => {
