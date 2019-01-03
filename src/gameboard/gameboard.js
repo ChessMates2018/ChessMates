@@ -63,7 +63,7 @@ class HumanVsHuman extends Component {
       darkPointsWin: 0,
       darkPointsDraw: 0,
       darkPointsLose: 0,
-      turn: true,
+      turn: false,
       message: '',
       isOpen: false,
       winner: '',
@@ -86,9 +86,11 @@ class HumanVsHuman extends Component {
       room: this.state.room
     })
     this.socket.on('update-history', (clickMove) => {
+      this.setState({turn: true})
       this.updateHistory(clickMove)
     })
     this.socket.on('update-game', (move) => {
+      this.setState({turn: true})
       this.updateNewMove(move)
     })
     this.socket.on('resign', (resign) => {
@@ -109,7 +111,15 @@ class HumanVsHuman extends Component {
       let darkRating = res.data[1]
       this.setState({
         lightRating, darkRating
-      }, () => this.eloCalculator())
+      }, () => {
+        this.eloCalculator()
+        console.log(this.props.username)
+        if (this.props.username === this.state.light){
+          this.setState({
+            turn: true
+          })
+        }
+      })
     })
   }
 
@@ -236,6 +246,7 @@ class HumanVsHuman extends Component {
       fen: this.game.fen(),
       history: this.game.history({ verbose: false }),
       squareStyles: squareStyling({ pieceSquare, history }),
+      turn: false
     }), () => {
       let {fen, history, squareStyles} = this.state
       let newMove = {fen, history, squareStyles, sourceSquare, targetSquare}
@@ -337,7 +348,8 @@ updateNewMove =(move)=> {
     this.setState({
       fen: this.game.fen(),
       history: this.game.history({ verbose: false }),
-      pieceSquare: ""
+      pieceSquare: "",
+      turn: false
     }, () => {
       let {fen, history} = this.state
       let clickMove = {fen, history, targetSquare, sourceSquare}
