@@ -97,6 +97,8 @@ class HumanVsHuman extends Component {
     this.socket.on('resign', (resign) => {
       this.endgameConditions(resign)
     })
+
+    this.socket.on('endgame', this.endgameConditions())
   }
 
   toggleModal (e) {
@@ -262,7 +264,8 @@ updateHistory = (clickMove) => {
     fen: this.game.fen(),
     history: history,
     pieceSquare: '',
-    turn: true
+  }, () => {
+    this.socket.emit('endgame')
   })
 }
 
@@ -277,6 +280,8 @@ updateNewMove =(move)=> {
     fen: this.game.fen(),
     history: this.game.history({ verbose: false }),
     pieceSquare: ''
+}, () => {
+  this.socket.emit('endgame')
 })
 )
 }

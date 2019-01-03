@@ -105,6 +105,10 @@ io.on('connection', function(socket){
         //add change turn to = true add to emit?
         socket.broadcast.to('game1').emit('update-turn', toggleTurn)
     })
+
+    socket.on('endgame', () => {
+        socket.to('game1').emit('endgame')
+    })
     
     socket.on('disconnect', () => console.log('User has peaced out, yo!', socket.id))
 
