@@ -42,6 +42,9 @@ handleKeyUp = e => {
     }
   };
 
+scrollToBottom(){
+
+}
 
     render(){
         let {user} = this.state
@@ -53,7 +56,9 @@ handleKeyUp = e => {
                 this.state.generalMessages.map((gm,i)=>{
                   return (<p key={i} className = 'gm'>{gm}</p>)
                 })
+                
               }
+              <div id="bottomOfWindow"></div>
             </div>
             <div className="input-container">
             <textarea name="" id="" cols="30" rows="5"

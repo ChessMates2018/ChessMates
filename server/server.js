@@ -90,27 +90,24 @@ io.on('connection', function(socket){
         io.emit('push to board', {challenged, gameId, challenger})
     })
 
-    // //original move code
-    // socket.on('move', (newMove) => {
-        
-    //     //add change turn to = true add to emit?
-    //     io.to('game1').emit('update-game',newMove)
-    // })
 
     socket.on('clickMove', (clickMove) => {
-        //add change turn to = true add to emit?
+       // sends move via click function to receiving client side.
         socket.broadcast.to('game1').emit('update-history', clickMove)
     })
 
     socket.on('move', (move) => {
-        
-        //add change turn to = true add to emit?
+      // sends move via onDrop function to receiving client side.
         socket.broadcast.to('game1').emit('update-game', move)
     })
 
     socket.on('toggleTurn', (toggleTurn) => {
         //add change turn to = true add to emit?
         socket.broadcast.to('game1').emit('update-turn', toggleTurn)
+    })
+
+    socket.on('endgame', () => {
+        socket.to('game1').emit('endgame')
     })
     
     socket.on('disconnect', () => console.log('User has peaced out, yo!', socket.id))
