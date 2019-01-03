@@ -1,16 +1,12 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import MoveList from './components/moveList'
-import Chess from "chess.js"; // import Chess from  "chess.js"(default) if recieving an error about new Chess() not being a constructor
+import Chess from "chess.js"; 
 import axios from 'axios'
 import Chessboard from "chessboardjsx";
-// import io from 'socket.io-client'
 import {socket} from '../utils/SocketFunctions'
 import {connect} from 'react-redux'
 import { relative } from "path";
-//set up endGame
-//resignation or checkmate assings victor and loser leaving counts as resignation
-//under any other condition the game is a draw including
 import Chat from './components/chat'
 import Modal from 'styled-react-modal'
 
@@ -356,6 +352,7 @@ updateNewMove =(move)=> {
     });
 
   resignation = (username) => {
+    console.log('firing?')
     if (this.state.winner) return
     let resign = username
     this.socket.emit('resign', resign)
