@@ -315,7 +315,7 @@ class HumanVsHuman extends Component {
       let newMove = {fen, history, squareStyles, sourceSquare, targetSquare}
       this.socket.emit('move', newMove)
       this.endgameConditions()
-      this.onSquareClick()
+      this.onSquareClick('e4')
     });
   };
 
@@ -338,6 +338,7 @@ updateHistory = (clickMove) => {
     pieceSquare: '',
   }, ()=>{
     this.endgameConditions()
+    this.onSquareClick('e4')
   })
 }
 
@@ -353,6 +354,7 @@ updateNewMove =(move)=> {
     pieceSquare: ''
 }, () => {
   this.endgameConditions()
+  this.onSquareClick('e4')
 })
 }
 
@@ -419,7 +421,7 @@ updateNewMove =(move)=> {
       let clickMove = {fen, history, targetSquare, sourceSquare}
       socket.emit('clickMove', clickMove)
       this.endgameConditions()
-      this.onSquareClick()
+      this.onSquareClick('e4')
     });
   };
 
