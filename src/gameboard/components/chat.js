@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import io from 'socket.io-client'
 import {connect} from 'react-redux'
-
+  
 class Chat extends Component{
     constructor(props){
         super(props)
@@ -29,6 +29,10 @@ componentDidMount(){
     });
 }
 
+componentWillUnmount(){
+    this.socket.close()
+  }
+
 submitMessage = (user, message, roomName) => {
         let messageObj = {user, message}
         this.socket.emit(`${roomName}-chat`, messageObj);
@@ -42,23 +46,18 @@ handleKeyUp = e => {
     }
   };
 
-scrollToBottom(){
-
-}
-
     render(){
-        let {user} = this.state
         return(
             <section className="chat-container">
             <h3>Insult box</h3>
-            <div className="messages-window">
+            <div 
+            className="messages-window"
+            >
             {
                 this.state.generalMessages.map((gm,i)=>{
                   return (<p key={i} className = 'gm'>{gm}</p>)
                 })
-                
-              }
-              <div id="bottomOfWindow"></div>
+            }
             </div>
             <div className="input-container">
             <textarea name="" id="" cols="30" rows="5"
@@ -70,7 +69,6 @@ scrollToBottom(){
                 onKeyUp={this.handleKeyUp}
             ></textarea>
             </div>
-            
             </section>
         )
     }

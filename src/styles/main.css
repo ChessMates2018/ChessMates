@@ -310,6 +310,23 @@ button {
   background-image: url("../images/marble1.jpg");
   padding-top: 20px; }
 
+#react-confirm-alert-firm-svg {
+  display: none; }
+
+#react-confirm-alert {
+  position: absolute;
+  left: 35%;
+  top: 35%;
+  background: gray;
+  border: black solid 1px;
+  z-index: 10; }
+
+.react-confirm-alert-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; }
+
 .ML_rapper {
   background-color: tan;
   display: flex;
