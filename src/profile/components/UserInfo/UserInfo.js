@@ -5,7 +5,6 @@ import bishop from '../../../images/default_bishop.jpg'
 import knight from '../../../images/default_knight.jpg'
 import rook from '../../../images/default_rook.jpg'
 import axios from 'axios'
-import {connect} from 'react-redux'
 
 
 class UserInfo extends Component {

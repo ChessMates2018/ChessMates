@@ -9,8 +9,6 @@ import {socket} from '../../../utils/SocketFunctions'
 import {withRouter} from 'react-router-dom'
 
 
-
-
 class Arena extends Component {
   constructor(props) {
     super(props)

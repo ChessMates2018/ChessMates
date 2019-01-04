@@ -1,11 +1,10 @@
 import React, {Component} from 'react'
 
-class MoveList extends Component{
-   
 
-  
+class MoveList extends Component{
+
   render(){
-      let {username, resignation} = this.props
+    let {username, resignation, draw} = this.props
     return(
         <div className='ML_rapper'>
             <h3>MoveList</h3>
@@ -14,10 +13,11 @@ class MoveList extends Component{
             </div>
             <button
                 className = "resign_btn"
-                 onClick = {() => resignation(username)}
+                onClick = {() => resignation(username)}
             >Resign</button>
             <button
                 className = "draw_btn"
+                onClick = {() => draw(username)}
             >Offer Draw</button>
         </div>
     )

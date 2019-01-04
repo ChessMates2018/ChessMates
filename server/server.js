@@ -77,7 +77,23 @@ io.on('connection', function(socket){
     })
    
     socket.on('resign', (resign) => {
+        //sends to all client in game1. Both parties are notified of who is resigning.
         io.to('game1').emit('resign', resign)
+    })
+
+    socket.on('draw', (draw_offer) => {
+        //draw_offer is sent from sender client to receiving client to either be confirmed or rejected.
+        socket.broadcast.to('game1').emit('draw', draw_offer)
+    })
+
+    socket.on('drawAccepted', () => {
+        //draw has been accepted.  Will trigger endGameModal for both clients with draw results.
+        io.to('game1').emit('drawAccept')
+    })
+
+    socket.on('drawDeclined', () => {
+        //draw has been declined.  Will trigger response Modal for receiving client and reset state so draw can be sent again.
+        socket.broadcast.to('game1').emit('drawDecline')
     })
 
     socket.on('new player', function() {

@@ -6,11 +6,12 @@ import axios from 'axios'
 import Chessboard from "chessboardjsx";
 import {socket} from '../utils/SocketFunctions'
 import {connect} from 'react-redux'
-import { relative } from "path";
 import Chat from './components/chat'
 import Modal from 'styled-react-modal'
+import {confirmAlert} from 'react-custom-confirm-alert'
 
-const StyledModal = Modal.styled`
+
+const EndGameModal = Modal.styled`
   width: 30rem;
   height: 10rem;
   display: flex;
@@ -34,7 +35,6 @@ const StyledModal = Modal.styled`
     font-weight: bold;    
   }
 `
-
 
 class HumanVsHuman extends Component {
   constructor(props) {
@@ -68,9 +68,30 @@ class HumanVsHuman extends Component {
       isOpen: false,
       winner: '',
       loser: '',
-      results: ''
+      results: '',
+      drawWasSent: false,
+      drawDecline: false,
+      finished: false,
+      options: {
+        title: 'Draw Offer',
+        message: 'Your opponent has offered a draw. Do you accept?',
+        buttons: [
+          {
+          label: 'Yes',
+          onClick: () => this.drawAccepted()
+          },
+          {
+          label: 'No',
+          onClick: () => this.drawDeclined()
+          }
+        ],
+        childrenElement: () => <div />,
+        willUnmount: () => {}
+      }
     };
     this.toggleModal = this.toggleModal.bind(this)
+    this.drawAccepted = this.drawAccepted.bind(this)
+    this.drawDeclined = this.drawDeclined.bind(this)
   }
   static propTypes = { children: PropTypes.func };
 
@@ -79,8 +100,6 @@ class HumanVsHuman extends Component {
     this.updatingPlayers()
     this.runSockets()
     this.game = new Chess();
-    let {turn} = this.game
-    console.log(this.props)
     this.socket.emit('new-game', {
       message: this.game,
       room: this.state.room
@@ -96,10 +115,30 @@ class HumanVsHuman extends Component {
     this.socket.on('resign', (resign) => {
       this.endgameConditions(resign)
     })
+    this.socket.on('draw', (draw_offer) => {
+      this.toggleDrawOfferModal(draw_offer)
+    })
+    this.socket.on('drawAccept', () => {
+      let draw = 'draw'
+      this.endgameConditions(draw)
+    })
+    this.socket.on('drawDecline', () => {
+      this.drawDeclineMessage()
+    })
   }
 
   toggleModal (e) {
     this.setState({ isOpen: !this.state.isOpen })
+  }
+
+  toggleDrawOfferModal(username){
+    let {options} = this.state
+    confirmAlert(options)
+  }
+
+  drawDeclineMessage(){
+    this.setState({drawWasSent: false})
+    alert('You opponent declined your draw offer.')
   }
 
   getPlayerRatings(){
@@ -113,7 +152,6 @@ class HumanVsHuman extends Component {
         lightRating, darkRating
       }, () => {
         this.eloCalculator()
-        console.log(this.props.username)
         if (this.props.username === this.state.light){
           this.setState({
             turn: true
@@ -174,6 +212,11 @@ class HumanVsHuman extends Component {
     let lightEloDraw = lightPointsDraw;
     let darkEloDraw = darkPointsDraw;
 
+    if (resign === 'draw'){
+      this.setState({isOpen: true, finished: true, message:`Game Over! The game has ended in a draw: Draw Agreed.`, results: `${light}'s new rating is ${lightEloDraw} and ${dark}'s new rating is ${darkEloDraw}.`}, () => {
+        axios.put('/api/updateRatingsDraw/', {light, dark, lightEloDraw, darkEloDraw})
+      })
+    }
     if (resign === light) {
         let win = 1;
         let loss = 1;
@@ -365,10 +408,31 @@ updateNewMove =(move)=> {
     });
 
   resignation = (username) => {
-    console.log('firing?')
-    if (this.state.winner) return
+    //Checks to see if game is over by either checkmate/draw
+    if (this.state.winner || this.state.finished) return
     let resign = username
     this.socket.emit('resign', resign)
+  }
+
+  draw = (username) => {
+    //Check if game is over. If true, kill function.
+    if (this.state.finished) return
+    //Check if draw has already been sent to prevent spamming.
+    if (this.state.drawWasSent) return
+
+    this.setState({drawWasSent: true})
+    let draw_offer = username
+    this.socket.emit('draw', draw_offer)
+  }
+
+  drawAccepted(){
+    this.setState({drawOffer: false})
+    this.socket.emit('drawAccepted')
+  }
+
+  drawDeclined(){
+    this.setState({drawOffer: false})
+    this.socket.emit('drawDeclined')
   }
 
   screenWidthCalc(screenWidth){
@@ -384,7 +448,7 @@ updateNewMove =(move)=> {
   }
 
   render() { 
-    const { fen, dropSquareStyle, squareStyles, endGame, isOpen, winner, message, light, dark, results } = this.state;
+    const { fen, dropSquareStyle, squareStyles, endGame, isOpen, winner, message, light, dark, results, drawOffer } = this.state;
     return this.props.children({
       screenWidthCalc: this.screenWidthCalc, 
       isOpen: isOpen,
@@ -393,6 +457,11 @@ updateNewMove =(move)=> {
       message: message,
       results: results,
       resignation: this.resignation,
+      draw: this.draw,
+      drawOffer: drawOffer,
+      drawAccepted: this.drawAccepted,
+      drawDeclined: this.drawDeclined,
+      toggleDrawDecline: this.toggleDrawDecline,
       showHistory: this.showHistory,
       squareStyles,
       position: fen,
@@ -419,6 +488,10 @@ updateNewMove =(move)=> {
         {({
           screenWidthCalc,
           resignation,
+          draw,
+          drawOffer,
+          drawAccepted,
+          drawDeclined,
           showHistory,
           position,
           onDrop,
@@ -431,6 +504,7 @@ updateNewMove =(move)=> {
           onSquareRightClick,
           isOpen,
           toggleModal,
+          toggleDrawDecline,
           winner,
           message,
           results,
@@ -502,12 +576,13 @@ updateNewMove =(move)=> {
             />
           }
           <MoveList 
-          move={showHistory}
+          move = {showHistory}
           resignation = {resignation}
+          draw = {draw}
           username= {props.username}
           />
-          
-        <StyledModal
+
+        <EndGameModal
           isOpen={isOpen}
           onBackgroundClick={toggleModal}
           onEscapeKeydown={toggleModal}
@@ -521,8 +596,7 @@ updateNewMove =(move)=> {
           <h1>Game Over</h1>
           <h3>{message}</h3>
           <h4>{results}</h4>
-          <button onClick={toggleModal}>Accept</button>
-        </StyledModal>
+        </EndGameModal>
           
           </>
         )}
