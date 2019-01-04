@@ -140,10 +140,8 @@ class HumanVsHuman extends Component {
   }
 
   simulateClick(){
-   const wrapper = document.querySelector('.chess-wrapper > div')
-   const div = wrapper.querySelector('div > div')
-   const otherDiv = div.querySelector('div')
-   otherDiv.click()
+  const square = document.querySelectorAll('[data-testid]')[0]
+  square.click()
   }
 
   componentWillUnmount() {
