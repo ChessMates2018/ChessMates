@@ -139,6 +139,13 @@ class HumanVsHuman extends Component {
     })
   }
 
+  simulateClick(){
+   const wrapper = document.querySelector('.chess-wrapper > div')
+   const div = wrapper.querySelector('div > div')
+   const otherDiv = div.querySelector('div')
+   otherDiv.click()
+  }
+
   componentWillUnmount() {
     socket.off('draw');
  }
@@ -312,9 +319,9 @@ class HumanVsHuman extends Component {
     }), () => {
       let {fen, history, squareStyles} = this.state
       let newMove = {fen, history, squareStyles, sourceSquare, targetSquare}
-      this.onSquareClick('a1')
       this.socket.emit('move', newMove)
       this.endgameConditions()
+      this.simulateClick()
     });
   };
 
@@ -389,8 +396,6 @@ updateNewMove =(move)=> {
      //check if game is already over. If yes, then cancel function
      if (this.state.winner || this.state.finished) return
 
-
-
     this.setState(({ history }) => ({
       squareStyles: squareStyling({ pieceSquare: square, history }),
       pieceSquare: square
@@ -416,9 +421,9 @@ updateNewMove =(move)=> {
     }, () => {
       let {fen, history} = this.state
       let clickMove = {fen, history, targetSquare, sourceSquare}
-      this.onSquareClick('a1')
       socket.emit('clickMove', clickMove)
       this.endgameConditions()
+      this.simulateClick()
     });
   };
 
@@ -474,6 +479,7 @@ updateNewMove =(move)=> {
 
   render() { 
     const { fen, dropSquareStyle, squareStyles, endGame, isOpen, winner, message, light, dark, results, drawOffer } = this.state;
+
     return this.props.children({
       screenWidthCalc: this.screenWidthCalc, 
       isOpen: isOpen,
@@ -536,7 +542,9 @@ updateNewMove =(move)=> {
           {
             props.username === props.match.params.light
             ?
-          <Chessboard
+            <div className='chess-wrapper'>
+              <Chessboard
+            simulateClick={simulateClick}
             username= {props.username}
             id='humanVsHuman'
             calcWidth={({ screenWidth }) => screenWidthCalc(screenWidth)}
@@ -548,7 +556,8 @@ updateNewMove =(move)=> {
             boardStyle={{
               borderRadius: "5px",
               boxShadow: `0 5px 15px rgba(0, 0, 0, 0.5)`,
-              marginBottom: '50px'
+              marginBottom: '50px',
+              background: 'red'
             }}
             darkSquareStyle = {{
               backgroundColor: 'gray'
@@ -562,8 +571,12 @@ updateNewMove =(move)=> {
             onSquareClick={onSquareClick}
             onSquareRightClick={onSquareRightClick}
             />
+            </div>
             :
+            <div className='chess-wrapper'>
+            
             <Chessboard
+            simulateClick={simulateClick}
             id='humanVsHuman'
             username= {props.username}
             updateNewMove={updateNewMove}
@@ -590,7 +603,7 @@ updateNewMove =(move)=> {
             onDragOverSquare={onDragOverSquare}
             onSquareClick={onSquareClick}
             onSquareRightClick={onSquareRightClick}
-            />
+            /></div>
           }
           <MoveList 
           move = {showHistory}
