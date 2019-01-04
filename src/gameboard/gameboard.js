@@ -315,6 +315,7 @@ class HumanVsHuman extends Component {
       let newMove = {fen, history, squareStyles, sourceSquare, targetSquare}
       this.socket.emit('move', newMove)
       this.endgameConditions()
+      this.onSquareClick()
     });
   };
 
@@ -384,7 +385,7 @@ updateNewMove =(move)=> {
   
   onSquareClick = square => {
     //check if it's player's turn. If false, the cancel function
-    if (!this.state.turn) return
+     if (!this.state.turn) return
 
      //check if game is already over. If yes, then cancel function
      if (this.state.winner || this.state.finished) return
@@ -418,6 +419,7 @@ updateNewMove =(move)=> {
       let clickMove = {fen, history, targetSquare, sourceSquare}
       socket.emit('clickMove', clickMove)
       this.endgameConditions()
+      this.onSquareClick()
     });
   };
 
