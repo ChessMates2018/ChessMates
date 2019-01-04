@@ -87,6 +87,17 @@ class HumanVsHuman extends Component {
         ],
         childrenElement: () => <div />,
         willUnmount: () => {}
+      },
+      rejection: {
+        title: 'Draw Declined',
+        message: 'Your opponent declined the draw.',
+        buttons: [
+          {
+            label: 'Accept'
+          }
+        ],
+        childrenElement: () => <div />,
+        willUnmount: () => {}
       }
     };
     this.toggleModal = this.toggleModal.bind(this)
@@ -137,8 +148,9 @@ class HumanVsHuman extends Component {
   }
 
   drawDeclineMessage(){
+    let {rejection} = this.state
     this.setState({drawWasSent: false})
-    alert('You opponent declined your draw offer.')
+    confirmAlert(rejection)
   }
 
   getPlayerRatings(){
@@ -421,6 +433,7 @@ updateNewMove =(move)=> {
     if (this.state.drawWasSent) return
 
     this.setState({drawWasSent: true})
+    console.log('how many times will this draw offer be sent?')
     let draw_offer = username
     this.socket.emit('draw', draw_offer)
   }
