@@ -344,6 +344,7 @@ updateHistory = (clickMove) => {
     pieceSquare: '',
   }, ()=>{
     this.endgameConditions()
+    this.simulateClick()
   })
 }
 
@@ -359,6 +360,7 @@ updateNewMove =(move)=> {
     pieceSquare: ''
 }, () => {
   this.endgameConditions()
+  this.simulateClick()
 })
 }
 
