@@ -312,7 +312,7 @@ class HumanVsHuman extends Component {
     }), () => {
       let {fen, history, squareStyles} = this.state
       let newMove = {fen, history, squareStyles, sourceSquare, targetSquare}
-      this.onSquareClick()
+      this.onSquareClick('a1')
       this.socket.emit('move', newMove)
       this.endgameConditions()
     });
@@ -416,7 +416,7 @@ updateNewMove =(move)=> {
     }, () => {
       let {fen, history} = this.state
       let clickMove = {fen, history, targetSquare, sourceSquare}
-      this.onSquareClick()
+      this.onSquareClick('a1')
       socket.emit('clickMove', clickMove)
       this.endgameConditions()
     });
