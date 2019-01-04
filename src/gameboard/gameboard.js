@@ -72,6 +72,7 @@ class HumanVsHuman extends Component {
       drawWasSent: false,
       drawDecline: false,
       finished: false,
+      drawSentNumber: 0,
       options: {
         title: 'Draw Offer',
         message: 'Your opponent has offered a draw. Do you accept?',
@@ -126,8 +127,9 @@ class HumanVsHuman extends Component {
     this.socket.on('resign', (resign) => {
       this.endgameConditions(resign)
     })
-    this.socket.on('draw', (draw_offer) => {
-      this.toggleDrawOfferModal(draw_offer)
+    this.socket.on('draw', () => {
+      console.log('is this doubling too? socket.on in componentDidMount')
+      this.toggleDrawOfferModal()
     })
     this.socket.on('drawAccept', () => {
       let draw = 'draw'
@@ -138,19 +140,25 @@ class HumanVsHuman extends Component {
     })
   }
 
+  componentWillUnmount() {
+    socket.off('draw');
+ }
+
   toggleModal (e) {
     this.setState({ isOpen: !this.state.isOpen })
   }
 
-  toggleDrawOfferModal(username){
+  toggleDrawOfferModal(){
     let {options} = this.state
+    console.log('how many times is toggleDrawOfferModal firing?')
     confirmAlert(options)
   }
 
   drawDeclineMessage(){
     let {rejection} = this.state
-    this.setState({drawWasSent: false})
-    confirmAlert(rejection)
+    this.setState({drawWasSent: false}, () => {
+      confirmAlert(rejection)
+    })
   }
 
   getPlayerRatings(){
@@ -426,26 +434,27 @@ updateNewMove =(move)=> {
     this.socket.emit('resign', resign)
   }
 
-  draw = (username) => {
+  draw = () => {
     //Check if game is over. If true, kill function.
     if (this.state.finished) return
     //Check if draw has already been sent to prevent spamming.
     if (this.state.drawWasSent) return
 
-    this.setState({drawWasSent: true})
-    console.log('how many times will this draw offer be sent?')
-    let draw_offer = username
-    this.socket.emit('draw', draw_offer)
+    this.setState({drawWasSent: true}, () => {
+      this.socket.emit('draw')
+    })
   }
 
   drawAccepted(){
-    this.setState({drawOffer: false})
-    this.socket.emit('drawAccepted')
+    this.setState({drawOffer: false}, () => {
+      this.socket.emit('drawAccepted')
+    })
   }
 
   drawDeclined(){
-    this.setState({drawOffer: false})
-    this.socket.emit('drawDeclined')
+    this.setState({drawOffer: false}, () => {
+      this.socket.emit('drawDeclined')
+    })
   }
 
   screenWidthCalc(screenWidth){

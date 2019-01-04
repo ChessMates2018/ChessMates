@@ -81,9 +81,10 @@ io.on('connection', function(socket){
         io.to('game1').emit('resign', resign)
     })
 
-    socket.on('draw', (draw_offer) => {
+    socket.on('draw', () => {
         //draw_offer is sent from sender client to receiving client to either be confirmed or rejected.
-        socket.broadcast.to('game1').emit('draw', draw_offer)
+        console.log('is my draw socket doubling,too?')
+        socket.broadcast.to('game1').emit('draw')
     })
 
     socket.on('drawAccepted', () => {
@@ -102,7 +103,6 @@ io.on('connection', function(socket){
     })
 
     socket.on('challenge initiated', (challenged, gameId, challenger) => {
-        
         io.emit('push to board', {challenged, gameId, challenger})
     })
 

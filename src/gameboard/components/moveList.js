@@ -17,7 +17,7 @@ class MoveList extends Component{
             >Resign</button>
             <button
                 className = "draw_btn"
-                onClick = {() => draw(username)}
+                onClick = {() => draw()}
             >Offer Draw</button>
         </div>
     )
