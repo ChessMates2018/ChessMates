@@ -109,6 +109,7 @@ class HumanVsHuman extends Component {
 
 
   componentDidMount() {
+    this.simulateClick()
     this.updatingPlayers()
     this.runSockets()
     this.game = new Chess();
@@ -542,7 +543,6 @@ updateNewMove =(move)=> {
           {
             props.username === props.match.params.light
             ?
-            <div className='chess-wrapper'>
               <Chessboard
             simulateClick={simulateClick}
             username= {props.username}
@@ -571,10 +571,7 @@ updateNewMove =(move)=> {
             onSquareClick={onSquareClick}
             onSquareRightClick={onSquareRightClick}
             />
-            </div>
             :
-            <div className='chess-wrapper'>
-            
             <Chessboard
             simulateClick={simulateClick}
             id='humanVsHuman'
@@ -603,7 +600,7 @@ updateNewMove =(move)=> {
             onDragOverSquare={onDragOverSquare}
             onSquareClick={onSquareClick}
             onSquareRightClick={onSquareRightClick}
-            /></div>
+            />
           }
           <MoveList 
           move = {showHistory}
