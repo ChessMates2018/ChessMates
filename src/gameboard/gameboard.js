@@ -128,7 +128,6 @@ class HumanVsHuman extends Component {
       this.endgameConditions(resign)
     })
     this.socket.on('draw', () => {
-      console.log('is this doubling too? socket.on in componentDidMount')
       this.toggleDrawOfferModal()
     })
     this.socket.on('drawAccept', () => {
@@ -143,6 +142,12 @@ class HumanVsHuman extends Component {
   componentWillUnmount() {
     socket.off('draw');
  }
+ 
+  simulateClick(){
+    //This simulated click on the client's side before opponent responds prevents animation bug from occuring.
+    
+    // gameboard.click()
+  }
 
   toggleModal (e) {
     this.setState({ isOpen: !this.state.isOpen })
@@ -182,7 +187,7 @@ class HumanVsHuman extends Component {
   }
 
   updatingPlayers(){
-    let {roomId, dark, light} = this.props.match.params
+    let {dark, light} = this.props.match.params
     this.setState({
       light, dark
     }, this.getPlayerRatings())
@@ -315,7 +320,7 @@ class HumanVsHuman extends Component {
       let newMove = {fen, history, squareStyles, sourceSquare, targetSquare}
       this.socket.emit('move', newMove)
       this.endgameConditions()
-      this.onSquareClick('e4')
+      this.simulateClick(Gameboard)
     });
   };
 
@@ -338,7 +343,6 @@ updateHistory = (clickMove) => {
     pieceSquare: '',
   }, ()=>{
     this.endgameConditions()
-    this.onSquareClick('e4')
   })
 }
 
@@ -354,7 +358,6 @@ updateNewMove =(move)=> {
     pieceSquare: ''
 }, () => {
   this.endgameConditions()
-  this.onSquareClick('e4')
 })
 }
 
@@ -421,7 +424,7 @@ updateNewMove =(move)=> {
       let clickMove = {fen, history, targetSquare, sourceSquare}
       socket.emit('clickMove', clickMove)
       this.endgameConditions()
-      this.onSquareClick('e4')
+      this.simulateClick(Gameboard)
     });
   };
 
@@ -443,6 +446,8 @@ updateNewMove =(move)=> {
     if (this.state.finished) return
     //Check if draw has already been sent to prevent spamming.
     if (this.state.drawWasSent) return
+    //Check if game has winner.
+    if (this.state.winner) return
 
     this.setState({drawWasSent: true}, () => {
       this.socket.emit('draw')
@@ -484,10 +489,6 @@ updateNewMove =(move)=> {
       results: results,
       resignation: this.resignation,
       draw: this.draw,
-      drawOffer: drawOffer,
-      drawAccepted: this.drawAccepted,
-      drawDeclined: this.drawDeclined,
-      toggleDrawDecline: this.toggleDrawDecline,
       showHistory: this.showHistory,
       squareStyles,
       position: fen,
@@ -499,12 +500,11 @@ updateNewMove =(move)=> {
       onSquareClick: this.onSquareClick,
       onSquareRightClick: this.onSquareRightClick,
       testSockets: this.testSockets,
-      updateNewMove: this.updateNewMove
+      updateNewMove: this.updateNewMove,
+      simulateClick: this.simulateClick
     });
   }
 }
-
-
 
  function Gameboard(props) {
   let {light, dark} = props.match.params
@@ -515,9 +515,6 @@ updateNewMove =(move)=> {
           screenWidthCalc,
           resignation,
           draw,
-          drawOffer,
-          drawAccepted,
-          drawDeclined,
           showHistory,
           position,
           onDrop,
@@ -530,11 +527,11 @@ updateNewMove =(move)=> {
           onSquareRightClick,
           isOpen,
           toggleModal,
-          toggleDrawDecline,
           winner,
           message,
           results,
-          updateNewMove
+          updateNewMove,
+          simulateClick
         }) => (
           <>
           <Chat
@@ -547,7 +544,7 @@ updateNewMove =(move)=> {
             ?
           <Chessboard
             username= {props.username}
-            id="humanVsHuman"
+            id='humanVsHuman'
             calcWidth={({ screenWidth }) => screenWidthCalc(screenWidth)}
             position={position}
             onDrop={onDrop}
@@ -573,7 +570,7 @@ updateNewMove =(move)=> {
             />
             :
             <Chessboard
-            id="humanVsHuman"
+            id='humanVsHuman'
             username= {props.username}
             updateNewMove={updateNewMove}
             calcWidth={({ screenWidth }) => screenWidthCalc(screenWidth)}
