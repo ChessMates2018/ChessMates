@@ -276,7 +276,7 @@ class HumanVsHuman extends Component {
   //Original Code
   onDrop = ({ sourceSquare, targetSquare }) => {
     //check if game is already over. If yes, then cancel function
-    if (this.state.winner) return
+    if (this.state.winner || this.state.finished) return
 
     //check if it's player's turn. If false, the cancel function
     if (!this.state.turn) return
@@ -367,7 +367,7 @@ updateNewMove =(move)=> {
     if (!this.state.turn) return
 
      //check if game is already over. If yes, then cancel function
-     if (this.state.winner) return
+     if (this.state.winner || this.state.finished) return
 
 
 
