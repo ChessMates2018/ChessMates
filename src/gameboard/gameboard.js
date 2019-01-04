@@ -142,12 +142,6 @@ class HumanVsHuman extends Component {
   componentWillUnmount() {
     socket.off('draw');
  }
- 
-  simulateClick(){
-    //This simulated click on the client's side before opponent responds prevents animation bug from occuring.
-    
-    // gameboard.click()
-  }
 
   toggleModal (e) {
     this.setState({ isOpen: !this.state.isOpen })
@@ -318,9 +312,9 @@ class HumanVsHuman extends Component {
     }), () => {
       let {fen, history, squareStyles} = this.state
       let newMove = {fen, history, squareStyles, sourceSquare, targetSquare}
+      this.onSquareClick()
       this.socket.emit('move', newMove)
       this.endgameConditions()
-      this.simulateClick(Gameboard)
     });
   };
 
@@ -422,9 +416,9 @@ updateNewMove =(move)=> {
     }, () => {
       let {fen, history} = this.state
       let clickMove = {fen, history, targetSquare, sourceSquare}
+      this.onSquareClick()
       socket.emit('clickMove', clickMove)
       this.endgameConditions()
-      this.simulateClick(Gameboard)
     });
   };
 
