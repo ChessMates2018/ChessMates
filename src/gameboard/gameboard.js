@@ -109,7 +109,6 @@ class HumanVsHuman extends Component {
 
 
   componentDidMount() {
-    this.simulateClick()
     this.updatingPlayers()
     this.runSockets()
     this.game = new Chess();
@@ -138,6 +137,7 @@ class HumanVsHuman extends Component {
     this.socket.on('drawDecline', () => {
       this.drawDeclineMessage()
     })
+    this.simulateClick()
   }
 
   simulateClick(){
