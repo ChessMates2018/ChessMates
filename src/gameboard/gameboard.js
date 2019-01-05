@@ -137,7 +137,6 @@ class HumanVsHuman extends Component {
     this.socket.on('drawDecline', () => {
       this.drawDeclineMessage()
     })
-    this.simulateClick()
   }
 
   simulateClick(){
@@ -182,6 +181,7 @@ class HumanVsHuman extends Component {
             turn: true
           })
         }
+        this.simulateClick()
       })
     })
   }
