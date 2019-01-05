@@ -86,6 +86,11 @@ class HumanVsHuman extends Component {
     })
   }
 
+  simulateClick(){
+    const square = document.querySelectorAll('[data-testid]')[0]
+    square.click()
+    }
+
   getPlayerRatings(){
     let {dark, light} = this.props.match.params
     let userStr = `${light},${dark}`
@@ -125,7 +130,7 @@ class HumanVsHuman extends Component {
       darkPointsWin: newDarkEloWin,
       darkPointsDraw: newDarkEloDraw,
       darkPointsLose: newDarkEloLose
-    })
+    }, () => this.simulateClick())
   }
 
   toggleModal (e) {
@@ -202,6 +207,7 @@ class HumanVsHuman extends Component {
     }), () => {
       window.setTimeout(this.computerMove(), 3000);
       this.endgameConditions()
+      this.simulateClick()
     });
   };
 
@@ -241,7 +247,9 @@ class HumanVsHuman extends Component {
   updateNewMove =(newMove)=> {
     this.movePiece(newMove.sourceSquare, newMove.targetSquare)
     let {fen, history, squareStyles} = newMove
-    this.setState({fen, history, squareStyles})
+    this.setState({fen, history, squareStyles}, () => {
+      this.simulateClick()
+    })
   }
 
   showHistory = () => {
@@ -298,6 +306,7 @@ class HumanVsHuman extends Component {
     }, () => {
       window.setTimeout(this.computerMove(), 3000);
       this.endgameConditions()
+      this.simulateClick()
     });
   };
 
@@ -352,7 +361,8 @@ class HumanVsHuman extends Component {
       onSquareRightClick: this.onSquareRightClick,
       testSockets: this.testSockets,
       computerMove: this.computerMove,
-      results: results
+      results: results,
+      simulateClick: this.simulateClick
     });
   }
 }
@@ -380,6 +390,7 @@ class HumanVsHuman extends Component {
           winner,
           message,
           results,
+          simulateClick
         }) => (
           <>
           <Chat
@@ -390,6 +401,7 @@ class HumanVsHuman extends Component {
             props.username === props.match.params.light
             ?
           <Chessboard
+            simulateClick={simulateClick}
             id="humanVsHuman"
             calcWidth={({ screenWidth }) => screenWidthCalc(screenWidth)}
             position={position}
@@ -415,6 +427,7 @@ class HumanVsHuman extends Component {
             />
             :
             <Chessboard
+            simulateClick={simulateClick}
             id="humanVsHuman"
             calcWidth={({ screenWidth }) => screenWidthCalc(screenWidth)}
             orientation="black"
