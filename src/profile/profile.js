@@ -1,4 +1,4 @@
-  import React, {Component} from 'react' 
+import React, {Component} from 'react' 
 import axios from 'axios'
 import Arena from './components/Arena/Arena'
 import UserInfo from './components/UserInfo/UserInfo'
@@ -27,7 +27,6 @@ class Profile extends Component {
 
   componentDidMount() {
     if (!this.props.username) {
-      // console.log('FIRE FIRE FIRE')
       axios.get(`/api/checkuser`).then(res => {
         console.log(res.data)
         this.props.setUsername(res.data)
@@ -67,6 +66,10 @@ class Profile extends Component {
     })
   }
 
+  pleaseLogIn = () => {
+    alert(`If you would like to change your image, pleace create an account and login. Thank you.`)
+  }
+
   render () {
     let {currentUser} = this.state
     console.log(currentUser)
@@ -77,6 +80,7 @@ class Profile extends Component {
             <div className="sun_profile_section">
               <UserInfo 
                 showTheIcons = {this.showTheIcons}
+                pleaseLogIn = {this.pleaseLogIn}
                 currentUser = {currentUser[0]}/>
               <div className = {(this.state.showIcons? 'imageOpps': 'hiding')}>
                 <img onClick = {() => this.changeIcon(king)} src={king} alt=""/>
