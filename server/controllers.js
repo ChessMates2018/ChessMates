@@ -63,30 +63,16 @@ module.exports = {
             res.status(500).send(err)
         })
     },
-    // loginUser: (req, res) => {
-    //     const { Username, Password } = req.body
-    //     const db = req.app.get('db')
-    //     db.checkUsername(Username).then(user => {
-    //         if (user.length) { 
-    //             const validPassword = bcrypt.compareSync(Password, user[0].password)
-    //             if (validPassword) {
-    //                 req.session.user = user[0].username
-    //                 req.session.user.session_id = session_id_count
-    //                 session_id_count++
-    //                 db.toggle_online([Username])
-    //                 res.sendStatus(200)
-    //             } else {
-    //                 res.status(200).send('Invalid Password')
-    //             }
-    //         } else {
-    //             res.status(200).send('Username does not exist')
-    //         }
-    //     })
-    // },
+    guestLogin: (req,res) => {
+        req.session.user = 'guest'
+        res.sendStatus(200)
+    },
     getUser: (req, res) => {
         // console.log('IVE BEEN HIT!')
         let {user} = req.session
-        // console.log('session user', req.session)
+        if (user === 'guest'){
+            res.status(200).send('guest')
+        } else {
         const db = req.app.get('db')
         db.get_user({user}).then(currentUser => {
         // console.log('currentUser', currentUser)
@@ -95,6 +81,7 @@ module.exports = {
             console.log(err)
             res.status(500).send(err)
             })
+        }
     },
     getOnlineUsers: (req, res) => {
         const db = req.app.get('db')
@@ -130,20 +117,13 @@ module.exports = {
         console.log('checkUser has Fired!')
         const db = req.app.get('db')
         let {user} = req.session
-
-        // if (DEVKEY === 'true') {
-        //     let user = await db.get_user('Knight')
-        //     req.session.user = user[0].username
-        //     res.status(200).send(user)
-        // }
-        // else {
-            if (req.session.user) {
+        console.log(user)
+            if (user) {
                 res.status(200).send(user)
             }
             else {
                 res.sendStatus(401)
             }
-        // }
     },
     gameMoves: (req, res) => {
         let {history} = req.body
@@ -193,12 +173,16 @@ module.exports = {
         let {val} = req.body
         const db = req.app.get('db'),
               username = req.session.user
+        if(username === 'guest'){
+            res.status(200).send('guest')
+        } else {
         db.update_icon({val, username}).then(
             res.sendStatus(200)
         ).catch(err => {
             console.log(err)
             res.status(500).send(err)
         })
+        }
     },
     order66: (req, res) => {
         let {roomId} = req.params

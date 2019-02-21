@@ -67,7 +67,7 @@ class Arena extends Component {
     })
     //grab username of challenged off button click and emit to socket along with gameId (this may cause timing issues, will need to see)
     //set up an io.on if username === the username cooming back from socket push to board  
-  
+
   }
     
 
@@ -85,32 +85,6 @@ class Arena extends Component {
       inArenaToggle: !inArenaToggle, players: newPlayers
     })
   }
-
- 
-
-  // displayArena = () => {
-  //   console.log(this.state.players[0])
-  //   let {username}  = this.props
-  //   let {players} = this.state
-  //   console.log(players)
-  //   if (players[0]) {
-  //     players.map(player => {
-  //       if(!this.props.username){
-  //       return (
-  //           <div>
-  //              <p>{player}</p>
-  //             <button
-  //             // onClick = {this.runSockets}
-  //             className="challenge_btn">Come at me!</button>
-  //           </div> 
-  //       )}
-  //     })
-  //   } else {
-  //     return (
-  //       <p>There are no current challengers.</p>
-  //     )
-  //   }
-  // }
 
 
 

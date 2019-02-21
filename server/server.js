@@ -23,27 +23,16 @@ var server = require('http').createServer(app)
 var io = require('socket.io')(server)
 var sharedSession = require('express-socket.io-session')
 
-
 app.use( express.static( `${__dirname}/../build` ) );
 
 app.use(bodyParser.json())
 
 app.use(session)
 
-// app.use((req,res,next) => {
-//     if (ENVIRONMENT === 'dev') {
-//         req.app.get('db').set_data()
-//         .then(userData => {
-//             req.session.user = userData[0]
-//             next()
-//         })
-//     } else {
-//         next()
-//     }
-// })
 
 // User Endpoints
 app.get(`/api/user`, ctrl.getUser)
+app.get(`/api/guestLogin`, ctrl.guestLogin)
 app.get('/api/leaderboard', ctrl.getLeaders)
 app.get(`/api/loggedin`, ctrl.getOnlineUsers)
 app.get('/api/myGames', ctrl.getMyGames)
@@ -83,7 +72,6 @@ io.on('connection', function(socket){
 
     socket.on('draw', () => {
         //draw_offer is sent from sender client to receiving client to either be confirmed or rejected.
-        console.log('is my draw socket doubling,too?')
         socket.broadcast.to('game1').emit('draw')
     })
 
@@ -129,19 +117,7 @@ io.on('connection', function(socket){
       })
 })
 
-// io = io.listen(server)
-
-// io.sockets.on("connection", function(socket) {
-//     socket.on("room", function (room) {
-//         socket.join(room)
-//     })
-// })
-
 
 server.listen(SERVER_PORT, () => console.log(`spellbound on port ${SERVER_PORT}`))
-
-// app.listen(SERVER_PORT, () => {
-//     console.log(`spellbound on port ${SERVER_PORT}`)
-// })
 
 massive(CONNECTION_STRING).then(db => app.set('db', db))
