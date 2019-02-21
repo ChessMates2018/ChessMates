@@ -14,6 +14,7 @@ constructor(props){
         this.handleInput = this.handleInput.bind(this)
         this.toggleDiv = this.toggleDiv.bind(this)
         this.login = this.login.bind(this)
+        this.guest = this.guest.bind(this)
 }
 
 login(){
@@ -27,8 +28,6 @@ if (res.data === 'Invalid Password'){
     this.props.history.push('/profile')
 }
 })
-
-
 }
 
 
@@ -49,6 +48,13 @@ this.setState({
 })
 }
 
+async guest(){
+// Axios call to sign in as guest on session - id?
+const guest = axios.get('/api/guestLogin/')
+
+// Redirects to profile
+this.props.history.push('/profile')
+}
 
 render(){
 let WelcomeDiv;
@@ -64,6 +70,7 @@ WelcomeDiv =
         <input className="input" placeholder="Password" name="Password" type = "password" value={this.state.Password}onChange={this.handleInput}/>
         <button className="btn"  onClick={this.login}>Login</button>
         <button className="btn"  onClick={this.toggleDiv}>Register</button>
+        <button className="btn"  onClick={this.guest}>Guest</button>
     </div>
 }
 let {Div} = this.state

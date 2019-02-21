@@ -340,6 +340,19 @@ class HumanVsHuman extends Component {
     }
   }
 
+  draw = () => {
+    //Check if game is over. If true, kill function.
+    if (this.state.finished) return
+    //Check if draw has already been sent to prevent spamming.
+    if (this.state.drawWasSent) return
+    //Check if game has winner.
+    if (this.state.winner) return
+
+    this.setState({drawWasSent: true}, () => {
+      this.socket.emit('draw')
+    })
+  }
+
   render() { 
     const { fen, dropSquareStyle, squareStyles, endGame, isOpen, winner, message, light, dark, results, areYouSure } = this.state;
     return this.props.children({

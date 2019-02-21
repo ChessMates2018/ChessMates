@@ -1,4 +1,4 @@
-import React, {Component} from 'react' 
+  import React, {Component} from 'react' 
 import axios from 'axios'
 import Arena from './components/Arena/Arena'
 import UserInfo from './components/UserInfo/UserInfo'
@@ -29,6 +29,7 @@ class Profile extends Component {
     if (!this.props.username) {
       // console.log('FIRE FIRE FIRE')
       axios.get(`/api/checkuser`).then(res => {
+        console.log(res.data)
         this.props.setUsername(res.data)
         login(res.data)
       })
@@ -68,6 +69,7 @@ class Profile extends Component {
 
   render () {
     let {currentUser} = this.state
+    console.log(currentUser)
     return (
       <div className="outerBlock">
         <div className="profile">
@@ -105,9 +107,3 @@ function setStateToProps (state) {
 
 
 export default connect(setStateToProps, {setUsername})(Profile)
-
-
-
-
-
-

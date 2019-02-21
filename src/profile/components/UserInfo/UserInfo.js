@@ -28,14 +28,28 @@ class UserInfo extends Component {
 
   getUser = () => {
     axios.get(`/api/user`).then(res => {
+      console.log(res.data)
+      if (res.data === "guest"){
+      const guest = {
+        image: "/static/media/default_rook.0af43384.jpg",
+        losses: 0,
+        rating: 1000,
+        username: "guest",
+        wins: 1
+      }
+        this.setState({
+          currentUser: guest
+        })
+      } else {
       this.setState({
         currentUser: res.data[0],
       })
+    }
     })
   }
 
 
-  render (props) {
+  render () {
   let {username, rating, image, wins, losses} = this.state.currentUser
   let {showTheIcons} = this.props
     return (
