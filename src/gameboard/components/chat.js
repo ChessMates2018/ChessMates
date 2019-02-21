@@ -23,9 +23,29 @@ componentDidMount(){
     this.socket = io();
     this.socket.on("general-message", data => {
       let {user, message} = data
-      let gm = this.state.generalMessages.slice();
-      gm.push(`${user}: ${message}`);
-      this.setState({ generalMessages: gm});
+      let compResponse = [
+        "Hello Human Overlord. I am your loyal servant, how may I assist you today?",
+        "It looks like you are trying to play a game of chess. May I suggest Knight to E4?",
+        "The creators of this app would really appreciate being considered for a job!",
+      ]
+      console.log(user)
+      if (user === 'guest'){
+        function getRandomInt(min, max) {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
+          }
+        const phraseNumber =  getRandomInt(0,compResponse.length)
+        let gm = this.state.generalMessages.slice();
+        gm.push(`${user}: ${message}`);
+        this.setState({ generalMessages: gm}, () => {
+            gm.push(`Computer: ${compResponse[phraseNumber]}`)
+        });
+      } else {
+        let gm = this.state.generalMessages.slice();
+        gm.push(`${user}: ${message}`);
+        this.setState({ generalMessages: gm});
+    }
     });
 }
 

@@ -15,6 +15,8 @@ class UserInfo extends Component {
       currentUser: {},
       updateImage: ''
     }
+
+    
   }
 
   componentDidMount(props) {
@@ -31,11 +33,11 @@ class UserInfo extends Component {
       console.log(res.data)
       if (res.data === "guest"){
       const guest = {
-        image: "/static/media/default_rook.0af43384.jpg",
+        image: "/static/media/default_king.4177e9c0.jpg",
         losses: 0,
         rating: 1000,
         username: "guest",
-        wins: 1
+        wins: 0
       }
         this.setState({
           currentUser: guest
@@ -48,10 +50,12 @@ class UserInfo extends Component {
     })
   }
 
+ 
+
 
   render () {
   let {username, rating, image, wins, losses} = this.state.currentUser
-  let {showTheIcons} = this.props
+  let {showTheIcons, pleaseLogIn} = this.props
     return (
       <div>
         <div className ="userInfoBlock">
@@ -72,7 +76,12 @@ class UserInfo extends Component {
             <h1 className="userName">{`${username}:`} <span className = 'sub_userName'>{` lv ${rating}`}</span> </h1>
             <p>Wins: {wins}</p>
             <p>Losses: {losses}</p>
+          {
+            username === "guest" ?
+            <button id = 'updateBtn' onClick = {pleaseLogIn}>Please Login</button>
+            :
             <button id = 'updateBtn' onClick = {showTheIcons}>Choose Image</button>
+          }
           </section >
         </div>
         
