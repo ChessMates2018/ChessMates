@@ -24,7 +24,7 @@ componentDidMount(){
     this.socket.on("general-message", data => {
       let {user, message} = data
       let compResponse = [
-        "Hello Human Overlord. I am your loyal servant, how may I assist you today?",
+        "Hello Human Overlord, I am your loyal servant. How may I assist you today?",
         "It looks like you are trying to play a game of chess. May I suggest Knight to E4?",
         "The creators of this app would really appreciate being considered for a job!",
       ]
@@ -40,6 +40,7 @@ componentDidMount(){
         gm.push(`${user}: ${message}`);
         this.setState({ generalMessages: gm}, () => {
             gm.push(`Computer: ${compResponse[phraseNumber]}`)
+            this.setState({generalMessages: gm})
         });
       } else {
         let gm = this.state.generalMessages.slice();
