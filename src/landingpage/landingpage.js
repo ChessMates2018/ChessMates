@@ -50,8 +50,8 @@ this.setState({
 
 async guest(){
 // Axios call to sign in as guest on session - id?
-const guest = axios.get('/api/guestLogin/')
-
+const guest = await axios.get('/api/guestLogin/')
+console.log(guest)
 // Redirects to profile
 this.props.history.push('/profile')
 }
