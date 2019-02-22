@@ -32,17 +32,19 @@
       <li>Styled Components</li>
     </ul>
 
-  <p>Checked was built with JavaScript, React, and Redux. The Back-End is constructed with Node.js and a static Express server is used to communicate with the PostgreSQL database. Bcrypt is used to protect users information and secure the database. The logic is provided by Chess.js,  and the chessboard is provided by ChessboardJSX. Socket.io is used to provide players with engaging turn-based action,as well as allowing them to hurl insults at one another.  </p>
+  <p>Checked was built with JavaScript, React, and Redux. The Back-End is constructed with Node.js and a static Express server is used to communicate with the PostgreSQL database. Bcrypt is used to protect users information and secure the database. The logic is provided by Chess.js,  and the chessboard is provided by ChessboardJSX. Socket.io is used to provide players with engaging turn-based action, as well as allowing them to hurl insults at one another.  </p>
 </section>
-
 <hr/>
+<section>
+<p>
+Login as a guest and play unrated against the computer or other players!
+</p>
+<img src="./src/images/Comp Match.gif" alt="AI-match gif"/>
+<p>If playing the computer isn't interesting enough, play and chat with other players where rating points are on the line.</p>
+<img src="./src/images/humanMatch.gif" alt="fools-mate gif"/>
 
-<img src="#" alt="fools-mate gif"/>
-<img src="#" alt="login gif"/>
-<img src="#" alt="AI-match gif"/>
-
+</section>
 <hr/>
-
 <section>
   <h2>Creators</h2>
   <p> <a href="https://www.bradysnuggs.net/index.html" target="_blank" alt="Link to Brady Snuggs' portfolio">Brady Snuggs</a>, <a href="https://michelleeditor2.wixsite.com/portfolio" target="_blank" alt="link to Michelle Jones' portfolio">Michelle Jones</a>, and <a href="https://www.jordanoftroy.com/" target="_blank" alt="Link to Jordan Smithson's portfolio">Jordan Smithson</a></p>
