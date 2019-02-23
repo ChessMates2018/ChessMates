@@ -72,13 +72,16 @@ class HumanVsHuman extends Component {
   static propTypes = { children: PropTypes.func };
 
 
-  componentDidMount() {
+  componentDidMount(props) {
     this.updatingPlayers()
     this.runSockets()
+    // Putting this.props.params game number into state and passing into socket.
+    console.log(this.props.match.params.roomId)
+    this.setState({room: this.props.match.params.roomId}, console.log(this.state.room))
     this.game = new Chess();
     this.socket.emit('new-game', {
       message: this.game,
-      room: this.state.room
+      room: this.props.match.params.roomId
     })
     this.socket.on('update-game', (data) => {
       this.updateNewMove(data)
@@ -235,7 +238,7 @@ class HumanVsHuman extends Component {
     }), () => {
       let {fen, history, squareStyles} = this.state
       let newMove = {fen, history, squareStyles,sourceSquare, targetSquare}
-      this.socket.emit('move', newMove)
+      this.socket.emit('move', newMove, {room: this.state.room})
     });
   }
 

@@ -61,10 +61,11 @@ io.on('connection', function(socket){
         io.sockets.emit("general-message", data)
     })
 
-    socket.on('new-game', () => {
-        socket.join('game1')
+    socket.on('new-game', (data) => {
+        socket.join(data.room)
+        io.to(data.room).emit('game joined', data.room)
     })
-   
+
     socket.on('resign', (resign) => {
         //sends to all client in game1. Both parties are notified of who is resigning.
         io.to('game1').emit('resign', resign)
@@ -100,9 +101,10 @@ io.on('connection', function(socket){
         socket.broadcast.to('game1').emit('update-history', clickMove)
     })
 
-    socket.on('move', (move) => {
+    socket.on('move', (newMove) => {
+        console.log(newMove)
       // sends move via onDrop function to receiving client side.
-        socket.broadcast.to('game1').emit('update-game', move)
+        socket.broadcast.to(newMove.room).emit('update-game', newMove)
     })
 
     socket.on('toggleTurn', (toggleTurn) => {

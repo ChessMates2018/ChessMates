@@ -81,7 +81,7 @@ handleKeyUp = e => {
             }
             </div>
             <div className="input-container">
-            <textarea name="" id="" cols="30" rows="5"
+            <textarea cols="30" rows="5"
                 className="input-field"
                 type="text"
                 value={this.state.generalUserInput}
