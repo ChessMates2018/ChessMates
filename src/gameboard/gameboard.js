@@ -117,7 +117,7 @@ class HumanVsHuman extends Component {
     this.setState({room: this.props.match.params.roomId})
     this.socket.emit('new-game', {
       message: this.game,
-      room: this.state.room
+      room: this.props.match.params.roomId.toString()
     })
     this.socket.on('update-history', (clickMove) => {
       this.setState({turn: true})
