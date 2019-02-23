@@ -112,6 +112,9 @@ class HumanVsHuman extends Component {
     this.updatingPlayers()
     this.runSockets()
     this.game = new Chess();
+    // I'm thinking we pull off game number from this.props.params, set it to state as room.
+    console.log(this.props.match.params.roomId)
+    this.setState({room: this.props.match.params.roomId})
     this.socket.emit('new-game', {
       message: this.game,
       room: this.state.room

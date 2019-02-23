@@ -61,10 +61,11 @@ io.on('connection', function(socket){
         io.sockets.emit("general-message", data)
     })
 
-    socket.on('new-game', () => {
-        socket.join('game1')
+    socket.on('new-game', (data) => {
+        socket.join(data.room)
+        io.to(data.room).emit('game joined', data.room)
     })
-   
+
     socket.on('resign', (resign) => {
         //sends to all client in game1. Both parties are notified of who is resigning.
         io.to('game1').emit('resign', resign)
