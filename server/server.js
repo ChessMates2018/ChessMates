@@ -63,7 +63,7 @@ io.on('connection', function(socket){
 
     socket.on('new-game', (data) => {
         socket.join(data.room)
-        io.to(data.room).emit('game joined', data.room)
+        io.to('game1').emit('game joined', 'game1')
     })
 
     socket.on('resign', (resign) => {
@@ -104,7 +104,7 @@ io.on('connection', function(socket){
     socket.on('move', (newMove) => {
         console.log(newMove)
       // sends move via onDrop function to receiving client side.
-        socket.broadcast.to(newMove.room).emit('update-game', newMove)
+        socket.broadcast.to('game1').emit('update-game', newMove)
     })
 
     socket.on('toggleTurn', (toggleTurn) => {
