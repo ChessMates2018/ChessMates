@@ -76,9 +76,9 @@ io.on('connection', function(socket){
         socket.broadcast.to('game1').emit('draw')
     })
 
-    socket.on('drawAccepted', () => {
+    socket.on('drawAccepted', (room) => {
         //draw has been accepted.  Will trigger endGameModal for both clients with draw results.
-        io.to('game1').emit('drawAccept')
+        io.to(room).emit('drawAccept')
     })
 
     socket.on('drawDeclined', () => {
@@ -97,8 +97,9 @@ io.on('connection', function(socket){
 
 
     socket.on('clickMove', (clickMove) => {
+        console.log('clickMove has fired', clickMove.room)
        // sends move via click function to receiving client side.
-        socket.broadcast.to('game1').emit('update-history', clickMove)
+        socket.broadcast.to(clickMove.room).emit('update-history', clickMove)
     })
 
     socket.on('move', (newMove) => {
@@ -108,6 +109,7 @@ io.on('connection', function(socket){
     })
 
     socket.on('toggleTurn', (toggleTurn) => {
+        console.log("toggleTurn")
         //add change turn to = true add to emit?
         socket.broadcast.to('game1').emit('update-turn', toggleTurn)
     })

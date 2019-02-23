@@ -422,9 +422,10 @@ updateNewMove =(move)=> {
       pieceSquare: "",
       turn: false
     }, () => {
-      let {fen, history} = this.state
-      let clickMove = {fen, history, targetSquare, sourceSquare}
+      let {fen, history, room} = this.state
+      let clickMove = {fen, history, targetSquare, sourceSquare, room}
       socket.emit('clickMove', clickMove)
+      console.log(clickMove)
       this.endgameConditions()
       this.simulateClick()
     });
@@ -458,7 +459,8 @@ updateNewMove =(move)=> {
 
   drawAccepted(){
     this.setState({drawOffer: false}, () => {
-      this.socket.emit('drawAccepted')
+      let {room} = this.state
+      this.socket.emit('drawAccepted', room)
     })
   }
 
