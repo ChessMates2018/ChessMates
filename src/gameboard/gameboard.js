@@ -440,7 +440,8 @@ updateNewMove =(move)=> {
   resignation = (username) => {
     //Checks to see if game is over by either checkmate/draw
     if (this.state.winner || this.state.finished) return
-    let resign = username
+    let {room} = this.state
+    let resign = {username, room} // using ES6 obj naming. Don't need 'key:value' pattern id both are the same thing, IE username:username is the same as username. Slick, huh?!
     this.socket.emit('resign', resign)
   }
 

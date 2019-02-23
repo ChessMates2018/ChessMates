@@ -67,8 +67,9 @@ io.on('connection', function(socket){
     })
 
     socket.on('resign', (resign) => {
+        console.log('resign', resign.room, resign.username)
         //sends to all client in game1. Both parties are notified of who is resigning.
-        io.to('game1').emit('resign', resign)
+        io.to(resign.room).emit('resign', resign.username)
     })
 
     socket.on('draw', () => {
@@ -97,18 +98,19 @@ io.on('connection', function(socket){
 
 
     socket.on('clickMove', (clickMove) => {
-        console.log('clickMove has fired', clickMove.room)
+        // console.log('clickMove has fired', clickMove.room)
        // sends move via click function to receiving client side.
         socket.broadcast.to(clickMove.room).emit('update-history', clickMove)
     })
 
     socket.on('move', (newMove) => {
-        console.log(newMove.room)
+        // console.log(newMove.room)
       // sends move via onDrop function to receiving client side.
         socket.broadcast.to(newMove.room).emit('update-game', newMove)
     })
 
     socket.on('toggleTurn', (toggleTurn) => {
+        // 2/23/19 - I'm not sure this is doing anything. Probably could be removed.
         console.log("toggleTurn")
         //add change turn to = true add to emit?
         socket.broadcast.to('game1').emit('update-turn', toggleTurn)
