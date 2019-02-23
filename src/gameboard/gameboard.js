@@ -112,9 +112,10 @@ class HumanVsHuman extends Component {
     this.updatingPlayers()
     this.runSockets()
     this.game = new Chess();
+    this.setState({room: this.props.match.params.roomId}, () => console.log(this.state.room))
     this.socket.emit('new-game', {
       message: this.game,
-      room: this.state.room
+      room: this.props.match.params.roomId
     })
     this.socket.on('update-history', (clickMove) => {
       this.setState({turn: true})
@@ -316,15 +317,16 @@ class HumanVsHuman extends Component {
       squareStyles: squareStyling({ pieceSquare, history }),
       turn: false
     }), () => {
-      let {fen, history, squareStyles} = this.state
-      let newMove = {fen, history, squareStyles, sourceSquare, targetSquare}
+      let {fen, history, squareStyles, room} = this.state
+      console.log(room)
+      let newMove = {fen, history, squareStyles, sourceSquare, targetSquare, room}
       this.socket.emit('move', newMove)
       this.endgameConditions()
       this.simulateClick()
     });
   };
 
-  //line 190
+
   runSockets = () => {
     this.socket = socket
     this.socket.on('test', data => console.log('test fired'))
