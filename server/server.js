@@ -62,7 +62,7 @@ io.on('connection', function(socket){
     })
 
     socket.on('new-game', (data) => {
-        socket.join(data.room)
+        socket.join('game1')
         io.to('game1').emit('game joined', 'game1')
     })
 
