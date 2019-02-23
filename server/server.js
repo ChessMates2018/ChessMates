@@ -109,12 +109,12 @@ io.on('connection', function(socket){
         socket.broadcast.to(newMove.room).emit('update-game', newMove)
     })
 
-    socket.on('toggleTurn', (toggleTurn) => {
-        // 2/23/19 - I'm not sure this is doing anything. Probably could be removed.
-        console.log("toggleTurn")
-        //add change turn to = true add to emit?
-        socket.broadcast.to('game1').emit('update-turn', toggleTurn)
-    })
+    // // 2/23/19 - I'm not sure this is doing anything. Probably could be removed.
+    // socket.on('toggleTurn', (toggleTurn) => {
+    //     console.log("toggleTurn")
+    //     //add change turn to = true add to emit?
+    //     socket.broadcast.to('game1').emit('update-turn', toggleTurn)
+    // })
     
     socket.on('disconnect', () => console.log('User has peaced out, yo!', socket.id))
 
