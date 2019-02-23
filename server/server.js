@@ -67,14 +67,14 @@ io.on('connection', function(socket){
     })
 
     socket.on('resign', (resign) => {
-        console.log('resign', resign.room, resign.username)
+        // console.log('resign', resign.room, resign.username) 
         //sends to all client in game1. Both parties are notified of who is resigning.
         io.to(resign.room).emit('resign', resign.username)
     })
 
-    socket.on('draw', () => {
+    socket.on('draw', (room) => {
         //draw_offer is sent from sender client to receiving client to either be confirmed or rejected.
-        socket.broadcast.to('game1').emit('draw')
+        socket.broadcast.to(room).emit('draw')
     })
 
     socket.on('drawAccepted', (room) => {
@@ -82,9 +82,9 @@ io.on('connection', function(socket){
         io.to(room).emit('drawAccept')
     })
 
-    socket.on('drawDeclined', () => {
+    socket.on('drawDeclined', (room) => {
         //draw has been declined.  Will trigger response Modal for receiving client and reset state so draw can be sent again.
-        socket.broadcast.to('game1').emit('drawDecline')
+        socket.broadcast.to(room).emit('drawDecline')
     })
 
     socket.on('new player', function() {

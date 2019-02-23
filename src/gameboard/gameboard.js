@@ -454,7 +454,8 @@ updateNewMove =(move)=> {
     if (this.state.winner) return
 
     this.setState({drawWasSent: true}, () => {
-      this.socket.emit('draw')
+      let {room} = this.state
+      this.socket.emit('draw', room)
     })
   }
 
@@ -467,7 +468,8 @@ updateNewMove =(move)=> {
 
   drawDeclined(){
     this.setState({drawOffer: false}, () => {
-      this.socket.emit('drawDeclined')
+      let {room} = this.state
+      this.socket.emit('drawDeclined', room)
     })
   }
 
