@@ -70,7 +70,7 @@ WelcomeDiv =
         <input className="input" placeholder="Password" name="Password" type = "password" value={this.state.Password}onChange={this.handleInput}/>
         <button className="btn"  onClick={this.login}>Login</button>
         <button className="btn"  onClick={this.toggleDiv}>Register</button>
-        <button className="btn"  onClick={this.guest}>Guest</button>
+        {/* <button className="btn"  onClick={this.guest}>Guest</button> */}
     </div>
 }
 let {Div} = this.state
