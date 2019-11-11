@@ -26,9 +26,15 @@ class Arena extends Component {
         players: res.data
       })
     })
+    socket.on('is online', (data) => {
+      console.log(data, this.props.username, 'I should be receiving this?')
+      axios.get(`/api/loggedin`).then(res => {
+        this.setState({
+          players: res.data
+        })
+      })
+    })
     socket.on('push to board', (challenged, gameId, challenger) => {
-      console.log(challenged)
-      console.log(challenger)
       let light = challenged.challenged.challenger
       let dark = challenged.challenged.challenged
       if(this.props.username === challenged.challenged.challenged){

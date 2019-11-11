@@ -56,6 +56,10 @@ app.delete(`/api/order66/:roomId`, ctrl.order66)
 
 // Sockets
 io.on('connection', function(socket){
+    socket.on("login", player => {
+        console.log(player, 'is this firing')
+        io.sockets.emit('is online', player)
+    })
 
     socket.on("general-chat", data=>{
         io.sockets.emit("general-message", data)

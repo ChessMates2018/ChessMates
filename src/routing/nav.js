@@ -3,11 +3,13 @@ import { withRouter } from 'react-router-dom'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import king from '../images/new_crown.png'
+import {socket} from '../utils/SocketFunctions'
 
 class Nav extends Component {
     logout() {
         axios.post('/api/logout')
             .then(this.props.history.push('/'))
+        socket.emit('login', 'loggedout')
     }
     render() {
         if (this.props.location.pathname !== '/') {
