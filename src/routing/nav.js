@@ -8,8 +8,10 @@ import {socket} from '../utils/SocketFunctions'
 class Nav extends Component {
     logout() {
         axios.post('/api/logout')
-            .then(this.props.history.push('/'))
-        socket.emit('login', `${this.props.username}`)
+            .then(() => {
+                this.props.history.push('/') 
+                socket.emit('logout', 'logging out someone')
+            })
     }
     render() {
         console.log(this.props, 'NAV')
