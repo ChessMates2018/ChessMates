@@ -27,11 +27,20 @@ class Arena extends Component {
       })
     })
     socket.on('is online', (data) => {
-      console.log(data, this.props.username, 'I should be receiving this?')
+      console.log(data, this.props.username, 'I should be receiving this? - someone logged in')
       axios.get(`/api/loggedin`).then(res => {
         this.setState({
           players: res.data
         })
+      })
+    })
+    socket.on('is offline', (data) => {
+      console.log(data, this.props.username, 'I should be receiving this? - someone logged out')
+      axios.get(`/api/loggedin`).then(res => {
+        this.setState({
+          players: res.data
+        })
+        console.log(this.state, 'After someone loggout')
       })
     })
     socket.on('push to board', (challenged, gameId, challenger) => {
@@ -44,6 +53,12 @@ class Arena extends Component {
         console.log('else town')
       }
     })
+  }
+
+  componentWillUnmount(){
+    socket.off('is online', 'turned off')
+    socket.off('is offline', 'user is offline')
+    socket.off('push to board', 'cannot send user to board')
   }
 
   joinArena(info){
@@ -67,9 +82,11 @@ class Arena extends Component {
       socket.emit(`challenge initiated`, {challenged, gameId, challenger})
       if(challenged === "Computer"){
         this.props.history.push(`/AIgameboard/${gameId}/${challenged}/${challenger}`)
+
       } else {
-      this.props.history.push(`/gameboard/${gameId}/${challenged}/${challenger}`)
-    }
+        this.props.history.push(`/gameboard/${gameId}/${challenged}/${challenger}`)
+
+      }
     })
     //grab username of challenged off button click and emit to socket along with gameId (this may cause timing issues, will need to see)
     //set up an io.on if username === the username cooming back from socket push to board  

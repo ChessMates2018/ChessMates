@@ -61,6 +61,11 @@ io.on('connection', function(socket){
         io.sockets.emit('is online', player)
     })
 
+    socket.on("logout", message => {
+        console.log(message)
+        io.sockets.emit('is offline', message)
+    })
+
     socket.on("general-chat", data=>{
         io.sockets.emit("general-message", data)
     })
@@ -120,7 +125,9 @@ io.on('connection', function(socket){
     //     socket.broadcast.to('game1').emit('update-turn', toggleTurn)
     // })
     
-    socket.on('disconnect', () => console.log('User has peaced out, yo!', socket.id))
+    socket.on('disconnect', () => {
+        console.log('User has peaced out, yo!', socket.id)
+    })
 
     socket.on('connect', () => {
         let roomId = socket.id
