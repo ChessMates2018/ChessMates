@@ -9,9 +9,10 @@ class Nav extends Component {
     logout() {
         axios.post('/api/logout')
             .then(this.props.history.push('/'))
-        socket.emit('login', 'loggedout')
+        socket.emit('login', `${this.props.username}`)
     }
     render() {
+        console.log(this.props, 'NAV')
         if (this.props.location.pathname !== '/') {
                 if (this.props.location.pathname === '/profile') {
                     //profile
