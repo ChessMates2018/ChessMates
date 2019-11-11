@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import Leaderboard from './components/leaderboard'
 import RegisterModal from './components/registerModal'
 import axios from 'axios';
+import {socket} from '../utils/SocketFunctions'
 
 class LandingPage extends Component {
 constructor(props){
@@ -26,6 +27,7 @@ if (res.data === 'Invalid Password'){
     alert(res.data)
 } else{
     this.props.history.push('/profile')
+    socket.emit('login', 'someone logged on')
 }
 })
 }
