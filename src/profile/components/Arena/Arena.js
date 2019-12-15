@@ -27,7 +27,7 @@ class Arena extends Component {
       })
     })
     socket.on('is online', (data) => {
-      console.log(data, this.props.username, 'I should be receiving this? - someone logged in')
+      
       axios.get(`/api/loggedin`).then(res => {
         this.setState({
           players: res.data
@@ -35,12 +35,12 @@ class Arena extends Component {
       })
     })
     socket.on('is offline', (data) => {
-      console.log(data, this.props.username, 'I should be receiving this? - someone logged out')
+     
       axios.get(`/api/loggedin`).then(res => {
         this.setState({
           players: res.data
         })
-        console.log(this.state, 'After someone loggout')
+        
       })
     })
     socket.on('push to board', (challenged, gameId, challenger) => {
@@ -49,8 +49,6 @@ class Arena extends Component {
       if(this.props.username === challenged.challenged.challenged){
         axios.post('/api/newGameHistory', {dark, light})
         this.props.history.push(`/gameboard/${challenged.challenged.gameId}/${dark}/${light}`)
-      }else{
-        console.log('else town')
       }
     })
   }

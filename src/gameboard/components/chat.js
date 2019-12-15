@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import io from 'socket.io-client'
 import {connect} from 'react-redux'
+import $ from 'jquery'
   
 class Chat extends Component{
     constructor(props){
@@ -28,8 +29,7 @@ componentDidMount(){
         "It looks like you are trying to play a game of chess. May I suggest Knight to E4?",
         "The creators of this app would really appreciate being considered for a job!",
       ]
-      console.log(user)
-      if (user === 'guest'){
+      if (user === 'guest' && this.state.black === "Computer"){
         function getRandomInt(min, max) {
             min = Math.ceil(min);
             max = Math.floor(max);
@@ -47,6 +47,8 @@ componentDidMount(){
         gm.push(`${user}: ${message}`);
         this.setState({ generalMessages: gm});
     }
+    //Scroll to bottom of chat window
+    $('.messages-window').scrollTo('#bottom-of-chat-window')
     });
 }
 
@@ -79,6 +81,7 @@ handleKeyUp = e => {
                   return (<p key={i} className = 'gm'>{gm}</p>)
                 })
             }
+            <div id="bottom-of-chat-window"></div>
             </div>
             <div className="input-container">
             <textarea cols="30" rows="5"

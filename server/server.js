@@ -125,11 +125,11 @@ io.on('connection', function(socket){
     //     socket.broadcast.to('game1').emit('update-turn', toggleTurn)
     // })
     
-    socket.on('disconnect', () => {
+    socket.on('disconnect', (data) => {
         console.log('User has peaced out, yo!', socket.id)
     })
 
-    socket.on('connect', () => {
+    socket.on('connect', (data) => {
         let roomId = socket.id
       })
 })
