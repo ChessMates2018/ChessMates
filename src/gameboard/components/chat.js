@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import io from 'socket.io-client'
 import {connect} from 'react-redux'
-import $ from 'jquery'
   
 class Chat extends Component{
     constructor(props){
@@ -48,7 +47,8 @@ componentDidMount(){
         this.setState({ generalMessages: gm});
     }
     //Scroll to bottom of chat window
-    $('.messages-window').scrollTo('#bottom-of-chat-window')
+    // $('.messages-window').scrollTo('#bottom-of-chat-window')
+    document.getElementById('bottom-of-chat-window').scrollIntoView({block: 'start', behavior: 'smooth'});
     });
 }
 
