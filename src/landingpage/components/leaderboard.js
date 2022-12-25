@@ -15,6 +15,8 @@ axios.get('/api/leaderboard').then((res) => {
     this.setState({
         Leaders: res.data
     })
+}).catch(e => {
+    console.error(e)
 })
 }
 

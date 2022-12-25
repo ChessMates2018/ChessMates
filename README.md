@@ -48,6 +48,12 @@ Login as a guest and play unrated against the computer or other players!
 <section>
   <h2>Creators</h2>
   <p> <a href="https://www.bradysnuggs.net/index.html" target="_blank" alt="Link to Brady Snuggs' portfolio">Brady Snuggs</a>, <a href="https://michelleeditor2.wixsite.com/portfolio" target="_blank" alt="link to Michelle Jones' portfolio">Michelle Jones</a>, and <a href="https://www.jordanoftroy.com/" target="_blank" alt="Link to Jordan Smithson's portfolio">Jordan Smithson</a></p>
-
 </section>
+
+<section>
+Local:
+- npm i
+- npm run start
+</section>
+
 

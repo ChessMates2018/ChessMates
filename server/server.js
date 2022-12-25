@@ -4,8 +4,12 @@ const {
     CONNECTION_STRING,
     SESSION_SECRET,
     DEV_KEY,
-    ENVIRONMENT
-    // PROTOCOL
+    ENVIRONMENT,
+    HOST,
+    DB_PORT,
+    DB_NAME,
+    DB_USER,
+    DB_PW
 } = process.env
 
 const express = require('express')
@@ -28,7 +32,6 @@ app.use( express.static( `${__dirname}/../build` ) );
 app.use(bodyParser.json())
 
 app.use(session)
-
 
 // User Endpoints
 app.get(`/api/user`, ctrl.getUser)
@@ -57,12 +60,10 @@ app.delete(`/api/order66/:roomId`, ctrl.order66)
 // Sockets
 io.on('connection', function(socket){
     socket.on("login", player => {
-        console.log(player, 'is this firing')
         io.sockets.emit('is online', player)
     })
 
     socket.on("logout", message => {
-        console.log(message)
         io.sockets.emit('is offline', message)
     })
 
@@ -76,28 +77,22 @@ io.on('connection', function(socket){
     })
 
     socket.on('resign', (resign) => {
-        // console.log('resign', resign.room, resign.username) 
-        //sends to all client in game1. Both parties are notified of who is resigning.
         io.to(resign.room).emit('resign', resign.username)
     })
 
     socket.on('draw', (room) => {
-        //draw_offer is sent from sender client to receiving client to either be confirmed or rejected.
         socket.broadcast.to(room).emit('draw')
     })
 
     socket.on('drawAccepted', (room) => {
-        //draw has been accepted.  Will trigger endGameModal for both clients with draw results.
         io.to(room).emit('drawAccept')
     })
 
     socket.on('drawDeclined', (room) => {
-        //draw has been declined.  Will trigger response Modal for receiving client and reset state so draw can be sent again.
         socket.broadcast.to(room).emit('drawDecline')
     })
 
     socket.on('new player', function() {
-        // console.log('message recieved')
         io.emit('player joined', {name: player.name, room: player.room})
     })
 
@@ -105,25 +100,13 @@ io.on('connection', function(socket){
         io.emit('push to board', {challenged, gameId, challenger})
     })
 
-
     socket.on('clickMove', (clickMove) => {
-        // console.log('clickMove has fired', clickMove.room)
-       // sends move via click function to receiving client side.
         socket.broadcast.to(clickMove.room).emit('update-history', clickMove)
     })
 
     socket.on('move', (newMove) => {
-        // console.log(newMove.room)
-      // sends move via onDrop function to receiving client side.
         socket.broadcast.to(newMove.room).emit('update-game', newMove)
     })
-
-    // // 2/23/19 - I'm not sure this is doing anything. Probably could be removed.
-    // socket.on('toggleTurn', (toggleTurn) => {
-    //     console.log("toggleTurn")
-    //     //add change turn to = true add to emit?
-    //     socket.broadcast.to('game1').emit('update-turn', toggleTurn)
-    // })
     
     socket.on('disconnect', (data) => {
         console.log('User has peaced out, yo!', socket.id)
@@ -134,7 +117,18 @@ io.on('connection', function(socket){
       })
 })
 
-
 server.listen(SERVER_PORT, () => console.log(`spellbound on port ${SERVER_PORT}`))
 
-massive(CONNECTION_STRING).then(db => app.set('db', db))
+massive({
+    host: HOST,
+    port: DB_PORT,
+    database: DB_NAME,
+    user: DB_USER,
+    password: DB_PW,
+    ssl: false,
+    poolSize: 10
+}).then(db => {
+    app.set('db', db)
+}).catch(e => {
+    console.error(e)
+})

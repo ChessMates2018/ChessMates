@@ -2,24 +2,29 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: inherit; }
+  font-family: inherit;
+}
 
 BODY {
   min-height: 100vh;
   width: 100%;
-  font-family: Arial, Helvetica, sans-serif; }
+  font-family: Arial, Helvetica, sans-serif;
+}
 
 H2 {
-  margin: 8px 0; }
+  margin: 8px 0;
+}
 
 P {
   line-height: 1.4;
   font-size: 1rem;
-  font-family: Arial, Helvetica, sans-serif; }
+  font-family: Arial, Helvetica, sans-serif;
+}
 
 h1, h2, h2 {
   color: #141414;
-  font-family: Arial, Helvetica, sans-serif; }
+  font-family: Arial, Helvetica, sans-serif;
+}
 
 .landing-page {
   text-align: center;
@@ -28,17 +33,19 @@ h1, h2, h2 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center; }
-  .landing-page .rapper {
-    background-color: #141414;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    justify-content: space-between;
-    border-radius: 50;
-    height: auto; }
+  justify-content: center;
+}
+.landing-page .rapper {
+  background-color: #141414;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  justify-content: space-between;
+  border-radius: 50;
+  height: auto;
+}
 
 .login {
   position: relative;
@@ -48,10 +55,12 @@ h1, h2, h2 {
   align-items: center;
   justify-content: space-evenly;
   height: 350px;
-  width: 19rem; }
+  width: 19rem;
+}
 
 #login-welcome {
-  color: #fbfafa; }
+  color: #fbfafa;
+}
 
 .input {
   height: 1.5rem;
@@ -60,9 +69,11 @@ h1, h2, h2 {
   border-bottom: 1px #fbfafa solid;
   background: none;
   text-align: start;
-  color: #fbfafa; }
-  .input::placeholder {
-    color: tan; }
+  color: #fbfafa;
+}
+.input::placeholder {
+  color: tan;
+}
 
 button {
   height: 1.5rem;
@@ -70,10 +81,12 @@ button {
   background-image: linear-gradient(to bottom left, #525354, #fbfafa);
   border-style: none;
   color: #141414;
-  border-radius: 2px; }
-  button:hover {
-    background-image: linear-gradient(to top right, #525354, tan);
-    border: solid grey 1px; }
+  border-radius: 2px;
+}
+button:hover {
+  background-image: linear-gradient(to top right, #525354, tan);
+  border: solid grey 1px;
+}
 
 #title {
   display: flex;
@@ -83,57 +96,72 @@ button {
   position: relative;
   height: 200px;
   width: 800px;
-  padding: 1rem 2rem; }
-  #title h1 {
-    color: #fbfafa;
-    font-weight: 100px;
-    font-size: 100px; }
-  #title .logo-img {
-    width: 200px;
-    height: 135px;
-    background-size: cover;
-    margin: 20px; }
-  #title .logo-left {
-    position: relative;
-    right: 16px;
-    background-image: url("../images/2knight_white_left.png");
-    background-size: cover; }
-  #title .logo-right {
-    position: relative;
-    background-image: url("../images/2knight_white_right.png");
-    background-size: cover; }
-  #title img {
-    z-index: 10; }
+  padding: 1rem 2rem;
+}
+#title h1 {
+  color: #fbfafa;
+  font-weight: 100px;
+  font-size: 100px;
+}
+#title .logo-img {
+  width: 200px;
+  height: 135px;
+  background-size: cover;
+  margin: 20px;
+}
+#title .logo-left {
+  position: relative;
+  right: 16px;
+  background-image: url("../images/2knight_white_left.png");
+  background-size: cover;
+}
+#title .logo-right {
+  position: relative;
+  background-image: url("../images/2knight_white_right.png");
+  background-size: cover;
+}
+#title img {
+  z-index: 10;
+}
 
 @keyframes rotate {
   0% {
-    transform: rotate(0deg); }
+    transform: rotate(0deg);
+  }
   100% {
-    transform: rotate(360deg); } }
-
+    transform: rotate(360deg);
+  }
+}
 @keyframes newsFeed {
   from {
-    left: 1700px; }
+    left: 1700px;
+  }
   to {
-    left: -1900px; } }
-
+    left: -1900px;
+  }
+}
 @keyframes shoeMeTheIcons {
   0% {
-    opacity: 0; }
+    opacity: 0;
+  }
   100% {
-    opacity: 1; } }
-
+    opacity: 1;
+  }
+}
 @keyframes goodByeIcons {
   0% {
-    opacity: 1; }
+    opacity: 1;
+  }
   100% {
-    opacity: 0; } }
-
+    opacity: 0;
+  }
+}
 .outerBlock {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center; }
+  align-items: center;
+}
 
 .profile {
   display: flex;
@@ -144,69 +172,84 @@ button {
   justify-content: space-between;
   align-items: start;
   margin-top: 120px;
-  width: 1325px; }
-  .profile .profile_section .sun_profile_section {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    justify-content: space-between;
-    align-items: flex-start; }
-    .profile .profile_section .sun_profile_section .hiding {
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-      width: 350px;
-      flex-wrap: wrap;
-      animation: goodByeIcons .7s linear;
-      opacity: 0; }
-      .profile .profile_section .sun_profile_section .hiding img {
-        border: solid #141414 1px;
-        width: 80px;
-        margin: 0px 5px;
-        margin-bottom: 10px; }
-    .profile .profile_section .sun_profile_section .imageOpps {
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-      width: 350px;
-      flex-wrap: wrap;
-      animation: shoeMeTheIcons .7s linear; }
-      .profile .profile_section .sun_profile_section .imageOpps img {
-        border: solid #141414 1px;
-        width: 80px;
-        margin: 0px 5px;
-        margin-bottom: 10px; }
+  width: 1325px;
+}
+.profile .profile_section .sun_profile_section {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.profile .profile_section .sun_profile_section .hiding {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 350px;
+  flex-wrap: wrap;
+  animation: goodByeIcons 0.7s linear;
+  opacity: 0;
+}
+.profile .profile_section .sun_profile_section .hiding img {
+  border: solid #141414 1px;
+  width: 80px;
+  margin: 0px 5px;
+  margin-bottom: 10px;
+}
+.profile .profile_section .sun_profile_section .imageOpps {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 350px;
+  flex-wrap: wrap;
+  animation: shoeMeTheIcons 0.7s linear;
+}
+.profile .profile_section .sun_profile_section .imageOpps img {
+  border: solid #141414 1px;
+  width: 80px;
+  margin: 0px 5px;
+  margin-bottom: 10px;
+}
 
 @keyframes rotate {
   0% {
-    transform: rotate(0deg); }
+    transform: rotate(0deg);
+  }
   100% {
-    transform: rotate(360deg); } }
-
+    transform: rotate(360deg);
+  }
+}
 @keyframes newsFeed {
   from {
-    left: 1700px; }
+    left: 1700px;
+  }
   to {
-    left: -1900px; } }
-
+    left: -1900px;
+  }
+}
 @keyframes shoeMeTheIcons {
   0% {
-    opacity: 0; }
+    opacity: 0;
+  }
   100% {
-    opacity: 1; } }
-
+    opacity: 1;
+  }
+}
 @keyframes goodByeIcons {
   0% {
-    opacity: 1; }
+    opacity: 1;
+  }
   100% {
-    opacity: 0; } }
-
+    opacity: 0;
+  }
+}
 .register {
   position: relative;
-  height: 350px; }
+  height: 350px;
+}
 
 .toggled-view {
   display: flex;
@@ -215,17 +258,20 @@ button {
   justify-content: space-between;
   width: 300px;
   height: 100%;
-  color: white; }
-  .toggled-view input {
-    border-style: none;
-    background: none;
-    border-bottom: solid 1px #fbfafa;
-    color: #fbfafa;
-    text-align: start;
-    width: 15rem;
-    height: 1.5rem; }
-    .toggled-view input::placeholder {
-      color: tan; }
+  color: white;
+}
+.toggled-view input {
+  border-style: none;
+  background: none;
+  border-bottom: solid 1px #fbfafa;
+  color: #fbfafa;
+  text-align: start;
+  width: 15rem;
+  height: 1.5rem;
+}
+.toggled-view input::placeholder {
+  color: tan;
+}
 
 button {
   width: 15rem;
@@ -233,32 +279,41 @@ button {
   background-image: linear-gradient(to bottom left, #525354, #fbfafa);
   border-style: none;
   color: #141414;
-  border-radius: 2px; }
+  border-radius: 2px;
+}
 
 @keyframes rotate {
   0% {
-    transform: rotate(0deg); }
+    transform: rotate(0deg);
+  }
   100% {
-    transform: rotate(360deg); } }
-
+    transform: rotate(360deg);
+  }
+}
 @keyframes newsFeed {
   from {
-    left: 1700px; }
+    left: 1700px;
+  }
   to {
-    left: -1900px; } }
-
+    left: -1900px;
+  }
+}
 @keyframes shoeMeTheIcons {
   0% {
-    opacity: 0; }
+    opacity: 0;
+  }
   100% {
-    opacity: 1; } }
-
+    opacity: 1;
+  }
+}
 @keyframes goodByeIcons {
   0% {
-    opacity: 1; }
+    opacity: 1;
+  }
   100% {
-    opacity: 0; } }
-
+    opacity: 0;
+  }
+}
 .lb-wrapper {
   display: flex;
   flex-direction: column;
@@ -270,34 +325,43 @@ button {
   height: 150px;
   width: 800px;
   overflow: hidden;
-  background: #141414; }
-  .lb-wrapper h1, .lb-wrapper h2 {
-    color: #fbfafa; }
-  .lb-wrapper p {
-    color: #d9c09e; }
-  .lb-wrapper h2 {
-    font-size: 20px; }
-  .lb-wrapper .Leaderboard {
-    overflow: hidden;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center; }
-    .lb-wrapper .Leaderboard .person {
-      width: 200px;
-      position: relative;
-      margin-left: 80px;
-      animation: newsFeed 27s linear infinite; }
-    .lb-wrapper .Leaderboard .blocker {
-      position: relative;
-      bottom: 20px;
-      height: 70px;
-      width: 120px; }
-    .lb-wrapper .Leaderboard .block_left {
-      background-color: #141414; }
-    .lb-wrapper .Leaderboard .block_right {
-      background-color: #141414;
-      z-index: 10; }
+  background: #141414;
+}
+.lb-wrapper h1, .lb-wrapper h2 {
+  color: #fbfafa;
+}
+.lb-wrapper p {
+  color: #d9c09e;
+}
+.lb-wrapper h2 {
+  font-size: 20px;
+}
+.lb-wrapper .Leaderboard {
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.lb-wrapper .Leaderboard .person {
+  width: 200px;
+  position: relative;
+  margin-left: 80px;
+  animation: newsFeed 27s linear infinite;
+}
+.lb-wrapper .Leaderboard .blocker {
+  position: relative;
+  bottom: 20px;
+  height: 70px;
+  width: 120px;
+}
+.lb-wrapper .Leaderboard .block_left {
+  background-color: #141414;
+}
+.lb-wrapper .Leaderboard .block_right {
+  background-color: #141414;
+  z-index: 10;
+}
 
 .the_BFB {
   display: flex;
@@ -308,10 +372,12 @@ button {
   align-items: flex-start;
   position: relative;
   background-image: url("../images/marble1.jpg");
-  padding-top: 20px; }
+  padding-top: 20px;
+}
 
 #react-confirm-alert-firm-svg {
-  display: none; }
+  display: none;
+}
 
 #react-confirm-alert {
   position: absolute;
@@ -320,13 +386,15 @@ button {
   transform: translate(-50%, -50%);
   background: gray;
   border: black solid 1px;
-  z-index: 10; }
+  z-index: 10;
+}
 
 .react-confirm-alert-body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center; }
+  justify-content: center;
+}
 
 .ML_rapper {
   background-color: tan;
@@ -337,11 +405,14 @@ button {
   height: 300px;
   width: 220px;
   justify-content: space-around;
-  box-shadow: 2px 2px 10px gray; }
-  .ML_rapper .resign_btn {
-    width: 100px; }
-  .ML_rapper .draw_btn {
-    width: 100px; }
+  box-shadow: 2px 2px 10px gray;
+}
+.ML_rapper .resign_btn {
+  width: 100px;
+}
+.ML_rapper .draw_btn {
+  width: 100px;
+}
 
 .move_list {
   background: #fbfafa;
@@ -349,14 +420,17 @@ button {
   height: 200px;
   overflow: scroll;
   overflow-x: hidden;
-  box-shadow: 2px 2px 10px gray; }
-  .move_list .move {
-    background: lightgray;
-    width: 70px;
-    display: inline-block;
-    text-align: center; }
-    .move_list .move:nth-child(even) {
-      float: right; }
+  box-shadow: 2px 2px 10px gray;
+}
+.move_list .move {
+  background: lightgray;
+  width: 70px;
+  display: inline-block;
+  text-align: center;
+}
+.move_list .move:nth-child(even) {
+  float: right;
+}
 
 .chat-container {
   height: 480px;
@@ -367,67 +441,80 @@ button {
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  box-shadow: 2px 2px 10px gray; }
-  .chat-container .messages-window {
-    height: 330px;
-    width: 250px;
-    background: white;
-    box-shadow: 2px 2px 10px gray;
-    word-wrap: break-word;
-    padding: 10px;
-    overflow: hidden;
-    overflow-y: scroll; }
-    .chat-container .messages-window .gm {
-      text-align: start;
-      padding: 2px;
-      border-radius: 4px; }
-  .chat-container .input-field {
-    height: 70px;
-    width: 250px;
-    border-style: none;
-    box-shadow: inset 2px 2px 10px gray;
-    padding: 10px; }
+  box-shadow: 2px 2px 10px gray;
+}
+.chat-container .messages-window {
+  height: 330px;
+  width: 250px;
+  background: white;
+  box-shadow: 2px 2px 10px gray;
+  word-wrap: break-word;
+  padding: 10px;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+.chat-container .messages-window .gm {
+  text-align: start;
+  padding: 2px;
+  border-radius: 4px;
+}
+.chat-container .input-field {
+  height: 70px;
+  width: 250px;
+  border-style: none;
+  box-shadow: inset 2px 2px 10px gray;
+  padding: 10px;
+}
 
 .navBod {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 20px;
-  background: #141414; }
+  background: #141414;
+}
 
 .leftNav {
   width: 10px;
   display: flex;
-  align-items: center; }
-  .leftNav .navH2 {
-    color: #fbfafa;
-    font-size: 40px;
-    transform: rotate(20deg);
-    margin-right: 20px; }
+  align-items: center;
+}
+.leftNav .navH2 {
+  color: #fbfafa;
+  font-size: 40px;
+  transform: rotate(20deg);
+  margin-right: 20px;
+}
 
 .navImg {
   margin-right: -40px;
-  height: 80px; }
+  height: 80px;
+}
 
 .navH1 {
   color: #fbfafa;
   font-size: 40px;
-  margin-left: 40px; }
+  margin-left: 40px;
+}
 
 .navH1:nth-child(odd) {
-  color: tan; }
+  color: tan;
+}
 
 .navMenu {
-  display: flex; }
-  .navMenu .aboutLink {
-    color: #fbfafa;
-    margin-right: 10px;
-    font-size: 18px; }
-  .navMenu .logoutBtn {
-    padding-top: 2px;
-    color: tan;
-    font-size: 18px;
-    cursor: pointer; }
+  display: flex;
+}
+.navMenu .aboutLink {
+  color: #fbfafa;
+  margin-right: 10px;
+  font-size: 18px;
+}
+.navMenu .logoutBtn {
+  padding-top: 2px;
+  color: tan;
+  font-size: 18px;
+  cursor: pointer;
+}
 
 #about-page {
   height: 90vh;
@@ -438,12 +525,14 @@ button {
   justify-content: flex-start;
   padding-top: 70px;
   background-image: url("../images/marble1.jpg");
-  overflow: hidden; }
+  overflow: hidden;
+}
 
 #checked-description {
   background: #eaeaed linear-gradient(to bottom left, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2));
   padding: 4px 7px;
-  box-shadow: 0px 0px 5px grey; }
+  box-shadow: 0px 0px 5px grey;
+}
 
 #about-checked {
   background: #eaeaed linear-gradient(to bottom left, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2));
@@ -455,12 +544,15 @@ button {
   align-item: center;
   padding: 10px;
   box-shadow: 2px 2px 5px grey;
-  padding: 15px 20px; }
-  #about-checked p {
-    text-indent: 50px; }
+  padding: 15px 20px;
+}
+#about-checked p {
+  text-indent: 50px;
+}
 
 #subtitle {
-  color: black; }
+  color: black;
+}
 
 #team-mate-section {
   margin-top: 70px;
@@ -469,7 +561,8 @@ button {
   justify-content: center;
   align-items: center;
   justify-content: space-around;
-  width: 1300px; }
+  width: 1300px;
+}
 
 .card-container {
   cursor: pointer;
@@ -482,7 +575,8 @@ button {
   justify-content: center;
   align-items: center;
   justify-content: space-around;
-  align-items: space-evenly; }
+  align-items: space-evenly;
+}
 
 .img-container {
   width: 100%;
@@ -490,19 +584,22 @@ button {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center; }
+  align-items: center;
+}
 
 .team-mate-img {
   height: 100%;
   width: 80%;
   border: 8px tan solid;
-  box-shadow: 2px 2px 2px; }
+  box-shadow: 2px 2px 2px;
+}
 
 .team-mate-bio {
   background: tan;
   margin: 5px;
   padding: 5px;
-  width: 100%; }
+  width: 100%;
+}
 
 .card {
   border: 1px black solid;
@@ -511,23 +608,27 @@ button {
   position: absolute;
   transform-style: preserve-3d;
   transition: all 1s ease-in-out;
-  width: 100%; }
+  width: 100%;
+}
 
 .card:hover {
-  transform: rotateY(180deg); }
+  transform: rotateY(180deg);
+}
 
 .front {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center; }
+  align-items: center;
+}
 
 .back {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  justify-content: space-between; }
+  justify-content: space-between;
+}
 
 .card .side {
   backface-visibility: hidden;
@@ -535,41 +636,50 @@ button {
   height: 100%;
   position: absolute;
   overflow: hidden;
-  width: 100%; }
+  width: 100%;
+}
 
 .card .back {
   line-height: 150px;
   text-align: center;
   transform: rotateY(180deg);
-  padding: 10px 10px 0 10px; }
+  padding: 10px 10px 0 10px;
+}
 
 .card {
-  background: #eaeaed linear-gradient(to bottom left, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)); }
+  background: #eaeaed linear-gradient(to bottom left, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2));
+}
 
 .team-mate-contact {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: center; }
+  align-items: center;
+}
 
 .linkedin-img {
   height: 50px;
-  width: 50px; }
+  width: 50px;
+}
 
 .github-img {
   height: 44px;
-  width: 44px; }
+  width: 44px;
+}
 
 a {
   text-decoration: none;
-  color: #141414; }
+  color: #141414;
+}
 
 .portfolio-text {
-  font-size: 20px; }
+  font-size: 20px;
+}
 
 .team-mate-contact a {
   display: flex;
-  padding-bottom: 30px; }
+  padding-bottom: 30px;
+}
 
 .userInfoBlock {
   background-color: #141414;
@@ -584,27 +694,34 @@ a {
   border-radius: 2px;
   position: relative;
   width: 450px;
-  z-index: 10; }
-  .userInfoBlock img {
-    width: 135px;
-    margin: 0px 20px; }
-  .userInfoBlock .userName {
-    color: #fbfafa; }
-    .userInfoBlock .userName .sub_userName {
-      font-size: 20px;
-      color: tan; }
-  .userInfoBlock #updateBtn {
-    width: 100px;
-    margin: 10px; }
-  .userInfoBlock .UI_Content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center; }
-  .userInfoBlock .test {
-    height: 50px;
-    width: 50px;
-    background-color: blue; }
+  z-index: 10;
+}
+.userInfoBlock img {
+  width: 135px;
+  margin: 0px 20px;
+}
+.userInfoBlock .userName {
+  color: #fbfafa;
+}
+.userInfoBlock .userName .sub_userName {
+  font-size: 20px;
+  color: tan;
+}
+.userInfoBlock #updateBtn {
+  width: 100px;
+  margin: 10px;
+}
+.userInfoBlock .UI_Content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.userInfoBlock .test {
+  height: 50px;
+  width: 50px;
+  background-color: blue;
+}
 
 .arenaBlock {
   background-color: #141414;
@@ -615,16 +732,20 @@ a {
   justify-content: center;
   align-items: center;
   padding: 20px;
-  width: 450px; }
-  .arenaBlock .arena_btn {
-    margin-top: 20px; }
-  .arenaBlock h3 {
-    color: #fbfafa;
-    margin-bottom: 20px; }
+  width: 450px;
+}
+.arenaBlock .arena_btn {
+  margin-top: 20px;
+}
+.arenaBlock h3 {
+  color: #fbfafa;
+  margin-bottom: 20px;
+}
 
 #challenge-header {
   color: #fff;
-  padding-top: 15px; }
+  padding-top: 15px;
+}
 
 #potOppsBlock {
   background-color: #e4dede;
@@ -639,20 +760,24 @@ a {
   justify-content: start;
   height: 16rem;
   overflow: scroll;
-  overflow-x: hidden; }
-  #potOppsBlock .potentialOpponent {
-    background-color: #f0ecec;
-    box-shadow: 2px 2px 3px gray;
-    padding-bottom: 2rem;
-    margin-bottom: 1rem;
-    width: 20rem;
-    height: 7rem; }
-    #potOppsBlock .potentialOpponent #player-name {
-      padding-top: 1rem;
-      text-align: center;
-      padding-bottom: 1rem; }
-    #potOppsBlock .potentialOpponent #challenge_btn {
-      margin-left: 2rem; }
+  overflow-x: hidden;
+}
+#potOppsBlock .potentialOpponent {
+  background-color: #f0ecec;
+  box-shadow: 2px 2px 3px gray;
+  padding-bottom: 2rem;
+  margin-bottom: 1rem;
+  width: 20rem;
+  height: 7rem;
+}
+#potOppsBlock .potentialOpponent #player-name {
+  padding-top: 1rem;
+  text-align: center;
+  padding-bottom: 1rem;
+}
+#potOppsBlock .potentialOpponent #challenge_btn {
+  margin-left: 2rem;
+}
 
 .App {
   background: url("../images/marble1.jpg");
@@ -660,395 +785,514 @@ a {
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
-    -o-background-size-background-size: cover; }
+  -o-background-size-background-size: cover;
+}
 
 @media screen and (min-width: 769px) and (max-width: 1170px) and (orientation: portrait) {
   .navBod .navH1 {
-    padding-left: 11rem; }
+    padding-left: 11rem;
+  }
   .navBod .navMenu {
     width: 14rem;
     display: flex;
     justify-content: space-between;
-    align-content: center; }
-    .navBod .navMenu .aboutLink {
-      font-size: 2rem; }
-    .navBod .navMenu .logoutBtn {
-      padding-top: .25rem;
-      font-size: 2rem; }
+    align-content: center;
+  }
+  .navBod .navMenu .aboutLink {
+    font-size: 2rem;
+  }
+  .navBod .navMenu .logoutBtn {
+    padding-top: 0.25rem;
+    font-size: 2rem;
+  }
   .outerBlock {
     width: 100vw;
     margin: 0 auto;
-    padding: 0 auto; }
-    .outerBlock .profile {
-      width: 100%;
-      margin: 0 auto;
-      padding: 0 auto;
-      display: flex;
-      flex-direction: column; }
-      .outerBlock .profile .profile_section {
-        width: 100vw;
-        margin: 0 auto;
-        padding: 0 auto; }
-        .outerBlock .profile .profile_section .lb-wrapper {
-          width: 95%;
-          margin-left: 1.2rem;
-          margin-top: -.01rem;
-          margin-bottom: 1rem; }
-        .outerBlock .profile .profile_section .sun_profile_section {
-          display: flex;
-          flex-direction: column; }
-          .outerBlock .profile .profile_section .sun_profile_section div {
-            width: 100%;
-            margin: 0 auto;
-            padding: 0 auto;
-            margin-top: 1rem; }
-          .outerBlock .profile .profile_section .sun_profile_section .hiding, .outerBlock .profile .profile_section .sun_profile_section .imageOpps {
-            width: 75%; }
-          .outerBlock .profile .profile_section .sun_profile_section .userInfoBlock {
-            width: 95%;
-            margin: 0 auto;
-            padding: 0 auto; }
-            .outerBlock .profile .profile_section .sun_profile_section .userInfoBlock .UI_Content {
-              width: 100%;
-              margin: 0 auto; }
-            .outerBlock .profile .profile_section .sun_profile_section .userInfoBlock #updateBtn {
-              visibility: visible; }
+    padding: 0 auto;
+  }
+  .outerBlock .profile {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 auto;
+    display: flex;
+    flex-direction: column;
+  }
+  .outerBlock .profile .profile_section {
+    width: 100vw;
+    margin: 0 auto;
+    padding: 0 auto;
+  }
+  .outerBlock .profile .profile_section .lb-wrapper {
+    width: 95%;
+    margin-left: 1.2rem;
+    margin-top: -0.01rem;
+    margin-bottom: 1rem;
+  }
+  .outerBlock .profile .profile_section .sun_profile_section {
+    display: flex;
+    flex-direction: column;
+  }
+  .outerBlock .profile .profile_section .sun_profile_section div {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 auto;
+    margin-top: 1rem;
+  }
+  .outerBlock .profile .profile_section .sun_profile_section .hiding, .outerBlock .profile .profile_section .sun_profile_section .imageOpps {
+    width: 75%;
+  }
+  .outerBlock .profile .profile_section .sun_profile_section .userInfoBlock {
+    width: 95%;
+    margin: 0 auto;
+    padding: 0 auto;
+  }
+  .outerBlock .profile .profile_section .sun_profile_section .userInfoBlock .UI_Content {
+    width: 100%;
+    margin: 0 auto;
+  }
+  .outerBlock .profile .profile_section .sun_profile_section .userInfoBlock #updateBtn {
+    visibility: visible;
+  }
   .arenaBlock {
     width: 95%;
     margin: 0 auto;
-    height: 45rem; }
-    .arenaBlock #potOppsBlock {
-      height: 35rem;
-      width: 95%;
-      margin: 0 auto; }
-      .arenaBlock #potOppsBlock .potentialOpponent {
-        width: 75%;
-        text-align: center; }
-        .arenaBlock #potOppsBlock .potentialOpponent #challenge_btn {
-          width: 65%;
-          height: 2.5rem;
-          margin: 0 auto; }
-    .arenaBlock #challenge-header {
-      text-align: center; }
+    height: 45rem;
+  }
+  .arenaBlock #potOppsBlock {
+    height: 35rem;
+    width: 95%;
+    margin: 0 auto;
+  }
+  .arenaBlock #potOppsBlock .potentialOpponent {
+    width: 75%;
+    text-align: center;
+  }
+  .arenaBlock #potOppsBlock .potentialOpponent #challenge_btn {
+    width: 65%;
+    height: 2.5rem;
+    margin: 0 auto;
+  }
+  .arenaBlock #challenge-header {
+    text-align: center;
+  }
   #about-page {
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
-    align-items: space-evenly; }
-    #about-page #about-checked {
-      width: 100%;
-      text-align: center;
-      margin-top: -3rem; }
-      #about-page #about-checked h1 {
-        margin-bottom: 1rem; }
-      #about-page #about-checked #checked-description {
-        text-align: left; }
-    #about-page #team-mate-section {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-around;
-      margin-top: 1rem;
-      margin-bottom: 1rem; }
-      #about-page #team-mate-section .card-container {
-        margin-bottom: 1rem; }
+    align-items: space-evenly;
+  }
+  #about-page #about-checked {
+    width: 100%;
+    text-align: center;
+    margin-top: -3rem;
+  }
+  #about-page #about-checked h1 {
+    margin-bottom: 1rem;
+  }
+  #about-page #about-checked #checked-description {
+    text-align: left;
+  }
+  #about-page #team-mate-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  #about-page #team-mate-section .card-container {
+    margin-bottom: 1rem;
+  }
   .the_BFB {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: -5px; }
+    padding-top: -5px;
+  }
   .chat-container {
     margin-top: -25px;
     width: 20rem;
     height: 20rem;
     order: 2;
-    margin-bottom: 10px; }
-    .chat-container .input-container {
-      margin-top: 1rem; }
+    margin-bottom: 10px;
+  }
+  .chat-container .input-container {
+    margin-top: 1rem;
+  }
   .ML_rapper {
     width: 20rem;
     height: 20rem;
     order: 3;
-    margin-bottom: 10px; } }
-
+    margin-bottom: 10px;
+  }
+}
 @media screen and (min-width: 501px) and (max-width: 768px) and (orientation: portrait) {
   .navBod .navH1 {
-    padding-left: 11rem; }
+    padding-left: 11rem;
+  }
   .navBod .navMenu {
     width: 10rem;
     display: flex;
     justify-content: space-evenly;
-    align-content: center; }
+    align-content: center;
+  }
   .landing-page {
-    width: 100%; }
-    .landing-page .rapper {
-      width: 80%; }
-      .landing-page .rapper #title {
-        width: 100%; }
-        .landing-page .rapper #title h1 {
-          font-size: 4rem; }
-        .landing-page .rapper #title .logo-img {
-          height: 7rem;
-          width: 7rem; }
-        .landing-page .rapper #title .logo-left {
-          margin-left: 1.25rem; }
-    .landing-page .lb-wrapper {
-      width: 100%; }
+    width: 100%;
+  }
+  .landing-page .rapper {
+    width: 80%;
+  }
+  .landing-page .rapper #title {
+    width: 100%;
+  }
+  .landing-page .rapper #title h1 {
+    font-size: 4rem;
+  }
+  .landing-page .rapper #title .logo-img {
+    height: 7rem;
+    width: 7rem;
+  }
+  .landing-page .rapper #title .logo-left {
+    margin-left: 1.25rem;
+  }
+  .landing-page .lb-wrapper {
+    width: 100%;
+  }
   .outerBlock {
     width: 100vw;
     margin: 0 auto;
-    padding: 0 auto; }
-    .outerBlock .profile {
-      width: 100%;
-      margin: 0 auto;
-      padding: 0 auto;
-      display: flex;
-      flex-direction: column; }
-      .outerBlock .profile .profile_section {
-        width: 100vw;
-        margin: 0 auto;
-        padding: 0 auto; }
-        .outerBlock .profile .profile_section .lb-wrapper {
-          width: 95%;
-          margin-left: 1.2rem;
-          margin-top: -.01rem;
-          margin-bottom: 1rem; }
-        .outerBlock .profile .profile_section .sun_profile_section {
-          display: flex;
-          flex-direction: column; }
-          .outerBlock .profile .profile_section .sun_profile_section div {
-            width: 100%;
-            margin: 0 auto;
-            padding: 0 auto;
-            margin-top: 1rem; }
-          .outerBlock .profile .profile_section .sun_profile_section .hiding, .outerBlock .profile .profile_section .sun_profile_section .imageOpps {
-            width: 75%; }
-          .outerBlock .profile .profile_section .sun_profile_section .userInfoBlock {
-            width: 95%;
-            margin: 0 auto;
-            padding: 0 auto; }
-            .outerBlock .profile .profile_section .sun_profile_section .userInfoBlock .UI_Content {
-              width: 100%;
-              margin: 0 auto; }
-            .outerBlock .profile .profile_section .sun_profile_section .userInfoBlock #updateBtn {
-              visibility: visible; }
+    padding: 0 auto;
+  }
+  .outerBlock .profile {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 auto;
+    display: flex;
+    flex-direction: column;
+  }
+  .outerBlock .profile .profile_section {
+    width: 100vw;
+    margin: 0 auto;
+    padding: 0 auto;
+  }
+  .outerBlock .profile .profile_section .lb-wrapper {
+    width: 95%;
+    margin-left: 1.2rem;
+    margin-top: -0.01rem;
+    margin-bottom: 1rem;
+  }
+  .outerBlock .profile .profile_section .sun_profile_section {
+    display: flex;
+    flex-direction: column;
+  }
+  .outerBlock .profile .profile_section .sun_profile_section div {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 auto;
+    margin-top: 1rem;
+  }
+  .outerBlock .profile .profile_section .sun_profile_section .hiding, .outerBlock .profile .profile_section .sun_profile_section .imageOpps {
+    width: 75%;
+  }
+  .outerBlock .profile .profile_section .sun_profile_section .userInfoBlock {
+    width: 95%;
+    margin: 0 auto;
+    padding: 0 auto;
+  }
+  .outerBlock .profile .profile_section .sun_profile_section .userInfoBlock .UI_Content {
+    width: 100%;
+    margin: 0 auto;
+  }
+  .outerBlock .profile .profile_section .sun_profile_section .userInfoBlock #updateBtn {
+    visibility: visible;
+  }
   .arenaBlock {
     width: 95%;
-    margin: 0 auto; }
-    .arenaBlock #potOppsBlock {
-      width: 95%;
-      margin: 0 auto; }
-      .arenaBlock #potOppsBlock .potentialOpponent {
-        width: 100%;
-        text-align: center; }
-        .arenaBlock #potOppsBlock .potentialOpponent #challenge_btn {
-          width: 65%;
-          margin: 0 auto; }
-    .arenaBlock #challenge-header {
-      text-align: center; }
+    margin: 0 auto;
+  }
+  .arenaBlock #potOppsBlock {
+    width: 95%;
+    margin: 0 auto;
+  }
+  .arenaBlock #potOppsBlock .potentialOpponent {
+    width: 100%;
+    text-align: center;
+  }
+  .arenaBlock #potOppsBlock .potentialOpponent #challenge_btn {
+    width: 65%;
+    margin: 0 auto;
+  }
+  .arenaBlock #challenge-header {
+    text-align: center;
+  }
   #about-page {
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
-    align-items: space-evenly; }
-    #about-page #about-checked {
-      width: 100%;
-      text-align: center;
-      margin-top: -3rem; }
-      #about-page #about-checked h1 {
-        margin-bottom: 1rem; }
-      #about-page #about-checked #checked-description {
-        text-align: left; }
-    #about-page #team-mate-section {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-around;
-      margin-top: 1rem;
-      margin-bottom: 1rem; }
-      #about-page #team-mate-section .card-container {
-        margin-bottom: 1rem; }
+    align-items: space-evenly;
+  }
+  #about-page #about-checked {
+    width: 100%;
+    text-align: center;
+    margin-top: -3rem;
+  }
+  #about-page #about-checked h1 {
+    margin-bottom: 1rem;
+  }
+  #about-page #about-checked #checked-description {
+    text-align: left;
+  }
+  #about-page #team-mate-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  #about-page #team-mate-section .card-container {
+    margin-bottom: 1rem;
+  }
   .the_BFB {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: -5px; }
+    padding-top: -5px;
+  }
   .chat-container {
     margin-top: -25px;
     width: 20rem;
     height: 20rem;
     order: 2;
-    margin-bottom: 10px; }
-    .chat-container .input-container {
-      margin-top: 1rem; }
+    margin-bottom: 10px;
+  }
+  .chat-container .input-container {
+    margin-top: 1rem;
+  }
   .ML_rapper {
     width: 20rem;
     height: 20rem;
     order: 3;
-    margin-bottom: 10px; } }
-
+    margin-bottom: 10px;
+  }
+}
 @media screen and (max-width: 768px) and (orientation: landscape) {
   .landing-page .lb-wrapper {
-    display: none; } }
-
+    display: none;
+  }
+}
 @media screen and (max-width: 500px) and (orientation: portrait) {
   .navBod {
-    width: 140%; }
+    width: 140%;
+  }
   .rapper {
     width: 92%;
-    border-bottom: solid #141414 50px; }
+    border-bottom: solid #141414 50px;
+  }
   .landing-page .lb-wrapper {
-    display: none; }
+    display: none;
+  }
   #title h1 {
     font-size: 2rem;
-    margin-left: -15px; }
+    margin-left: -15px;
+  }
   #title .logo-img {
     margin: 8px;
-    width: 150px; }
+    width: 150px;
+  }
   .landing-page {
     width: 100vw;
-    overflow: hidden; }
+    overflow: hidden;
+  }
   .outerBlock {
-    width: 100vw; }
+    width: 100vw;
+  }
   .profile {
     width: 100vw;
     display: flex;
     flex-direction: column;
-    align-items: center; }
+    align-items: center;
+  }
   .outerBlock .lb-wrapper {
-    visibility: hidden; }
+    visibility: hidden;
+  }
   .outerBlock .userInfoBlock #updateBtn {
-    visibility: hidden; }
+    visibility: hidden;
+  }
   .outerBlock .userInfoBlock {
     margin-top: -110px;
-    margin-left: 340px; }
+    margin-left: 340px;
+  }
   .arenaBlock {
     margin-top: -250px;
-    margin-left: 100px; } }
-
+    margin-left: 100px;
+  }
+}
 @media screen and (max-width: 568px) and (orientation: landscape) {
   .landing-page {
-    width: 100%; }
-    .landing-page .rapper {
-      width: 80%; }
-      .landing-page .rapper #title {
-        width: 100%; }
-        .landing-page .rapper #title h1 {
-          font-size: 40px; }
-        .landing-page .rapper #title .logo-img {
-          height: 50px;
-          width: 50px; }
-        .landing-page .rapper #title .logo-left {
-          margin-left: 35px; }
+    width: 100%;
+  }
+  .landing-page .rapper {
+    width: 80%;
+  }
+  .landing-page .rapper #title {
+    width: 100%;
+  }
+  .landing-page .rapper #title h1 {
+    font-size: 40px;
+  }
+  .landing-page .rapper #title .logo-img {
+    height: 50px;
+    width: 50px;
+  }
+  .landing-page .rapper #title .logo-left {
+    margin-left: 35px;
+  }
   .landing-page .lb-wrapper {
-    display: none; } }
-
+    display: none;
+  }
+}
 @media screen and (max-width: 420px) and (orientation: portrait) {
   .navBod {
     width: 100vw;
     display: flex;
-    justify-content: space-evenly; }
-    .navBod .leftNav {
-      display: none; }
-    .navBod .navH1 {
-      display: none; }
-    .navBod .navMenu {
-      width: 100%;
-      display: flex;
-      justify-content: space-evenly; }
-      .navBod .navMenu .logoutBtn {
-        padding-top: 1.4px; }
+    justify-content: space-evenly;
+  }
+  .navBod .leftNav {
+    display: none;
+  }
+  .navBod .navH1 {
+    display: none;
+  }
+  .navBod .navMenu {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+  }
+  .navBod .navMenu .logoutBtn {
+    padding-top: 1.4px;
+  }
   #title h1 {
-    margin-left: .05rem; }
+    margin-left: 0.05rem;
+  }
   #title .logo-img {
     margin: -1rem;
     width: 100px;
     height: 100px;
-    left: 4px; }
+    left: 4px;
+  }
   .outerBlock {
     width: 100vw;
     margin: 0 auto;
-    padding: 0 auto; }
-    .outerBlock .profile {
-      width: 100%;
-      margin: 0 auto;
-      padding: 0 auto; }
-      .outerBlock .profile .profile_section {
-        width: 100vw;
-        margin: 0 auto;
-        padding: 0 auto; }
-        .outerBlock .profile .profile_section .lb-wrapper {
-          display: none; }
-        .outerBlock .profile .profile_section .sun_profile_section {
-          display: flex;
-          flex-direction: column; }
-          .outerBlock .profile .profile_section .sun_profile_section div {
-            width: 100%;
-            margin: 0 auto;
-            padding: 0 auto;
-            margin-top: 1rem; }
-          .outerBlock .profile .profile_section .sun_profile_section .hiding, .outerBlock .profile .profile_section .sun_profile_section .imageOpps {
-            width: 75%; }
-          .outerBlock .profile .profile_section .sun_profile_section .userInfoBlock {
-            width: 95%;
-            margin: 0 auto;
-            padding: 0 auto; }
-            .outerBlock .profile .profile_section .sun_profile_section .userInfoBlock .UI_Content {
-              width: 100%;
-              margin: 0 auto; }
-            .outerBlock .profile .profile_section .sun_profile_section .userInfoBlock #updateBtn {
-              visibility: visible; }
+    padding: 0 auto;
+  }
+  .outerBlock .profile {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 auto;
+  }
+  .outerBlock .profile .profile_section {
+    width: 100vw;
+    margin: 0 auto;
+    padding: 0 auto;
+  }
+  .outerBlock .profile .profile_section .lb-wrapper {
+    display: none;
+  }
+  .outerBlock .profile .profile_section .sun_profile_section {
+    display: flex;
+    flex-direction: column;
+  }
+  .outerBlock .profile .profile_section .sun_profile_section div {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 auto;
+    margin-top: 1rem;
+  }
+  .outerBlock .profile .profile_section .sun_profile_section .hiding, .outerBlock .profile .profile_section .sun_profile_section .imageOpps {
+    width: 75%;
+  }
+  .outerBlock .profile .profile_section .sun_profile_section .userInfoBlock {
+    width: 95%;
+    margin: 0 auto;
+    padding: 0 auto;
+  }
+  .outerBlock .profile .profile_section .sun_profile_section .userInfoBlock .UI_Content {
+    width: 100%;
+    margin: 0 auto;
+  }
+  .outerBlock .profile .profile_section .sun_profile_section .userInfoBlock #updateBtn {
+    visibility: visible;
+  }
   .arenaBlock {
     width: 95%;
-    margin: 0 auto; }
-    .arenaBlock #potOppsBlock {
-      width: 95%;
-      margin: 0 auto; }
-      .arenaBlock #potOppsBlock .potentialOpponent {
-        width: 100%;
-        text-align: center; }
-        .arenaBlock #potOppsBlock .potentialOpponent #challenge_btn {
-          width: 65%;
-          margin: 0 auto; }
-    .arenaBlock #challenge-header {
-      text-align: center; }
+    margin: 0 auto;
+  }
+  .arenaBlock #potOppsBlock {
+    width: 95%;
+    margin: 0 auto;
+  }
+  .arenaBlock #potOppsBlock .potentialOpponent {
+    width: 100%;
+    text-align: center;
+  }
+  .arenaBlock #potOppsBlock .potentialOpponent #challenge_btn {
+    width: 65%;
+    margin: 0 auto;
+  }
+  .arenaBlock #challenge-header {
+    text-align: center;
+  }
   #about-page {
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
-    align-items: space-evenly; }
-    #about-page #about-checked {
-      width: 100%;
-      text-align: center;
-      margin-top: -3rem; }
-      #about-page #about-checked h1 {
-        margin-bottom: 1rem; }
-      #about-page #about-checked #checked-description {
-        text-align: left; }
-    #about-page #team-mate-section {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-around;
-      margin-top: 1rem;
-      margin-bottom: 1rem; }
-      #about-page #team-mate-section .card-container {
-        margin-bottom: 1rem; }
+    align-items: space-evenly;
+  }
+  #about-page #about-checked {
+    width: 100%;
+    text-align: center;
+    margin-top: -3rem;
+  }
+  #about-page #about-checked h1 {
+    margin-bottom: 1rem;
+  }
+  #about-page #about-checked #checked-description {
+    text-align: left;
+  }
+  #about-page #team-mate-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  #about-page #team-mate-section .card-container {
+    margin-bottom: 1rem;
+  }
   .the_BFB {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: -5px; }
+    padding-top: -5px;
+  }
   .chat-container {
     margin-top: -25px;
     width: 20rem;
     height: 20rem;
     order: 2;
-    margin-bottom: 10px; }
-    .chat-container .input-container {
-      margin-top: 1rem; }
+    margin-bottom: 10px;
+  }
+  .chat-container .input-container {
+    margin-top: 1rem;
+  }
   .ML_rapper {
     width: 20rem;
     height: 20rem;
     order: 3;
-    margin-bottom: 10px; } }
+    margin-bottom: 10px;
+  }
+}
+
+/*# sourceMappingURL=main.css.map */

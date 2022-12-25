@@ -75,8 +75,6 @@ class HumanVsHuman extends Component {
   componentDidMount(props) {
     this.updatingPlayers()
     this.runSockets()
-    // Putting this.props.params game number into state and passing into socket.
-    console.log(this.props.match.params.roomId)
     this.setState({room: this.props.match.params.roomId}, console.log(this.state.room))
     this.game = new Chess();
     this.socket.emit('new-game', {
@@ -141,7 +139,7 @@ class HumanVsHuman extends Component {
   }
 
   updatingPlayers(){
-    let {roomId, dark, light} = this.props.match.params
+    let {dark, light} = this.props.match.params
     this.setState({
       light, dark
     }, this.getPlayerRatings())
@@ -215,13 +213,11 @@ class HumanVsHuman extends Component {
   };
 
   computerMove = () => {
-    let game = this.game
     let possibleMoves = this.game.moves({
       verbose:true
     })
-    //game over
+  
     if (possibleMoves.length === 0) return;
-
     let randomIndex = Math.floor(Math.random() * possibleMoves.length);
     let move = possibleMoves[randomIndex];
     
@@ -257,10 +253,7 @@ class HumanVsHuman extends Component {
 
   showHistory = () => {
   let {history} = this.state
-  let counter = 0
-  // console.log("HISTORY",history)
   let moveList = history.map((element,index) => {
-    let moveNumber = 1 + index
     return(
       <div
         className = "move"
@@ -322,7 +315,7 @@ class HumanVsHuman extends Component {
     if (this.state.resigned || this.state.finished) return
     let win = 1;
     let loss = 1;
-    let {light, dark, lightRating, darkRating, lightPointsWin, lightPointsDraw, lightPointsLose, darkPointsWin, darkPointsDraw, darkPointsLose} = this.state
+    let {light, dark, lightRating, darkRating, lightPointsWin, darkPointsLose} = this.state
     let eloGain = lightPointsWin - lightRating;
     let eloLost = darkRating - darkPointsLose;
     this.setState({resigned: true, winner: dark, loser: light, isOpen: true, message: `You have resigned. ${dark} has won.`, results: `${dark} has gained ${eloGain} points and ${light} has lost ${eloLost} points.`}, () => {

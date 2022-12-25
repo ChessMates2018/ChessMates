@@ -14,7 +14,6 @@ class Nav extends Component {
             })
     }
     render() {
-        console.log(this.props, 'NAV')
         if (this.props.location.pathname !== '/') {
                 if (this.props.location.pathname === '/profile') {
                     //profile
